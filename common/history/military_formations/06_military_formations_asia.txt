@@ -1,0 +1,358 @@
+﻿MILITARY_FORMATIONS = {
+	c:FGT ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_manchuria
+			name = first_national_protection_army
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_SOUTHERN_MANCHURIA
+				count = 20
+			}
+			save_scope_as = first_national_protection_army
+		}
+
+		create_character = { # CHI, general
+			is_general = yes
+			first_name = Pingyuan
+			last_name = Zhang
+			historical = yes
+			culture = cu:han
+			interest_group = ig_intelligentsia
+			ideology = ideology_social_democrat
+			birth_date = 1791.9.17 # exact date unknown
+			traits = {
+				brave
+			}
+			save_scope_as = pingyuan_zhang
+		}
+		scope:pingyuan_zhang = {
+			transfer_to_formation = scope:first_national_protection_army
+		}
+
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_north_china
+			name = second_national_protection_army
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_HINGGAN
+				count = 15
+			}
+			
+			save_scope_as = second_national_protection_army
+		}
+
+		create_character = { # FGT, general
+			is_general = yes
+			first_name = Aotian
+			last_name = Yang
+			historical = yes
+			culture = cu:han
+			interest_group = ig_armed_forces
+			ideology = ideology_reformer
+			birth_date = 1787.12.3 
+			traits = {
+				brave
+				stalwart_defender
+			}
+			save_scope_as = aotian_yang
+		}
+
+		scope:aotian_yang = {
+			transfer_to_formation = scope:second_national_protection_army
+		}
+		
+		create_military_formation = {
+			type = fleet
+			hq_region = sr:region_manchuria
+			name = Bohai_Gulf_Fleet
+			combat_unit = {
+				type = unit_type:combat_unit_type_frigate # War junks, but no modern ships
+				state_region = s:STATE_SHENGJING
+				count = 5
+			}
+			save_scope_as = shenyang_fleet
+		}
+
+		create_character = {
+			is_admiral = yes
+			first_name = Tianpei
+			last_name = Ge
+			historical = yes
+			age = 57
+			culture = cu:han
+			traits = {
+				expert_naval_commander
+				brave
+			}
+			save_scope_as = shenyang_fleet_admiral
+		}
+	}
+	c:MGB ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_north_china
+			name = mongol_banner_army
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_ULIASTAI
+				count = 6
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_ALXA
+				count = 5
+			}
+			save_scope_as = mgb_army
+		}
+
+		create_character = { # MGB, general
+			is_general = yes
+			first_name = Nalan
+			last_name = Keqin
+			historical = yes
+			culture = cu:manchu
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			birth_date = 1797.7.29
+			traits = {
+				wrathful
+				plains_commander
+			}
+			save_scope_as = mgb_general
+		}
+		scope:mgb_general = {
+			transfer_to_formation = scope:mgb_army
+		}
+	}
+	c:CFD ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_north_china
+			name = zhilijun
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_SHANDONG
+				count = 15
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_ZHILI
+				count = 10
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_ZHILI
+				count = 10
+			}
+			save_scope_as = zhilijun
+		}
+
+		create_character = { # CFD, general
+			is_general = yes
+			first_name = Li
+			last_name = Dong
+			historical = yes
+			culture = cu:han
+			interest_group = ig_armed_forces
+			ideology = ideology_moderate
+			birth_date = 1782.7.20
+			traits = {
+				reckless
+				traditionalist_commander
+			}
+			save_scope_as = shandong_general
+		}
+		scope:shandong_general = {
+			transfer_to_formation = scope:zhilijun
+		}
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_north_china
+			name = huijun
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_NORTHERN_ANHUI
+				count = 10
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_SOUTHERN_ANHUI
+				count = 5
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_SOUTHERN_ANHUI
+				count = 10
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_HENAN
+				count = 10
+			}
+			save_scope_as = huijun
+		}
+
+		create_character = { # CFD, general
+			is_general = yes
+			first_name = Mao
+			last_name = Fang
+			historical = yes
+			culture = cu:han
+			interest_group = ig_armed_forces
+			ideology = ideology_moderate
+			birth_date = 1787.7.2
+			traits = {
+				imperious
+			}
+			save_scope_as = huijun_gen
+		}
+		scope:huijun_gen = {
+			transfer_to_formation = scope:huijun
+		}
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_north_china
+			name = xibeijun
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_SHANXI
+				count = 15
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_SHANXI
+				count = 10
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_XIAN
+				count = 10
+			}
+			save_scope_as = xibeijun
+		}
+
+		create_character = { # CFD, general
+			is_general = yes
+			first_name = Wu
+			last_name = Chen
+			historical = yes
+			culture = cu:han
+			interest_group = ig_landowners
+			ideology = ideology_traditionalist
+			birth_date = 1774.3.8
+			traits = {
+				surveyor
+				compliant
+			}
+			save_scope_as = xibeijungen
+		}
+		scope:xibeijungen = {
+			transfer_to_formation = scope:xibeijun
+		}
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_south_china
+			name = minjun
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_FUJIAN
+				count = 15
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_SHAOZHOU
+				count = 8
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_SHAOZHOU
+				count = 5
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_JIANGXI
+				count = 12
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_ZHEJIANG
+				count = 7
+			}
+			save_scope_as = minjun
+		}
+
+		create_character = { # CFD, general
+			is_general = yes
+			first_name = Zhang
+			last_name = Wang
+			historical = yes
+			culture = cu:han
+			interest_group = ig_armed_forces
+			ideology = ideology_traditionalist
+			birth_date = 1794.11.28
+			traits = {
+				tactful
+				forest_commander
+			}
+			save_scope_as = minjungen
+		}
+		scope:minjungen = {
+			transfer_to_formation = scope:minjun
+		}
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_south_china
+			name = hubeijun
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_WESTERN_HUBEI
+				count = 13
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_EASTERN_HUBEI
+				count = 9
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_EASTERN_HUBEI
+				count = 4
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_HUNAN
+				count = 6
+			}
+			save_scope_as = hubeijun
+		}
+
+		create_character = { # CFD, general
+			is_general = yes
+			first_name = Zhang
+			last_name = Wang
+			historical = yes
+			culture = cu:han
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+			birth_date = 1803.7.15
+			traits = {
+				brave
+				basic_defensive_strategist
+			}
+			save_scope_as = hubeijungen
+		}
+		scope:hubeijungen = {
+			transfer_to_formation = scope:hubeijun
+		}
+	}
+}

@@ -1,0 +1,120 @@
+﻿TREATIES = {
+	# german british treaty
+	create_treaty = {
+		name = treaty_name_love_deluxe #can't sleep. Doing this at 6 am even though the whole damn mod crashes the game before you can even play.
+		first_country = c:GBR
+		second_country = c:GER
+
+		is_draft = no
+		entered_into_force_on = 1833.3.21
+		binding_period = { years = 20 } 
+
+		articles_to_create = {
+			{ #idk why you would want to do this but ok
+				article = military_access
+				source_country = c:GER
+				target_country = c:GBR
+			}
+			{ # Britannia gets to build stuff in Germany
+				article = foreign_investment_rights
+				source_country = c:GER
+				target_country = c:GBR
+			}
+			{ # Trade bonus because why not
+				article = trade_privilege
+				source_country = c:GER
+				target_country = c:GBR
+			}
+			{ #LMAO
+				article = money_transfer
+				source_country = c:GER
+				target_country = c:GBR
+				inputs = {
+					{ quantity = 10000 } # screw you
+				}
+			}
+		}
+	}
+	### eastern mutual support league
+	# FER and FGT
+	create_treaty = {
+		name = treaty_name_eastern_mutual_support_league
+		first_country = c:FGT
+		second_country = c:FER
+
+		is_draft = no
+		entered_into_force_on = 1835.10.30
+		binding_period = { years = 50 } # should be enough to see through russia unified
+
+		articles_to_create = {
+			{ # Defensive Pact 
+				article = defensive_pact
+			}
+			{ # Fengtian assistance to Far Eastern Republic
+				article = military_assistance
+				source_country = c:FGT
+				target_country = c:FER
+			}
+			{
+				article = transit_rights
+				source_country = c:FGT
+				target_country = c:FER
+			}
+		}
+	}
+	###sru transit
+	#sru and url
+	create_treaty = {
+		name = treaty_name_black_sea_pact
+		first_country = c:SRU
+		second_country = c:URL
+
+		is_draft = no
+		entered_into_force_on = 1832.4.3
+		binding_period = { years = 25 } 
+
+		articles_to_create = {
+			{
+				article = transit_rights
+				source_country = c:SRU
+				target_country = c:URL
+			}
+			{ # tools because sru has a shortage apparently
+				article = goods_transfer
+				source_country = c:URL
+				target_country = c:SRU
+				inputs = {
+					{ goods = g:tools }
+					{ quantity = 15 }
+				}
+			}
+		}
+	}
+	###sru and dvm
+	#radio gaga
+	create_treaty = {
+		name = treaty_name_radio_gaga
+		first_country = c:SRU
+		second_country = c:DVM
+
+		is_draft = no
+		entered_into_force_on = 1832.4.3
+		binding_period = { years = 25 } 
+
+		articles_to_create = {
+			{
+				article = transit_rights
+				source_country = c:SRU
+				target_country = c:DVM
+			}
+			{ # Verified in game that dvm is so desperate for transit they'll pay for it. Should also take off a little of their 2 state advantage
+				article = money_transfer
+				source_country = c:DVM
+				target_country = c:SRU
+				inputs = {
+					{ quantity = 600 }  #max is 621, but I don't know about game start. Nice whole number anyways.
+				}
+			}
+		}
+	}
+}

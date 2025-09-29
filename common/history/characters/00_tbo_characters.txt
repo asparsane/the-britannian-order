@@ -1,0 +1,121 @@
+CHARACTERS = {
+	c:FER ?= {
+		create_character = {
+			template = fer_oleg_antonov
+		}
+	}
+	c:TTA ?= {
+		create_character = {
+			first_name = "Olga"
+			last_name = "Kuropatkin"
+			historical = yes
+			birth_date = 1784.5.30
+			culture = cu:russian
+			female = yes
+			ruler = yes
+			interest_group = ig_industrialists
+			ideology = ideology_jingoist_leader
+			traits = {
+				tactful
+				cruel
+			}
+		}
+	}
+	c:DVM ?= {
+		create_character = {
+			first_name = "Vladimir"
+			last_name = "Kutaisov"
+			historical = yes
+			birth_date = 1775.2.27
+			culture = cu:russian
+			ruler = yes
+			interest_group = ig_devout
+			ideology = ideology_theocrat
+			traits = {
+				meticulous
+				basic_political_operator
+			}
+		}
+	}
+	c:IRK ?= {
+		create_character = {
+			first_name = Boris
+			last_name = Yeltsin
+			historical = yes
+			birth_date = 1778.5.21
+			culture = cu:russian
+			ruler = yes
+			interest_group = ig_landowners
+			ideology = ideology_traditionalist
+			traits = {
+				arrogant
+				expensive_tastes
+			}
+		}
+	}
+	c:MSK ?= {
+		create_character = {
+			template = msk_taboritsky
+		}
+	}
+	c:GBR ?= {
+		create_character = {
+			first_name = alan
+			last_name = cromwell
+			historical = yes
+			culture = cu:british
+			ruler = yes
+			birth_date = 1783.2.7
+			interest_group = ig_landowners
+			ideology = ideology_jingoist_leader
+			traits = {
+				cruel
+				ambitious
+			}
+			trait_generation = { }
+		}
+	}
+	c:HNE ?= {
+		create_character = {
+			template = hne_k_kerr_otes
+		}
+	}
+	c:FGT ?= {
+		create_character = {
+			template = fgt_lu_anjiang
+		}	
+		create_character = {
+			first_name = song
+			last_name = jiang
+			historical = yes
+			birth_date = 1782.8.14
+			culture = cu:han
+			ig_leader = yes
+			interest_group = ig_rural_folk
+			ideology = ideology_fengtian_civicalist
+			traits = {
+				imperious
+				firebrand
+			}
+		}
+		create_character = {
+			first_name = 
+			last_name = 
+			historical = yes
+			birth_date = 1786.3.9
+			culture = cu:han
+			ig_leader = yes
+			interest_group = ig_intelligentsia
+			ideology = ideology_fengtian_civicalist
+			traits = {
+				imperious
+				firebrand
+			}
+		}
+	}
+	c:WST = {
+		create_character = {
+			template = wst_walthre_freight
+		}
+	}
+}

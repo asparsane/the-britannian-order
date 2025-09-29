@@ -1,0 +1,340 @@
+﻿MILITARY_FORMATIONS = {
+	c:BAG ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_arabic
+			name = baghdad_assembly_guard
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_BAGHDAD
+				count = 8
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_BAGHDAD
+				count = 3
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_BAGHDAD
+				count = 2
+			}
+			save_scope_as = baghdad_assembly_guard
+		}
+	}
+	
+	c:KUR ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_anatolia
+			name = kurdish_force
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_KARS
+				count = 5
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_ERZURUM
+				count = 3
+			}
+			
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_ERZURUM
+				count = 1
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_ERZURUM
+				count = 2
+			}
+			save_scope_as = baghdad_assembly_guard
+		}
+	}
+
+	c:YEM ?= {
+		create_military_formation = { # If somebody can explain the reason behind these whacky ship names, please give me a call
+			type = fleet
+			hq_region = sr:region_arabic
+			name = Bahriat_alMasqat
+
+			combat_unit = { # Liverpool (?)
+				type = unit_type:combat_unit_type_man_o_war
+				state_region = s:STATE_OMAN
+				count = 1
+			}
+		}
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_arabic
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_OMAN
+				count = 4
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_OMAN
+				count = 4
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_YEMEN
+				count = 2
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_YEMEN
+				count = 3
+			}
+		}
+	}
+	c:SYR ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_arabic
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_SYRIA
+				count = 7
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_ALEPPO
+				count = 2
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_PALESTINE
+				count = 1
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_TRANSJORDAN
+				count = 1
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_ALEPPO
+				count = 3
+			}
+			
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_PALESTINE
+				count = 1
+			}
+		}
+	}
+	c:DES ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_arabic
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_HEDJAZ
+				count = 3
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_HAIL
+				count = 2
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_NEJD
+				count = 3
+			}
+			
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_HAIL
+				count = 2
+			}
+			
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_HEDJAZ
+				count = 1
+			}
+		}
+	}
+	c:LWE ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_nile_basin
+			name = lower_egyptian_force
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_LOWER_EGYPT
+				count = 7
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_LOWER_EGYPT
+				count = 2
+			}
+			
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_MIDDLE_EGYPT
+				count = 4
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_EGYPTIAN_DESERT
+				count = 3
+			}
+		}
+	}
+	c:UPE ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_nile_basin
+			name = upper_egyptian_force
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_UPPER_EGYPT
+				count = 2
+			}
+			
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_UPPER_EGYPT
+				count = 3
+			}
+		}
+	}
+	c:SUD ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_nile_basin
+			name = sudanese_force
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_BLUE_NILE
+				count = 12
+			}
+			
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_KORDOFAN
+				count = 5
+			}	
+			
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_KORDOFAN
+				count = 3
+			}
+		}
+	}
+	c:PER = {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_persia
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_IRAKAJEMI
+				count = 6
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_IRAKAJEMI
+				count = 4
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_IRAKAJEMI
+				count = 2
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_FARS
+				count = 3
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_TABRIZ
+				count = 8
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_LURISTAN
+				count = 3
+			}
+		}
+	}
+	c:PER = {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_persia
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_ISFAHAN
+				count = 3
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_MAZANDARAN
+				count = 5
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_KHORASAN
+				count = 1
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_KHORASAN
+				count = 4
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_KERMAN
+				count = 5
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_KHORASAN
+				count = 1
+			}
+		}
+	}
+}

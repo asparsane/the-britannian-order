@@ -1,0 +1,247 @@
+﻿MILITARY_FORMATIONS = {
+	c:MSK ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_west_siberia
+			name = black_league_funni
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_TOBOLSK
+				count = 5
+			}
+			save_scope_as = black_league_funni
+		}
+		create_character = {
+			is_general = yes
+			first_name = lelouch
+			last_name = lazarenko
+			historical = yes
+			culture = cu:british
+			heir = yes
+			birth_date = 1812.5.12
+			dna = dna_lelouch
+			interest_group = ig_petty_bourgeoisie
+			ideology = ideology_radical
+			traits = {
+				sickly
+				romantic
+				tactful
+			}
+			save_scope_as = lelouch_scope
+		}
+		scope:lelouch_scope = {
+			transfer_to_formation = scope:black_league_funni
+		}
+	}
+
+	c:TTA ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_west_siberia
+			name = tobolsk_army
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_TOBOLSK
+				count = 10
+			}
+			save_scope_as = tobolsk_army
+		}
+		create_character = { # tta, general
+			is_general = yes
+			first_name = Nikolai
+			last_name = Orlov
+			historical = yes
+			culture = cu:russian
+			interest_group = ig_armed_forces
+			ideology = ideology_moderate
+			birth_date = 1770.12.19
+			traits = {
+				hedonist
+				traditionalist_commander
+			}
+			save_scope_as = nikolai_orlov
+		}
+		scope:nikolai_orlov = {
+			transfer_to_formation = scope:tobolsk_army
+		}
+	}
+
+	c:URL ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_west_siberia
+			name = ural_army
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_URAL
+				count = 3
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_URAL
+				count = 6
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_SURGUT
+				count = 5
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_SURGUT
+				count = 2
+			}
+			
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_URAL
+				count = 2
+			}
+			save_scope_as = ural_army
+		}
+		create_character = { # URL, general
+			is_general = yes
+			first_name = Leonid
+			last_name = Rozhestvensky
+			historical = yes
+			culture = cu:russian
+			interest_group = ig_armed_forces
+			ideology = ideology_moderate
+			birth_date = 1794.3.1
+			traits = {
+				imposing
+				traditionalist_commander
+			}
+			save_scope_as = leonid_rozhestvensky_scope
+		}
+		scope:leonid_rozhestvensky_scope = {
+			transfer_to_formation = scope:ural_army
+		}
+	}
+
+	c:FER ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_east_siberia
+			name = fer_army
+
+			combat_unit = { 
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_BURYATIA
+				count = 2
+			}
+			combat_unit = { 
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_BURYATIA
+				count = 3
+			}
+			combat_unit = { 
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_TRANS_BAIKAL
+				count = 2
+			}
+			combat_unit = { 
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_TRANS_BAIKAL
+				count = 2
+			}
+		}
+	}
+
+	c:DVM ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_west_siberia
+			name = dvm_army
+
+			combat_unit = { 
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_KRASNOYARSK
+				count = 3
+			}
+			combat_unit = { 
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_TOMSK
+				count = 2
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_TOMSK
+				count = 5
+			}
+			combat_unit = {
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_TOMSK
+				count = 2
+			}
+			save_scope_as = dvm_army
+		}
+		create_character = { # DVM, general
+			is_general = yes
+			first_name = Andrei
+			last_name = Kornilov
+			historical = yes
+			culture = cu:russian
+			interest_group = ig_devout
+			ideology = ideology_moderate
+			birth_date = 1782.5.31
+			traits = {
+				cautious
+				pillager
+			}
+			save_scope_as = andrei_kornilov
+		}
+		scope:andrei_kornilov = {
+			transfer_to_formation = scope:dvm_army
+		}
+	}
+
+	c:IRK ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_east_siberia
+			name = irk_army
+
+			combat_unit = { 
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_IRKUTSK
+				count = 2
+			}
+			combat_unit = { 
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_IRKUTSK
+				count = 6
+			}
+			combat_unit = { 
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_IRKUTSK
+				count = 1
+			}
+			save_scope_as = irk_army
+		}
+		create_character = { # IRK, general
+			is_general = yes
+			first_name = Aleksandr
+			last_name = Kolchak
+			historical = yes
+			culture = cu:russian
+			interest_group = ig_devout
+			ideology = ideology_traditionalist
+			birth_date = 1798.1.19
+			traits = {
+				cautious
+				pillager
+			}
+			save_scope_as = aleksandr_kolchak
+		}
+		scope:aleksandr_kolchak = {
+			transfer_to_formation = scope:irk_army
+		}
+	}
+}

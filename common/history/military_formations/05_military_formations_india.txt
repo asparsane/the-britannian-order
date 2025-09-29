@@ -1,0 +1,311 @@
+﻿MILITARY_FORMATIONS = {
+	c:BIN ?= {
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_punjab
+			name = FaujiKhas
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_PUNJAB
+				count = 4
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_cuirassiers
+				state_region = s:STATE_PUNJAB
+				count = 1
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_dragoons
+				state_region = s:STATE_PUNJAB
+				count = 1
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_PUNJAB
+				count = 1
+			}
+		}
+
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_punjab
+			name = FaujiAin
+
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_PUNJAB
+				count = 8
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_PUNJAB
+				count = 8
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_PUNJAB
+				count = 20
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_cuirassiers
+				state_region = s:STATE_PUNJAB
+				count = 10
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_PUNJAB
+				count = 3
+			}
+		}
+
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_punjab
+			name = FaujiBe_Qawaid
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_PUNJAB
+				count = 15
+			}
+
+			combat_unit = {
+				type = unit_type:combat_unit_type_irregular_infantry
+				state_region = s:STATE_PUNJAB
+				count = 15
+			}
+			save_scope_as = qawaid_army
+		}
+
+		create_character = {
+			is_general = yes
+			first_name = Alexander
+			last_name = Gardner
+			culture = cu:yankee
+			interest_group = ig_armed_forces
+			historical = yes
+			hq = region_punjab
+			age = 51
+			traits = {
+				brave
+				# experienced_artillery_commander
+			}
+			save_scope_as = gardner_gen
+		}
+
+		scope:gardner_gen = {
+			transfer_to_formation = scope:qawaid_army
+		}
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_bombay
+			name = Bombay_Army
+
+			# Infantry
+			combat_unit = { # European Regiments
+				type = unit_type:combat_unit_type_skirmish_infantry
+				state_region = s:STATE_BOMBAY
+				count = 3
+			}
+			combat_unit = { # Bombay Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_BOMBAY
+				count = 10
+			}
+			combat_unit = { # Bombay Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_GUJARAT
+				count = 9
+			}
+			combat_unit = { # Bombay Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_BOMBAY
+				count = 5
+			}
+			combat_unit = { # Bombay Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_BOMBAY
+				count = 5
+			}
+			# Cavalry
+			combat_unit = { # Bombay Light Cavalry
+				type = unit_type:combat_unit_type_lancers
+				state_region = s:STATE_BOMBAY
+				count = 2
+			}
+			combat_unit = { # Bombay Light Cavalry
+				type = unit_type:combat_unit_type_lancers
+				state_region = s:STATE_GUJARAT
+				count = 1
+			}
+			# Artillery
+			combat_unit = { # European Artillery
+				type = unit_type:combat_unit_type_mobile_artillery
+				state_region = s:STATE_BOMBAY
+				count = 2
+			}
+			combat_unit = { # Bombay Native Artillery
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_BOMBAY
+				count = 2
+			}
+			save_scope_as = bombay_army
+		}
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_madras
+			name = Madras_Army
+
+			# Infantry
+			combat_unit = { # European Regiments
+				type = unit_type:combat_unit_type_skirmish_infantry
+				state_region = s:STATE_MADRAS
+				count = 3
+			}
+			combat_unit = { # Madras Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_MADRAS
+				count = 28
+			}
+			combat_unit = { # Madras Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_MYSORE
+				count = 4
+			}
+			combat_unit = { # Madras Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_CIRCARS
+				count = 10
+			}
+			combat_unit = { # Madras Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_KURNOOL
+				count = 5
+			}
+			combat_unit = { # Madras Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_MYSORE
+				count = 5
+			}
+			# Cavalry
+			combat_unit = { # Madras Light Cavalry
+				type = unit_type:combat_unit_type_lancers
+				state_region = s:STATE_MADRAS
+				count = 5
+			}
+			combat_unit = { # Madras Light Cavalry
+				type = unit_type:combat_unit_type_lancers
+				state_region = s:STATE_TRAVANCORE
+				count = 3
+			}
+			# Artillery
+			combat_unit = { # European Artillery
+				type = unit_type:combat_unit_type_mobile_artillery
+				state_region = s:STATE_MADRAS
+				count = 4
+			}
+			combat_unit = { # Madras Native Artillery
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_MADRAS
+				count = 2
+			}
+			save_scope_as = madras_army
+		}
+
+		create_military_formation = {
+			type = army
+			hq_region = sr:region_bengal
+			name = Bengal_Army
+
+			# Infantry
+			combat_unit = { # European Infantry Regiments
+				type = unit_type:combat_unit_type_skirmish_infantry
+				state_region = s:STATE_WEST_BENGAL
+				count = 6
+			}
+			combat_unit = { # Bengal Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_WEST_BENGAL
+				count = 14
+			}
+			combat_unit = { # Bengal Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_AGRA
+				count = 20
+			}
+			combat_unit = { # Bengal Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_EAST_BENGAL
+				count = 15
+			}
+			combat_unit = { # Bengal Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_BIHAR
+				count = 15
+			}
+			combat_unit = { # Bengal Native Infantry
+				type = unit_type:combat_unit_type_line_infantry
+				state_region = s:STATE_AWADH
+				count = 10
+			}
+			# Cavalry
+			combat_unit = { # Irregular Cavalry
+				type = unit_type:combat_unit_type_hussars
+				state_region = s:STATE_BIHAR
+				count = 4
+			}
+			combat_unit = { # Governor General's Bodyguard (European)
+				type = unit_type:combat_unit_type_cuirassiers
+				state_region = s:STATE_WEST_BENGAL
+				count = 1
+			}
+			combat_unit = { # Bengal Light Cavalry
+				type = unit_type:combat_unit_type_lancers
+				state_region = s:STATE_AGRA
+				count = 5
+			}
+			# Artillery
+			combat_unit = { # Bengal Artillery, Foot + Horse
+				type = unit_type:combat_unit_type_cannon_artillery
+				state_region = s:STATE_WEST_BENGAL
+				count = 9
+			}
+			combat_unit = { # European Artillery
+				type = unit_type:combat_unit_type_mobile_artillery
+				state_region = s:STATE_WEST_BENGAL
+				count = 1
+			}
+			save_scope_as = bengal_army
+		}
+
+		create_character = {
+			template = BIC_henry_fane
+			save_scope_as = fane_gen
+		}
+
+		scope:fane_gen = {
+			transfer_to_formation = scope:bengal_army
+		}
+
+		create_military_formation = {
+			type = fleet
+			hq_region = sr:region_bombay
+			name = Indian_Navy
+
+			combat_unit = { # Nothing the size of a frigate
+				type = unit_type:combat_unit_type_frigate
+				state_region = s:STATE_BOMBAY
+				count = 1
+			}
+		}
+	}
+}

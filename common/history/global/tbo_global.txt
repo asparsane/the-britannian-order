@@ -1,0 +1,152 @@
+GLOBAL = {
+
+	c:GBR ?= {
+		trigger_event = {
+			id = britannian_prosperity.1 
+			days = 0
+			popup = yes
+		}
+	}
+	c:GDG = {
+		add_journal_entry = {
+			type = je_guangdong_nexus
+		}
+		add_journal_entry = {
+			type = je_guangdong_hub_of_corruption
+		}
+	}
+	c:TTA ?= {
+		add_journal_entry = {
+			type = je_glove_and_fist
+		}
+	}
+	c:GER ?= {
+		add_journal_entry = {
+			type = je_german_british_split
+		}
+	}
+	c:FGT ?= {
+		add_modifier = { 
+			name = fengtian_modifier
+		}
+		add_journal_entry = {
+			type = je_the_national_era
+		}
+		ig:ig_trade_unions = {
+			set_variable = { name = special_ideology }
+		}
+		ig:ig_intelligentsia = {
+			set_variable = { name = special_ideology }
+		}
+	}
+	c:CFD ?= {
+		add_journal_entry = {
+			type = je_cfd_modernization_program
+		}
+	}
+	c:DVM ?= {
+		add_journal_entry = {
+			type = je_dvm_church_of_state
+		}
+		add_modifier = {
+			name = dvm_indulgence_bonus
+		}
+	}
+	c:MSK ?= {
+		add_journal_entry = {
+			type = je_the_tobolsk_insurgency_zone
+		}
+	}
+	c:IRK ?= {
+		add_journal_entry = {
+			type = irk_the_tsar_of_siberia
+		}
+		add_journal_entry = {
+			type = irk_foreign_investments
+		}
+	}
+	c:SBR ?= {
+		add_modifier = {
+			name = siberian_black_army
+		}
+	}
+	c:URL ?= {
+		add_modifier = {
+			name = ural_shattered_fighting_spirit
+		}
+		add_modifier = {
+			name = ural_shattered_military_organization
+		}
+		add_modifier = {
+			name = ural_shattered_logistics
+		}
+		add_journal_entry = {
+			type = ural_frontier
+		}
+	}
+	c:FER = {
+		add_modifier = {
+			name = widespread_poverty_modifier
+		}
+		add_modifier = {
+			name = low_literacy_modifier
+		}
+		add_modifier = {
+			name = underdeveloped_healthcare_modifier
+		}
+		add_modifier = {
+			name = desolate_wasteland_modifier
+		}
+		add_modifier = {
+			name = economic_hardship
+		}
+		add_modifier = {
+			name = weakened_military
+		}
+		add_modifier = {
+			name = political_turmoil
+		}
+		trigger_event = {
+			id = russia.100
+			days = 14
+			popup = yes
+		}
+	}
+	c:SLR = {
+		add_journal_entry = {
+			type = slr_charred_land
+		}
+		every_scope_state = {
+			limit = {
+				any_neighbouring_state = {
+					owner = {
+						country_has_primary_culture = cu:russian
+					}
+				}
+			}
+			add_modifier = {
+				name = slr_state_unrest
+			}
+		}
+	}
+	c:SRU = {
+		add_radicals = {
+			value = 0.4
+		}
+		add_journal_entry = {
+			type = je_directorial_national_guard
+		}
+		add_journal_entry = {
+			type = je_sru_directory_national_literacy_campaign
+		}
+		add_journal_entry = {
+			type = je_sru_rebellions
+		}
+		add_journal_entry = {
+			type = je_sru_directory_modernization_campaign
+		}
+		add_modifier = {
+			name = national_vigilance_declared_sru
+		}
+	}
+}

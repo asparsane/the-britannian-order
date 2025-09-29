@@ -1,0 +1,40 @@
+﻿TRADE_ROUTES = {
+	s:STATE_BURYATIA = {
+		region_state:FER = {
+			sg:small_arms = {
+				add_imports = 10
+			}
+			sg:tools = {
+				add_imports = 10
+			}
+		}	
+	}
+	s:STATE_GUANGDONG = {
+		region_state:GDG = {
+			sg:clothes = {
+				add_imports = 40
+			}
+			sg:furniture = {
+				add_imports = 40
+			}
+			sg:silk = {
+				add_exports = 30
+			}
+			sg:luxury_clothes = {
+				add_imports = 60
+			}
+			sg:paper = {
+				add_imports = 40
+			}
+			sg:dye = {
+				add_exports = 50
+			}
+			sg:opium = {
+				add_imports = 20
+			}
+			sg:sugar = {
+				add_exports = 20
+			}
+		}
+	}
+}
