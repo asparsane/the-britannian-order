@@ -1,0 +1,30 @@
+#7/20:
+    #DONE #Fix Germany always siding with CFD by changing the diplo play into an instant war. It's a coup anyways. 
+    #DONE Slow down advancement of CFD modernization bar, right now it fills up and leads to war way too fast
+    #DONE add loc for german events 2
+    #UNF finish implementing nukes. Fix burgundy laws.
+    #DONE fix siberian neighbor not being notified about the Great Asian War
+    #DONE make it so japan can't back out of Great Asian War 
+    #DONE add superevent and notification for Great Asian War
+    #UNF add aloevera's character(s) to westland, maybe some skeleton breakup stuff?
+
+#7/21:
+    #DONE? finish implementing nukes. Fix burgundy laws.
+    #UNF add aloevera's character(s) to westland, maybe some skeleton breakup stuff?
+    #UNF add bormann locs and atomic locs
+    #DONE make a tbo discord
+
+#7/22:
+    #UNF Implement skeleton content for the collapse of Westland, as well as set up the 50-way civil war
+    #DONE add locs for bormann events and the rest of atomic content
+    #add alternate atomic policy. Should be super easy.
+    #UNF begin looking into a sort of bidding system for the sale of nukes so random minors can't get them. Anticipating issues where everybody and their grandma tries to buy nukes so Burgundy is permanently running low.
+    #UNF Maybe add special parallel techs or whatever to grant bonuses in nuke production/power?
+    #DONE actually fix russia not getting the event
+    #DONE add sol and food security reduction from getting nuked, maybe look into army effects, figure out destroying parts of buildings
+#7/24:
+    #FIN?Figure out how to generate the character templates as rulers for westland successors
+    #UNFAdd more content revolving bormann's descent into insanity
+#7/25
+    #start implementing the different westland successors
+    #start by creating basic jes for the iberian successors

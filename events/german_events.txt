@@ -1,0 +1,88 @@
+namespace = german_events
+
+german_events.1 = { #chaos ensures, leader is offed
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	title = german_events.1.t
+	desc = german_events.1.d
+	flavor = german_events.1.f
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		c:GBR ?= {
+			save_scope_as = gbr_scope
+		}
+		change_relations = {
+			country = scope:gbr_scope
+			value = -30
+		}
+		this.ruler = {
+			save_scope_as = ruler_scope
+		}
+	}
+
+	option = {
+		name = german_events.1.a
+		ai_chance = {
+			base = 10
+		}
+		add_modifier = {
+			name = ger_political_chaos_modifier
+			days = short_modifier_time
+		}
+		this.ruler = {
+			kill_character = yes
+		}
+		trigger_event = {
+			id = bormann_events.1
+			days = 1
+			popup = yes
+		}
+	}
+}
+
+german_events.2 = { #get the south german war
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	title = german_events.2.t
+	desc = german_events.2.d
+	flavor = german_events.2.f
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = german_events.1.a
+		ai_chance = {
+			base = 10
+		}
+		add_journal_entry = {
+			type = je_south_german_war
+		}
+	}
+}

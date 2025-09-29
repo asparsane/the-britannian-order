@@ -1,0 +1,233 @@
+﻿ namespace = japan_events
+
+japan_events.120 = { #indonesian slave uprising
+	type = country_event
+
+	title = japan_events.120.t
+	desc = japan_events.120.d
+	flavor = japan_events.120.f
+
+	event_image = {
+		video = "asia_sepoy_mutiny"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	duration = 3
+	immediate = {
+		set_variable = indonesian_slave_revolt_var
+	}
+	option = {
+		ai_chance = {
+			base = 10
+		}
+		default_option = yes
+		name = japan_events.120.a
+	}
+}
+japan_events.200 = { # false flag to create ramg
+	type = country_event
+
+	title = japan_events.200.t
+	desc = japan_events.200.d
+	flavor = japan_events.200.f
+
+	event_image = {
+		video = "unspecific_politicians_arguing"	
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+	
+	immediate = {
+		c:GDG = {
+			random_neighbouring_state = {
+				limit = {
+					region = sr:region_south_china
+					owner ?= {
+						country_has_primary_culture = cu:han
+					}
+				}
+				save_scope_as = incident_state
+				owner ?= {
+					save_scope_as = owner_country
+				}
+			}
+		}
+	}
+
+	option = {
+		ai_chance = {
+			base = 5
+		}
+		default_option = yes
+		name = japan_events.200.a
+		create_diplomatic_play = {
+			name = south_china_skirmish
+			target_country = scope:owner_country
+			type = dp_japan_establish_ramg
+			escalation = 50
+			target_state = "scope:incident_state".region_state:"scope:owner_country"
+		}
+		c:GDG ?= {
+			change_tag = RAMG
+		}
+		add_journal_entry = {
+			type = je_tkk_the_conquest_of_china
+		}
+		c:RAMG = {
+			set_country_type = recognized	
+		}
+		create_diplomatic_pact = {
+			country = c:RAMG
+			type = puppet
+		}
+	}
+}
+
+japan_events.202 = { #japan stages a false flag attack
+	type = country_event
+	title = japan_events.202.t
+	desc = japan_events.202.d
+	flavor = japan_events.202.f
+	event_image = {
+		video = "unspecific_armored_train"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_gear.dds"
+	duration = 3
+	immediate = {
+		set_variable = chinese_national_congress_participant
+	}
+	option = { #declare chinese national congress
+		ai_chance = {
+			base = 10
+		}
+		name = japan_events.202.a
+		set_global_variable = {
+			name = false_flag_target_var
+			value = this
+		}
+		random_country = {
+			limit = {
+				AND = {
+					country_has_primary_culture = cu:russian
+					any_neighbouring_state = {
+						owner = {
+							c:TKK ?= this
+						}
+					}
+				}
+			}
+			trigger_event = {
+				id = japan_events.204
+				days = 0
+				popup = yes
+			}
+		}
+		every_country = {
+			limit = {
+				country_has_primary_culture = cu:han
+				is_subject = no
+			}
+			trigger_event = {
+				id = japan_events.203
+				days = 0
+				popup = yes
+			}
+		}
+	}
+}
+
+japan_events.203 = { #gives all non-subject chinese countries an option to join the chinese national congress
+	type = country_event
+	title = japan_events.203.t
+	desc = japan_events.203.d
+	flavor = japan_events.203.f
+	event_image = {
+		video = "unspecific_armored_train"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_gear.dds"
+	duration = 3
+	immediate = {
+		global_var:false_flag_target = {
+			save_scope_as = false_flag_target_scope
+		}
+		if = {
+			limit = {
+				has_global_variable = false_flag_target
+			}
+			remove_global_variable = false_flag_target
+		}
+		change_relations = {
+			country = c:TKK
+			value = -15
+		}
+	}
+	option = { #join the chinese national congress
+		ai_chance = {
+			base = 9
+		}
+		name = japan_events.203.a
+		custom_tooltip = {
+			text = join_national_congress_tt
+			set_variable = chinese_national_congress_participant
+		}
+		change_relations = {
+			country = c:TKK
+			value = -40
+		}
+	}
+	option = { #decline the invitation
+		ai_chance = {
+			base = 1
+			modifier = {
+				trigger = {
+					c:FGT ?= this
+				}
+				add = -1
+			}
+		}
+		name = japan_events.203.b
+	}
+}
+
+japan_events.204 = { #gives russian bordering state chance to accept chinese offer
+	type = country_event
+	title = japan_events.204.t
+	desc = japan_events.204.d
+	flavor = japan_events.204.f
+	event_image = {
+		video = "unspecific_armored_train"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_gear.dds"
+	duration = 3
+	option = { #accept chinese offer
+		ai_chance = {
+			base = 10
+		}
+		default_option = yes
+		name = japan_events.204.a
+		custom_tooltip = {
+			text = accepted_chinese_offer_tt
+			set_variable = accepted_chinese_offer
+		}
+		change_relations = {
+			country = c:TKK
+			value = -40
+		}
+	}
+	option = { #decline offer
+		ai_chance = {
+			base = 0
+		}
+		name = japan_events.204.b
+	}
+}

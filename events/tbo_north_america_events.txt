@@ -1,0 +1,52 @@
+namespace = britannian_prosperity
+
+north_america_events.10 = {
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	title = north_america_events.10.t
+	desc = north_america_events.10.d
+	flavor = north_america_events.10.f
+
+	duration = 3
+
+	trigger = {
+	}
+	
+	immediate = {
+		if = {
+			limit = {
+				has_company = company_type:company_quaker_oats
+			}
+			remove_company = company_type:company_quaker_oats
+		}
+		random_scope_character = {
+			limit = {
+				has_template = hne_k_kerr_otes
+			}
+			kill_character = yes
+		}
+		c:BNA = {
+			create_character = {
+				template = hne_k_kerr_otes
+			}
+		}
+		add_journal_entry = {
+			type = je_tung_tung_tung_corps
+		}
+	}
+
+	option = {
+		name = north_america_events.10.a
+		ai_chance = {
+			base = 10
+		}
+	}
+}

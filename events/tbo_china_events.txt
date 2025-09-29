@@ -1,0 +1,943 @@
+﻿namespace = china_events
+china_events.100 = { #mgb has fallen; billions must homestead
+	type = country_event
+
+	title = china_events.100.t
+	desc = china_events.100.d
+	flavor = china_events.100.f
+
+	event_image = {
+		video = "ep1_transfer_of_authority"	
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+	
+	immediate = {
+		c:MGB = {
+			make_independent = yes
+		}
+	}
+
+	option = { #seek protection from fengtian
+		ai_chance = {
+			base = 10
+		}
+		default_option = yes
+		name = china_events.100.a
+		fengtian_ally_early_setup = yes
+		c:FGT = {
+			create_diplomatic_pact = {
+				country = c:MGB
+				type = co_governance
+			}
+		}
+	}
+	option = { #independence
+		ai_chance = {
+			base = 0
+		}
+		name = china_events.100.b
+		peasant_revolt_setup = yes
+	}
+}
+china_events.110 = { #increase or don't increase reparations value
+	type = country_event
+	title = china_events.110.t
+	desc = china_events.110.d
+	flavor = china_events.110.f
+	event_image = {
+		video = "unspecific_politicians_arguing"	
+	}
+	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+	duration = 3
+	option = { #increase reparation value
+		ai_chance = {
+			base = 5
+		}
+		trigger = {
+			var:deliberation_points > 0
+		}
+		name = china_events.110.a
+		change_global_variable = {
+			name = japanese_reparations_deliberation
+			add = 1
+		}
+		change_variable = {
+			name = deliberation_points
+			subtract = -1
+		}
+		set_variable = {
+			name = finished_reparation_deliberations
+		}
+	}
+}
+china_events.150 = { #britannia-backed elements launch coup
+	type = country_event
+	title = china_events.150.t
+	desc = china_events.150.d
+	flavor = china_events.150.f
+	event_image = {
+		video = "asia_sepoy_mutiny"	
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	duration = 3
+	immediate = {
+		create_doc = yes
+	}
+	option = { #rise up in armed revolt.
+		ai_chance = {
+			base = 5
+		}
+		name = china_events.150.a
+		ig:ig_intelligentsia = {
+			save_scope_as = intelligentsia_scope
+		}
+		kill_population_percent_in_state = {
+			percent = 0.02
+			interest_group = ig:ig_intelligentsia
+		}
+		c:DOC = {
+			create_diplomatic_play = {
+				name = chinese_revolt
+				target_country = c:CFD
+				type = dp_annex_war
+				escalation = 80
+				target_state = ROOT.capital.region_state:CFD
+				add_war_goal = {
+					holder = c:CFD
+					target_country = c:DOC
+					type = annex_country
+				}
+				add_initiator_backers = { c:GBR }
+			}
+			change_infamy = -150
+		}
+		change_infamy = -150
+	}
+	option = { #jump ship and switch tags
+		ai_chance = {
+			base = 5
+		}
+		name = china_events.150.b
+		ig:ig_intelligentsia = {
+			save_scope_as = intelligentsia_scope
+		}
+		kill_population_percent_in_state = {
+			percent = 0.02
+			interest_group = ig:ig_intelligentsia
+		}
+		c:DOC = {
+			create_diplomatic_play = {
+				name = chinese_revolt
+				target_country = c:CFD
+				type = dp_annex_war
+				escalation = 80
+				target_state = ROOT.capital.region_state:CFD
+				add_war_goal = {
+					holder = c:CFD
+					target_country = c:DOC
+					type = annex_country
+				}
+				add_initiator_backers = { c:GBR }
+			}
+			change_infamy = -150
+		}
+		change_infamy = -150
+		play_as = c:DOC
+	}
+}
+
+china_events.151 = { #britannia orders coup. all reforms are rolled back, negative modifier applied to intelligentsia
+	type = country_event
+	title = china_events.151.t
+	desc = china_events.151.d
+	flavor = china_events.151.f
+	event_image = {
+		video = "unspecific_politicians_arguing"	
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	duration = 3
+	option = {
+		ai_chance = {
+			base = 10
+		}
+		name = china_events.151.a
+        add_modifier = {
+        	name = CFDMODJE_intelligentsia_decreased_influence
+	        days = normal_modifier_time
+        }
+		hidden_effect = {
+			trigger_event = {
+				id = china_events.150
+				days = 3
+			}
+		}
+	}
+}
+china_events.152 = { #receiver is demanded to be annexed by doc
+	type = country_event
+	placement = ROOT
+	duration = 3
+	title = china_events.152.t
+	desc= china_events.152.d
+	flavor = china_events.152.f
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	option = {
+		name = china_events.152.a
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = DOC.army_power_projection
+				divide = this.army_power_projection
+				multiply = 3
+			}
+		}
+		c:DOC = {
+			annex = root
+		}
+	}
+	option = {
+		name = china_events.152.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				subtract = {
+					value = DOC.army_power_projection
+					divide= this.army_power_projection
+					multiply = 3
+				}
+			}
+		}
+		c:DOC = {
+			create_diplomatic_play = {
+				name = chinese_revolt
+				target_country = root
+				type = dp_annex_war
+				escalation = 60
+				target_state = "root.capital".region_state:root
+				add_war_goal = {
+					holder = root
+					target_country = c:DOC
+					type = war_reparations
+				}
+			}
+			change_infamy = -40
+		}
+	}
+}
+
+china_events.153 = { # governmental collapse
+	type = country_event
+	placement = ROOT
+	duration = 3
+	title = china_events.153.t
+	desc = china_events.153.d
+	flavor = china_events.153.f
+	event_image = {
+		video = "unspecific_armored_train"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	immediate = {
+		add_modifier = {
+			name = doc_government_collapse_modifier
+			days = short_modifier_time
+			is_decaying = yes
+		}
+	}
+	option = { #remain loyal to britannia
+		name = china_events.153.a #you will get couped
+		trigger_event = {
+			id = china_events.154
+			days = 7
+			popup = yes
+		}
+	}
+	option = { #beg for help from landowner faction
+		name = china_events.153.b
+		trigger_event = {
+			id = china_events.158
+			days = 7
+			popup = yes
+		}
+	}
+}
+
+china_events.154 = { # coup happens, you get to choose a random warlord
+	type = country_event
+	placement = ROOT
+	duration = 3
+	title = china_events.154.t
+	desc = china_events.154.d
+	flavor = china_events.154.f
+	event_image = {
+		video = "middleeast_courtroom_upheaval"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	option = { #northern faction warlords
+		name = china_events.154.a
+		trigger_event = {
+			id = china_events.155
+			days = 0
+			popup = yes
+		}
+	}
+	option = { #southern faction warlords
+		name = china_events.154.b
+		trigger_event = {
+			id = china_events.156
+			days = 0
+			popup = yes
+		}
+	}
+	option = { #western loose warlords
+		name = china_events.154.c
+		trigger_event = {
+			id = china_events.157
+			days = 0
+			popup = yes
+		}
+	}
+}
+
+china_events.155 = { #lets you pick a northern warlord 
+	type = country_event
+	placement = ROOT
+	duration = 3
+	title = china_events.155.t
+	desc = china_events.155.d
+	flavor = china_events.155.f
+	event_image = {
+		video = "unspecific_armored_train"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	immediate = {
+		create_northern_warlords = yes
+		also_create_nanjing_warlord = yes
+	}
+	option = {
+		name = china_events.155.a
+		trigger = {
+			exists = c:ZHL
+		}
+		play_as = c:ZHL
+		create_southern_warlords = yes
+		create_western_warlords = yes
+	}
+	option = {
+		name = china_events.155.b
+		trigger = {
+			exists = c:HEN
+		}
+		play_as = c:HEN
+		create_southern_warlords = yes
+		create_western_warlords = yes
+	}
+	option = {
+		name = china_events.155.c
+		trigger = {
+			exists = c:WQI
+		}
+		play_as = c:WQI
+		create_southern_warlords = yes
+		create_western_warlords = yes
+	}
+	option = {
+		name = china_events.155.e
+		trigger = {
+			exists = c:SHX
+		}
+		play_as = c:SHX
+		create_southern_warlords = yes
+		create_western_warlords = yes
+	}
+	option = {
+		name = china_events.155.g
+		trigger = {
+			exists = c:JSU
+		}
+		play_as = c:JSU
+		create_southern_warlords = yes
+		create_western_warlords = yes
+	}
+}
+
+china_events.156 = { #lets you pick a southern warlord 
+	type = country_event
+	placement = ROOT
+	duration = 3
+	title = china_events.156.t
+	desc = china_events.156.d
+	flavor = china_events.156.f
+	event_image = {
+		video = "unspecific_armored_train"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	immediate = {
+		create_southern_warlords = yes
+		also_create_nanjing_warlord = yes
+	}
+	option = {
+		name = china_events.156.a
+		trigger = {
+			exists = c:FUJ
+		}
+		play_as = c:FUJ
+		create_northern_warlords = yes
+		create_western_warlords = yes
+	}
+	option = {
+		name = china_events.156.b
+		trigger = {
+			exists = c:ZHJ
+		}
+		play_as = c:ZHJ
+		create_northern_warlords = yes
+		create_western_warlords = yes
+	}
+	option = {
+		name = china_events.156.c
+		trigger = {
+			exists = c:JXI
+		}
+		play_as = c:JXI
+		create_northern_warlords = yes
+		create_western_warlords = yes
+	}
+	option = {
+		name = china_events.156.e
+		trigger = {
+			exists = c:HNA
+		}
+		play_as = c:HNA
+		create_northern_warlords = yes
+		create_western_warlords = yes
+	}
+	option = {
+		name = china_events.156.g
+		trigger = {
+			exists = c:ANH
+		}
+		play_as = c:ANH
+		create_northern_warlords = yes
+		create_western_warlords = yes
+	}
+	option = {
+		name = china_events.156.h
+		trigger = {
+			exists = c:HUB
+		}
+		play_as = c:HUB
+		create_northern_warlords = yes
+		create_western_warlords = yes
+	}
+}
+
+
+china_events.157 = { #lets you pick a western warlord 
+	type = country_event
+	placement = ROOT
+	duration = 3
+	title = china_events.157.t
+	desc = china_events.157.d
+	flavor = china_events.157.f
+	event_image = {
+		video = "unspecific_armored_train"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	immediate = {
+		create_western_warlords = yes
+	}
+	option = {
+		name = china_events.157.a
+		trigger = {
+			exists = c:SXI
+		}
+		play_as = c:SXI
+		create_northern_warlords = yes
+		create_southern_warlords = yes
+		also_create_nanjing_warlord = yes
+	}
+	option = {
+		name = china_events.157.b
+		trigger = {
+			exists = c:XIB
+		}
+		play_as = c:XIB
+		create_northern_warlords = yes
+		create_southern_warlords = yes
+		also_create_nanjing_warlord = yes
+	}
+	option = {
+		name = china_events.157.b
+		trigger = {
+			exists = c:CHJ
+		}
+		play_as = c:CHJ
+		create_northern_warlords = yes
+		create_southern_warlords = yes
+		also_create_nanjing_warlord = yes
+	}
+}
+
+china_events.158 = {
+	type = country_event
+	placement = ROOT
+	duration = 3
+	title = china_events.158.t
+	desc = china_events.158.d
+	flavor = china_events.158.f
+	event_image = {
+		video = "unspecific_armored_train"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	immediate = {
+		create_northern_warlords = yes
+		create_western_warlords = yes
+		create_southern_warlords = yes
+	}
+	option = {
+		name = china_events.158.a
+		add_modifier = {
+			name = landowner_rescue
+			days = normal_modifier_time
+		}
+		every_scope_state = {
+			limit = {
+				owner = this
+			}
+			remove_building = building_barracks
+		}
+	}
+}
+
+china_events.160 = {
+	type = country_event
+	placement = ROOT
+	duration = 3
+	
+	title = china_events.160.t
+	desc = china_events.160.d
+	flavor = china_events.160.f
+	
+	event_image = {
+		video = "unspecific_armored_train"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	
+	trigger = {
+		exists = c:CFD
+		this = c:CFD
+		has_technology_researched = nationalism
+	}
+	
+	immediate = {
+		if = {
+			limit = { exists = s:STATE_SHANDONG.region_state:CFD }
+			create_country = {
+				tag = WQI
+				origin = this
+				state = s:STATE_SHANDONG.region_state:CFD
+				on_created = {
+					warlord_setup_effect = yes
+					c:CFD ?= {	
+						create_diplomatic_pact = {
+							country = c:WQI
+							type = loose_warlord
+						}
+					}
+				}
+			}
+			c:WQI = { save_scope_as = scope_WQI }
+		}
+	}
+	
+	option = {
+		name = china_events.160.a
+		default_option = yes
+		ai_chance = {
+			base = 4
+		}
+		random_state = {
+			limit = {
+				state_region = s:STATE_ZHILI
+			}
+			set_state_owner = c:WQI
+		}
+		if = {
+			limit = { exists = s:STATE_NORTHERN_ANHUI.region_state:CFD }
+			create_country = {
+				tag = ANH
+				origin = this
+				state = s:STATE_NORTHERN_ANHUI.region_state:CFD
+				on_created = {
+					warlord_setup_effect = yes
+				}
+			}
+			c:ANH = { save_scope_as = scope_ANH }
+			c:CFD ?= {	
+				create_diplomatic_pact = {
+					country = c:ANH
+					type = loose_warlord
+				}
+			}
+		}
+	}
+	option = {
+		name = china_events.160.b
+		ai_chance = {
+			base = 6
+		}
+		if = {
+			limit = { exists = s:STATE_NORTHERN_ANHUI.region_state:CFD }
+			create_country = {
+				tag = ANH
+				origin = this
+				state = s:STATE_NORTHERN_ANHUI.region_state:CFD
+				on_created = {
+					warlord_setup_effect = yes
+				}
+			}
+			c:ANH = { save_scope_as = scope_ANH }
+			random_state = {
+				limit = {
+					state_region = s:STATE_SOUTHERN_ANHUI
+				}
+				set_state_owner = c:ANH
+			}
+			random_state = {
+				limit = {
+					state_region = s:STATE_HENAN
+				}
+				set_state_owner = c:ANH
+			}
+			c:CFD ?= {	
+				create_diplomatic_pact = {
+					country = c:ANH
+					type = loose_warlord
+				}
+			}
+		}
+	}
+}
+
+china_events.161 = {
+	type = country_event
+	placement = ROOT
+	duration = 3
+	
+	title = china_events.161.t
+	desc = china_events.161.d
+	flavor = china_events.161.f
+	
+	event_image = {
+		video = "unspecific_armored_train"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	
+	immediate = {
+		if = {
+			limit = { exists = s:STATE_JIANGXI.region_state:CFD }
+			create_country = {
+				tag = JXI
+				origin = this
+				state = s:STATE_JIANGXI.region_state:CFD
+				on_created = {
+					warlord_setup_effect = yes
+				}
+			}
+			c:JXI = { save_scope_as = scope_JXI }
+			c:CFD ?= {	
+				create_diplomatic_pact = {
+					country = c:JXI
+					type = loose_warlord
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = china_events.161.a
+		default_option = yes
+		ai_chance = {
+			base = 4
+		}
+		if = {
+			limit = { exists = s:STATE_EASTERN_HUBEI.region_state:CFD }
+			create_country = {
+				tag = HUB
+				origin = this
+				state = s:STATE_EASTERN_HUBEI.region_state:CFD
+				on_created = {
+					warlord_setup_effect = yes
+				}
+			}
+			c:HUB = { save_scope_as = scope_HUB }
+			c:CFD ?= {	
+				create_diplomatic_pact = {
+					country = c:HUB
+					type = loose_warlord
+				}
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_WESTERN_HUBEI.region_state:CFD }
+			random_state = {
+				limit = {
+					state_region = s:STATE_WESTERN_HUBEI
+				}
+				set_state_owner = c:HUB
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_HUNAN.region_state:CFD }
+			create_country = {
+				tag = HNA
+				origin = this
+				state = s:STATE_HUNAN.region_state:CFD
+				on_created = {
+					warlord_setup_effect = yes
+				}
+			}
+			c:HNA = { save_scope_as = scope_HNA }
+			c:CFD ?= {	
+				create_diplomatic_pact = {
+					country = c:HNA
+					type = loose_warlord
+				}
+			}
+		}
+	}
+}
+
+china_events.162 = {
+	type = country_event
+	placement = ROOT
+	duration = 3
+	
+	title = cfd_events.162.t
+	desc = cfd_events.162.d
+	flavor = cfd_events.162.f
+	
+	event_image = {
+		video = "unspecific_armored_train"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	
+	immediate = {
+		if = {
+			limit = { exists = s:STATE_SHANXI.region_state:CFD }
+			create_country = {
+				tag = XIB
+				origin = this
+				state = s:STATE_SHANXI.region_state:CFD
+				on_created = {
+					warlord_setup_effect = yes
+				}
+			}
+			c:CFD ?= {	
+				create_diplomatic_pact = {
+					country = c:XIB
+					type = loose_warlord
+				}
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_FUJIAN.region_state:CFD }
+			create_country = {
+				tag = FUJ
+				origin = this
+				state = s:STATE_FUJIAN.region_state:CFD
+				on_created = {
+					warlord_setup_effect = yes
+				}
+			}
+			c:CFD ?= {	
+				create_diplomatic_pact = {
+					country = c:FUJ
+					type = loose_warlord
+				}
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_ZHEJIANG.region_state:CFD }
+			random_state = {
+				limit = {
+					state_region = s:STATE_ZHEJIANG
+				}
+				set_state_owner = c:FUJ
+			}
+		}
+	}
+	
+	option = { # cede northwest
+		name = china_events.162.a
+		default_option = yes
+		ai_chance = {
+			base = 4
+		}
+		if = {
+			limit = { exists = s:STATE_ZHILI.region_state:CFD }
+			random_state = {
+				limit = {
+					state_region = s:STATE_ZHILI
+				}
+				set_state_owner = c:XIB
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_XIAN.region_state:CFD }
+			random_state = {
+				limit = {
+					state_region = s:STATE_XIAN
+				}
+				set_state_owner = c:XIB
+			}
+		}
+	}
+	
+	option = { # cede southeast
+		name = cfd_events.162.b
+		default_option = yes
+		ai_chance = {
+			base = 4
+		}
+		if = {
+			limit = { exists = s:STATE_SHAOZHOU.region_state:CFD }
+			random_state = {
+				limit = {
+					state_region = s:STATE_SHAOZHOU
+				}
+				set_state_owner = c:FUJ
+			}
+		}
+	}
+}
+
+china_events.180 = { # britannia explodes, guangdong corruption exposed
+	type = country_event
+	title = china_events.180.t
+	desc = china_events.180.d
+	flavor = china_events.180.f
+	event_image = {
+		video = "unspecific_politicians_arguing"	
+	}
+	duration = 3
+	immediate = {
+		remove_modifier = GDGHC_laundering_modifier
+		add_treasury = {
+			value = var:GDGHC_total_laundered_amount
+			multiply = -1
+		}
+		remove_variable = GDGHC_total_laundered_amount
+	}
+	option = {
+		ai_chance = {
+			base = 0
+		}
+		name = china_events.180.a
+		set_variable = GDGHC_corruption_exposed
+	}
+}
+
+china_events.181 = { # japan instates military rule in guangdong
+	type = country_event
+	title = china_events.181.t
+	desc = china_events.181.d
+	flavor = china_events.181.f
+	duration = 3
+	event_image = {
+		video = "ep1_change_of_authority"	
+	}
+	immediate = {
+		remove_variable = GDGHC_corruption_exposed
+	}
+	option = {
+		ai_chance = {
+			base = 0
+		}
+		name = china_events.181.a
+		instate_japanese_military_rule = yes
+		c:TKK = {
+			trigger_event = {
+				id = japan_events.200
+				days = 7
+				popup = yes
+			}
+		}
+	}
+}
+
+china_events.200 = {  #fengtian super communist
+	type = country_event
+
+	title = china_events.200.t
+	desc = china_events.200.d
+	flavor = china_events.200.f
+
+	event_image = {
+		video = "middleeast_police_breaking_door"	
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+		exists = c:FGT
+		THIS = c:FGT
+		has_technology_researched = socialism
+	}
+
+	option = {
+		ai_chance = {
+			base = 10
+		}
+		name = china_events.200.a
+		ig:ig_center_communist = {
+			add_modifier = { 
+				name = fengtian_communist_modifier
+			}
+		}
+		ig:ig_right_communist = {
+			add_modifier = { 
+				name = fengtian_communist_modifier
+			}
+		}
+		ig:ig_left_communist = {
+			add_modifier = { 
+				name = fengtian_communist_modifier
+			}
+		}
+		remove_modifier = fengtian_modifier
+	}
+}

@@ -1,0 +1,156 @@
+namespace = atomics_events
+
+atomics_events.1 = { # review atomics policy
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_gear.dds"
+
+	title = atomics_events.1.t
+	desc = atomics_events.1.d
+	flavor = atomics_events.1.f
+
+	duration = 3
+
+	trigger = {
+	}
+	
+	immediate = {
+		trigger_event = {
+			id = atomics_events.2
+			days = 3
+		}
+	}
+
+	option = { #permit offensive use
+		name = atomics_events.1.a
+		ai_chance = {
+			base = 10
+			modifier = {
+				trigger = {
+					has_law = law_type:law_autocracy
+				}
+				add = 5
+			}
+			modifier = {
+				trigger = {
+					has_law = law_type:law_council_republic
+				}
+				add = 5
+			}
+		}
+		custom_tooltip = {
+			text = offensive_use_permitted_tt
+			set_variable = {
+				name = atomics_policy
+				value = 1
+			}
+		}
+	}
+	option = { #permit defensive use
+		name = atomics_events.1.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				trigger = {
+					c:BRG ?= this
+				}
+				add = -100
+			}
+		}
+		custom_tooltip = {
+			text = defensive_atomics_tt
+			set_variable = {
+				name = atomics_policy
+				value = 2
+			}
+		}
+	}
+	option = {
+		name = atomics_events.1.c
+		ai_chance = {
+			base = 10
+			modifier = {
+				trigger = {
+					has_law = law_type:law_council_republic
+				}
+				add = 5
+			}
+			modifier = {
+				trigger = {
+					c:BRG ?= this
+				}
+				add = -100
+			}
+		}
+		custom_tooltip = {
+			text = no_first_strike_tt
+			set_variable = {
+				name = atomics_policy
+				value = 3
+			}
+		}
+	}
+}
+
+atomics_events.2 = { # review atomics priority
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_gear.dds"
+
+	title = atomics_events.2.t
+	desc = atomics_events.2.d
+	flavor = atomics_events.2.f
+
+	duration = 3
+
+	trigger = {
+	}
+	
+	immediate = {
+	}
+
+	option = { #prioritize gdp
+		name = atomics_events.2.a
+		ai_chance = {
+			base = 10
+		}
+		custom_tooltip = {
+			text = prioritize_gdp_tt
+			set_variable = {
+				name = atomics_priority_policy
+				value = 1
+			}
+		}
+	}
+	option = { #prioritize population
+		name = atomics_events.1.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				trigger = {
+					has_law = law_type:law_council_republic
+				}
+				add = -8
+			}
+		}
+		custom_tooltip = {
+			text = defensive_atomics_tt
+			set_variable = {
+				name = atomics_priority_policy
+				value = 2
+			}
+		}
+	}
+}

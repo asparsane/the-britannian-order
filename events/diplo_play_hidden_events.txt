@@ -1,0 +1,203 @@
+namespace = diplo_play_hidden_events
+
+diplo_play_hidden_events.1 = { #for target country, on war end for chinese national defense
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				has_variable = recently_won_war
+			}
+			annex = c:RAMG
+		}
+	}
+}
+
+diplo_play_hidden_events.2 = { #for initiator, on war end for chinese national defense
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				has_variable = recently_lost_war
+			}
+			dismantle_shina = yes
+			set_variable = lost_invasion_of_china
+		}
+	}
+}
+
+diplo_play_hidden_events.3 = { #westland war end
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				has_variable = recently_won_war
+			}
+			create_diplomatic_play = {
+				name = central_europe_conquest
+				target_country = c:HNG
+				type = dp_annex_war
+				add_escalation = 70
+				add_war_goal = {
+					holder = c:GER
+					target_country = c:BAV
+					type = annex_country
+				}
+				add_war_goal = {
+					holder = c:GER
+					target_country = c:AST
+					type = annex_country
+				}
+				add_war_goal = {
+					holder = c:GER
+					target_country = c:YUG
+					type = annex_country
+				}
+			}
+		}
+	}
+}
+
+diplo_play_hidden_events.4 = { #ramg postwar effect
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				has_variable = recently_won_war
+			}
+			random_scope_state = {
+				limit = {
+					state_region = {
+						is_homeland = cu:han
+					}
+				}
+				save_scope_as = ramg_state
+			}
+			scope:ramg_state = {
+				set_state_owner = c:RAMG
+			}
+		}
+	}
+}
+
+diplo_play_hidden_events.5 = { #warlord clash loser effect
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				has_variable = recently_lost_war
+			}
+			china_warlord_bloc_breakdown = yes
+		}
+	}
+}
+
+diplo_play_hidden_events.6 = { #lost warlord mutual puppet thingy
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				has_variable = recently_won_war
+			}
+			create_diplomatic_pact = {
+				country = scope:target_country
+				type = tight_warlord
+			}
+		}
+	}
+}
+
+diplo_play_hidden_events.7 = { #lost to toledo in iberian springtime
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				has_variable = recently_lost_war
+			}
+			c:TLR = {
+				create_diplomatic_pact = {
+					country = ROOT
+					type = co_governance
+				}
+			}
+			toledo_republic_ally_setup = yes
+		}
+	}
+}
+
+diplo_play_hidden_events.8 = { #turn spain into a personal union and give alentejo back
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				has_variable = recently_lost_war
+			}
+			change_tag = SPA
+			c:POR = {
+				create_diplomatic_pact = {
+					type = personal_union
+					country = ROOT
+				}
+			}
+		}
+	}
+}
+
+diplo_play_hidden_events.9 = { #newly conquered subject becomes a part of PU spain
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				has_variable = recently_lost_war
+			}
+			c:SPA ?= {
+				annex = ROOT
+			}
+		}
+	}
+}
+
+diplo_play_hidden_events.10 = { #becomes france
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				has_variable = recently_won_war
+			}
+			change_tag = FRA
+		}
+	}
+}
+
+diplo_play_hidden_events.11 = {
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				has_variable = recently_won_war
+			}
+			remove_variable = skibidi_postwar_debt_amount
+			add_journal_entry = {
+				type = je_the_balance_of_brainrot
+			}
+			add_journal_entry = {
+				type = je_sigma_wolves
+			}
+			remove_modifier = skibidi_fighting_temp
+		}
+	}
+}
+
+diplo_play_hidden_events.12 = { #lost warlord mutual puppet thingy
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				has_variable = recently_won_war
+			}
+			create_diplomatic_pact = {
+				country = scope:initiator
+				type = tight_warlord
+			}
+		}
+	}
+}

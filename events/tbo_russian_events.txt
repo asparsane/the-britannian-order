@@ -1,0 +1,2211 @@
+﻿namespace = russia
+
+russia.001 = { #generic unification
+	type = country_event
+
+	title = russia.001.t
+	desc = russia.001.d
+	flavor = russia.001.f
+
+	event_image = {
+		video = "unspecific_military_parade"	
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	option = {
+		ai_chance = {
+			base = 5
+		}
+		default_option = yes
+		name = russia.001.a
+		change_tag = SIBERIA
+		add_loyalists = {
+			value = 0.1
+		}
+		add_modifier = {
+			name = siberia_unified_economic_growth
+			days = long_modifier_time
+		}
+		add_modifier = {
+			name = siberia_unified_military_resurgence
+			days = long_modifier_time
+		}
+		add_modifier = {
+			name = siberia_unified_political_prestige
+			days = long_modifier_time
+		}
+		set_variable = {
+			name = siberian_unifier
+		}
+		hidden_effect = {
+			trigger_event = {
+				name = russia.002
+				days = 7
+				popup = yes
+			}
+		}
+	}
+}
+
+russia.002 = { #generic sbr annexation
+
+	title = russia.002.t
+	desc = russia.002.d
+	flavor = russia.002.f
+		
+	event_image = {
+		#placeholder
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	
+	duration = 3
+	
+	option = {
+		default_option = yes
+		name = russia.002.a
+		annex = c:SBR
+	}
+}
+
+russia.50 = { # russia unifies
+	type = country_event
+
+	title = russia.50.t
+	desc = russia.50.d
+	flavor = russia.50.f
+
+	event_image = {
+		video = ""	
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	option = {
+		ai_chance = {
+			base = 10
+		}
+		default_option = yes
+		add_loyalists = {
+			value = 0.2
+		}
+		name = russia.50.a
+		change_tag = RUS
+	}
+}
+
+russia.100 = { #far eastern republic status
+	type = country_event
+
+	title = russia.100.t
+	desc = russia.100.d
+	flavor = russia.100.f
+
+	event_image = {
+		video = "europenorthamerica_political_extremism"	
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	option = {
+		ai_chance = {
+			base = 5
+		}
+		default_option = yes
+		name = russia.100.a
+		add_journal_entry = {
+			type = je_star_in_the_wastes
+		}
+	}
+}
+
+russia.110 = { # begin improving standard of living
+	type = country_event
+
+	title = russia.110.t
+	desc = russia.110.d
+	flavor = russia.110.f
+
+	event_image = {
+		video = "europenorthamerica_gold_prospectors"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_gear.dds"
+
+	duration = 3
+
+	option = { #remain focused on agriculture
+		ai_chance = {
+			base = 10
+		}
+		name = russia.110.a
+		add_journal_entry = {
+			type = je_developing_the_nation
+		}
+	}
+}
+
+russia.111 = {
+	type = country_event
+
+	title = russia.111.t
+	desc = russia.111.d
+	flavor = russia.111.f
+
+	event_image = {
+		video = "unspecific_gears_pistons"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_gear.dds"
+
+	duration = 3
+
+	option = { #imrpoov
+		ai_chance = {
+			base = 10
+		}
+		name = russia.111.a
+		add_journal_entry = {
+			type = je_national_reinvigoration
+		}
+	}
+}
+
+russia.120 = { #fer unified siberia
+	type = country_event
+
+	title = russia.120.t
+	desc = russia.120.d
+	flavor = russia.120.f
+
+	event_image = {
+		video = "southamerica_election"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	option = { #yay
+		default_option = yes
+		name = russia.120.a
+		change_tag = SUR
+		add_modifier = {
+			name = siberia_unified_economic_growth
+			days = long_modifier_time
+			multiplier = 1.15
+		}
+		add_modifier = {
+			name = siberia_unified_military_resurgence
+			days = long_modifier_time
+			multiplier = 0.8
+		}
+		add_modifier = {
+			name = siberia_unified_political_prestige
+			days = long_modifier_time
+			multiplier = 1.25
+		}
+		add_loyalists = {
+			value = 0.1
+		}
+		set_variable = siberian_unifier
+		hidden_effect = {
+			trigger_event = {
+				id = russia.121
+				weeks = 1
+			}
+		}
+	}
+}
+
+russia.121 = { #fer sbr annexation event
+
+	title = russia.121.t
+	desc = russia.121.d
+	flavor = russia.121.f
+		
+	event_image = {
+		video = "africa_construction_colony"
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	
+	duration = 3
+	
+	option = {
+		default_option = yes
+		name = russia.121.a
+		annex = c:SBR
+	}
+}
+
+#dvm events
+
+russia.200 = { #dvm sbr annexation event
+
+	title = russia.200.t
+	desc = russia.200.d
+	flavor = russia.200.f
+		
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	
+	duration = 3
+	
+	option = {
+		default_option
+		name = russia.200.a
+		annex = c:SBR
+	}
+}
+
+russia.201 = { #dvm unifies siberia
+	type = country_event
+
+	title = russia.201.t
+	desc = russia.201.d
+	flavor = russia.201.f
+
+	event_image = {
+		video = "southamerica_christianity"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	option = { #yay
+		default_option = yes
+		name = russia.201.a
+		change_tag = SBDVM
+		add_modifier = {
+			name = siberia_unified_economic_growth
+			days = long_modifier_time
+			multiplier = 0.6
+		}
+		add_modifier = {
+			name = siberia_unified_military_resurgence
+			days = long_modifier_time
+			multiplier = 1.05
+		}
+		add_modifier = {
+			name = siberia_unified_political_prestige
+			days = long_modifier_time
+			multiplier = 1.4
+		}
+		add_loyalists = {
+			value = 0.1
+		}
+		set_variable = siberian_unifier
+		hidden_effect = {
+			trigger_event = {
+				id = russia.200
+				weeks = 1
+			}
+		}
+	}
+}
+
+russia.202 = { #dvm indulgence scandals
+	type = create_building
+	
+	title = russia.202.t
+	desc = russia.202.d
+	flavor = russia.202.f
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"	
+
+	duration = 3
+	
+	event_image = {
+		video = "middleeast_courtroom_upheaval"
+	}
+	
+	immediate = {
+		remove_modifier = dvm_indulgence_bonus
+		add_modifier = {
+			name = indulgence_scandal_exposed
+			months  = long_modifier_time
+		}
+	}
+	
+	option = { #refuse to rescind indulgences, reestablish church authority
+		name = russia.202.a
+		modifier = {
+			base = 8
+		}
+		add_modifier = {
+			name = religious_trust_destroyed
+			multiplier = 0.5
+			days = long_modifier_time
+		}
+		hidden_effect = {
+			trigger_event = {
+				id = russia.203
+				days = { 6 14 }
+				popup = yes
+			}
+		}
+	}
+	option = { #refund indulgences
+		name = russia.202.b
+		ai_chance = {
+			base = 2
+		}
+		add_modifier = {
+			name = refunding_indulgences
+			days = short_modifier_time
+		}
+		add_modifier = {
+			name = religious_trust_destroyed
+			days = long_modifier_time
+		}
+		hidden_effect = {
+			trigger_event = {
+				id = russia.204
+				days = { 7 20 }
+				popup = yes
+			}
+		}
+	}
+}
+
+russia.203 = { #indulgence riots, people demand refunds
+	type = country_event
+	
+	title = russia.203.t
+	desc = russia.203.d
+	flavor = russia.203.f
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	
+	duration = 3
+	
+	event_image = {
+		video = "europenorthamerica_political_extremism"
+	}
+	
+	immediate = {
+		add_modifier = {
+			name = military_stockpiles_siezed
+			days = normal_modifier_time
+		}
+	}
+	
+	option = { #suppress riots with military force
+		name = russia.203.a
+		every_scope_state = {
+			state_region = {
+				add_devastation = 15
+				add_radicals = {
+					value = 0.1
+				}
+			}
+		}
+		hidden_effect = {
+			random_list = {
+				60 = {
+					modifier = {
+						add = this.radical_fraction
+						multiply = 10
+					}
+					trigger_event = {
+						id = russia.205
+						days = { 5 10 }
+						popup = yes
+					}
+				}
+				40 = {
+				}
+			}
+		}
+	}
+}
+
+russia.204 = { #further church scandals break out
+	type = country_event
+	
+	title = russia.204.t
+	desc = russia.204.d
+	flavor = russia.204.f
+	
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	
+	duration = 3
+	
+	immediate = {
+		add_modifier = {
+			name = devout_corruption_superscandal
+			days = normal_modifier_time
+		}
+	}
+	
+	option = { #announce immediate reorganization of divine mandate church
+		name = russia.204.a
+		ai_chance = {
+			base = 3
+		}
+		add_modifier = {
+			name = dvm_reorganizing_church
+			days = long_modifier_time
+			is_decaying = yes
+		}
+		every_scope_state = {
+			state_region = {
+				add_devastation = 15
+				add_radicals = {
+					value = 0.1
+				}
+			}
+		}
+	}
+	
+	option = { #impose censorship and attempt to suppress dissent
+		name = russia.204.b
+		ai_chance = {
+			base = 7
+		}
+		if = {
+			NOT = {
+				has_law = law_type:law_outlawed_dissent
+			}
+			activate_law = law_type:law_outlawed_dissent
+		}
+		every_scope_state = {
+			state_region = {
+				add_devastation = 5
+				add_radicals = {
+					value = 0.05
+				}
+			}
+		}
+		hidden_effect = {
+			random_list = {
+				70 = {
+					modifier = {
+						add = this.radical_fraction
+						multiply = 10
+					}
+					trigger_event = {
+						id = russia.205
+						days = { 5 10 }
+						popup = yes
+					}
+				}
+				30 = {
+				}
+			}
+		}
+	}
+}
+
+russia.205 = { #tensions explode, political frustrations blow over
+	type = country_event
+	
+	title = russia.205.t
+	desc = russia.205.d
+	flavor = russia.205.f
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	
+	duration = 3
+	
+	event_image = {
+		video = "europenorthamerica_springtime_of_nations"
+	}
+	
+	option = {
+		name = russia.205.a
+		add_modifier = {
+			name = dvm_political_explosion
+			days = long_modifier_time
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = anti_clerical_sentiments
+			days = long_modifier_time
+		}
+		every_political_movement = {
+			add_modifier = {
+				name = dvm_political_frustrations
+				days = long_modifier_time
+				is_decaying = yes
+			}
+		}
+	}
+}
+
+russia.206 = { #already weak church rule explodes
+	type = country_event
+	
+	title = russia.206.t
+	desc = russia.206.d
+	flavor = russia.206.f
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	event_image = {
+		video = "europenorthamerica_springtime_of_nations"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_icons/event_newspaper.dds"
+	
+	duration = 3
+	
+	option = {
+		name = russia.206.a
+		ruler = {
+			kill_character = yes
+		}
+		add_modifier = {
+			name = devout_rule_destroyed
+			days = long_modifier_time
+			is_decaying = yes
+		}
+	}
+}
+
+russia.300 = { # decision on whether or not to accept caucas
+	type = country_event
+
+	title = russia.300.t
+	desc = russia.300.d
+	flavor = russia.300.f
+
+	event_image = {
+		#placeholder
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+	
+	option = { #return caucas
+		ai_chance = {
+			base = 30
+		}
+		default_option = yes
+		name = russia.300.a
+		every_scope_state = {
+			limit = {
+				has_claim_by = c:SRU
+			}
+			set_state_owner = c:SRU
+		}
+	}
+	option = { #refuse caucas
+		ai_chance = {
+			base = 70
+		}
+		name = russia.300.b
+		set_variable = {
+			name = refused_caucas
+			months = 1
+		}
+	}
+}
+
+russia.301 = { # allow sru to stationing troops?
+	type = country_event
+
+	title = russia.301.t
+	desc = russia.301.d
+	flavor = russia.301.f
+
+	event_image = {
+		#placeholder
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+	
+	immediate = {
+		change_relations = {
+			country = c:SRU
+			value = -5
+		}
+	}
+	
+	option = { #allow stationing
+		ai_chance = {
+			base = 30
+		}
+		default_option = yes
+		name = russia.301.a
+		add_modifier = {
+			name = south_russian_troops_stationed
+		}
+		c:SRU = {
+			add_modifier = {
+				name = sru_stationing_troops
+			}
+		}
+	}
+	option = { #refuse stationing
+		ai_chance = {
+			base = 70
+		}
+		name = russia.301.b
+		set_variable = {
+			name = refused_stationing
+			months = 1
+		}
+		change_relations = {
+			country = c:SRU
+			value = -10
+		}
+	}
+}
+
+russia.302 = { # decide whether or not to grant germany mining rights
+	type = country_event
+
+	title = russia.302.t
+	desc = russia.302.d
+	flavor = russia.304.f
+
+	event_image = {
+		#placeholder
+	}
+	
+	immediate = {
+		je:per_iranian_gambit = {
+			save_scope_value_as = {
+				name = iran_progress_scope
+				value = "scripted_bar_progress(iranian_gambit_progress_bar)"
+			}
+		}
+		set_variable = {
+			name = iran_progress_scaled
+			value = scope:iran_progress_scope
+		}
+		change_variable = {
+			name = iran_progress_scaled
+			subtract = 50
+			divide = 5
+		}
+		set_variable = {
+			name = escalation_scaling
+			value = global_var:persian_escalation
+		}
+		change_variable = {
+			name = escalation_scaling
+			multiply = -7
+		}
+		change_relations = {
+			country = c:GER
+			value = -4
+		}
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	option = { #grant mining rights. 
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = var:iran_progress_scaled
+			}
+			modifier = {
+				add = var:escalation_scaling
+			}
+		}
+		default_option = yes
+		name = russia.302.a
+		hidden_effect = {
+			remove_variable = iran_progress_scaled
+			remove_variable = escalation_scaling
+		}
+		c:GER = {
+			create_diplomatic_pact = {
+				country = c:PER
+				type = foreign_investment_agreement
+			}
+		}
+	}
+	option = { #refuse mining rights. increases persian escalation
+		ai_chance = {
+			base = 60
+		}
+		default_option = yes
+		name = russia.302.a
+		hidden_effect = {
+			remove_variable = iran_progress_scaled
+			remove_variable = escalation_scaling
+		}
+		custom_tooltip = {
+			text = increase_escalation
+			change_global_variable = {
+				name = persian_escalation
+				add = 1
+			}
+		}
+		change_relations = {
+			country = c:GER
+			value = -8
+		}
+	}
+}
+
+russia.303 = { # decide whether or not to allow germany to build mines
+	type = country_event
+
+	title = russia.303.t
+	desc = russia.303.d
+	flavor = russia.303.f
+
+	event_image = {
+		#placeholder
+	}
+	
+	immediate = {
+		je:per_iranian_gambit = {
+			save_scope_value_as = {
+				name = iran_progress_scope
+				value = "scripted_bar_progress(iranian_gambit_progress_bar)"
+			}
+		}
+		set_variable = {
+			name = iran_progress_scaled
+			value = scope:iran_progress_scope
+		}
+		change_variable = {
+			name = iran_progress_scaled
+			subtract = 50
+			divide = 5
+		}
+		set_variable = {
+			name = escalation_scaling
+			value = global_var:persian_escalation
+		}
+		change_variable = {
+			name = escalation_scaling
+			multiply = -7
+		}
+		change_relations = {
+			country = c:GER
+			value = -15
+		}
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	option = { #grant mining rights. 
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = var:iran_progress_scaled
+			}
+			modifier = {
+				add = var:escalation_scaling
+			}
+		}
+		default_option = yes
+		name = russia.302.a
+		hidden_effect = {
+			remove_variable = iran_progress_scaled
+			remove_variable = escalation_scaling
+		}
+		c:PER = {
+			random_state = {
+				limit = {
+					AND = {
+						owner ?= c:PER
+						has_potential_resource = bg_iron
+					}
+				}
+				create_building = {
+					building = building_iron_mine
+					add_ownership={
+						country={
+							country="c:BNA"
+							levels=2
+						}
+					}
+				}
+			}
+		}
+	}
+	option = { #refuse mining rights. increases persian escalation
+		ai_chance = {
+			base = 60
+		}
+		default_option = yes
+		name = russia.302.a
+		add_modifier = {
+			name = per_rus_tech_sharing_modifier
+			days = normal_modifier_time
+		}
+		hidden_effect = {
+			remove_variable = iran_progress_scaled
+			remove_variable = escalation_scaling
+		}
+		custom_tooltip = {
+			text = increase_escalation
+			change_global_variable = {
+				name = persian_escalation
+				add = 1
+			}
+		}
+		change_relations = {
+			country = c:GER
+			value = -10
+		}
+	}
+}
+	
+
+russia.304 = { # persia decides whether or not to accept sru technology sharing
+	type = country_event
+
+	title = russia.304.t
+	desc = russia.304.d
+	flavor = russia.304.f
+
+	event_image = {
+		#placeholder
+	}
+	
+	immediate = {
+		je:per_iranian_gambit = {
+			save_scope_value_as = {
+				name = iran_progress_scope
+				value = "scripted_bar_progress(iranian_gambit_progress_bar)"
+			}
+		}
+		set_variable = {
+			name = iran_progress_scaled
+			value = scope:iran_progress_scope
+		}
+		change_variable = {
+			name = iran_progress_scaled
+			subtract = 50
+			divide = -5
+		}
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+	
+	option = { #accept tech sharing
+		ai_chance = {
+			base = 80
+			modifier = {
+				trigger = {
+					taking_loans = yes
+				}
+				add = -15
+			}
+			modifier = {
+				add = var:iran_progress_scaled
+			}
+		}
+		default_option = yes
+		name = russia.304.a
+		add_modifier = {
+			name = per_rus_tech_sharing_modifier
+			days = normal_modifier_time
+		}
+		hidden_effect = {
+			remove_variable = iran_progress_scaled
+		}
+		change_relations = {
+			country = c:SRU
+			value = 5
+		}
+		c:SRU = {
+			add_modifier = {
+				name = per_rus_tech_sharing_modifier
+				days = normal_modifier_time
+			}
+			set_variable = {
+				name = srutechsharing
+				months = 1
+			}
+		}
+	}
+	option = { # refuse tech sharing
+		ai_chance = {
+			base = 20
+		}
+		name = russia.304.b
+		change_relations = {
+			country = c:SRU
+			value = -10
+		}
+		hidden_effect = {
+			remove_variable = iran_progress_scaled
+		}
+		set_variable = {
+			name = refused_tech_sharing
+			months = 1
+		}
+	}
+}
+
+russia.305 = { # persia decides whether or not to accept sru defense cooperation
+	type = country_event
+
+	title = russia.305.t
+	desc = russia.305.d
+	flavor = russia.305.f
+
+	event_image = {
+		#placeholder
+	}
+	
+	immediate = {
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+	
+	option = { #accept def cooperation
+		ai_chance = {
+			base = 60
+			modifier = {
+				trigger = {
+					taking_loans = yes
+				}
+				add = -30
+			}
+			modifier = {
+				trigger = {
+					in_default = yes
+				}
+				add = -30
+			}
+			modifier = {
+				trigger = {
+					global_var:persian_escalation >= 4
+				}
+				add = 40
+			}
+		}
+		default_option = yes
+		name = russia.305.a
+		add_modifier = {
+			name = per_rus_defense_cooperation_modifier
+			days = normal_modifier_time
+		}
+		change_relations = {
+			country = c:SRU
+			value = 5
+		}
+		c:SRU = {
+			add_modifier = {
+				name = per_rus_defense_cooperation_modifier
+				days = normal_modifier_time
+			}
+			set_variable = {
+				name = srudefcoop
+				months = 1
+			}
+		}
+	}
+	option = { # refuse defensive cooperation
+		ai_chance = {
+			base = 20
+		}
+		change_relations = {
+			country = c:SRU
+			value = -10
+		}
+		name = russia.305.b
+		set_variable = {
+			name = refused_defcoop
+			months = 1
+		}
+	}
+}
+
+russia.306 = { # persia responds to german demands for coastal garrison. no backing out for germany on this one
+	type = country_event
+
+	title = russia.306.t
+	desc = russia.306.d
+	flavor = russia.306.f
+
+	event_image = {
+		#placeholder
+	}
+	
+	immediate = {
+		c:PER = {
+			save_scope_as = per_scope
+		}
+		c:SRU = {
+			save_scope_as = sru_scope
+		}
+		c:GER = {
+			save_scope_as = ger_scope
+		}
+		set_variable = {
+			name = sru_projection
+			value = c:SRU.army_power_projection
+		}
+		set_variable = {
+			name = per_projection
+			value = c:PER.army_power_projection
+		}
+		set_variable = {
+			name = ger_projection
+			value = c:GER.army_power_projection
+		}
+		change_variable = {
+			name = ger_projection
+			divide = 20
+		}
+		change_variable = {
+			name = per_projection
+			divide = 15
+		}
+		change_variable = {
+			name = sru_projection
+			divide = 15
+		}
+		change_relations = {
+			country = c:GER
+			value = -8
+		}
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+	
+	option = { #acquiesce to demands
+		ai_chance = {
+			base = 0
+			modifier = {
+				trigger = {
+					has_modifier = cooperation_with_germany_modifier
+				}
+				add = 50
+			}
+			modifier = {
+				add = var:ger_projection
+			}
+		}
+		default_option = yes
+		name = russia.305.a
+		
+		random_state = {
+			limit = {
+				state_region = s:STATE_LARISTAN
+			}
+			set_state_owner = c:GER
+		}
+		hidden_effect = {
+			remove_variable = ger_projection
+			remove_variable = per_projection
+			remove_variable = sru_projection
+		}
+	}
+	option = { # refuse german demands
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = var:per_projection
+			}
+			modifier = {
+				trigger = {
+					has_modifier = cooperation_with_south_russia_modifier
+				}
+				add = var:sru_projection
+			}
+		}
+		name = russia.306.b
+		hidden_effect = {
+			remove_variable = ger_projection
+			remove_variable = per_projection
+			remove_variable = sru_projection
+		}
+		change_relations = {
+			country = c:GER
+			value = -15
+		}
+		custom_tooltip = {
+			text = increase_escalation
+			change_global_variable = {
+				name = persian_escalation
+				add = 1
+			}
+		}
+	}
+}
+
+
+# area eastland events
+russia.400 = { # slr collapse
+	type = country_event
+	placement = ROOT
+	duration = 3
+	
+	title = russia.400.t
+	desc = russia.400.d
+	flavor = russia.400.f
+	
+	event_image = {
+		video = "unspecific_armored_train"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	
+	immediate = {
+		if = {
+			limit = { exists = s:STATE_NOVGOROD.region_state:SLR }
+			create_country = {
+				tag = NOVGOROD
+				origin = this
+				state = s:STATE_NOVGOROD.region_state:SLR
+				on_created = {
+					add_modifier = {
+						name = emergency_logistics
+						days = normal_modifier_time
+					}
+					add_modifier = {
+						name = successors_of_area_westland
+					}
+				}
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_INGRIA.region_state:SLR }
+			random_state = {
+				limit = {
+					state_region = s:STATE_INGRIA
+				}
+				set_state_owner = c:NOVGOROD
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_TALINN.region_state:SLR }
+			random_state = {
+				limit = {
+					state_region = s:STATE_TALINN
+				}
+				set_state_owner = c:NOVGOROD
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_VYATKA.region_state:SLR }
+			create_country = {
+				tag = VYATKA
+				origin = this
+				state = s:STATE_VYATKA.region_state:SLR
+				on_created = {
+					add_modifier = {
+						name = emergency_logistics
+						days = normal_modifier_time
+					}
+					add_modifier = {
+						name = successors_of_area_westland
+					}
+				}
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_ARKHANGELSK.region_state:SLR }
+			create_country = {
+				tag = ARKHANGELSK
+				origin = this
+				state = s:STATE_ARKHANGELSK.region_state:SLR
+				on_created = {
+					add_modifier = {
+						name = emergency_logistics
+						days = normal_modifier_time
+					}
+					add_modifier = {
+						name = successors_of_area_westland
+					}
+				}
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_PERM.region_state:SLR }
+			create_country = {
+				tag = PERM
+				origin = this
+				state = s:STATE_PERM.region_state:SLR
+				on_created = {
+					add_modifier = {
+						name = emergency_logistics
+						days = normal_modifier_time
+					}
+					add_modifier = {
+						name = successors_of_area_westland
+					}
+				}
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_NIZHNY_NOVGOROD.region_state:SLR }
+			create_country = {
+				tag = NIZHNY_NOVGOROD
+				origin = this
+				state = s:STATE_NIZHNY_NOVGOROD.region_state:SLR
+				on_created = {
+					add_modifier = {
+						name = emergency_logistics
+						days = normal_modifier_time
+					}
+					add_modifier = {
+						name = successors_of_area_westland
+					}
+				}
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_YAROSLAVL.region_state:SLR }
+			random_state = {
+				limit = {
+					state_region = s:STATE_YAROSLAVL
+				}
+				set_state_owner = c:NIZHNY_NOVGOROD
+			}
+		}
+		if = {
+			limit = { exists = s:STATE_RYAZAN.region_state:SLR }
+			random_state = {
+				limit = {
+					state_region = s:STATE_RYAZAN
+				}
+				set_state_owner = c:NIZHNY_NOVGOROD
+			}
+		}
+		c:PERM = {
+			create_diplomatic_play = {
+				name = second_west_russian_war
+				target_country = c:SLR
+				type = dp_conquer_state
+				war = yes
+				target_state = s:STATE_TAMBOV.region_state:SLR
+				add_war_goal = {
+					holder = c:SLR
+					target_country = c:PERM
+					target_state = s:STATE_PERM.region_state:PERM
+					type = annex_country
+				}
+			}
+		}
+		c:NOVGOROD = {
+			create_diplomatic_play = {
+				name = second_west_russian_war
+				target_country = c:SLR
+				type = dp_conquer_state
+				war = yes
+				target_state = s:STATE_EAST_KARELIA.region_state:SLR
+				add_war_goal = {
+					holder = c:NOVGOROD
+					target_country = c:SLR
+					target_state = s:STATE_KOLA.region_state:SLR
+					type = conquer_state
+				}
+				add_war_goal = {
+					holder = c:SLR
+					target_country = c:NOVGOROD
+					target_state = s:STATE_NOVGOROD.region_state:NOVGOROD
+					type = annex_country
+				}
+			}
+		}
+		c:ARKHANGELSK = {
+			create_diplomatic_play = {
+				name = second_west_russian_war
+				target_country = c:SLR
+				type = dp_conquer_state
+				target_state = s:STATE_EAST_KARELIA.region_state:SLR
+				war = yes	
+				add_war_goal = {
+					holder = c:ARKHANGELSK
+					target_country = c:SLR
+					target_state = s:STATE_KOLA.region_state:SLR
+					type = conquer_state
+				}
+				add_war_goal = {
+					holder = c:ARKHANGELSK
+					target_country = c:SLR
+					target_state = s:STATE_GALICH.region_state:SLR
+					type = conquer_state
+				}
+				add_war_goal = {
+					holder = c:SLR
+					target_country = c:ARKHANGELSK
+					target_state = s:STATE_ARKHANGELSK.region_state:ARKHANGELSK
+					type = annex_country
+				}
+			}
+		}
+		c:NIZHNY_NOVGOROD = {
+			create_diplomatic_play = {
+				name = second_west_russian_war
+				target_country = c:SLR
+				type = dp_conquer_state
+				war = yes	
+				target_state = s:STATE_TAMBOV.region_state:SLR
+				add_war_goal = {
+					holder = c:NIZHNY_NOVGOROD
+					target_country = c:SLR
+					target_state = s:STATE_CHUVASHIA.region_state:SLR
+					type = conquer_state
+				}
+				add_war_goal = {
+					holder = c:NIZHNY_NOVGOROD
+					target_country = c:SLR
+					target_state = s:STATE_KAZAN.region_state:SLR
+					type = conquer_state
+				}
+				add_war_goal = {
+					holder = c:NIZHNY_NOVGOROD
+					target_country = c:SLR
+					target_state = s:STATE_TARTARIA.region_state:SLR
+					type = conquer_state
+				}
+				add_war_goal = {
+					holder = c:SLR
+					target_country = c:NIZHNY_NOVGOROD
+					target_state = s:STATE_NIZHNY_NOVGOROD.region_state:NIZHNY_NOVGOROD
+					type = annex_country
+				}
+			}
+		}
+		c:SRU = {
+			create_diplomatic_play = {
+				name = second_west_russian_war
+				target_country = c:SLR
+				type = dp_conquer_state
+				war = yes	
+				target_state = s:STATE_TAMBOV.region_state:SLR
+				add_war_goal = {
+					holder = c:SRU
+					target_country = c:SLR
+					target_state = s:STATE_CHUVASHIA.region_state:SLR
+					type = conquer_state
+				}
+				add_war_goal = {
+					holder = c:SRU
+					target_country = c:SLR
+					target_state = s:STATE_KAZAN.region_state:SLR
+					type = conquer_state
+				}
+				add_war_goal = {
+					holder = c:SRU
+					target_country = c:SLR
+					target_state = s:STATE_TARTARIA.region_state:SLR
+					type = conquer_state
+				}
+			}
+		}
+		c:VYATKA = {
+			create_diplomatic_play = {
+				name = second_west_russian_war
+				target_country = c:SLR
+				type = dp_conquer_state
+				war = yes	
+				target_state = s:STATE_TARTARIA.region_state:SLR
+				add_war_goal = {
+					holder = c:VYATKA
+					target_country = c:SLR
+					target_state = s:STATE_GALICH.region_state:SLR
+					type = conquer_state
+				}
+				add_war_goal = {
+					holder = c:VYATKA
+					target_country = c:SLR
+					target_state = s:STATE_TAMBOV.region_state:SLR
+					type = conquer_state
+				}
+				add_war_goal = {
+					holder = c:SLR
+					target_country = c:VYATKA
+					target_state = s:STATE_VYATKA.region_state:VYATKA
+					type = annex_country
+				}
+			}
+		}
+		c:SLR = {
+			add_modifier = {
+				name = logistic_collapse
+				days = normal_modifier_time
+			}
+		}
+		c:moskowien ?= {
+			trigger_event = {
+				id = german_british_split.15
+				days = 3
+			}
+		}
+	}
+	
+	option = { # oh
+		name = russia.400.a
+		default_option = yes
+		ai_chance = {
+			base = 4
+		}
+        every_state =  {
+            limit = {
+                has_modifier = slr_state_unrest
+            }
+            remove_modifier = slr_state_unrest
+        }
+	}
+}
+
+#irk events
+russia.500 = { #irk unified siberia
+	type = country_event
+
+	title = russia.500.t
+	desc = russia.500.d
+	flavor = russia.500.f
+
+	event_image = {
+		#placeholder
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	duration = 3
+
+	option = { #yay
+		default_option = yes
+		name = russia.500.a
+		change_tag = SBIRK
+		remove_modifier = irk_outmoded_bureaucracy
+		remove_modifier = irk_archaic_taxation_system
+		add_modifier = {
+			name = siberia_unified_economic_growth
+			days = long_modifier_time
+			multiplier = 0.7
+		}
+		add_modifier = {
+			name = siberia_unified_military_resurgence
+			days = long_modifier_time
+			multiplier = 1.1
+		}
+		add_modifier = {
+			name = siberia_unified_political_prestige
+			days = long_modifier_time
+			multiplier = 1.2
+		}
+		set_variable = siberian_unifier
+		every_country = {
+			limit = {
+				has_variable = accepted_irk_investments
+			}
+			remove_variable = accepted_irk_investments
+			create_diplomatic_pact = {
+				country = c:SBIRK
+				type = foreign_investment_rights
+			}		
+		}
+		add_loyalists = {
+			value = 0.1
+		}
+		hidden_effect = {
+			trigger_event = {
+				id = russia.501
+				weeks = 1
+			}
+		}
+	}
+}
+
+russia.501 = { #irk sbr annexation event
+
+	title = russia.501.t
+	desc = russia.501.d
+	flavor = russia.501.f
+		
+	event_image = {
+		#placeholder
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	
+	duration = 3
+	
+	option = {
+		default_option = yes
+		name = russia.501.a
+		annex = c:SBR
+	}
+}
+
+russia.502 = { #irk asks for investments
+
+	title = russia.502.t
+	desc = russia.502.d
+	flavor = russia.502.f
+		
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	
+	duration = 3
+	
+	option = {
+		default_option = yes
+		name = russia.502.a
+		ai_chance = {
+			base = 10
+		}
+		add_modifier = {
+			name = irk_military_funding
+			months = 6
+		}
+		c:IRK = {
+			add_modifier = {
+				name = irk_foreign_investments
+				months = 12
+			}
+		}
+		hidden_effect = {
+			set_variable = accepted_irk_investments
+		}
+		c:IRK = {
+			post_notification = irk_investment_accepted
+		}
+	}
+	
+	option = {
+		name = russia.502.b
+		ai_chance = {
+			base = 0
+		}
+		hidden_effect = {
+			set_variable = refused_irk_investments
+			months = 10
+		}
+	}
+}
+
+russia.503 = {
+	title = russia.503.t
+	desc = russia.503.d
+	flavor = russia.503.f
+	
+	event_image = {
+		video = "europenorthamerica_political_extremism"
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	
+	duration = 3
+	
+	option = {
+		default_option = yes
+		name = russia.503.a
+		ai_chance = {
+			base = 10
+		}
+		ruler = {
+			kill_character = yes
+		}
+	}
+}
+
+russia.504 = {
+	title = russia.504.t
+	desc = russia.504.d
+	flavor = russia.504.f
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_icons/event_trade.dds"
+    duration = 3
+    
+    option = {
+        default_option = yes
+        name = russia.504.a
+        ai_chance = {
+            base = 10
+            modifier = {
+                trigger = {
+                    has_healthy_economy = no
+                }
+                add = -6
+            }
+        }
+        add_modifier = {
+            name = funding_irk_resource_industry
+            months = 10
+        }
+        random_scope_country = {
+            limit = {
+                has_journal_entry = irk_foreign_investments
+            }
+            add_modifier = {
+                name = resource_sales_irk
+                months = 10
+            }
+            random_state = {
+                limit =  {
+                    has_potential_resource = bg_iron_mining
+                }
+        		create_building={
+					building="building_iron_mine"
+					add_ownership={
+						country={
+							country=root
+							levels=1
+						}
+					}
+				}
+            }
+        }
+    }
+    
+    option = {
+        name = russia.504.b
+        ai_chance = {
+            base = 0
+            modifier = {
+                trigger = {
+                    has_healthy_economy = no
+                }
+                add = 7
+            }
+        }
+    }
+}
+
+russia.505 = {
+	title = russia.505.t
+	desc = russia.505.d
+	flavor = russia.505.f
+	event_image = {
+		#placeholder
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_icons/event_trade.dds"
+    duration = 3
+    
+    option = {
+        default_option = yes
+        name = russia.505.a
+        ai_chance = {
+            base = 10
+            modifier = {
+                trigger = {
+                    has_healthy_economy = no
+                }
+                add = -6
+            }
+        }
+        add_modifier = {
+            name = funding_irk_resource_industry
+            months = 10
+        }
+        random_scope_country = {
+            limit = {
+                has_journal_entry = irk_foreign_investments
+            }
+            add_modifier = {
+                name = resource_sales_irk
+                months = 10
+            }
+            random_state = {
+                limit =  {
+                    has_potential_resource = bg_coal_mining
+                }
+        		create_building={
+					building="building_coal_mine"
+					add_ownership={
+						country={
+							country=root
+							levels=1
+						}
+					}
+				}
+            }
+        }
+    }
+    
+    option = {
+        name = russia.505.b
+        ai_chance = {
+            base = 0
+            modifier = {
+                trigger = {
+                    has_healthy_economy = no
+                }
+                add = 7
+            }
+        }
+    }
+}
+
+russia.506 = {
+	title = russia.506.t
+	desc = russia.506.d
+	flavor = russia.506.f
+	event_image = {
+		#placeholder
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_icons/event_trade.dds"
+    duration = 3
+    
+    option = {
+        default_option = yes
+        name = russia.506.a
+        ai_chance = {
+            base = 10
+            modifier = {
+                trigger = {
+                    has_healthy_economy = no
+                }
+                add = -6
+            }
+        }
+        add_modifier = {
+            name = funding_irk_resource_industry
+            months = 10
+        }
+        random_scope_country = {
+            limit = {
+                has_journal_entry = irk_foreign_investments
+            }
+            add_modifier = {
+                name = resource_sales_irk
+                months = 10
+            }
+            random_state = {
+                limit =  {
+                    has_potential_resource = bg_sulfur_mining
+                }
+        		create_building={
+                    building="building_sulfur_mine"
+                    add_ownership={
+                        country={
+                            country=root
+                            levels=1
+                        }
+                    }
+                }
+			}
+        }
+    }
+    
+    option = {
+        name = russia.506.b
+        ai_chance = {
+            base = 0
+            modifier = {
+                trigger = {
+                    has_healthy_economy = no
+                }
+                add = 7
+            }
+        }
+    }
+}
+
+russia.507 = {
+	title = russia.507.t
+	desc = russia.507.d
+	flavor = russia.507.f
+	event_image = {
+		#placeholder
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_icons/event_trade.dds"
+    duration = 3
+    
+    option = {
+        default_option = yes
+        name = russia.507.a
+        ai_chance = {
+            base = 10
+            modifier = {
+                trigger = {
+                    has_healthy_economy = no
+                }
+                add = -6
+            }
+        }
+        add_modifier = {
+            name = funding_irk_resource_industry
+            months = 10
+        }
+        random_scope_country = {
+            limit = {
+                has_journal_entry = irk_foreign_investments
+            }
+            add_modifier = {
+                name = resource_sales_irk
+                months = 10
+            }
+            random_state = {
+                limit =  {
+                    has_potential_resource = bg_lead_mining
+                }
+        		create_building={
+                    building="building_lead_mine"
+                    add_ownership={
+                        country={
+                            country=root
+                            levels=1
+                        }
+                    }
+                }
+			}
+        }
+    }
+    
+    option = {
+        name = russia.507.b
+        ai_chance = {
+            base = 0
+            modifier = {
+                trigger = {
+                    has_healthy_economy = no
+                }
+                add = 7
+            }
+        }
+    }
+}
+
+russia.550 = { #tta unification
+
+	title = russia.550.t
+	desc = russia.550.d
+	flavor = russia.550.f
+		
+	event_image = {
+		video = "unspecific_factory_closed"
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	
+	duration = 3
+	
+	option = { #yay
+		default_option = yes
+		name = russia.550.a
+		change_tag = SBTA
+		add_modifier = {
+			name = siberia_unified_economic_growth
+			days = long_modifier_time
+			multiplier = 0.55
+		}
+		add_modifier = {
+			name = siberia_unified_military_resurgence
+			days = long_modifier_time
+			multiplier = 1.4
+		}
+		add_modifier = {
+			name = siberia_unified_political_prestige
+			days = long_modifier_time
+			multiplier = 1
+		}
+		add_loyalists = {
+			value = 0.8
+		}
+		set_variable = siberian_unifier
+		hidden_effect = {
+			trigger_event = {
+				id = russia.551
+				weeks = 1
+			}
+		}
+	}
+}
+
+russia.551 = { #tta sbr annexation event
+
+	title = russia.551.t
+	desc = russia.551.d
+	flavor = russia.551.f
+
+	event_image = {
+		video = "unspecific_iceberg"
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	
+	duration = 3
+	
+	option = {
+		default_option = yes
+		name = russia.551.a
+		annex = c:SBR
+	}
+}
+
+russia.552 = { #omsk launches war
+	title = russia.552.t
+	desc = russia.552.d
+	flavor = russia.552.f
+		
+	event_image = {
+		video = "unspecific_devastation"
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	
+	duration = 3
+	
+	option = {
+		default_option = yes
+		name = russia.552.a
+	}
+}
+
+russia.560 = { # omsk unifies siberia
+	title = russia.560.t
+	desc = russia.560.d
+	flavor = russia.560.f
+		
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+   	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+    
+    duration = 3
+    
+   	option = { #yay
+		default_option = yes
+		name = russia.560.a
+		change_tag = ARB
+		add_modifier = {
+			name = siberia_unified_economic_growth
+			days = long_modifier_time
+			multiplier = 0.6
+		}
+		add_modifier = {
+			name = siberia_unified_military_resurgence
+			days = long_modifier_time
+			multiplier = 1.3
+		}
+		add_modifier = {
+			name = siberia_unified_political_prestige
+			days = long_modifier_time
+			multiplier = 1.2
+		}
+		add_loyalists = {
+			value = 0.1
+		}
+		set_variable = siberian_unifier
+		hidden_effect = {
+			trigger_event = {
+				id = russia.561
+				weeks = 1
+			}
+		}
+	}
+}
+
+russia.561 = {
+	title = russia.561.t
+	desc = russia.561.d
+	flavor = russia.561.f
+		
+	event_image = {
+		video = "unspecific_iceberg"
+	}
+    
+   	duration = 3
+    
+   	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	
+	option = {
+		default_option = yes
+		name = russia.561.a
+		annex = c:SBR
+	}
+}
+
+russia.580 = { #url unification
+
+	title = russia.580.t
+	desc = russia.580.d
+	flavor = russia.580.f
+		
+	event_image = {
+		video = "middleeast_battlefield_trenches"
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	
+	duration = 3
+	
+	option = { #yay
+		default_option = yes
+		name = russia.580.a
+		change_tag = SBURL
+		add_modifier = {
+			name = siberia_unified_economic_growth
+			days = long_modifier_time
+			multiplier = 0.8
+		}
+		add_modifier = {
+			name = siberia_unified_military_resurgence
+			days = long_modifier_time
+			multiplier = 1.4
+		}
+		add_modifier = {
+			name = siberia_unified_political_prestige
+			days = long_modifier_time
+			multiplier = 0.7
+		}
+		add_loyalists = {
+			value = 0.1
+		}
+		set_variable = siberian_unifier
+		hidden_effect = {
+			trigger_event = {
+				id = russia.581
+				weeks = 1
+			}
+		}
+	}
+}
+
+russia.581 = { #tta sbr annexation event
+
+	title = russia.581.t
+	desc = russia.581.d
+	flavor = russia.581.f
+		
+	event_image = {
+		video = "unspecific_iceberg"
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	
+	duration = 3
+	
+	option = {
+		default_option = yes
+		name = russia.581.a
+		annex = c:SBR
+	}
+}
+
+russia.600 = { #generic slr unification
+
+	title = russia.600.t
+	desc = russia.600.d
+	flavor = russia.600.f
+		
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+	
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	
+	duration = 3
+	
+	option = { #yay
+		default_option = yes
+		name = russia.600.a
+		change_tag = WSR
+		add_loyalists = {
+			value = 0.1
+		}
+	}
+}

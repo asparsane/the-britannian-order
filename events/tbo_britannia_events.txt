@@ -1,0 +1,455 @@
+namespace = britannian_prosperity
+
+britannian_prosperity.1 = {
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	title = britannian_prosperity.1.t
+	desc = britannian_prosperity.1.d
+	flavor = britannian_prosperity.1.f
+
+	duration = 3
+
+	trigger = {
+		exists = c:GBR
+		THIS = c:GBR
+		NOT = { has_variable = britannian_prosperity_event }
+	}
+	
+	immediate = {
+		set_variable = britannian_prosperity_event
+		set_variable = {
+			name = britannian_prosperity_var
+			value = 0
+		}
+	}
+
+	option = {
+		name = britannian_prosperity.1.a
+		ai_chance = {
+			base = 10
+		}
+		add_journal_entry = {
+			type = je_britannian_prosperity
+		}
+	}
+}
+
+britannian_prosperity.2 = {
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "unspecific_devastation"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	title = britannian_prosperity.2.t
+	desc = britannian_prosperity.2.d
+	flavor = britannian_prosperity.2.f
+
+	duration = 3
+
+	trigger = {
+	#triggered by britannian prosperity je
+	}
+	
+	immediate = {
+		add_modifier = {
+			name = britannia_fall
+		}
+		add_journal_entry = {
+			type = je_economic_recovery
+		}
+		remove_variable = britannian_prosperity_event
+		remove_variable = mexican_war_started
+		remove_variable = vietnam_war_started
+		remove_variable = american_war
+		remove_variable = german_bna_war
+	}
+
+	option = {
+		name = britannian_prosperity.2.a
+		ai_chance = {
+			base = 10
+		}
+		every_country = {
+			limit = {
+				is_player = yes
+			}
+			trigger_event = {
+				id = superevents.1
+				days = 0
+				popup = yes
+			}
+		}
+		every_country = {
+			limit = {
+				is_subject_of = c:GBR
+			}
+			make_independent = yes
+		}
+		c:TKK = {
+			set_variable = can_setup_puppet
+			add_journal_entry = {
+				type = je_tkk_financial_crisis
+			}
+		}
+		c:GER = {
+			trigger_event = {
+				id = britannian_prosperity.6
+				days = { 20 60 }
+				popup = yes
+			}
+		}
+		c:WST ?= {
+			add_journal_entry = {
+				type = je_the_collapse_of_westland
+			}
+		}
+		c:GDG ?= {
+			trigger_event = {
+				id = china_events.180
+				days = 14
+				popup = yes
+			}
+		}
+		c:DOC ?= {
+			trigger_event = {
+				id = china_events.153
+				days = 7
+				popup = yes
+			}
+		}
+		c:SLR = {
+			trigger_event = {
+				id = russia.400
+				popup = yes
+				days = 7
+			}
+		}
+	}
+}
+britannian_prosperity.3 = {
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "unspecific_devastation"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	title = britannian_prosperity.3.t
+	desc = britannian_prosperity.3.d
+	flavor = britannian_prosperity.3.f
+
+	duration = 3
+	option = {
+		name = britannian_prosperity.3.a
+		ai_chance = {
+			base = 10
+		}
+		custom_tooltip = {
+			text = create_secret_pact_tt
+			create_secret_pact = yes
+		}
+	}
+	option = {
+		name = britannian_prosperity.3.b
+		ai_chance = {
+			base = 0
+		}
+		c:GER = {
+			set_variable = failed_secret_pact
+		}
+	}
+}
+britannian_prosperity.4 = { #states get occupied by ottomans, fire back with support of britannia
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "unspecific_devastation"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	title = britannian_prosperity.4.t
+	desc = britannian_prosperity.4.d
+	flavor = britannian_prosperity.4.f
+	duration = 3
+	immediate = {
+	}
+	option = { #to war, with the backing of britannia
+		name = britannian_prosperity.4.a
+		c:TUR = {
+			create_diplomatic_play = {
+				name = anatolian_war
+				target_country = c:BAG
+				type = dp_humiliation
+				escalation = 50
+				add_war_goal = {
+					holder = c:BAG
+					target_country = c:TUR
+					type = dp_humiliation
+				}
+			}
+		}
+		random_diplomatic_play = {
+			limit = {
+				target = {
+					c:BAG ?= this
+				}
+			}
+			if = {
+				limit = {
+					any_scope_treaty = {
+						binds = c:GBR
+						any_scope_article = {
+							has_type = guarantee_independence
+						}
+					}
+				}
+				add_target_backers = { c:GBR }
+			}
+			every_state = {
+				limit = {
+					AND = {
+						owner = c:TUR
+						has_claim_by = c:BAG
+					}
+				}
+				PREV = {
+					add_war_goal = {
+						holder = c:BAG
+						target_country = c:TUR
+						target_state = PREV
+						type = conquer_state
+					}
+				}
+			}
+		}
+		c:GBR = {
+			trigger_event = {
+				id = britannian_prosperity.5
+				days = 0
+				popup = yes
+			}
+		}
+	}
+}
+
+britannian_prosperity.5 = { #option to add a load of wargoals
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "unspecific_devastation"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	title = britannian_prosperity.5.t
+	desc = britannian_prosperity.5.d
+	flavor = britannian_prosperity.5.f
+	duration = 3
+
+	option = { #conquer the entire balkans
+		name = britannian_prosperity.5.a
+		ai_chance = {
+			base = 100
+			modifier = {
+				add = this.infamy
+				multiply = -2.5
+			}
+		}
+		random_diplomatic_play = {
+			limit = {
+				initiator = {
+					c:TUR ?= this
+				}
+			}
+			every_state = {
+				limit = {
+					this.region = {
+						this = sr:region_balkans
+					}
+					owner ?= c:TUR
+				}
+				PREV = {
+					add_war_goal = {
+						holder = c:GBR
+						target_country = c:TUR
+						target_state = PREV
+						type = conquer_state
+					}
+				}
+			}
+		}
+	}
+	option = {#only conquer neighboring states instead
+		name = britannian_prosperity.5.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				add = this.infamy
+			}
+		}
+		random_diplomatic_play = {
+			limit = {
+				initiator = {
+					c:TUR ?= this
+				}
+			}
+			every_state = {
+				limit = {
+					owner ?= c:TUR
+					any_neighbouring_state = {
+						owner = {
+							OR = {
+								c:GBR ?= this
+								is_subject_of = c:GBR
+							}
+						}
+					}
+				}
+				PREV = {
+					add_war_goal = {
+						holder = c:GBR
+						target_country = c:TUR
+						target_state = PREV
+						type = conquer_state
+					}
+				}
+			}
+		}
+	}
+	option = { # just back BAG, no war goals
+		name = britannian_prosperity.5.c
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = this.infamy
+				multiply = 3
+			}
+		}
+	}
+}
+
+britannian_prosperity.6 = { #sell burgundy to germany
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "unspecific_devastation"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	title = britannian_prosperity.6.t
+	desc = britannian_prosperity.6.d
+	flavor = britannian_prosperity.6.f
+	duration = 3
+	option = {#we need money
+		create_country = {
+			tag = BRG
+			origin = this
+			state = s:STATE_HOLLAND.region_state:GBR
+		}
+		c:BRG = {
+			burgundy_setup = yes
+		}
+		add_modifier = {
+			name = recently_sold_land
+			days = short_modifier_time
+		}
+		if = {
+			limit = {
+				exists = s:STATE_GELRE.region_state:GBR
+			}
+			random_state = {
+				limit = {
+					state_region = s:STATE_GELRE
+				}
+				set_state_owner = c:BRG
+			}
+			add_modifier = {
+				name = recently_sold_land
+				days = short_modifier_time
+			}
+		}
+		if = {
+			limit = {
+				exists = s:STATE_FRIESLAND.region_state:GBR
+			}
+			random_state = {
+				limit = {
+					state_region = s:STATE_FRIESLAND
+				}
+				set_state_owner = c:BRG
+			}
+			add_modifier = {
+				name = recently_sold_land
+				days = short_modifier_time
+			}
+		}
+		if = {
+			limit = {
+				exists = s:STATE_WALLONIA.region_state:GBR
+			}
+			random_state = {
+				limit = {
+					state_region = s:STATE_WALLONIA
+				}
+				set_state_owner = c:BRG
+			}
+			add_modifier = {
+				name = recently_sold_land
+				days = short_modifier_time
+			}
+		}
+		if = {
+			limit = {
+				exists = s:STATE_FLANDERS.region_state:GBR
+			}
+			random_state = {
+				limit = {
+					state_region = s:STATE_FLANDERS
+				}
+				set_state_owner = c:BRG
+			}
+			add_modifier = {
+				name = recently_sold_land
+				days = short_modifier_time
+			}
+		}
+		c:GER = {
+			add_modifier = {
+				name = bought_britannian_land
+				days = normal_modifier_time
+			}
+		}
+		hidden_effect = {
+			c:GER = {
+				trigger_event = {
+					id = bormann_events.8
+					days = 3
+				}
+			}
+		}
+	}
+}

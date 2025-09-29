@@ -1,0 +1,8 @@
+﻿l_english:
+  superevents.1.t: "The German-British Split"
+  superevents.1.a: "One power, two powers. I posture, you cower."
+  superevents.2.t: "The Greater Asian War"
+  superevents.2.a: "China Awakens"
+  notification_greater_asian_war_tooltip:1 "#header $notification_greater_asian_war_name$#!\n$TOOLTIP_DELIMITER$\n$notification_greater_asian_war_desc$"
+  notification_greater_asian_war_name:1 "The Greater Asian War"
+  notification_greater_asian_war_desc:1 "War has erupted between the Dai-Nippon Teikoku and the various warlords of China"

@@ -1,0 +1,445 @@
+namespace = bormann_events
+
+bormann_events.1 = { #HH talks bormann down and offers him a geass
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	title = bormann_events.1.t
+	desc = bormann_events.1.d
+	flavor = bormann_events.1.f
+
+	duration = 3
+
+	trigger = {
+	}
+
+	option = {
+		name = bormann_events.1.a
+		ai_chance = {
+			base = 10
+		}
+		create_character = {
+			template = ger_schnitzel_bormann
+		}
+		trigger_event = {
+			id = bormann_events.2
+			days = 1
+			popup = yes
+		}
+		add_journal_entry = {
+			type = je_bormanns_realm
+		}
+	}
+}
+
+bormann_events.2 = { #opponent politician to Bormann is killed using kaiser crimson
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	duration = 3
+
+	title = bormann_events.2.t
+	desc = bormann_events.2.d
+	flavor = bormann_events.2.f
+
+	immediate = {
+		random_scope_character = {
+			limit = {
+				has_role = ig_leader
+			}
+			save_scope_as = opposer_leader
+		}
+		random_scope_character = {
+			limit = {
+				has_template = ger_schnitzel_bormann
+			}
+			save_scope_as = bormann_scope
+		}
+	}
+	trigger = {
+	}
+	option ={
+		name = bormann_events.2.a
+		ai_chance = {
+			base = 10
+		}
+		scope:opposer_leader = {
+			kill_character = yes
+		}
+		scope:bormann_scope = {
+			add_modifier = {
+				name = bormann_suspected_of_killing_modifier
+				days = normal_modifier_time
+				is_decaying = yes
+			}
+		}
+	}
+}
+
+bormann_events.3 = {
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	duration = 3
+
+	title = bormann_events.3.t
+	desc = bormann_events.3.d
+	flavor = bormann_events.3.f
+	option = {
+		name = bormann_events.3.a
+		ai_chance = {
+			base = 10
+		}
+		default_option = yes
+		add_journal_entry = {
+			type = je_construction_of_germania
+		}
+		trigger_event = {
+			id = bormann_events.4
+			days = 3
+		}
+	}
+}
+
+bormann_events.4 = { #meeting with dentist speer
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_statue.dds"
+	duration = 3
+
+	title = bormann_events.4.t
+	desc = bormann_events.4.d
+	flavor = bormann_events.4.f
+	option = {
+		name = bormann_events.4.a
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+bormann_events.5 = { #Bormann and H.H find out the player exists and gets mad at them for ruining their laws
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	duration = 3
+	title = bormann_events.5.t
+	desc = bormann_events.5.d
+	flavor = bormann_events.5.f
+	immediate = {
+		set_variable = had_law_revert_event
+	}
+	option = {
+		name = bormann_events.5.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.5.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.5.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.5.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.5.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.5.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.5.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.5.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.5.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+}
+
+bormann_events.6 = { #You are observing H.H, but she notices and spams you with notifications
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	duration = 3
+	title = bormann_events.6.t
+	desc = bormann_events.6.d
+	flavor = bormann_events.6.f
+	immediate = {
+		hh_notif_spam = yes
+	}
+	option = {
+		name = bormann_events.6.a
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+bormann_events.7 = { #buy burgundy
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	duration = 3
+	title = bormann_events.7.t
+	title = bormann_events.7.d
+	title = bormann_events.7.f
+	option = {
+		name = bormann_events.7.a
+		default_option = yes
+		c:GBR = {
+			trigger_event = {
+				id = britannian_prosperity.6
+				days = 7
+				popup = yes
+			}
+		}
+	}
+}
+
+bormann_events.8 = { #lets you play as burgundy, if you want to for some reason
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	duration = 3
+	title = bormann_events.8.t
+	desc = bormann_events.8.d
+	flavor = bormann_events.8.f
+	option = {
+		name = bormann_events.8.a
+		default_option = yes
+	}
+	option = {
+		name = bormann_events.8.b
+		play_as = c:BRG
+	}
+}
+
+bormann_events.9 = { #Bormann and H.H find out the player exists and gets mad at them for ruining their laws
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	duration = 3
+	title = bormann_events.9.t
+	desc = bormann_events.9.d
+	flavor = bormann_events.9.f
+	immediate = {
+		set_variable = had_law_revert_event
+	}
+	option = {
+		name = bormann_events.9.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.9.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.9.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.9.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.9.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.9.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.9.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.9.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+	option = {
+		name = bormann_events.9.a
+		ai_chance = {
+			base = 10
+		}
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_monarchy
+	}
+}
+
+bormann_events.9 = { #bormann gets pissed about the labor movement
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	duration = 3
+	title = bormann_events.9.t
+	desc = bormann_events.9.d
+	flavor = bormann_events.9.f
+	option = {
+		name = bormann_events.9.a
+		default_option = yes
+		add_modifier = {
+			name = bormann_killed_union_rep_modifier
+			days = normal_modifier_time
+			is_decaying = yes
+		}
+		hidden_effect = {
+			trigger_event = {
+				id = bormann_events.10
+				days = { 20 40 }
+				popup = yes
+			}
+		}
+	}
+}
+
+bormann_events.10 = { #bormann kills a bureaucrat
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	duration = 3
+	title = bormann_events.10.t
+	desc = bormann_events.10.d
+	flavor = bormann_events.10.f
+	option = {
+		name = bormann_events.10.a
+		default_option = yes
+		add_modifier = {
+			name = bormann_killed_bureaucrat_modifier
+			days = normal_modifier_time
+			is_decaying = yes
+		}
+	}
+}

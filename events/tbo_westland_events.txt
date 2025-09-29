@@ -1,0 +1,424 @@
+namespace = westland_events
+
+westland_events.1 = { # westland collapse
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "unspecific_devastation"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	title = westland_events.1.t
+	desc = westland_events.1.d
+	flavor = westland_events.1.f
+
+	duration = 3
+
+	option = {
+		ai_chance = {
+			base = 1
+		}
+		name = westland_events.1.a
+		create_lorraine = yes
+		play_as = c:LRA
+		create_andalusia = yes
+		create_toledo_republic = yes
+		create_smalland = yes
+		create_languedoc = yes
+		create_portugese_directorate = yes
+		create_aragon = yes
+		create_corsica = yes
+	}
+	option = {
+		ai_chance = {
+			base = 1
+		}
+		name = westland_events.1.b
+		create_toledo_republic = yes
+		play_as = c:TLR
+		create_andalusia = yes
+		create_lorraine = yes
+		create_smalland = yes
+		create_languedoc = yes
+		create_portugese_directorate = yes
+		create_aragon = yes
+		create_corsica = yes
+	}
+	option = {
+		ai_chance = {
+			base = 1
+		}
+		name = westland_events.1.c
+		create_languedoc = yes
+		play_as = c:LNG
+		create_andalusia = yes
+		create_lorraine = yes
+		create_smalland = yes
+		create_toledo_republic = yes
+		create_portugese_directorate = yes
+		create_aragon = yes
+		create_corsica = yes
+	}
+	option = {
+		ai_chance = {
+			base = 1
+		}
+		name = westland_events.1.e
+		create_portugese_directorate = yes
+		play_as = c:POR
+		create_andalusia = yes
+		create_lorraine = yes
+		create_smalland = yes
+		create_toledo_republic = yes
+		create_languedoc = yes
+		create_aragon = yes
+		create_corsica = yes
+	}
+	option = {
+		ai_chance = {
+			base = 1
+		}
+		name = westland_events.1.g
+		create_aragon = yes
+		play_as = c:ARG
+		create_andalusia = yes
+		create_lorraine = yes
+		create_smalland = yes
+		create_toledo_republic = yes
+		create_languedoc = yes
+		create_portugese_directorate = yes
+		create_corsica = yes
+	}
+	option = {
+		ai_chance = {
+			base = 1
+		}
+		name = westland_events.1.h
+		create_corsica = yes
+		play_as = c:COR
+		create_andalusia = yes
+		create_lorraine = yes
+		create_smalland = yes
+		create_toledo_republic = yes
+		create_languedoc = yes
+		create_portugese_directorate = yes
+		create_aragon = yes
+	}
+	option = {
+		ai_chance = {
+			base = 1
+		}
+		name = westland_events.1.i
+		create_andalusia = yes
+		play_as = c:ADL
+		create_corsica = yes
+		create_lorraine = yes
+		create_smalland = yes
+		create_toledo_republic = yes
+		create_languedoc = yes
+		create_portugese_directorate = yes
+		create_aragon = yes
+	}
+}
+
+westland_events.10 = {
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "unspecific_capitalists_meeting"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	title = westland_events.10.t
+	desc = westland_events.10.d
+	flavor = westland_events.10.f
+	duration = 3
+	option = {
+		ai_chance = {
+			base = 10
+		}
+		name = westland_events.10.a
+		default_option = yes
+		c:TLR = {
+			create_diplomatic_play = {
+				name = iberian_springtime_war
+				target_country = root
+				type = dp_iberian_spring
+				escalation = 80
+				add_war_goal = {
+					holder = root
+					target_country = this
+					type = regime_change
+				}
+			}
+		}
+	}
+	option = {
+		ai_chance = {
+			base = 0
+			modifier = {
+				trigger = {
+					c:TLR.army_power_projection > this.army_power_projection
+				}
+				add = 5
+			}
+		}
+		name = westland_events.10.b
+		c:TLR = {
+			create_diplomatic_pact = {
+				country = c:ROOT
+				type = co_governance
+			}
+		}
+		toledo_republic_ally_setup = yes
+	}
+}
+
+westland_events.11 = { #sets up the new iberian bloc
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "ep1_transfer_of_authority"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	title = westland_events.11.t
+	desc = westland_events.11.d
+	flavor = westland_events.11.f
+	duration = 3
+	immediate = {
+		c:TLR = {
+			save_scope_as = tlr_scope
+		}
+		every_country = {
+			limit = {
+				OR = {
+					country_has_primary_culture = cu:spanish
+					country_has_primary_culture = cu:portuguese
+				}
+				NOT = {
+					this = ROOT
+				}
+			}
+			c:TLR = {
+				annex = prev
+			}
+		}
+	}
+
+	option = {
+		ai_chance = {
+			base = 10
+		}
+		name = westland_events.11.a
+		reorganize_spain = yes
+	}
+}
+
+westland_events.20 = { #torture people select screen
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "unspecific_sick_in_hospital"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	title = westland_events.20.t
+	desc = westland_events.20.d
+	flavor = westland_events.20.f
+	duration = 3
+	option = { #waterboarding
+		ai_chance = {
+			base = 0
+		}
+		name = westland_events.20.a
+		add_modifier = {
+			name = moa_waterboarding_modifier
+			days = short_modifier_time
+		}
+		custom_tooltip = {
+			text = moa_remove_2_insanity
+			scope:journal_entry = {
+				add_progress = { value = -2 name = moa_waldro_insanity_progress_bar }
+			}
+		}
+	}
+	option = { #elephant crushing
+		ai_chance = {
+			base = 0
+		}
+		name = westland_events.20.e
+		add_modifier = {
+			name = moa_elephant_modifier
+			days = short_modifier_time
+		}
+		custom_tooltip = {
+			text = moa_remove_2_5_insanity
+			scope:journal_entry = {
+				add_progress = { value = -2.5 name = moa_waldro_insanity_progress_bar }
+			}
+		}
+	}
+	option = { #flaying
+		ai_chance = {
+			base = 0
+		}
+		name = westland_events.20.b
+		add_modifier = {
+			name = moa_flaying_modifier
+			days = short_modifier_time
+		}
+		custom_tooltip = {
+			text = moa_remove_3_insanity
+			scope:journal_entry = {
+				add_progress = { value = -3 name = moa_waldro_insanity_progress_bar }
+			}
+		}
+	}
+	option = { #hungry rat torture
+		ai_chance = {
+			base = 0
+		}
+		name = westland_events.20.c
+		add_modifier = {
+			name = moa_hungry_rat_modifier
+			days = short_modifier_time
+		}
+		custom_tooltip = {
+			text = moa_remove_3.5_insanity
+			scope:journal_entry = {
+				add_progress = { value = -3.5 name = moa_waldro_insanity_progress_bar }
+			}
+		}
+	}
+	option = { #tickle torture
+		ai_chance = {
+			base = 0
+		}
+		name = westland_events.20.g
+		add_modifier = {
+			name = moa_tickle_modifier
+			days = short_modifier_time
+		}
+		custom_tooltip = {
+			text = moa_remove_4_insanity
+			scope:journal_entry = {
+				add_progress = { value = -4 name = moa_waldro_insanity_progress_bar }
+			}
+		}
+	}
+}
+
+westland_events.21 = { # waldro screws up and dies lmao
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "unspecific_vandalized_storefront"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	title = westland_events.21.t
+	desc = westland_events.21.d
+	flavor = westland_events.21.f
+	duration = 3
+	immediate = {
+
+	}
+	option = {
+		random_character = {
+			limit = {
+				has_template = wst_waldro_freight_small
+			}
+			kill_character = yes
+		}
+		name = westland_events.21.a
+		add_modifier = {
+			name = andalusia_political_instability_modifier
+			days = normal_modifier_time
+		}
+	}
+}
+
+westland_events.22 = { #become kingdom of iberia
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "ep1_transfer_of_authority"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	title = westland_events.22.t
+	desc = westland_events.22.d
+	flavor = westland_events.22.f
+	duration = 3
+	immediate = {
+		change_tag = KIB
+	}
+	option = {
+		ai_chance = {
+			base = 10
+		}
+		default_option = yes
+		name = westland_events.22.a
+		add_modifier = {
+			name = andalusia_unified_iberia_modifier
+			days = normal_modifier_time
+		}
+	}
+}
+
+westland_events.30 = { #portugal manages to take all iberia
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "ep1_transfer_of_authority"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	title = westland_events.30.t
+	desc = westland_events.30.d
+	flavor = westland_events.30.f
+	duration = 3
+	option = {
+		ai_chance = {
+			base = 10
+		}
+		default_option = yes
+		name = westland_events.30.a
+		add_modifier = {
+			name = portugal_reunified_iberia
+			days = normal_modifier_time
+		}
+	}
+}
+
+westland_events.40 = { #become kingdom of iberia
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "ep1_transfer_of_authority"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	title = westland_events.40.t
+	desc = westland_events.40.d
+	flavor = westland_events.40.f
+	duration = 3
+	immediate = {
+		change_tag = KIB
+	}
+	option = {
+		ai_chance = {
+			base = 10
+		}
+		default_option = yes
+		name = westland_events.40.a
+		add_modifier = {
+			name = aragon_unified_iberia_modifier
+			days = normal_modifier_time
+		}
+	}
+}
