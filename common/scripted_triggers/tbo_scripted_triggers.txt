@@ -1,0 +1,5 @@
+brainrot_harmony_high = {
+	NOR = {
+		ROOT."culture_percent_country(cu:skibidi)"
+	}
+}

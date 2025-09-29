@@ -1,0 +1,134 @@
+siberian_planning_progress_bar = {
+ 	name = "occitan_chances_progress_bar"
+ 	desc = "occitan_chances_progress_bar_desc"
+	
+	start_value = 0
+	min_value = 0
+	max_value = 5
+	
+	default = yes
+	
+}
+
+fer_unification_war_progress_bar = {
+	name = "fer_unification_war_progress_bar"
+	desc = "fer_unification_war_progress_bar_desc"
+	
+	start_value = 0
+	min_value = 0
+	max_value = 100
+	
+	default_bad = yes
+	weekly_progress = {
+		add = {
+			desc = base_decay
+			add = -0.2
+		}
+		if = {
+			limit = {
+				has_modifier = fer_war_planning
+			}
+			add = {
+				desc = war_planning
+				add = 2
+			}
+		}
+	}
+}
+
+tta_omsk_sympathies = {
+	name = "tta_omsk_sympathies"
+	desc = "tta_omsk_sympathies_desc"
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	default_bad = yes
+
+	weekly_progress = {
+		if = {
+			limit = {
+				owner = {
+					any_scope_state = {
+						turmoil >= 0.10
+					}
+				}
+			}
+			add = {
+				desc = "from_turmoil"
+				owner = {
+					every_scope_state = {
+						limit = {
+							turmoil >= 0.10
+						}
+						add = this.turmoil
+					}
+				}
+			}
+		}
+		add = {
+			desc = from_legitimacy
+			add = 100
+			subtract = government_legitimacy
+			multiply = 0.02	
+		}
+		add = {
+			desc = from_authority
+			add = authority
+			multiply = -0.001
+		}
+	}
+}
+
+sru_railway_funds = {
+	name = "sru_railway_funds"
+	desc = "sru_railway_funds_desc"
+
+	start_value = 2
+	min_value = 0
+	max_value = 5
+
+	default_green = yes
+}
+
+sru_rail_system_construction_efficiency = {
+	name = "sru_rail_system_construction_efficiency"
+	desc = "sru_rail_system_construction_efficiency_desc"
+
+	start_value = 40
+	min_value = 0
+	max_value = 100
+
+	default = yes
+}
+
+sru_rail_system_progress = {
+	name = "sru_rail_system_progress"
+	desc = "sru_rail_system_progress_desc"
+	
+	start_value = 0
+	min_value = 0
+	max_value = 100
+	
+	default = yes
+		
+	monthly_progress = {
+		add = {
+			desc = from_rail_efficiency
+			add = owner.var:calculating_rail
+			divide = 10
+		}
+	}
+}
+
+irk_legitimacy_bar = {
+	name = "irk_legitimacy_bar"
+	desc = "irk_legitimacy_bar_desc"
+	
+	start_value = 50
+	min_value = 40
+	max_value = 100
+	
+	default = yes
+}

@@ -1,0 +1,11 @@
+prestige_good_dubai_chocolate = {
+	base_good = sugar
+	prestige_bonus = 0.1
+	texture = "gfx/interface/icons/goods_icons/prestige_goods/dubai_chocolate_prestige.png"
+}
+
+prestige_good_moonbeam_icecream_crumbl_cookies = {
+	base_good = groceries
+	prestige_bonus = 0.1
+	texture = "gfx/interface/icons/goods_icons/prestige_goods/prestige_good_moonbeam_icecream.png"
+}

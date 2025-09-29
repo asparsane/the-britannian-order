@@ -1,0 +1,1389 @@
+je_star_in_the_wastes = {	
+	icon = "gfx/interface/icons/event_icons/event_star_in_the_wastes.dds"
+
+	group = je_group_historical_content
+	
+	scripted_button = fer_revitalize_bureaucracy_button
+
+	is_shown_when_inactive = {
+	}
+	
+	possible = {
+		this ?= c:FER
+	}
+	
+	immediate = {
+		add_journal_entry = {
+			type = je_fer_economic_recovery
+		}
+		add_journal_entry = {
+			type = je_military_recovery
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = reclaimed_siberia_tt
+			has_variable = siberian_unifier
+		}
+	}
+}
+
+je_fer_economic_recovery = {
+	icon = "gfx/interface/icons/event_icons/event_star_in_the_wastes.dds"
+
+	group = je_group_historical_content
+	
+	immediate = {
+	}
+	
+	current_value = {
+		value = root.gdp
+	}
+	
+	complete = {
+		scope:journal_entry = {
+			is_goal_complete = yes
+		}
+	}
+	
+	on_complete = {
+		remove_modifier = economic_hardship
+		add_modifier = {
+			name = economic_rebuilding
+			months = normal_modifier_time
+			multiplier = 0.8
+			is_decaying = yes
+		}
+		trigger_event = {
+			id = russia.110
+			days = 3
+		}
+	}
+	
+	progressbar = yes
+
+	goal_add_value = {
+		value = root.gdp
+		multiply = 0.15
+	}
+}
+
+je_military_recovery = {
+	icon = "gfx/interface/icons/event_icons/event_star_in_the_wastes.dds"
+
+	group = je_group_historical_content
+	
+	immediate = {
+	}
+	
+	current_value = {
+		value = root.army_power_projection
+	}
+	
+	complete = {
+		scope:journal_entry = {
+			is_goal_complete = yes
+		}
+	}
+	
+	on_complete = {
+		remove_modifier = weakened_military
+		add_modifier = {
+			name = recovering_military
+			months = normal_modifier_time
+			is_decaying = yes
+		}
+		add_journal_entry = {
+			type = je_unification_of_siberia
+		}
+	}
+	
+	progressbar = yes
+
+	goal_add_value = {
+		value = root.army_power_projection
+		multiply = 0.15
+	}
+}
+
+je_the_east_russian_war = {
+	icon = "gfx/interface/icons/event_icons/event_star_in_the_wastes.dds"
+
+	group = je_group_historical_content
+
+	scripted_progress_bar = siberian_planning_progress_bar
+
+	is_shown_when_inactive = {
+	}
+
+	possible = {
+		any_scope_state = {
+			any_neighbouring_state = {
+				owner = c:TKK
+				has_claim_by = c:FER
+			}
+		}
+	}
+
+	complete = {
+		c:TKK = {
+			NOT = {
+				any_scope_state = {
+					has_claim_by = c:FER
+				}
+			}
+		}
+	}
+
+	fail = {
+		any_country = {
+			NOT = {
+				this = c:FER
+			}
+			has_modifier = reclaimed_siberia
+		}
+	}
+}
+
+je_contact_indonesia = {
+	icon = "gfx/interface/icons/event_icons/event_star_in_the_wastes.dds"
+
+	group = je_group_historical_content
+
+	scripted_progress_bar = contacting_indonesian_resistance
+	scripted_progress_bar = indonesian_materiel_support
+
+	complete = {
+		je:je_contact_indonesia = {
+			"scripted_bar_progress(contacting_indonesian_resistance)" >= 100
+		}
+	}
+
+	fail = {
+		any_country = {
+			NOT = {
+				this ?= c:FER
+			}
+			has_modifier = reclaimed_siberia
+		}
+	}
+}
+
+je_unification_of_siberia = { # wars to unify siberia
+	icon = "gfx/interface/icons/event_icons/event_star_in_the_wastes.dds"
+	group = je_group_historical_content
+
+	scripted_button = fer_stop_preparing_button
+	scripted_button = fer_resume_preparing_button
+	scripted_button = fer_start_war_button
+
+	scripted_progress_bar = fer_unification_war_progress_bar
+
+	on_weekly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					has_modifier = fer_war_planning
+				}
+				remove_modifier = fer_war_planning
+				set_variable = {
+					name = preparations_temp
+					value = root.army_power_projection
+				}
+				change_variable = {
+					name = preparations_temp
+					divide = 100
+				}
+				add_modifier = {
+					name = fer_war_planning
+					multiplier = var:preparations_temp
+				}
+				remove_variable = preparations_temp
+			}
+		}
+	}
+	
+	on_monthly_pulse = {
+		effect = {
+			select_random_siberian_opponent = yes
+			calculate_war_chance = yes
+		}
+	}
+
+	complete = {
+		NOT = {
+			any_country = {
+				AND = {
+					country_has_primary_culture = cu:russian
+					any_scope_state = {
+						OR = {
+							region = sr:region_west_siberia
+							region = sr:region_east_siberia
+						}
+					}
+					NOT = {
+						this = root
+					}
+				}
+			}
+		}
+	}
+
+	on_complete = {
+		remove_variable = chance_var
+		remove_variable = target_country
+		trigger_event = {
+			id = russia.120
+			days = 3
+			popup = yes
+		}
+	}
+}
+
+je_developing_the_nation = {
+	icon = "gfx/interface/icons/event_icons/event_star_in_the_wastes.dds"
+
+	group = je_group_historical_content
+
+	scripted_button = fer_literacy_drive_button
+	scripted_button = fer_increasing_population_button
+	scripted_button = fer_improving_healthcare_button
+	scripted_button = fer_alleviating_poverty_button
+
+	complete = {
+		custom_tooltip = {
+			text = setup_basic_infrastructure_tt
+			has_variable = var_literacy_drive
+			has_variable = var_improving_healthcare
+			has_variable = var_increasing_population
+			has_variable = var_alleviating_poverty
+		}
+	}
+
+	on_complete = {
+		remove_variable = var_literacy_drive
+		remove_variable = var_improving_healthcare
+		remove_variable = var_increasing_population
+		remove_variable = var_alleviating_poverty
+		trigger_event = {
+			id = russia.111
+			days = 3
+			popup = yes
+		}
+	}
+
+	fail = {
+	}
+}
+
+je_national_reinvigoration = {
+	icon = "gfx/interface/icons/event_icons/event_star_in_the_wastes.dds"
+
+	group = je_group_historical_content
+
+	scripted_button = fer_develop_infrastructure_technology_button
+	scripted_button = fer_reorganize_industrial_practices_button
+	scripted_button = fer_far_eastern_infrastructure_button
+	scripted_button = fer_develop_infrastructure_technology_button
+	scripted_button = fer_improving_agriculture_button
+	scripted_button = fer_develop_agricultural_technology_button
+
+	complete = {
+		has_technology_researched = railways
+		custom_tooltip = {
+			text = fer_completed_additional_development
+			has_variable = var_reorganized_industrial_practices
+			has_variable = var_developed_infra_tech
+			has_variable = var_buryatian_railway
+			has_variable = var_improved_agriculture
+			has_variable = var_agriculture_tech
+			has_variable = var_developed_infra_tech
+		}
+	}
+
+	on_complete = {
+		remove_variable = var_reorganized_industrial_practices
+		remove_variable = var_buryatian_railway
+		remove_variable = var_developed_infra_tech
+		remove_variable = var_improved_agriculture
+		remove_variable = var_agriculture_tech
+		remove_variable = var_developed_infra_tech
+		trigger_event = {
+			id = russia.112
+			days = 3
+			popup = yes
+		}
+	}
+}
+
+#end of FER journals
+#beginning of Omsk journals
+
+je_the_tobolsk_insurgency_zone = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_historical_content
+	
+	scripted_button = stir_dissent_in_tobolsk
+	scripted_button = declare_war_on_tta
+	
+	possible = {
+		always = yes
+	}
+	
+	complete = {
+		owns_entire_state_region = STATE_TOBOLSK
+	}
+	
+	on_complete = {
+		s:STATE_TOBOLSK.region_state:MSK = {
+			save_scope_value_as = {
+				name = radical_fraction_scope
+				value = this.radical_fraction
+			}
+			add_loyalists = {
+				value = scope:radical_fraction
+			}
+		}
+		add_journal_entry = {
+			type = je_the_second_trial
+		}
+	}
+	should_be_pinned_by_default = yes
+	fail = {
+		NOT = {
+			exists = c:TTA
+		}
+	}
+	on_fail = {
+		every_country = {
+			limit = {
+				has_truce_with = ROOT
+			}
+			end_truce = ROOT
+		}
+	}
+}
+
+je_the_second_trial = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_historical_content
+	
+	scripted_button = start_uni_war_generic
+	
+	possible = {
+		always = yes
+	}
+	
+	on_monthly_pulse = {
+		effect = {
+			select_random_siberian_opponent = yes
+			calculate_war_chance = yes
+		}
+	}
+	
+	complete = {
+		NOT = {
+			any_country = {
+				AND = {
+					country_has_primary_culture = cu:russian
+					any_scope_state = {
+						OR = {
+							region = sr:region_west_siberia
+							region = sr:region_east_siberia
+						}
+					}
+					NOT = {
+						this = root
+					}
+				}
+			}
+		}
+	}
+	
+	on_complete = {
+		remove_variable = chance_var
+		remove_variable = target_country
+		trigger_event = {
+			id = russia.560
+			days = 3
+			popup = yes
+		}
+	}
+	
+	should_be_pinned_by_default = yes
+}
+
+# Divine Mandate jes
+
+je_dvm_church_of_state = {
+	icon = "gfx/interface/icons/event_icons/dvm_icon.dds"
+	group = je_group_historical_content
+	
+	scripted_button = dvm_crusades
+	scripted_progress_bar = dvm_religious_discontent_progress_bar
+		
+	modifiers_while_active = {
+		dvm_reformed_purification
+		dvm_inquisition_costs
+	}
+	
+	fail = {
+		ig:ig_devout = {
+			is_powerful = no
+		}
+	}
+	
+	on_monthly_pulse = {
+		effect = {
+			select_random_siberian_opponent = yes
+			calculate_war_chance = yes
+			scope:journal_entry = {
+				save_scope_value_as = {
+					name = progress_scope
+					value = "scripted_bar_progress(dvm_religious_discontent_progress_bar)"
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_modifier = indulgence_scandal_exposed
+					}
+				}
+				random_list = {
+					0 = {
+						modifier = {
+							add = scope:progress_scope
+						}
+						trigger_event = {
+							id = russia.202
+							days = 7
+							popup = yes
+						}
+						remove_modifier = dvm_indulgence_bonus
+					}
+					100 = {
+						modifier = {
+							subtract = scope:progress_scope
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	on_fail = {
+		remove_variable = chance_var
+		remove_variable = target_country
+		add_modifier = {
+			name = mandate_collapse_modifier
+		}
+		add_journal_entry = {
+			type = je_dvm_crisis_of_faith
+		}
+		remove_variable = belief_var
+	}
+		
+	complete = {
+		NOT = {
+			any_country = {
+				AND = {
+					country_has_primary_culture = cu:russian
+					any_scope_state = {
+						OR = {
+							region = sr:region_west_siberia
+							region = sr:region_east_siberia
+						}
+					}
+					NOT = {
+						this = root
+					}
+				}
+			}
+		}
+	}
+	
+	on_complete = {
+		remove_variable = chance_var
+		remove_variable = target_country
+		remove_variable = belief_var
+		trigger_event = {
+			id = russia.201
+			days = 1
+		}
+	}
+	should_be_pinned_by_default = yes
+}
+
+je_dvm_crisis_of_faith = { # try your best to delay mass hysteria until timeout
+	icon = "gfx/interface/icons/event_icons/dvm_icon.dds"
+	group = je_group_historical_content
+	
+	immediate = {
+		set_variable = {
+			name = mass_hysteria_chance
+			value = 0
+		}
+	}
+	
+	on_weekly_pulse = {
+		effect = {
+			mass_hysteria_check = yes
+		}
+	}
+	
+	fail = {
+		government_legitimacy <= 20
+	}
+	
+	timeout = 1825
+	
+	on_fail = {
+		remove_variable = mass_hysteria_chance
+		remove_modifier = mandate_collapse_modifier
+		trigger_event = {
+			id = russia.206
+			days = 3
+			popup = yes
+		}
+	}
+	
+	on_timeout = {
+		remove_variable = mass_hysteria_chance
+		remove_modifier = mandate_collapse_modifier
+		add_modifier = {
+			name = shattered_faith_modifier
+			months = long_modifier_time
+		}
+	}
+	should_be_pinned_by_default = yes
+}
+
+#jes for TTA
+
+je_glove_and_fist = { 
+	icon = "gfx/interface/icons/event_icons/event_glove_and_fist.dds"
+	group = je_group_historical_content
+	
+	scripted_button = siberian_capital_tobolsk
+	scripted_button = military_suppression
+	scripted_progress_bar = tta_omsk_sympathies
+	
+	modifiers_while_active = {
+		strained_authority_modifier
+	}
+	
+	on_monthly_pulse = {
+		effect = {
+			select_random_siberian_opponent = yes
+			calculate_war_chance = yes
+		}
+	}
+	
+	immediate = {
+	}
+	
+	fail = {
+		scope:journal_entry = {
+			"scripted_bar_progress(tta_omsk_sympathies)">=100
+		}
+	}
+	
+	complete = {
+		NOT = {
+			any_country = {
+				AND = {
+					country_has_primary_culture = cu:russian
+					any_scope_state = {
+						OR = {
+							region = sr:region_west_siberia
+							region = sr:region_east_siberia
+						}
+					}
+					NOT = {
+						this = root
+					}
+				}
+			}
+		}
+	}
+	
+	on_fail = {
+		remove_variable = chance_var
+		remove_variable = target_country
+		remove_modifier = tta_suppression_penalty
+		random_scope_state = {
+			limit = {
+				state_region = {
+					s:STATE_TOBOLSK = this
+				}
+			}
+			set_state_owner = c:MSK
+		}
+		every_country = {
+			limit = {
+				has_truce_with = c:MSK
+			}
+			end_truce = c:MSK
+		}
+		s:STATE_TOBOLSK.region_state:TTA = {
+			save_scope_value_as = {
+				name = radical_fraction_scope
+				value = this.radical_fraction
+			}
+		}
+		c:MSK = {
+			add_modifier = {
+				name = omsk_attack_bonus
+				months = 6
+				multiplier = scope:radical_fraction_scope
+			}
+		}
+		c:MSK = {
+			create_diplomatic_play = {
+				name = siberian_unification_war
+				target_country = root
+				type = dp_annex_war
+				escalation = 90
+				target_state = "root.capital".region_state:root
+				add_war_goal = {
+					holder = root
+					target_country = this
+					type = annex_country
+				}
+			}
+		}
+		c:TTA = {
+			trigger_event = {
+				id = russia.552
+				days = 1
+				popup = yes
+			}
+			add_modifier = {
+				name = tta_tobolsk_insurgence
+				months = 6
+				multiplier = scope:radical_fraction_scope
+				multiplier = scope:radical_fraction_scope
+			}
+			save_scope_as = owner_country
+		}
+	}
+	
+	on_complete = {
+		remove_variable = chance_var
+		remove_variable = target_country
+		remove_modifier = tta_suppression_penalty
+		trigger_event = {
+			id = russia.550
+			days = 7
+			popup = yes
+		}
+	}
+}
+
+irk_the_tsar_of_siberia = {
+	icon = "gfx/interface/icons/event_icons/irk_unification.dds"
+	group = je_group_historical_content
+
+	scripted_button = small_bribe_efforts
+	scripted_button = medium_bribe_efforts
+	scripted_button = start_uni_war_irk
+	scripted_progress_bar = irk_legitimacy_bar
+	
+	immediate = {
+		add_modifier = {
+			name = irk_reduced_legitimacy
+			multiplier = 20
+		}
+		set_variable = {
+			name = legitimacy_value
+			value = 20
+		}
+	}
+	
+	possible = {
+		always = yes
+	}
+    
+    on_weekly_pulse = {
+        effect = {
+            je:irk_the_tsar_of_siberia= {
+                set_bar_progress = {
+                    value = root.government_legitimacy
+                    name = irk_legitimacy_bar
+                }
+            }
+        }
+    }
+
+	on_monthly_pulse = {
+		effect = {
+			select_random_siberian_opponent = yes
+			calculate_war_chance = yes
+			if = {
+				limit = {
+					has_modifier = irk_reduced_legitimacy
+				}
+				remove_modifier = irk_reduced_legitimacy
+				add_modifier = {
+					name = irk_reduced_legitimacy
+					multiplier = var:legitimacy_value
+				}
+			}
+			change_variable = {
+				name = legitimacy_value
+				add = 0.3
+			}
+		}
+	}
+    
+	fail = {
+		government_legitimacy <= 40
+	}
+	
+	complete = {
+		NOT = {
+			any_country = {
+				AND = {
+					country_has_primary_culture = cu:russian
+					any_scope_state = {
+						OR = {
+							region = sr:region_west_siberia
+							region = sr:region_east_siberia
+						}
+					}
+					NOT = {
+						this = root
+					}
+				}
+			}
+		}
+	}
+	
+	on_complete = {
+        if = {
+            limit = {
+                has_modifier = irk_foreign_investments
+            }
+            remove_modifier = irk_foreign_investments
+        }
+		remove_variable = chance_var
+		remove_variable = target_country
+		remove_modifier = irk_reduced_legitimacy
+		trigger_event = {
+			id = russia.500
+			days = 0
+		}
+	}
+	
+	on_fail = {
+		remove_variable = chance_var
+		remove_variable = target_country
+		remove_modifier = irk_reduced_legitimacy
+	}
+
+	weight = 100
+
+	can_revolution_inherit = yes
+	transferable = yes
+	should_be_pinned_by_default = yes
+}
+
+irk_foreign_investments = {
+	icon = "gfx/interface/icons/event_icons/irk_unification.dds"
+	group = je_group_historical_content
+	
+	possible = {
+		always = yes
+	}
+	scripted_button = irk_propose_investment_portfolio_button
+    scripted_button = sell_iron_mines_irk
+    scripted_button = sell_coal_mines_irk
+    scripted_button = sell_sulfur_mines_irk
+    scripted_button = sell_lead_mines_irk
+	
+	fail = {
+		government_legitimacy <= 40
+	}
+}
+
+#generic je
+generic_siberian_unification = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	group = je_group_historical_content
+
+	scripted_button = start_uni_war_generic
+
+	is_shown_when_inactive = {
+		country_has_primary_culture = cu:russian
+		any_scope_state = {
+			OR = {
+				region = sr:region_west_siberia
+				region = sr:region_east_siberia
+			}
+		}
+		NOT  ={
+			has_journal_entry = irk_the_tsar_of_siberia
+			has_journal_entry = siberian_capital_tobolsk
+			has_journal_entry = je_dvm_church_of_state
+			has_journal_entry = je_glove_and_fist
+			has_journal_entry = ural_frontier
+			c:FER ?= this
+			c:MSK ?= this
+		}
+	}
+	
+	immediate = {
+	}
+	
+	possible = {
+		always = yes
+	}
+	
+	on_monthly_pulse  ={
+		effect = {
+			select_random_siberian_opponent = yes
+			calculate_war_chance = yes
+		}
+	}
+	
+	complete = {
+		NOT = {
+			any_country = {
+				AND = {
+					country_has_primary_culture = cu:russian
+					any_scope_state = {
+						OR = {
+							region = sr:region_west_siberia
+							region = sr:region_east_siberia
+						}
+					}
+					NOT = {
+						this = root
+					}
+				}
+			}
+		}
+	}		
+	
+	on_complete = {
+		remove_variable = chance_var
+		remove_variable = target_country
+		trigger_event = {
+			id = russia.001
+			days = 0
+		}
+	}
+	
+	on_fail = {
+	}
+
+	weight = 100
+
+	can_revolution_inherit = yes
+	transferable = yes
+	should_be_pinned_by_default = yes
+}
+
+#ural jes
+ural_frontier = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_historical_content
+	
+	possible = {
+		always = yes
+	}
+	
+	immediate = {
+		calculate_ural_skirmish_value = yes
+	}
+	
+	scripted_button = url_defensive_exercises
+	scripted_button = url_offensive_exercises
+	scripted_button = url_logistical_training
+	scripted_button = url_standardize_defense
+	scripted_button = url_standardize_offense
+	scripted_button = url_standardize_logistics
+	scripted_button = url_modernize_offensive_methods
+	scripted_button = url_modernize_defensive_methods
+	scripted_button = url_modernize_supply_lines
+	scripted_button = start_uni_war_ural
+	
+	on_weekly_pulse = {
+		effect = {
+			calculate_ural_skirmish_value = yes
+		}
+	}
+	
+	on_monthly_pulse = {
+		effect = {
+			select_random_siberian_opponent = yes
+			calculate_war_chance = yes
+		}	
+	}
+	
+	complete = {
+		NOT = {
+			any_country = {
+				AND = {
+					country_has_primary_culture = cu:russian
+					any_scope_state = {
+						OR = {
+							region = sr:region_west_siberia
+							region = sr:region_east_siberia
+						}
+					}
+					NOT = {
+						this = root
+					}
+				}
+			}
+		}
+	}		
+	
+	on_complete = {
+		remove_variable = chance_var
+		remove_variable = target_country
+		remove_negative_modifiers_url = yes
+		trigger_event = {
+			id = russia.580
+			days = 0
+		}
+	}
+}
+
+slr_charred_land = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_historical_content
+	
+	possible = {
+		always = yes
+	}
+	
+	scripted_button = pacify_state_button #button to pacify state. having the national values decree will prioritize a state for pacification.
+	
+	complete = {
+		NOT = {
+			any_scope_state = {
+				has_modifier = slr_state_unrest
+			}
+		}
+	}
+}
+
+#beginning of south russian journals
+
+je_sru_rebellions = {
+	icon = "gfx/interface/icons/event_icons/south_russian_directory.dds"
+	group = je_group_historical_content
+	
+	possible = {
+		always = yes
+	}
+	
+	immediate = {
+		set_variable = {
+			name = rebellion_chance
+			value = 0
+		}
+	}
+	
+	on_monthly_pulse = {
+		effect = {
+			sru_rebellion_check = yes
+		}
+	}
+	
+	complete = {
+		custom_tooltip = {
+			text = all_states_below_fourth
+			NOT = {
+				any_scope_state = {
+					this.radical_fraction > 0.25
+				}
+			}
+		}
+	}
+}
+
+je_directorial_national_guard = {
+	icon = "gfx/interface/icons/event_icons/south_russian_directory.dds"
+	group = je_group_historical_content
+	
+	scripted_button = declare_national_emergency_button
+	scripted_button = declare_mobilized_guard_button
+	scripted_button = declare_national_vigilance_button
+	scripted_button = declare_national_prosperity_button
+	
+	possible = {
+		always = yes
+	}
+	
+	status_desc = {
+		first_valid = {
+			triggered_desc = { 
+				desc = national_emergency_declared_sru_desc
+				trigger = {
+					has_modifier = national_emergency_declared_sru
+				}
+			}
+			triggered_desc = { 
+				desc = mobilized_national_guard_sru_desc
+				trigger = {
+					has_modifier = mobilized_national_guard_sru
+				}
+			}
+			triggered_desc = { 
+				desc = national_vigilance_declared_sru_desc
+				trigger = {
+					has_modifier = national_vigilance_declared_sru
+				}
+			}
+			triggered_desc = { 
+				desc = national_prosperity_declared_sru_desc
+				trigger = {
+					has_modifier = national_prosperity_declared_sru
+				}
+			}
+		}
+	}
+	
+	complete = {
+		custom_tooltip = {
+			text = all_states_below_fourth
+			NOT = {
+				any_scope_state = {
+					this.radical_fraction > 0.25
+				}
+			}
+		}
+	}
+	
+	fail = {
+		NOT = {
+			has_law = law_type:law_national_guard
+		}
+	}
+}
+
+je_sru_directory_national_literacy_campaign = {
+	icon = "gfx/interface/icons/event_icons/south_russian_directory.dds"
+	group = je_group_historical_content
+	
+	possible = {
+		always = yes
+	}
+	
+	on_monthly_pulse = {
+		effect = {
+			reevaluate_university_bonus = yes
+		}
+	}
+}
+
+je_sru_directory_modernization_campaign = {
+	icon = "gfx/interface/icons/event_icons/south_russian_directory.dds"
+	group = je_group_historical_content
+	
+	possible = {
+		always = yes
+	}
+	
+	scripted_button = sru_setup_rail_system
+}
+
+je_sru_directory_rail_system = {
+	icon = "gfx/interface/icons/event_icons/south_russian_directory.dds"
+	group = je_group_historical_content
+	scripted_button = sru_increase_rail_system_funds
+	scripted_button = sru_decrease_rail_system_funds
+	scripted_progress_bar = sru_railway_funds
+	scripted_progress_bar = sru_rail_system_construction_efficiency
+	scripted_progress_bar = sru_rail_system_progress
+	
+	on_monthly_pulse = {
+		effect = {
+			scope:journal_entry = {
+				save_scope_value_as = {
+					name = rail_investment_level
+					value = "scripted_bar_progress(sru_railway_funds)"
+				}
+			}
+			rail_expense_and_rate_calc = yes
+			scope:journal_entry = {
+				save_scope_value_as = {
+					name = rail_efficiency
+					value = "scripted_bar_progress(sru_rail_system_construction_efficiency)"
+				}
+			}
+			rail_progress_checks = yes
+		}
+	}
+	
+	complete = {
+		je:je_sru_directory_rail_system = {
+			"scripted_bar_progress(sru_rail_system_progress)" >= 100
+		}
+	}
+	
+	on_complete = {
+		post_notification = sru_railway_built
+		remove_sru_directory_modifiers = yes
+		remove_variable = calculating_rail
+		if = {
+			limit = {
+				any_scope_state = {
+					has_decree = decree_road_maintenance
+				}
+			}
+			random_scope_state = {
+				limit = {
+					has_decree = decree_road_maintenance
+				}
+				create_building={
+					building="building_railway"
+					add_ownership={
+						country={
+							country="c:SRU"
+							levels=1
+						}
+					}
+				}
+			}
+		}
+		else = {
+			random_scope_state = {
+				create_building={
+					building="building_railway"
+					add_ownership={
+						country={
+							country="c:SRU"
+							levels=1
+						}
+					}
+				}
+			}
+		}
+	}		
+}
+
+je_generic_west_russian_unification = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	group = je_group_historical_content
+	scripted_button = declare_wr_unification_war
+	
+	is_shown_when_inactive = {
+		has_modifier = successors_of_area_westland
+	}
+	
+	possible = {
+		has_modifier = successors_of_area_westland
+	}
+	
+	on_monthly_pulse = {
+		effect = {
+			select_random_west_russian_opponent = yes
+			calculate_war_chance = yes
+		}
+	}
+
+	complete = {
+		NOT = {
+			any_country = {
+				NOT = {
+					this = root
+				}
+				has_modifier = successors_of_area_westland
+			}
+		}
+	}
+	
+	on_complete = {
+		remove_modifier = successors_of_area_westland
+		remove_variable = chance_var
+		remove_variable = target_country
+		trigger_event = {
+			id = russia.600
+			days = 3
+			popup = yes
+		}
+	}	
+	should_be_pinned_by_default = yes
+}
+
+je_battle_on_the_ice = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_historical_content
+	
+	immediate = {
+	}
+	
+	possible = {
+		always = yes
+	}
+	
+	modifiers_while_active = {
+		battle_on_the_ice_civilian_transport
+		battle_on_the_ice_high_morale
+	}
+	
+	complete = {
+		custom_tooltip = {
+			text = nov_won_battle_on_the_ice_tt
+			has_variable = recently_won_war
+			has_truce_with = c:moskowien
+		}
+	}
+	
+	fail = {
+		custom_tooltip = {
+			text = nov_lost_battle_on_the_ice_tt
+			has_variable = recently_won_war
+			has_truce_with = c:moskowien
+		}
+	}
+	
+	on_complete = {
+		add_modifier = {
+			name = triumphant_victory_novgorod
+			months = normal_modifier_time
+			is_decaying = yes
+		}
+	}
+	
+	on_fail = {
+		add_modifier = {
+			name = humiliating_defeat_novgorod
+			months = normal_modifier_time
+			is_decaying = yes
+		}
+	}
+}
+
+moskowien_invasion_of_novgorod = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_historical_content
+	scripted_button = invade_novgorod_button
+	
+	possible = {
+		always = yes
+	}
+	
+	complete = {
+		custom_tooltip = {
+			text = mosk_won_battle_on_the_ice_tt
+			has_variable = recently_won_war
+			has_truce_with = c:novgorod
+		}
+	}
+	
+	fail = {
+		custom_tooltip = {
+			text = mosk_failed_to_take_novgorod_tt
+			has_variable = recently_lost_war
+			has_truce_with = c:novgorod
+		}
+	}
+	
+	on_complete = {
+		add_modifier = {
+			name = triumphant_victory_moskowien
+			months = normal_modifier_time
+			is_decaying = yes
+		}
+	}
+	
+	on_fail = {
+		add_modifier = {
+			name = humiliating_defeat_moskowien
+			months = normal_modifier_time
+			is_decaying = yes
+		}
+	}
+}
+
+je_final_confrontation_russia = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	group = je_group_historical_content
+	
+	scripted_button = propose_unification_with_south_russia
+	scripted_button = propose_unification_with_west_russia
+	scripted_button = propose_unification_with_siberia
+	
+	immediate = {
+		random_country = {
+			limit = {
+				has_variable = siberian_unifier
+			}
+			save_scope_as = siberia_unifier_scope
+		}
+		root = {
+			set_variable = {
+				name = siberia_var
+				value = scope:siberia_unifier_scope
+			}
+		}
+	}
+	
+	possible = {
+		AND = {
+			OR = {
+				has_variable = siberian_unifier
+				c:WSR ?= this
+				c:SRU ?= this
+			}
+			any_country = {
+				has_variable = siberian_unifier
+			}
+			any_country = {
+				c:WSR ?= this
+			}
+			any_country = {
+				c:SRU ?= this
+			}
+		}
+	}
+	
+	is_shown_when_inactive = {
+		OR = {
+			has_variable = siberian_unifier
+			c:WSR ?= this
+			c:SRU ?= this
+		}
+	}
+	
+	complete = {
+		NOT = {
+			any_country = {
+				AND = {
+					NOT = {
+						this = root
+					}
+					OR = {
+						has_variable = siberian_unifier
+						c:WSR ?= this
+						c:SRU ?= this
+					}
+				}
+			}
+		}
+	}
+	
+	on_complete = {
+		remove_variable = siberia_var
+		if = {
+			limit = {
+				has_variable = siberian_unifier
+			}
+			remove_variable = siberian_unifier
+		}
+		trigger_event = {
+			id = russia.50
+			days = 7
+			popup = yes
+		}
+	}
+	should_be_pinned_by_default = yes
+}

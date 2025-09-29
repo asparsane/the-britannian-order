@@ -1,0 +1,17 @@
+﻿objective_russia_reborn = {
+	enabled_background = "gfx/interface/icons/objectives/hegemon_illu.dds"
+	icon = "gfx/interface/icons/objectives/hegemon.dds"
+	recommended_tags = { FER IRK DVM TTA MSK URL SLR SRU }
+}
+
+objective_unify_china = {
+	enabled_background = "gfx/interface/icons/objectives/hegemon_illu.dds"
+	icon = "gfx/interface/icons/objectives/hegemon.dds"
+	recommended_tags = { FGT QNG CFD }
+}
+
+objective_north_american_path = {
+	enabled_background = "gfx/interface/icons/objectives/hegemon_illu.dds"
+	icon = "gfx/interface/icons/objectives/hegemon.dds"
+	recommended_tags = { CRM BNA HNE }
+}

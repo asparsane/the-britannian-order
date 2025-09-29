@@ -1,0 +1,636 @@
+#fgt jes
+    je_the_national_era = {	
+        icon = "gfx/interface/icons/event_icons/fengtian_icons.dds"
+        group = je_group_historical_content
+
+        is_shown_when_inactive = {
+            this ?= c:FGT
+        }
+        
+        current_value = {
+            value = root.gdp
+        }
+        
+        modifiers_while_active = {
+            the_national_era
+        }
+        
+        complete = {
+            scope:journal_entry = {
+                is_goal_complete = yes
+            }
+        }
+    	progressbar = yes
+
+        goal_add_value = {
+            value = root.gdp
+            multiply = 0.3
+        }
+    
+        possible = {
+            this ?= c:FGT
+        }
+        
+        immediate = {
+        }
+
+        complete = {
+        }
+        should_be_pinned_by_default = yes
+    }
+
+#mgb jes
+    je_qing_peasant_revolt_je = {
+        icon = "gfx/interface/icons/event_icons/event_map.dds"
+        group = je_group_historical_content
+        scripted_button = qng_increase_military_participation
+        scripted_button = qng_decrease_military_participation
+        scripted_progress_bar = mgb_occupation_progress_bar
+        
+        immediate = {
+            c:MGB = {
+                save_scope_as = mgb_scope
+            }
+            c:FGT ?= {
+                post_notification = mgb_peasant_war
+            }
+            set_variable = {
+                name = participating_fraction
+                value = 0.1
+            }
+            set_variable = {
+                name = support_modifier 
+                value = 4
+            }
+            set_variable = {
+                name = army_involvement_fraction
+                value = 0.1
+            }
+            add_modifier = {
+                name = fighting_peasants_modifier
+            }
+            set_variable = {
+                name = occupation_change
+                value = 0
+            }
+            set_variable = {
+                name = rebel_strength_multiplier
+                value = 1
+            }
+            calculate_suppression = yes
+        }
+        
+        on_monthly_pulse = {
+            effect = {
+                remove_modifier = rebel_suppression_cost
+                calculate_suppression = yes
+                calculate_rebel_strength = yes
+                qng_calculate_combat = yes
+                qng_calculate_occupation = yes
+            }
+        }
+        should_be_pinned_by_default = yes
+        
+        fail = {
+            custom_tooltip = {
+                text = total_rebel_occupation
+                scope:journal_entry = {
+                    "scripted_bar_progress(mgb_occupation_progress_bar)" >= 80
+                }
+            }
+        }
+        on_fail = {
+            trigger_event = {
+                id = china_events.100
+                days = 7
+            }
+            remove_variable = radicalization_factor
+            remove_variable = participating_fraction
+            remove_variable = support_modifier
+            remove_variable = army_involvement_fraction
+            remove_variable = occupation_change
+            remove_variable = rebel_strength_multiplier
+            remove_modifier = fighting_peasants_modifier
+            remove_modifier = rebel_suppression_cost
+        }
+        complete = {
+            custom_tooltip = {
+                text = participating_less_than_1_percent
+                var:participating_fraction < 0.001
+            }
+        }
+        on_complete = {
+            remove_variable = radicalization_factor
+            remove_variable = participating_fraction
+            remove_variable = support_modifier
+            remove_variable = army_involvement_fraction
+            remove_variable = occupation_change
+            remove_variable = rebel_strength_multiplier
+            remove_modifier = fighting_peasants_modifier
+            remove_modifier = rebel_suppression_cost
+        }
+        
+        should_be_pinned_by_default = yes
+    }
+
+    je_mgb_local_unrest = {
+        icon = "gfx/interface/icons/event_icons/event_fire.dds"
+        group = je_group_historical_content
+        
+        is_shown_when_inactive = {
+            this = c:MGB
+        }
+        
+        possible = {
+            always = yes
+        }
+        
+        modifiers_while_active = {
+            mgb_unrest_modifier
+        }
+        
+        fail = {
+            custom_tooltip = {
+                text = radical_fraction_greater_than_10_percent
+                this.radical_fraction > 0.1
+            }
+        }
+        
+        on_fail = {
+            add_journal_entry = {
+                type = je_qing_peasant_revolt_je
+            }
+        }
+        
+        timeout = 3650
+    }
+
+#cfd jes
+    je_cfd_modernization_program = { #progressbar gives reform progress towards changing laws, boosting tech, etc
+        icon = "gfx/interface/icons/event_icons/event_trade.dds"
+        group = je_group_historical_content
+        scripted_progress_bar = cfd_modernization_progress_bar
+        scripted_button = CFDMODJE_tech_boost_button
+        scripted_button = CFDMODJE_expand_voting_rights
+        scripted_button = CFDMODJE_restructure_economy
+        scripted_button = CFDMODJE_empower_academia
+        scripted_button = CFDMODJE_modernize_bureaucracy
+        scripted_button = CFDMODJE_modernize_army
+        scripted_button = CFDMODJE_reject_reforms
+        
+        possible = {
+            always = yes
+        }
+
+        immediate = {
+            set_variable = {
+                name = british_intervention_chance
+                value = 0
+            }
+        }
+
+        on_monthly_pulse = {
+            effect = {
+                if = {
+                    limit = {
+                        var:british_intervention_chance > 1
+                    }
+                    change_variable = {
+                        name = british_intervention_chance
+                        subtract = 0.5
+                    }
+                }
+            }
+        }
+
+        complete = {
+            OR = {
+                AND = {
+                    exists = c:DOC
+                    c:DOC ?= {
+                        is_at_war = yes
+                    }
+                }
+                AND = {
+                    has_law = law_type:law_interventionism
+                    has_law = law_type:law_professional_army
+                    has_law = law_type:law_wealth_voting
+                    has_law = law_type:law_appointed_bureaucrats
+                }
+            }
+        }
+
+        on_complete = {
+            CFDMODJE_remove_vars = yes
+        }
+
+        fail = {
+            custom_tooltip = {
+                text = CFDMODJE_rejected_reforms
+                has_variable = CFDMODJE_rejected_reforms_var
+            }
+        }
+        on_fail = {
+            CFDMODJE_remove_vars = yes
+            add_modifier = {
+                name = CFDMODJE_intelligentsia_decreased_influence
+                days = normal_modifier_time
+            }
+            if = {
+                limit = {
+                    NOT = {
+                        is_at_war = yes
+                        is_diplomatic_play_committed_participant = yes
+                    }
+                }
+                add_journal_entry = {
+                    type = je_cfd_crush_liberals
+                }
+            }
+        }
+    }
+
+    je_cfd_crush_liberals = {
+        modifiers_while_active = {
+            CFDCL_suppressing_reform
+        }
+        scripted_button = CFDCL_launch_coup_button #launch a coup with the backing of greater britannia
+        complete = {
+            this = c:DOC
+        }
+        should_be_pinned_by_default = yes
+    }
+#doc jes
+    je_doc_pacify_west = { #this one lets you integrate the western 3 nations that were under CFD control
+        icon = "gfx/interface/icons/event_icons/event_map.dds"
+        group = je_group_historical_content
+        scripted_button = DOCPW_integrate_xia_button #this will send an event to xia demanding integration. A war will start if they refuse.
+        scripted_button = DOCPW_integrate_sichuan_button #you'll never guess what this does
+        scripted_button = DOCPW_integrate_yunnan_button
+        is_shown_when_inactive = {
+            c:DOC ?= this
+        }
+        possible = {
+            NOT = {
+                is_at_war = yes
+                is_diplomatic_play_committed_participant = yes
+            }
+        }
+        complete = {
+            custom_tooltip = {
+                text = pacified_west_tt
+                has_variable = demanded_scu
+                has_variable = demanded_xia
+                has_variable = demanded_yun
+            }
+        }
+        on_complete = {
+            remove_variable = demanded_scu
+            remove_variable = demanded_xia
+            remove_variable = demanded_yun
+        }
+    }
+#warlord jes
+    je_doc_warlord_clash = { #this one is for the post-doc warlords. It's given to the two largest warlords in China.
+        icon = "gfx/interface/icons/event_icons/event_miliary.dds"
+        group = je_group_historical_content
+        scripted_progress_bar = DWCJE_conflict_progress
+        scripted_button = DWCJE_minor_warlord_conflict
+        is_shown_when_inactive = {
+            is_chinese_warlord = yes
+        }
+        immediate = {
+            check_strongest_warlords = yes
+        }
+        possible = {
+            always = yes
+        }
+        on_monthly_pulse = {
+            effect = {
+                check_strongest_warlords = yes
+            }
+        }
+        fail = {
+            is_subject = yes
+        }
+    }
+#japan and co jes
+    je_guangdong_nexus = { # trade bonuses
+        icon = "gfx/interface/icons/event_icons/event_trade.dds"
+        group = je_group_historical_content
+        possible = {
+            always = yes
+        }
+        modifiers_while_active = {
+            GNJE_heart_of_sphere_trade
+        }
+        fail = {
+            custom_tooltip = {
+                text = GDGHC_corruption_exposed
+                has_variable = GDGHC_corruption_exposed
+            }
+        }
+    }
+    je_guangdong_hub_of_corruption = { #free income that britannia fall blows up
+        icon = "gfx/interface/icons/event_icons/event_trade.dds"
+        group = je_group_historical_content
+        possible = {
+            always = yes
+        }
+        immediate = {
+            add_modifier = {
+                name = GDGHC_laundering_modifier
+            }
+            set_variable = {
+                name = GDGHC_total_laundered_amount
+                value = 0
+            }
+        }
+        modifiers_while_active = {
+            GDGHC_bureaucratic_leniency
+            GDGHC_investment_laundering
+        }
+        #investment_pool_gross_income
+        on_weekly_pulse = {
+            effect = {
+                GDGHC_launder_money = yes
+            }
+        }
+        fail = {
+            custom_tooltip = {
+                text = GDGHC_corruption_exposed
+                has_variable = GDGHC_corruption_exposed
+            }
+        }
+        on_fail = {
+            trigger_event = {
+                id = china_events.181 #military rule instated
+                popup = yes
+                days = 7
+            }
+        }
+    }
+    je_tkk_the_conquest_of_china = {
+        icon = "gfx/interface/icons/event_icons/event_trade.dds"
+        group = je_group_historical_content
+        scripted_button = TKKCC_stage_false_flag_attack
+        scripted_button = TKKCC_full_scale_invasion
+        possible = {
+            always = yes
+        }
+        modifiers_while_active = {
+            TKKCOC_overseas_logistics
+        }
+        complete = {
+            
+        }
+        fail = {
+            custom_tooltip = {
+                text = lost_chinese_war_tt
+                has_variable = lost_invasion_of_china
+            }
+        }
+        on_fail = {
+            remove_variable = lost_invasion_of_china
+        }
+    }
+    je_tkk_zaibatsu_program = {
+        icon = "gfx/interface/icons/event_icons/event_trade.dds"
+        group = je_group_historical_content
+        scripted_button = jezp_construct_siberian_habitation_zone
+        scripted_button = jezp_construct_kansai_integrated_police_force
+        scripted_button = jezp_construct_southern_port_complex
+        possible = {
+            always = yes
+        }
+        immediate = {
+        }
+    }
+    #prestige projects
+        je_tkk_siberian_habitation_zone = { #spend vast resources on creating a habitable region in siberia
+            icon = "gfx/interface/icons/production_method_icons/home_workshops.dds"
+            group = je_group_historical_content
+            scripted_progress_bar = jeshz_colony_construction_progress_bar
+            scripted_progress_bar = tkk_public_discontent_progress_bar
+            scripted_button = tkk_delay_work_progress_button
+            scripted_button = jeshz_approve_additional_funds
+            possible = {
+                always = yes
+            }
+            modifiers_while_active = {
+                jeshz_constructing_megaprojects_modifier
+            }
+            immediate = {
+                random_scope_state = {
+                    limit = {
+                        region = sr:region_east_siberia
+                    }
+                    save_scope_as = colony_state
+                }
+                set_variable = {
+                    name = discontent_variable
+                    value = 0
+                }
+            }
+            on_weekly_pulse = {
+                effect = {
+                    je:je_tkk_siberian_habitation_zone = {
+                        save_scope_value_as = {
+                            name = discontent_amount_scope
+                            value = "scripted_bar_progress(tkk_public_discontent_progress_bar)"
+                        }
+                    }
+                    set_variable = {
+                        name = discontent_variable
+                        value = scope:discontent_amount_scope
+                    }
+                }
+            }
+            complete = {
+                custom_tooltip = {
+                    text = tkk_completed_construction_tt
+                    scope:journal_entry = {
+                        "scripted_bar_progress(jeshz_colony_construction_progress_bar)" >= 100
+                    }
+                }
+            }
+            on_complete = {
+                scope:colony_state = {
+                    add_modifier = {
+                        name = jeshz_siberian_colony_modifier
+                    }
+                }
+                remove_variable = discontent_variable
+            }
+        }
+        je_tkk_kansai_integrated_police_force = {#extensive police infrastructure within kansai
+            icon = "gfx\interface\icons\law_icons\dedicated_police.dds"
+            group = je_group_historical_content
+            scripted_progress_bar = jekipf_police_infrastructure_construction_bar
+            scripted_progress_bar = tkk_public_discontent_progress_bar
+            scripted_button = tkk_delay_work_progress_button
+            scripted_button = jekipf_approve_additional_funding_button
+            possible = {
+                always = yes
+            }
+            modifiers_while_active = {
+                jeshz_constructing_megaprojects_modifier
+            }
+            immediate = {
+                set_variable = {
+                    name = discontent_variable
+                    value = 0
+                }
+            }
+            on_weekly_pulse = {
+                effect = {
+                    je:je_tkk_kansai_integrated_police_force = {
+                        save_scope_value_as = {
+                            name = discontent_amount_scope
+                            value = "scripted_bar_progress(tkk_public_discontent_progress_bar)"
+                        }
+                    }
+                    set_variable = {
+                        name = discontent_variable
+                        value = scope:discontent_amount_scope
+                    }
+                }
+            }
+            complete = {
+                custom_tooltip = {
+                    text = tkk_completed_construction_tt
+                    scope:journal_entry = {
+                        "scripted_bar_progress(jekipf_police_infrastructure_construction_bar)" >= 100
+                    }
+                }
+            }
+            on_complete = {
+                if = {
+                    limit = {
+                        NOT = {
+                            has_law = law_type:law_dedicated_police
+                        }
+                    }
+                    activate_law = law_type:law_dedicated_police
+                }
+                this.capital = {
+                    add_modifier = {
+                        name = jekipf_kansai_integrated_police_modifier
+                    }
+                }
+                remove_variable = discontent_variable
+            }
+        }
+        je_tkk_southwest_port_complex = { #massive west post port complex to facilitate good transfer to guangdong, siberia, and indonesia
+            icon = "gfx\interface\icons\law_icons\modern_port.dds"
+            group = je_group_historical_content
+            scripted_progress_bar = jespc_port_complex_construction_bar
+            scripted_progress_bar = tkk_public_discontent_progress_bar
+            scripted_button = tkk_delay_work_progress_button
+            scripted_button = jespc_approve_additional_funding_button
+            possible = {
+                always = yes
+            }
+            modifiers_while_active = {
+                jeshz_constructing_megaprojects_modifier
+            }
+            immediate = {
+                set_variable = {
+                    name = discontent_variable
+                    value = 0
+                }
+            }
+            on_weekly_pulse = {
+                effect = {
+                    scope:journal_entry = {
+                        save_scope_value_as = {
+                            name = discontent_amount_scope
+                            value = "scripted_bar_progress(tkk_public_discontent_progress_bar)"
+                        }
+                    }
+                    set_variable = {
+                        name = discontent_variable
+                        value = scope:discontent_amount_scope
+                    }
+                }
+            }
+            complete = {
+                custom_tooltip = {
+                    text = tkk_completed_construction_tt
+                    scope:journal_entry = {
+                        "scripted_bar_progress(jespc_port_complex_construction_bar)" >= 100
+                    }
+                }
+                remove_variable = discontent_variable
+            }
+            on_complete = {
+                remove_variable = discontent_variable
+                s:STATE_KYUSHU = {
+                    add_modifier = {
+                        name = jespc_southwest_port_complex
+                    }
+                    region_state:TKK = {
+                        create_building={
+                            building="building_port"
+                            add_ownership={
+                                country={
+                                    country="c:TKK"
+                                    levels=4
+                                }
+                            }
+                            reserves=1
+                            activate_production_methods={ "pm_basic_port" }
+                        }
+                       create_building={
+                            building="building_shipyards"
+                            add_ownership={
+                                company={
+                                    type=company_arasaka
+                                    country="c:TKK"
+                                    levels=1
+                                }
+                            }
+                            reserves=1
+				            activate_production_methods={ "pm_basic_shipbuilding"  }
+                        }
+                    }
+                }
+            }
+        }
+    je_tkk_financial_crisis = { #temporary financial shock resulting from britannia's collapse
+        icon = "gfx/interface/icons/event_icons/event_fire.dds"
+        group = je_group_historical_content
+        scripted_button = jetfc_business_bailout
+        possible = {
+            always = yes
+        }
+        immediate = {
+            calculate_treasury_deplete_amount = yes
+			add_modifier = {
+				name = jetfc_financial_crisis_buildings
+				days = long_modifier_time
+			}
+        }
+        complete = {
+            has_modifier = jetfc_bailing_out_businesses
+        }
+        on_complete = {}
+        timeout = 1825
+        on_timeout = {
+            tkk_angry_corporations = yes
+        }
+        fail = {
+            in_default = yes
+        }
+        on_fail = {
+            tkk_angry_corporations = yes
+        }
+    }
+    je_tkk_accounting_fraud_crisis = { #arasaka's inability to distribute actual cash reveals that they have been paying contractors with fraudulent capital. this causes a grinding halt of the entire financial system
+        icon = "gfx/interface/icons/event_icons/event_fire.dds"
+        immediate = {
+            add_modifier = {
+                name = jeafc_financial_disaster_modifier
+            }
+        }
+    }

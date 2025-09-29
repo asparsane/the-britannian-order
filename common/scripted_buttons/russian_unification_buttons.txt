@@ -1,0 +1,2836 @@
+fer_revitalize_bureaucracy_button = {
+	name = "revitalize_bureaucracy_button"
+	desc = "revitalize_bureaucracy_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 15
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -12
+		}
+		if = {
+			limit = {
+				has_modifier = national_improvement_expenses
+			}
+			add = -6
+		}
+		if = {
+			limit = {
+				bureaucracy < 20
+			}
+			add = -7
+		}
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -7
+		}
+	}
+
+	possible = {
+		bureaucracy > 0
+		NOT = {
+			has_modifier = political_strife
+		}
+		has_modifier = political_turmoil
+	}
+
+	effect = {
+		set_variable = {
+			name = initiative_recent
+			days = short_modifier_time
+		}
+		remove_modifier = political_turmoil
+		add_modifier = {
+			name = political_strife
+			days = normal_modifier_time
+			is_decaying = yes
+		}
+	}
+}
+
+fer_literacy_drive_button = {
+	name = "literacy_drive_button"
+	desc = "literacy_drive_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 12
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -5
+		}
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -3
+		}
+		if = {
+			limit = {
+				has_modifier = national_improvement_expenses
+			}
+			add = -3
+		}
+		if = {
+			limit = {
+				bureaucracy < 20
+			}
+			add = -4
+		}
+	}
+
+	possible = {
+		bureaucracy > 0
+		NOT = {
+			has_variable = var_literacy_drive
+		}
+		NOT = {
+			has_variable = var_initiative_cooldown
+		}
+	}
+
+	effect = {
+		set_variable = {
+			name = initiative_recent
+			days = short_modifier_time
+		}
+		set_variable = {
+			name = var_initiative_cooldown
+			days = 30
+		}
+		set_variable = {
+			name = var_literacy_drive
+		}
+		add_modifier = {
+			name = national_improvement_expenses
+			days = normal_modifier_time
+		}
+		add_modifier = {
+			name = literacy_drive_modifier
+			days = normal_modifier_time
+		}
+		remove_modifier = low_literacy_modifier
+		add_modifier = {
+			name = low_literacy_modifier
+			days = short_modifier_time
+			is_decaying = yes
+		}
+	}
+}
+
+fer_improving_healthcare_button = {
+	name = "improving_healthcare_button"
+	desc = "improving_healthcare_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 15
+		if = {
+			limit = {
+				has_modifier = national_improvement_expenses
+			}
+			add = -5
+		}
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -6
+		}
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -4
+		}
+		if = {
+			limit = {
+				bureaucracy < 20
+			}
+			add = -5
+		}
+	}
+
+	possible = {
+		bureaucracy > 0
+		NOT = {
+			has_variable = var_improving_healthcare
+		}
+		NOT = {
+			has_variable = var_initiative_cooldown
+		}
+	}
+
+	effect = {
+		set_variable = {
+			name = var_initiative_cooldown
+			days = 30
+		}
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -40
+		}
+		set_variable = {
+			name = var_improving_healthcare
+		}
+		add_modifier = {
+			name = national_improvement_expenses
+			days = normal_modifier_time
+		}
+		add_modifier = {
+			name = improving_healthcare_modifier 
+			days = normal_modifier_time
+		}
+		remove_modifier = underdeveloped_healthcare_modifier
+		add_modifier = {
+			name = underdeveloped_healthcare_modifier
+			days = short_modifier_time
+			is_decaying = yes
+		}
+	}
+}
+
+fer_increasing_population_button = {
+	name = "increasing_population_button"
+	desc = "increasing_population_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 12
+		if = {
+			limit = {
+				has_modifier = national_improvement_expenses
+			}
+			add = -4
+		}
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -8
+		}
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -5
+		}
+		if = {
+			limit = {
+				bureaucracy < 20
+			}
+			add = -5
+		}
+	}
+
+	possible = {
+		bureaucracy > 0
+		NOT = {
+			has_variable = var_increasing_population
+		}
+		NOT = {
+			has_variable = var_initiative_cooldown
+		}
+	}
+
+	effect = {
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -40
+		}
+		set_variable = {
+			name = var_initiative_cooldown
+			days = 30
+		}
+		set_variable = {
+			name = var_increasing_population
+		}
+		add_modifier = {
+			name = national_improvement_expenses
+			days = normal_modifier_time
+		}
+		add_modifier = {
+			name = increasing_population_modifier 
+			days = normal_modifier_time
+		}
+		remove_modifier = desolate_wasteland_modifier
+		add_modifier = {
+			name = desolate_wasteland_modifier
+			days = short_modifier_time
+			is_decaying = yes
+		}
+	}
+}
+
+fer_alleviating_poverty_button = {
+	name = "alleviating_poverty_button"
+	desc = "alleviating_poverty_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 20
+		if = {
+			limit = {
+				has_modifier = national_improvement_expenses
+			}
+			add = -15
+		}
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -8
+		}
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -12
+		}
+		if = {
+			limit = {
+				bureaucracy < 20
+			}
+			add = -10
+		}
+	}
+
+	possible = {
+		bureaucracy > 0
+		NOT = {
+			has_variable = var_alleviating_poverty
+		}
+		NOT = {
+			has_variable = var_initiative_cooldown
+		}
+	}
+
+	effect = {
+		set_variable = {
+			name = initiative_recent
+			days = 30
+		}
+		set_variable = {
+			name = var_initiative_cooldown
+			days = 30
+		}
+		set_variable = {
+			name = var_alleviating_poverty
+		}
+		add_modifier = {
+			name = national_improvement_expenses
+			days = normal_modifier_time
+		}
+		add_modifier = {
+			name = alleviating_poverty_modifier 
+			days = normal_modifier_time
+		}
+		remove_modifier = widespread_poverty_modifier
+		add_modifier = {
+			name = widespread_poverty_modifier
+			days = short_modifier_time
+			is_decaying = yes
+		}
+	}
+}
+
+fer_expanding_industry_button = {
+	name = "expanding_industry_button"
+	desc = "expanding_industry_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 14
+		if = {
+			limit = {
+				has_modifier = national_improvement_expenses
+			}
+			add = -10
+		}
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -7
+		}
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -6
+		}
+		if = {
+			limit = {
+				has_modifier = national_improvement_expenses
+			}
+			add = -7
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_variable = var_expanding_industry
+		}
+		NOT = {
+			has_variable = var_initiative_cooldown
+		}
+	}
+
+	effect = {
+		set_variable = {
+			name = var_initiative_cooldown
+			days = 30
+		}
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -40
+		}
+		set_variable = {
+			name = var_expanding_industry
+		}
+		add_modifier = {
+			name = national_improvement_expenses
+			multiplier = 0.8
+			days = normal_modifier_time
+		}
+		add_modifier = {
+			name = expanding_industry_modifier
+			days = normal_modifier_time
+		}
+	}
+}
+
+fer_improving_agriculture_button = {
+	name = "improving_agriculture_button"
+	desc = "improving_agriculture_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 18
+		if = {
+			limit = {
+				has_modifier = national_improvement_expenses
+			}
+			add = -8
+		}
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -10
+		}
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -10
+		}
+		if = {
+			limit = {
+				bureaucracy < 20
+			}
+			add = -10
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_variable = var_improved_agriculture
+		}
+		NOT = {
+			has_variable = var_initiative_cooldown
+		}
+	}
+
+	effect = {
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -40
+		}
+		set_variable = {
+			name = var_initiative_cooldown
+			days = 30
+		}
+		set_variable = {
+			name = var_improved_agriculture
+		}
+		add_modifier = {
+			name = national_improvement_expenses
+			multiplier = 0.5
+			days = normal_modifier_time
+		}
+		add_modifier = {
+			name = improvements_in_agriculture_modifier 
+			days = normal_modifier_time
+		}
+	}
+}
+
+fer_develop_agricultural_technology_button = {
+	name = "fer_develop_agricultural_technology_button"
+	desc = "fer_develop_agricultural_technology_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 14
+		if = {
+			limit = {
+				has_modifier = national_improvement_expenses
+			}
+			add = -5
+		}
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -7
+		}
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -5
+		}
+		if = {
+			limit = {
+				bureaucracy < 20
+			}
+			add = -5
+		}
+	}
+
+	possible = {
+		bureaucracy > 0
+		NOT = {
+			has_variable = var_agriculture_tech
+		}
+		NOT = {
+			has_variable = var_initiative_cooldown
+		}
+	}
+
+	effect = {
+		set_variable = {
+			name = var_initiative_cooldown
+			days = 30
+		}
+		set_variable = {
+			name = initiative_recent
+			days = short_modifier_time
+		}
+		set_variable = {
+			name = var_agriculture_tech
+		}
+		add_modifier = {
+			name = national_improvement_expenses
+			multiplier = 0.4
+			days = normal_modifier_time
+		}
+		if = {
+			limit = {
+				can_research = improved_fertilizer
+			}
+			add_technology_progress = { progress = 3000 technology = improved_fertilizer }
+		}
+		if = {
+			limit = {
+				can_research = threshing_machine
+			}
+			add_technology_progress = { progress = 3000 technology = threshing_machine }
+		}
+	}
+}
+
+fer_develop_infrastructure_technology_button = {
+	name = "develop_infrastructure_technology_button"
+	desc = "develop_infrastructure_technology_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 14
+		if = {
+			limit = {
+				has_modifier = national_improvement_expenses
+			}
+			add = -4
+		}
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -10
+		}
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -8
+		}
+		if = {
+			limit = {
+				bureaucracy < 20
+			}
+			add = -10
+		}
+	}
+
+	possible = {
+		bureaucracy > 0
+		NOT = {
+			has_variable = var_developed_infra_tech
+		}
+		NOT = {
+			has_variable = var_initiative_cooldown
+		}
+	}
+
+	effect = {
+		set_variable = {
+			name = var_initiative_cooldown
+			days = 30
+		}
+		set_variable = {
+			name = initiative_recent
+			days = short_modifier_time
+		}
+		set_variable = {
+			name = var_developed_infra_tech
+		}
+		add_modifier = {
+			name = national_improvement_expenses
+			multiplier = 0.6
+			days = normal_modifier_time
+		}
+		if = {
+			limit = {
+				can_research = atmospheric_engine
+			}
+			add_technology_progress = { progress = 3500 technology = atmospheric_engine }
+		}
+		if = {
+			limit = {
+				can_research = mechanical_tools
+			}
+			add_technology_progress = { progress = 3500 technology = mechanical_tools }
+		}
+		if = {
+			limit = {
+				can_research = railways
+			}
+			add_technology_progress = { progress = 4500 technology = railways }
+		}
+		if = {
+			limit = {
+				can_research = steel_railway_cars
+			}
+			add_technology_progress = { progress = 4500 technology = steel_railway_cars }
+		}
+	}
+}
+
+fer_reorganize_industrial_practices_button = {
+	name = "fer_reorganize_industrial_practices_button"
+	desc = "fer_reorganize_industrial_practices_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 16
+		if = {
+			limit = {
+				has_modifier = national_improvement_expenses
+			}
+			add = -10
+		}
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -12
+		}
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -6
+		}
+		if = {
+			limit = {
+				bureaucracy < 20
+			}
+			add = -6
+		}
+	}
+
+	possible = {
+		bureaucracy > 0
+		NOT = {
+			has_variable = var_reorganized_industrial_practices
+		}
+		NOT = {
+			has_variable = var_initiative_cooldown
+		}
+	}
+
+	effect = {
+		set_variable = {
+			name = var_initiative_cooldown
+			days = 30
+		}
+		set_variable = {
+			name = initiative_recent
+			days = short_modifier_time
+		}
+		set_variable = {
+			name = var_reorganized_industrial_practices
+		}
+		add_modifier = {
+			name = reorganizing_industrial_practices
+			days = normal_modifier_time
+		}
+		add_modifier = {
+			name = national_improvement_expenses
+			multiplier = 0.4
+			days = normal_modifier_time
+		}
+	}
+}
+
+fer_far_eastern_infrastructure_button = {
+	name = "fer_far_eastern_infrastructure_button"
+	desc = "fer_far_eastern_infrastructure_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 18
+		if = {
+			limit = {
+				has_modifier = national_improvement_expenses
+			}
+			add = -9
+		}
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -9
+		}
+		if = {
+			limit = {
+				has_variable = initiative_recent
+			}
+			add = -8
+		}
+		if = {
+			limit = {
+				bureaucracy < 20
+			}
+			add = -10
+		}
+	}
+
+	possible = {
+		bureaucracy > 0
+		has_technology_researched = railways
+		NOT = {
+			has_variable = var_buryatian_railway
+		}
+		NOT = {
+			has_variable = var_initiative_cooldown
+		}
+	}
+
+	effect = {
+		set_variable = {
+			name = var_initiative_cooldown
+			days = 30
+		}
+		set_variable = {
+			name = initiative_recent
+			months = short_modifier_time
+		}
+		set_variable = {
+			name = var_buryatian_railway
+		}
+		random_state = {
+			limit = {
+				state_region = s:STATE_BURYATIA
+			}
+			add_modifier = {
+                name = fer_infra_modifier
+            }
+		}
+		random_state = {
+			limit = {
+				state_region = s:STATE_CHITA
+			}
+			add_modifier = {
+                name = fer_infra_modifier
+            }
+		}
+		add_modifier = {
+			name = national_improvement_expenses
+			days = long_modifier_time
+		}
+	}
+}
+
+fer_stop_preparing_button = {
+	name = "fer_stop_preparing_button"
+	desc = "fer_stop_preparing_button_desc"
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = 10
+		}
+		if = {
+			limit = {
+				bureaucracy < 20
+			}
+			add = 15
+		}
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = 25
+		}
+	}
+
+	possible = {
+		has_modifier = fer_war_planning
+	}
+
+	effect = {
+		remove_modifier = fer_war_planning
+	}
+}
+
+fer_resume_preparing_button = {
+	name = "fer_resume_preparing_button"
+	desc = "fer_resume_preparing_button_desc"
+
+	ai_chance = {
+		value = 100
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -100
+		}
+	}
+
+	possible = {
+		AND = {
+			NOT = {
+				has_modifier = fer_war_planning
+			}
+			has_healthy_economy = yes
+			is_at_war = no
+		}
+	}
+
+	effect = {
+		add_modifier = {
+			name = fer_war_planning
+		}
+	}
+}
+
+fer_start_war_button = {
+	name = "fer_start_war_button"
+	desc = "fer_start_war_button_desc"
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -5
+		}
+		add = var:chance_var
+		scope:journal_entry = {
+			add = {
+				value = "scripted_bar_progress(fer_unification_war_progress_bar)"
+				multiply = 0.07
+			}
+		}
+	}
+
+	possible = {
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+
+	effect = {
+		scope:journal_entry = {
+			save_scope_value_as = {
+				name = planning_amount
+				value = "scripted_bar_progress(fer_unification_war_progress_bar)"
+			}
+			add_progress = {
+				value = -100 name = fer_unification_war_progress_bar
+			}
+		}
+		add_modifier = {
+			name = fer_war_planning_bonus
+			months = 12
+			multiplier = scope:planning_amount
+		}
+		if = {
+			limit = {
+				has_modifier = fer_war_planning 
+			}
+			remove_modifier = fer_war_planning
+		}
+		create_diplomatic_play = {
+			name = siberian_unification_war
+			target_country = var:target_country
+			type = dp_unify_russia
+			escalation = 60
+			target_state = "var:target_country.capital".region_state:"var:target_country"
+			add_war_goal = {
+				holder = var:target_country
+				target_country = this
+				type = annex_country
+			}
+		}
+	}
+}
+
+#end of fer journals
+
+dvm_crusades = { # starts a crusade against another country
+	name = "dvm_impose_gods_will"
+	desc = "dvm_impose_gods_will_desc"
+
+	ai_chance = {
+		value = 20
+		add = var:chance_var
+	}
+	
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	effect = {
+		create_diplomatic_play = {
+			name = siberian_unification_war
+			target_country = var:target_country
+			type = dp_unify_russia
+			escalation = 60
+			target_state = "var:target_country.capital".region_state:"var:target_country"
+			add_war_goal = {
+				holder = var:target_country
+				target_country = this
+				type = annex_country
+			}
+		}
+		if = {
+			limit = {
+				is_diplomatic_play_committed_participant = yes
+			}
+			add_modifier = {
+				name = crusade_bonus
+				months = 4
+			}
+		}
+	}
+}
+
+small_bribe_efforts = { # small bribe effort to gain legitimacy. 
+	name = "small_bribe_efforts"
+	desc = "small_bribe_efforts_desc"
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -100
+		}
+		if = {
+			limit = {
+				has_modifier = irk_bribe_costs
+			}
+			add = -70
+		}
+		add = {
+			value = 48
+			subtract = government_legitimacy
+			multiply = 10
+		}
+	}
+	
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = irk_bribe_cooldown
+			NOT = {
+				has_variable = irk_bribe_cooldown
+			}
+		}
+	}
+	
+	effect = {
+		custom_tooltip = {
+			text = legitimacy_increase_1_2
+			change_variable = {
+				name = legitimacy_value
+				add = 1.2
+			}
+		}
+		set_variable = {
+			name = irk_bribe_cooldown
+			months = 2.5
+		}
+		add_modifier = {
+			name = irk_bribe_costs
+			days = short_modifier_time
+		}
+	}
+}
+
+medium_bribe_efforts = { # medium bribe effort to gain legitimacy.
+	name = "medium_bribe_efforts"
+	desc = "medium_bribe_efforts_desc"
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -100
+		}
+		if = {
+			limit = {
+				has_modifier = irk_bribe_costs
+			}
+			add = -50
+		}
+		add = {
+			value = 45
+			subtract = government_legitimacy
+			multiply = 20
+		}
+	}
+	
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = irk_bribe_cooldown
+			NOT = {
+				has_variable = irk_bribe_cooldown
+			}
+		}
+	}
+	
+	effect = {
+		custom_tooltip = {
+			text = legitimacy_increase_1_6
+			change_variable = {
+				name = legitimacy_value
+				add = 1.6
+			}
+		}
+		set_variable = {
+			name = irk_bribe_cooldown
+			months = 4
+		}
+		add_modifier = {
+			name = irk_bribe_costs
+			days = short_modifier_time
+			multiplier = 1.4
+		}
+	}
+}
+
+start_uni_war_irk = { # starts unification war for irk, get some legitimacy
+	name = "start_uni_war_irk"
+	desc = "start_uni_war_irk_desc"
+
+	ai_chance = {
+		value = 2
+		if = {
+			limit = {
+				government_legitimacy <= 42
+			}
+			add = 3
+		}
+		if = {
+			limit = {
+				government_legitimacy <= 44
+			}
+			add = 7
+		}
+		add = var:chance_var
+	}
+	
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	effect = {
+		create_diplomatic_play = {
+			name = siberian_unification_war
+			target_country = var:target_country
+			type = dp_unify_russia
+			escalation = 60
+			target_state = "var:target_country.capital".region_state:"var:target_country"
+			add_war_goal = {
+				holder = var:target_country
+				target_country = this
+				type = annex_country
+			}
+		}
+		if = {
+			limit = {
+				is_diplomatic_play_committed_participant = yes
+			}
+			custom_tooltip = {
+				text = legitimacy_increase_2
+				change_variable = {
+					name = legitimacy_value
+					add = 2
+				}
+			}
+		}
+	}
+}
+
+sell_iron_mines_irk = {
+    name = "sell_iron_mines_irk"
+	desc = "sell_iron_mines_irk_desc"
+    
+    ai_chance = {
+        value = 20
+        if = {
+            limit = {
+                has_healthy_economy = no
+            }
+            add = 40
+        }
+        if = {
+            limit = {
+                taking_loans = yes
+            add = 20
+        }
+    }
+    
+    visible = {
+        NOT = {
+            has_journal_entry = irk_the_tsar_of_siberia
+        }
+    }
+    
+    possible = {
+        any_scope_state
+            limit = {
+				has_potential_resource = bg_iron_mining
+			}
+        }
+        NOT = {
+            has_modifier = resource_sales_irk
+        }
+    }
+    
+    effect = {
+        random_country = {
+            limit = {
+                country_rank >= rank_value:great_power
+                NOT = {
+                    has_modifier = funding_irk_resource_industry
+                }
+            }
+            trigger_event = {
+                id = russia.504
+                days = 3
+            }
+        }
+    }
+}
+
+sell_coal_mines_irk = {
+    name = "sell_coal_mines_irk"
+	desc = "sell_coal_mines_irk_desc"
+    
+    ai_chance = {
+        value = 20
+        if = {
+            limit = {
+                has_healthy_economy = no
+            }
+            add = 40
+        }
+        if = {
+            limit = {
+                taking_loans = yes
+            add = 20
+        }
+    }
+    
+    visible = {
+        NOT = {
+            has_journal_entry = irk_the_tsar_of_siberia
+        }
+    }
+    
+    possible = {
+        any_scope_state
+            limit = {
+				has_potential_resource = bg_coal_mining
+			}
+        }
+        NOT = {
+            has_modifier = resource_sales_irk
+        }
+    }
+    
+    effect = {
+        random_country = {
+            limit = {
+                country_rank >= rank_value:great_power
+                NOT = {
+                    has_modifier = funding_irk_resource_industry
+                }
+            }
+            trigger_event = {
+                id = russia.506
+                days = 3
+            }
+        }
+    }
+}
+
+sell_sulfur_mines_irk = {
+    name = "sell_sulfur_mines_irk"
+	desc = "sell_sulfur_mines_irk_desc"
+    
+    ai_chance = {
+        value = 20
+        if = {
+            limit = {
+                has_healthy_economy = no
+            }
+            add = 40
+        }
+        if = {
+            limit = {
+                taking_loans = yes
+            add = 20
+        }
+    }
+    
+    visible = {
+        NOT = {
+            has_journal_entry = irk_the_tsar_of_siberia
+        }
+    }
+    
+    possible = {
+        any_scope_state
+            limit = {
+				has_potential_resource = bg_sulfur_mining
+			}
+        }
+        NOT = {
+            has_modifier = resource_sales_irk
+        }
+    }
+    
+    effect = {
+        random_country = {
+            limit = {
+                country_rank >= rank_value:great_power
+                NOT = {
+                    has_modifier = funding_irk_resource_industry
+                }
+            }
+            trigger_event = {
+                id = russia.507
+                days = 3
+            }
+        }
+    }
+}
+
+sell_lead_mines_irk = {
+    name = "sell_lead_mines_irk"
+	desc = "sell_lead_mines_irk_desc"
+    
+    ai_chance = {
+        value = 20
+        if = {
+            limit = {
+                has_healthy_economy = no
+            }
+            add = 40
+        }
+        if = {
+            limit = {
+                taking_loans = yes
+            add = 20
+        }
+    }
+    
+    visible = {
+        NOT = {
+            has_journal_entry = irk_the_tsar_of_siberia
+        }
+    }
+    
+    possible = {
+        any_scope_state
+            limit = {
+				has_potential_resource = sell_lead_mines_irk
+			}
+        }
+        NOT = {
+            has_modifier = resource_sales_irk
+        }
+    }
+    
+    effect = {
+        random_country = {
+            limit = {
+                country_rank >= rank_value:great_power
+                NOT = {
+                    has_modifier = funding_irk_resource_industry
+                }
+            }
+            trigger_event = {
+                id = russia.508
+                days = 3
+            }
+        }
+    }
+}
+
+start_uni_war_generic = { # generic unification war
+	name = "start_uni_war_generic"
+	desc = "start_uni_war_generic_desc"
+
+	ai_chance = {
+		value = 5
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -5
+		}
+		add = var:chance_var
+	}
+	
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	effect = {
+		create_diplomatic_play = {
+			name = siberian_unification_war
+			target_country = var:target_country
+			type = dp_unify_russia
+			escalation = 60
+			target_state = "var:target_country.capital".region_state:"var:target_country"
+			add_war_goal = {
+				holder = var:target_country
+				target_country = this
+				type = annex_country
+			}
+		}
+	}
+}
+
+irk_propose_investment_portfolio_button = {
+	name = "irk_propose_investment_portfolio_button"
+	desc = "irk_propose_investment_portfolio_button_desc"
+	
+	visible = {
+		c:IRK ?= this
+	}
+	
+	possible = {
+		AND = {
+			NOR = {
+				has_modifier = recently_asked_investments
+				has_modifier = irk_foreign_investments
+			}
+			any_country = {
+				AND = {
+					country_rank >= rank_value:great_power
+					NOR = {
+						has_variable = refused_irk_investments
+						has_variable = accepted_irk_investments
+					}
+				}
+			}
+		}
+	}
+	
+	ai_chance = {
+		value = 100
+	}
+	
+	effect = {
+		add_modifier = {
+			name = recently_asked_investments
+			months = 1.5
+		}
+		random_country = {
+			limit = {
+				AND = {
+					country_rank >= rank_value:great_power
+					NOR = {
+						has_variable = refused_irk_investments
+						has_variable = accepted_irk_investments
+					}
+				}
+			}
+			trigger_event = russia.502 # asked for investments
+		}
+	}
+}
+
+#ural buttons
+url_defensive_exercises = {
+	name = "url_defensive_exercises"
+	desc = "url_defensive_exercises_desc"
+
+	visible = {
+		has_modifier = ural_shattered_military_organization
+	}
+
+	ai_chance = {
+		value = 15
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -15
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = ural_improving_military
+		}
+		NOT = {
+			has_modifier = ural_reorganizing_defense
+		}
+	}
+
+	effect = {
+		remove_modifier = ural_shattered_military_organization
+		add_modifier = {
+			name = ural_reorganizing_defense
+			months = 6
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = ural_broken_military_organization
+		}
+		add_modifier = {
+			name = ural_improving_military
+			months = 4
+		}
+	}
+}
+
+url_offensive_exercises = {
+	name = "url_offensive_exercises"
+	desc = "url_offensive_exercises_desc"
+
+	visible = {
+		has_modifier = ural_shattered_fighting_spirit
+	}
+
+	ai_chance = {
+		value = 13
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -13
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = ural_improving_military
+		}
+		NOT = {
+			has_modifier = ural_reorganizing_offense
+		}
+	}
+
+	effect = {
+		remove_modifier = ural_shattered_fighting_spirit
+		add_modifier = {
+			name = ural_reorganizing_offense
+			months = 6
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = ural_broken_fighting_spirit
+		}
+		add_modifier = {
+			name = ural_improving_military
+			months = 4
+		}
+	}
+}
+
+url_logistical_training = {
+	name = "url_logistical_training"
+	desc = "url_logistical_training_desc"
+
+	visible = {
+		has_modifier = ural_shattered_logistics
+	}
+
+	ai_chance = {
+		value = 14
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -14
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = ural_improving_military
+		}
+		NOT = {
+			has_modifier = ural_reorganizing_logistics
+		}
+	}
+
+	effect = {
+		remove_modifier = ural_shattered_logistics
+		add_modifier = {
+			name = ural_reorganizing_logistics
+			months = 6
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = ural_broken_logistics
+		}
+		add_modifier = {
+			name = ural_improving_military
+			months = 4
+		}
+	}
+}
+
+url_standardize_offense = {
+	name = "url_standardize_offense"
+	desc = "url_standardize_offense_desc"
+
+	visible = {
+		has_modifier = ural_broken_fighting_spirit
+	}
+
+	ai_chance = {
+		value = 13
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -13
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = ural_improving_military
+		}
+		NOT = {
+			has_modifier = ural_reorganizing_offense
+		}
+	}
+
+	effect = {
+		remove_modifier = ural_broken_fighting_spirit
+		add_modifier = {
+			name = ural_reorganizing_offense
+			months = 6
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = ural_recovering_fighting_spirit
+		}
+		add_modifier = {
+			name = ural_improving_military
+			multiplier = 1.2
+			months = 6
+		}
+	}
+}
+
+url_standardize_defense = {
+	name = "url_standardize_defense"
+	desc = "url_standardize_defense_desc"
+
+	visible = {
+		has_modifier = ural_broken_military_organization
+	}
+
+	ai_chance = {
+		value = 15
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -15
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = ural_improving_military
+		}
+		NOT = {
+			has_modifier = ural_reorganizing_defense
+		}
+	}
+
+	effect = {
+		remove_modifier = ural_broken_military_organization
+		add_modifier = {
+			name = ural_reorganizing_defense
+			months = 6
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = ural_recovering_military_organization
+		}
+		add_modifier = {
+			name = ural_improving_military
+			multiplier = 1.2
+			months = 6
+		}
+	}
+}
+
+url_standardize_logistics = {
+	name = "url_standardize_logistics"
+	desc = "url_standardize_logistics_desc"
+
+	visible = {
+		has_modifier = ural_broken_logistics
+	}
+
+	ai_chance = {
+		value = 14
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -14
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = ural_improving_military
+		}
+		NOT = {
+			has_modifier = ural_reorganizing_logistics
+		}
+	}
+
+	effect = {
+		remove_modifier = ural_broken_logistics
+		add_modifier = {
+			name = ural_reorganizing_logistics
+			months = 6
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = ural_recovering_logistics
+		}
+		add_modifier = {
+			name = ural_improving_military
+			multiplier = 1.2
+			months = 6
+		}
+	}
+}
+
+url_modernize_defensive_methods = {
+	name = "url_modernize_defensive_methods"
+	desc = "url_modernize_defensive_methods_desc"
+
+	visible = {
+		has_modifier = ural_recovering_military_organization
+	}
+
+	ai_chance = {
+		value = 15
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -15
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = ural_improving_military
+		}
+		NOT = {
+			has_modifier = ural_reorganizing_defense
+		}
+	}
+
+	effect = {
+		remove_modifier = ural_recovering_military_organization
+		add_modifier = {
+			name = ural_reorganizing_defense
+			months = 6
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = ural_renewed_military_organization
+		}
+		add_modifier = {
+			name = ural_improving_military
+			multiplier = 1.6
+			months = 8
+		}
+	}
+}
+
+url_modernize_offensive_methods = {
+	name = "url_modernize_offensive_methods"
+	desc = "url_modernize_offensive_methods_desc"
+
+	visible = {
+		has_modifier = ural_recovering_fighting_spirit
+	}
+
+	ai_chance = {
+		value = 13
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -13
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = ural_improving_military
+		}
+		NOT = {
+			has_modifier = ural_reorganizing_offense
+		}
+	}
+
+	effect = {
+		remove_modifier = ural_recovering_fighting_spirit
+		add_modifier = {
+			name = ural_reorganizing_offense
+			months = 6
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = ural_renewed_fighting_spirit
+		}
+		add_modifier = {
+			name = ural_improving_military
+			multiplier = 1.6
+			months = 8
+		}
+	}
+}
+
+url_modernize_supply_lines = {
+	name = "url_modernize_supply_lines"
+	desc = "url_modernize_supply_lines_desc"
+
+	visible = {
+		has_modifier = ural_recovering_logistics
+	}
+
+	ai_chance = {
+		value = 14
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -14
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = ural_improving_military
+		}
+		NOT = {
+			has_modifier = ural_reorganizing_offense
+		}
+	}
+
+	effect = {
+		remove_modifier = ural_recovering_logistics
+		add_modifier = {
+			name = ural_reorganizing_logistics
+			months = 6
+			is_decaying = yes
+		}
+		add_modifier = {
+			name = ural_renewed_logistics
+		}
+		add_modifier = {
+			name = ural_improving_military
+			multiplier = 1.6
+			months = 8
+		}
+	}
+}
+
+start_uni_war_ural = { # start uni war for url
+	name = "start_uni_war_ural"
+	desc = "start_uni_war_ural_desc"
+
+	ai_chance = {
+		value = 5
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -5
+		}
+		add = {
+			value = var:chance_var
+		}
+	}
+	
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	effect = {
+		create_diplomatic_play = {
+			name = siberian_unification_war
+			target_country = var:target_country
+			type = dp_unify_russia
+			escalation = 60
+			target_state = "var:target_country.capital".region_state:"var:target_country"
+			add_war_goal = {
+				holder = var:target_country
+				target_country = this
+				type = annex_country
+			}
+		}
+	}
+}
+
+#tta buttons
+
+military_suppression = {
+	name = "military_suppression"
+	desc = "military_suppression_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				authority <= 100
+			}
+			add = -15
+		}
+		if = {
+			limit = {
+				je:je_glove_and_fist = {
+					"scripted_bar_progress(tta_omsk_sympathies)" >= 50
+				}
+			}
+			add = 20
+		}
+		if = {
+			limit = {
+				je:je_glove_and_fist = {
+					"scripted_bar_progress(tta_omsk_sympathies)" >= 70
+				}
+			}
+			add = 40
+		}
+		if = {
+			limit = {
+				je:je_glove_and_fist = {
+					"scripted_bar_progress(tta_omsk_sympathies)" >= 90
+				}
+			}
+			add = 60
+		}
+		if = {
+			limit = {
+				authority <= 50
+			}
+			add = -10
+		}
+	}
+
+	possible = {
+		authority > 0
+	}
+
+	effect = {
+		add_modifier = {
+			name = tta_suppression_penalty
+		}
+		s:STATE_TOBOLSK = {
+			add_devastation = 10
+		}
+		custom_tooltip = {
+			text = "reduce_omsk_sympathy_30"
+			je:je_glove_and_fist = {
+				add_progress = {
+					value = -30 name = tta_omsk_sympathies
+				}
+			}
+		}
+	}
+}
+
+siberian_capital_tobolsk = { # tobolsk unification button
+	name = "siberian_capital_tobolsk"
+	desc = "siberian_capital_tobolsk_desc"
+
+	ai_chance = {
+		value = 0
+		add = var:chance_var
+		if = {
+			limit = {
+				authority < 70
+			}
+			add = {
+				value = 70
+				subtract = authority
+			}
+		}
+	}
+	
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	effect = {
+		create_diplomatic_play = {
+			name = siberian_unification_war
+			target_country = var:target_country
+			type = dp_unify_russia
+			escalation = 60
+			target_state = "var:target_country.capital".region_state:"var:target_country"
+			add_war_goal = {
+				holder = var:target_country
+				target_country = this
+				type = annex_country
+			}
+		}
+	}
+}
+
+#omsk
+stir_dissent_in_tobolsk = { #create radicals in tta tobolsk, 
+	name = "stir_dissent_in_tobolsk"
+	desc = "stir_dissent_in_tobolsk_desc"
+	
+	ai_chance = {
+		value = 70
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -70
+		}
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = -30
+		}
+		if = {
+			limit = {
+				authority < 60
+			}
+			add = {
+				value = 100
+				subtract = authority
+			}
+		}
+	}
+	
+	visible = {
+		always = yes
+	}
+	
+	possible = {
+		NOT = {
+			has_modifier = stirring_tobolsk_dissent
+		}
+	}
+	
+	effect = {
+		add_modifier = {
+			name = stirring_tobolsk_dissent
+			months = 6
+			multiplier = 0.5
+		}
+		set_local_variable = {
+			name = tobolsk_calculation_temporary
+			value = {
+				add = government_legitimacy
+				multiply = army_power_projection
+				divide = c:TTA.army_power_projection
+				divide = 1000
+			}
+		}
+		s:STATE_TOBOLSK.region_state:TTA = {
+			add_radicals_in_state = {
+				value = local_var:tobolsk_calculation_temporary
+			}
+		}
+	}
+}
+
+declare_war_on_tta = { #declare war with some bonuses
+	name = "declare_war_on_tta"
+	desc = "declare_war_on_tta_desc"
+	
+	ai_chance = {
+		value = 10
+		s:STATE_TOBOLSK.region_state:TTA = {
+			add = {
+				value = radical_fraction
+				subtract = 20
+			}
+		}
+	}
+	
+	visible = {
+		always = yes
+	}
+	
+	possible = {
+		custom_tooltip = {
+			text = radical_third
+			s:STATE_TOBOLSK.region_state:TTA ?= {
+				this.radical_fraction > 0.33
+			}
+		}
+		NOT = {
+			is_diplomatic_play_committed_participant = yes
+		}
+	}
+	
+	effect = {
+		s:STATE_TOBOLSK.region_state:TTA ?= {
+			save_scope_value_as = {
+				name = radical_fraction_scope
+				value = this.radical_fraction
+			}
+		}
+		add_modifier = {
+			name = omsk_attack_bonus
+			months = 6
+			multiplier = scope:radical_fraction_scope
+		}
+		c:MSK = {
+			save_scope_as = omsk_scope
+		}
+		c:TTA ?= {
+			trigger_event = {
+				id = russia.552
+				days = 1
+				popup = yes
+			}
+			add_modifier = {
+				name = tta_tobolsk_insurgence
+				months = 6
+				multiplier = scope:radical_fraction_scope
+			}
+			save_scope_as = owner_country
+		}
+		every_country = {
+			limit = {
+				has_truce_with = c:MSK
+			}
+			end_truce = c:MSK
+		}
+		c:MSK = {
+			create_diplomatic_play = {
+				name = siberian_unification_war
+				target_country = scope:owner_country
+				type = dp_unify_russia
+				escalation = 90
+				target_state = "scope:owner_country.capital".region_state:"scope:owner_country"
+				add_war_goal = {
+					holder = scope:owner_country
+					target_country = this
+					type = annex_country
+				}
+			}
+		}
+	}
+}
+
+pacify_state_button = {
+	name = "pacify_state_button"
+	desc = "pacify_state_button_desc"
+	
+	visible = {
+		always = yes
+	}
+	
+	possible = {
+		any_scope_state = {
+			has_modifier = slr_state_unrest
+		}
+	}
+	
+	ai_chance = {
+		value = 20
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -100
+		}
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = -10
+		}
+	}
+	
+	effect = {
+		if = {
+			limit = {
+				any_scope_state = {
+					AND = {
+						has_decree = decree_promote_national_values
+						has_modifier = slr_state_unrest
+					}
+				}
+			}
+			random_scope_state = {
+				limit = {
+					has_decree = decree_promote_national_values
+					has_modifier = slr_state_unrest
+				}
+				remove_modifier = slr_state_unrest
+				save_scope_value_as = {
+					name = population_scope
+					value = state_population
+				}
+			}
+			c:SLR = {
+				add_modifier = {
+					name = state_pacification_costs
+					days = short_modifier_time
+					multiplier = scope:population_scope
+				}
+			}
+		}
+		else = {
+			random_scope_state = {
+				limit = {
+					has_modifier = slr_state_unrest
+				}
+				remove_modifier = slr_state_unrest
+				save_scope_value_as = {
+					name = population_scope
+					value = state_population
+				}
+			}
+			c:SLR = {
+				add_modifier = {
+					name = state_pacification_costs
+					days =short_modifier_time
+					multiplier = scope:population_scope
+				}
+			}
+		}
+	}
+}
+
+#sru buttons
+
+declare_national_emergency_button = {
+	name = "declare_national_emergency_button"
+	desc = "declare_national_emergency_button_desc"
+	
+	possible = {
+		has_modifier = mobilized_guard_declared_sru
+	}
+	
+	visible = {
+		has_modifier = mobilized_guard_declared_sru
+	}
+	
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				any_scope_state = {
+					turmoil > 0.2
+				}
+			}
+			add = 20
+		}
+	}
+	
+	effect = {
+		remove_modifier = mobilized_guard_declared_sru
+		add_modifier = {
+			name = national_emergency_declared_sru
+		}
+	}
+}
+
+declare_mobilized_guard_button = {
+	name = "declare_mobilized_guard_button"
+	desc = "declare_mobilized_guard_button_desc"
+	
+	possible = {
+		OR = {
+			has_modifier = national_emergency_declared_sru
+			has_modifier = national_vigilance_declared_sru
+		}
+	}
+	
+	visible = {
+		OR = {
+			has_modifier = national_emergency_declared_sru
+			has_modifier = national_vigilance_declared_sru
+		}
+	}
+	
+	ai_chance = {
+		value = 0 
+		if = {
+			limit = {
+				has_modifier = national_emergency_declared_sru
+			}
+			add = 80
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					turmoil > 0.2
+				}
+			}
+			add = 20
+		}
+	}
+	
+	effect = {
+		if = {
+			limit = {
+				has_modifier = national_emergency_declared_sru
+			}
+			remove_modifier = national_emergency_declared_sru
+			add_modifier = {
+				name = mobilized_guard_declared_sru
+			}
+		}
+		if = {
+			limit = {
+				has_modifier = national_vigilance_declared_sru
+			}
+			remove_modifier = national_vigilance_declared_sru
+			add_modifier = {
+				name = mobilized_guard_declared_sru
+			}
+		}
+	}
+}
+
+declare_national_vigilance_button = {
+	name = "declare_national_vigilance_button"
+	desc = "declare_national_vigilance_button_desc"
+	
+	possible = {
+		OR = {
+			has_modifier = mobilized_guard_declared_sru
+			has_modifier = national_prosperity_declared_sru
+		}
+	}
+	
+	visible = {
+		OR = {
+			has_modifier = mobilized_guard_declared_sru
+			has_modifier = national_prosperity_declared_sru
+		}
+	}
+	
+	ai_chance = {
+		value = 0 
+		if = {
+			limit = {
+				has_modifier = mobilized_guard_declared_sru
+			}
+			add = 80
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					turmoil > 0.2
+				}
+			}
+			add = 20
+		}
+	}
+	
+	effect = {
+		if = {
+			limit = {
+				has_modifier = mobilized_guard_declared_sru
+			}
+			remove_modifier = mobilized_guard_declared_sru
+			add_modifier = {
+				name = national_vigilance_declared_sru
+			}
+		}
+		if = {
+			limit = {
+				has_modifier = national_prosperity_declared_sru
+			}
+			remove_modifier = national_prosperity_declared_sru
+			add_modifier = {
+				name = national_vigilance_declared_sru
+			}
+		}
+	}
+}
+
+declare_national_prosperity_button = {
+	name = "declare_national_prosperity_button"
+	desc = "declare_national_prosperity_button_desc"
+	
+	possible = {
+		has_modifier = national_vigilance_declared_sru
+	}	
+	
+	visible = {
+		has_modifier = national_vigilance_declared_sru
+	}
+	
+	ai_chance = {
+		value = 50
+		if = {
+			limit = {
+				any_scope_state = {
+					turmoil > 0.2
+				}
+			}
+			add = -20
+		}	
+	}
+	
+	effect = {
+		remove_modifier = national_vigilance_declared_sru
+		add_modifier = {
+			name = national_prosperity_declared_sru
+		}
+	}
+}
+
+sru_increase_rail_system_funds = {
+	name = "sru_increase_rail_system_funds"
+	name = "sru_increase_rail_system_funds_desc"
+
+	possible = {
+		has_journal_entry = je_sru_directory_rail_system
+		je:je_sru_directory_rail_system = {
+			"scripted_bar_progress(sru_railway_funds)" < 5
+		}
+	}	
+	
+	ai_chance = {
+		value = 40
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -100
+		}
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = -30
+		}
+		if = {
+			limit = {
+				has_modifier = national_emergency_declared_sru
+			}
+			add = -50
+		}
+		if = {
+			limit = {
+				has_modifier = mobilized_guard_declared_sru
+			}
+			add = -40
+		}
+		if = {
+			limit = {
+				has_modifier = national_vigilance_declared_sru
+			}
+			add = -20
+		}
+		if = {
+			limit = {
+				has_modifier = national_prosperity_declared_sru
+			}
+			add = 40
+		}
+	}
+	
+	visible = {
+		has_journal_entry = je_sru_directory_rail_system
+	}
+	
+	effect = {
+		je:je_sru_directory_rail_system = {
+			add_progress = {
+				value = 1
+				name = sru_railway_funds
+			}
+		}
+	}		
+}
+
+sru_decrease_rail_system_funds = {
+	name = "sru_decrease_rail_system_funds"
+	name = "sru_decrease_rail_system_funds_desc"
+
+	possible = {
+		has_journal_entry = je_sru_directory_rail_system
+		je:je_sru_directory_rail_system = {
+			"scripted_bar_progress(sru_railway_funds)" > 0
+		}
+	}	
+	
+	visible = {
+		has_journal_entry = je_sru_directory_rail_system
+	}
+	
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = 20
+		}
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = 100
+		}
+		if = {
+			limit = {
+				has_healthy_economy = yes
+			}
+			add = -50
+		}
+		if = {
+			limit = {
+				has_modifier = national_emergency_declared_sru
+			}
+			add = 50
+		}
+		if = {
+			limit = {
+				has_modifier = mobilized_guard_declared_sru
+			}
+			add = 40
+		}
+		if = {
+			limit = {
+				has_modifier = national_vigilance_declared_sru
+			}
+			add = 20
+		}
+		if = {
+			limit = {
+				has_modifier = national_prosperity_declared_sru
+			}
+			add = -10
+		}
+	}
+	
+	effect = {
+		je:je_sru_directory_rail_system = {
+			add_progress = {
+				value = -1
+				name = sru_railway_funds
+			}
+		}
+	}		
+}
+
+sru_setup_rail_system = {
+	name = "sru_setup_rail_system"
+	name = "sru_setup_rail_system_desc"
+	
+	possible = {
+		AND = {
+			has_technology_researched = railways
+			has_technology_researched = steelworking
+			NOT = {
+				has_journal_entry = je_sru_directory_rail_system
+			}
+		}
+	}
+	
+	ai_chance = {
+		value = 100
+	}
+	
+	effect = {
+		add_journal_entry = {
+			type = je_sru_directory_rail_system
+		}
+	}
+}
+
+declare_wr_unification_war = { #generic unification war for post slr states
+	name = "declare_wr_unification_war"
+	desc = "declare_wr_unification_war_desc"
+
+	ai_chance = {
+		value = 25
+		if = {
+			add = var:chance_var
+		}
+	}
+
+	possible = {
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+	}
+	
+	effect = {
+		create_diplomatic_play = {
+			name = slr_unification_war
+			target_country = var:target_country
+			type = dp_unify_russia
+			escalation = 60
+			target_state = "var:target_country.capital".region_state:"var:target_country"
+			add_war_goal = {
+				holder = var:target_country
+				target_country = this
+				type = annex_country
+			}
+		}
+	}
+}
+
+invade_novgorod_button = {
+	name = "invade_novgorod_button"
+	desc = "invade_novgorod_button_desc"
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+		c:novgorod = {
+			is_at_war = no
+			is_diplomatic_play_committed_participant = no
+		}
+	}
+	
+	effect = {
+		c:novgorod = {
+			add_journal_entry = {
+				type = je_battle_on_the_ice
+			}
+		}
+		create_diplomatic_play = {
+			name = invasion_of_novgorod
+			target_country = c:novgorod
+			type = dp_unify_russia
+			war = yes	
+			target_state = s:STATE_NOVGOROD.region_state:novgorod
+			add_war_goal = {
+				holder = c:novgorod
+				target_country = c:moskowien
+				type = war_reparations
+			}
+		}
+	}
+}
+
+propose_unification_with_south_russia = {
+	name = "propose_unification_with_south_russia"
+	desc = "propose_unification_with_south_russia_desc"
+	
+	visible = {
+		NOT = {
+			this = c:SRU
+		}
+		NOR = {
+			is_diplomatic_play_committed_participant = yes
+			is_at_war = yes
+		}
+	}
+	
+	possible = {
+		always = yes
+	}
+	
+	ai_chance = {
+		value = 20
+		if = {
+			limit = {
+				this.army_power_projection > sru.army_power_projection
+			}
+			add = 50
+		}
+		if = {
+			limit = {
+				c:SRU = {
+					has_healthy_economy = no
+				}
+			}
+            add = -20
+		}
+	}
+	
+	effect = {
+		create_diplomatic_play = {
+			name = russian_national_unification
+			target_country = c:SRU
+			type = dp_unify_russia
+			escalation = 30
+			add_war_goal = {
+				holder = c:SRU
+				target_country = this
+				type = annex_country
+			}
+		}
+		change_infamy = -150
+		c:SRU = {
+			change_infamy = -150
+		}
+	}
+}
+
+propose_unification_with_west_russia = {
+	name = "propose_unification_with_west_russia"
+	desc = "propose_unification_with_west_russia_desc"
+	
+	visible = {
+		NOT = {
+			this = c:WSR
+		}
+		NOR = {
+			is_diplomatic_play_committed_participant = yes
+			is_at_war = yes
+		}
+	}
+	
+	possible = {
+		always = yes
+	}
+	
+	ai_chance = {
+		value = 20
+		if = {
+			limit = {
+				this.army_power_projection > "c:WSR.army_power_projection"
+			}
+			add = 50
+		}
+		if = {
+			limit = {
+				c:WSR = {
+					has_healthy_economy = no
+				}
+			}
+            add = -20
+		}
+		change_infamy = -150
+		c:WSR = {
+			change_infamy = -150
+		}
+	}
+	
+	effect = {
+		create_diplomatic_play = {
+			name = russian_national_unification
+			target_country = c:WSR
+			type = dp_unify_russia
+			escalation = 30
+			add_war_goal = {
+				holder = c:WSR
+				target_country = this
+				type = annex_country
+			}
+		}
+	}
+}
+
+propose_unification_with_siberia = {
+	name = "propose_unification_with_siberia"
+	desc = "propose_unification_with_siberia_desc"
+	
+	visible = {
+		NOT = {
+			has_variable = siberian_unifier
+		}
+	}
+	
+	possible = {
+		always = yes
+		NOR = {
+			is_diplomatic_play_committed_participant = yes
+			is_at_war = yes
+		}
+	}
+	
+	ai_chance = {
+		value = 20
+		if = {
+			limit = {
+				this.army_power_projection > "var:siberia_var.army_power_projection"
+			}
+			add = 50
+		}
+		if = {
+			limit = {
+				var:siberia_var = {
+					has_healthy_economy = no
+				}
+			}
+            add = -20
+		}
+	}
+	
+	effect = {
+		random_country = {
+			limit = {
+				has_variable = siberian_unifier
+			}
+			save_scope_as = siberia_unifier_scope
+		}
+		create_diplomatic_play = {
+			name = russian_national_unification
+			target_country = "scope:siberia_unifier_scope"
+			type = dp_unify_russia
+			escalation = 30
+			add_war_goal = {
+				holder = scope:siberia_unifier_scope
+				target_country = this
+				type = annex_country
+			}
+		}
+		change_infamy = -150
+		scope:siberia_unifier_scope = {
+			change_infamy = -150
+		}
+	}
+}

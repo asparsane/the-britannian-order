@@ -1,0 +1,33 @@
+﻿# If you add religions, and use those tags, do not change them without changing everywhere they are used.
+
+skibidi = {
+	texture = "gfx/interface/icons/religion_icons/catholic.dds"
+	traits = {
+		brainrot
+	}
+	color = { 232 232 211 }
+}
+
+labubite = {
+	texture = "gfx/interface/icons/religion_icons/catholic.dds"
+	traits = {
+		brainrot
+	}
+	color = { 208 209 163 }
+}
+
+redpill = {
+	texture = "gfx/interface/icons/religion_icons/catholic.dds"
+	traits = {
+		sigma
+	}
+	color = { 255 0 0 }
+}
+
+tralaleroist = {
+	texture = "gfx/interface/icons/religion_icons/catholic.dds"
+	traits = {
+		brainrot
+	}
+	color = { 136 187 207 }
+}

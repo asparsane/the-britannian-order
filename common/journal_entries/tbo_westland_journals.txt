@@ -1,0 +1,379 @@
+je_the_collapse_of_westland = {
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	group = je_group_historical_content
+	scripted_progress_bar = westland_collapse_progress
+	immediate = {
+
+	}
+	fail = {
+		scope:journal_entry = {
+			"scripted_progress_bar(westland_collapse_progress)" >= 20
+		}
+	}
+	on_fail = {
+		trigger_event = {
+			id = westland_events.1
+			days = 0
+			popup = yes
+		}
+	}
+}
+
+je_springtime_of_iberia = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	group = je_group_historical_content
+	scripted_button = soi_propose_unification_button
+	immediate = {
+	}
+	complete = {
+		custom_tooltip = {
+			text = secured_iberia_tt
+			NOT = {
+				any_country = {
+					OR = {
+						country_has_primary_culture = cu:spanish
+						country_has_primary_culture = cu:portuguese
+					}
+					NOT = {
+						c:TLR ?= this
+						is_subject_of = c:TLR
+					}
+				}
+			}
+		}
+	}
+	on_complete = {
+		trigger_event = {
+			id = westland_events.11
+			days = 3
+			popup = yes
+		}
+	}
+	fail = {
+	}
+	on_fail = {
+	}
+}
+
+je_bastion_of_iberia = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	scripted_button = boi_conquer_iberia
+	complete = {
+		NOT = {
+			any_country = {
+				NOT = {
+					this = ROOT
+				}
+				OR = {
+					country_has_primary_culture = cu:spanish
+					country_has_primary_culture = cu:portuguese
+				}
+			}
+		}
+	}
+	on_complete = {
+		trigger_event = {
+			id = westland_events.40
+			days = 3
+			popup = yes
+		}
+	}
+	fail = {
+		is_subject = yes
+	}
+}
+
+je_the_madman_of_andalusia = {
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+	group = je_group_historical_content
+	scripted_progress_bar = moa_waldro_insanity_progress_bar
+	scripted_progress_bar = moa_government_stabilization_progress_bar
+	scripted_button = moa_torture_people
+	scripted_button = moa_destroy_village
+	scripted_button = moa_demolish_village
+	scripted_button  = moa_obliterate_village
+	fail = {
+		custom_tooltip = {
+			text = waldro_went_insane
+			scope:journal_entry = {
+				"scripted_bar_progress(moa_waldro_insanity_progress_bar)" >= 20
+			}
+		}
+	}
+	on_fail = {
+		trigger_event = {
+			id = westland_events.21 #waldro goes insane and gets put down. debuffs
+			days = 3
+			popup = yes
+		}
+	}
+	complete = {
+		custom_tooltip = {
+			text = andalusia_stabilized_tt
+			scope:journal_entry = {
+				"scripted_bar_progress(moa_government_stabilization_progress_bar)" >= 20
+			}
+		}
+	}
+	on_complete = {
+		random_character = {
+			limit = {
+				has_template = wst_waldro_freight_small
+			}
+			add_modifier = waldro_figureheaded_modifier
+		}
+		add_modifier = waldro_figureheaded_country
+	}
+	should_be_pinned_by_default = yes
+}
+
+je_andalusia_unification = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	group = je_group_historical_content
+	scripted_button = moa_conquer_unifier
+	should_be_pinned_by_default = yes
+	complete = {
+		NOT = {
+			any_country = {
+				NOT = {
+					this = ROOT
+				}
+				OR = {
+					country_has_primary_culture = cu:spanish
+					country_has_primary_culture = cu:portuguese
+				}
+			}
+		}
+	}
+	on_complete = {
+		trigger_event = {
+			id = westland_events.22
+			days = 3
+			popup = yes
+		}
+	}
+	fail = {
+		is_subject = yes
+	}
+}
+
+je_restoration_of_portugal = { #for joel freight to first take portugal back then create spain as a pu
+	icon = "gfx/interface/icons/event_icons/event_statue.dds"
+	group = je_group_historical_content
+	scripted_button = rop_take_back_alentejo
+	scripted_button = rop_iberia_sweep
+	should_be_pinned_by_default = yes
+	complete = {
+		NOT = {
+			any_country = {
+				NOR = {
+					this = ROOT
+					c:SPA ?= this
+				}
+				OR = {
+					country_has_primary_culture = cu:portuguese
+					country_has_primary_culture = cu:spanish
+				}
+			}
+		}
+	}
+	on_complete = {
+		trigger_event = {
+			id = westland_events.30
+			days = 3
+			popup = yes
+		}
+	}
+}
+
+je_bid_for_brittany = { #each country places bids, along with influence and authority, all of which won't be returned to you after one winner is decided.
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	group = je_group_historical_content
+	scripted_button = bfb_place_additional_bid
+	should_be_pinned_by_default = yes
+	scripted_progress_bar = bfb_smalland_bid_progress
+	scripted_progress_bar = bfb_languedoc_bid_progress
+	scripted_progress_bar = bfb_lorraine_bid_progress
+	immediate = {
+		set_global_variable = {
+			name = smalland_bid_amount
+			value = 1
+		}
+		set_global_variable = {
+			name = languedoc_bid_amount
+			value = 1
+		}
+		set_global_variable = {
+			name = lorraine_bid_amount
+			value = 1
+		}
+	}
+	on_weekly_pulse = {
+		effect = {
+			calculate_brittany_progress_bars = yes
+		}
+	}
+	timeout = {
+		days = 180
+	}
+	on_timeout = {
+		if = { #languedoc
+			limit = {
+				AND = {
+					global_var:languedoc_bid_amount >= global_var:smalland_bid_amount
+					global_var:languedoc_bid_amount >= global_var:lorraine_bid_amount
+				}
+			}
+			every_state = {
+				limit = {
+					c:GBR ?= owner
+					state_region = {
+						is_homeland = cu:french
+					}
+				}
+				set_state_owner = c:LNG
+			}
+		}
+		if = { #smalland
+			limit = {
+				AND = {
+					global_var:smalland_bid_amount >= global_var:languedoc_bid_amount
+					global_var:smalland_bid_amount >= global_var:lorraine_bid_amount
+				}
+			}
+			every_state = {
+				limit = {
+					c:GBR ?= owner
+					state_region = {
+						is_homeland = cu:french
+					}
+				}
+				set_state_owner = c:SML
+			}
+		}
+		if = { #lorraine
+			limit = {
+				AND = {
+					global_var:lorraine_bid_amount >= global_var:smalland_bid_amount
+					global_var:lorraine_bid_amount >= global_var:lorraine_bid_amount
+				}
+			}
+			every_state = {
+				limit = {
+					c:GBR ?= owner
+					state_region = {
+						is_homeland = cu:french
+					}
+				}
+				set_state_owner = c:LRA
+			}
+		}
+	}
+}
+
+je_aid_from_the_east = { #for lorraine, burgundian offer 
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	group = je_group_historical_content
+	scripted_button = bfb_place_additional_bid
+	should_be_pinned_by_default = yes
+	immediate = {
+	}
+	on_weekly_pulse = {
+		effect = {
+			add_treasury = 5000
+			c:BRG = {
+				add_treasury = -5000
+			}
+		}
+	}
+	complete = {
+		exists = s:STATE_BRITTANY.region_state:LRA
+	}
+	on_complete = {
+		s:STATE_FRENCH_LOW_COUNTRIES.region_state:LRA ?= {
+			set_state_owner = c:BRG
+		}
+		s:STATE_WALLONIA.region_state:LRA ?= {
+			set_state_owner = c:BRG
+		}
+		s:STATE_PICARDY.region_state:LRA ?= {
+			set_state_owner = c:BRG
+		}
+		s:STATE_CHAMPAGNE.region_state:LRA ?= {
+			set_state_owner = c:BRG
+		}
+		s:STATE_LORRAINE.region_state:LRA ?= {
+			set_state_owner = c:BRG
+		}
+		s:STATE_ALSACE_LORRAINE.region_state:LRA ?= {
+			set_state_owner = c:BRG
+		}
+		c:BRG = {
+			create_diplomatic_pact = {
+				type = puppet
+				country = c:LRA
+			}
+		}
+		s:STATE_LORRAINE = {
+			random_scope_state = {
+		        set_hub_name = {
+		            type = city
+		            name = HUB_NAME_STATE_LORRAINE_city_nanzig
+		        }
+	        }
+		}
+	}
+	fail = {
+		NAND = {
+			has_journal_entry = je_bid_for_brittany
+			exists = s:STATE_BRITTANY.region_state:LRA
+		}
+	}
+	on_fail = {
+		s:STATE_FRENCH_LOW_COUNTRIES.region_state:LRA ?= {
+			set_state_owner = c:BRG
+		}
+		s:STATE_PICARDY.region_state:LRA ?= {
+			set_state_owner = c:BRG
+		}
+		s:STATE_CHAMPAGNE.region_state:LRA ?= {
+			set_state_owner = c:BRG
+		}
+		s:STATE_LORRAINE.region_state:LRA ?= {
+			set_state_owner = c:BRG
+		}
+		s:STATE_ALSACE_LORRAINE.region_state:LRA ?= {
+			set_state_owner = c:BRG
+		}
+		c:BRG = {
+			create_diplomatic_pact = {
+				type = puppet
+				country = c:LRA
+			}
+		}
+		s:STATE_LORRAINE = {
+			random_scope_state = {
+		        set_hub_name = {
+		            type = city
+		            name = HUB_NAME_STATE_LORRAINE_city_nanzig
+		        }
+	        }
+		}
+	}
+}
+
+je_order_in_frankreich = { # for lorraine, continue to act as a puppet of burgundy
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_historical_content
+	scripted_button = oif_conquer_france
+	complete = {
+		NOR = {
+			exists = c:LNG
+			exists = c:SML
+		}
+		exists = c:FRA
+	}
+	on_complete = {
+		change_tag = RKF
+	}
+}

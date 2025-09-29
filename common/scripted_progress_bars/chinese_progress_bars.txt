@@ -1,0 +1,158 @@
+﻿cfd_modernization_progress_bar = {
+	name = "cfd_modernization_progress_bar"
+ 	desc = "cfd_modernization_progress_bar_desc"
+	start_value = 0
+ 	min_value = 0
+ 	max_value = 100
+	default = yes
+ 	monthly_progress = {
+		add = {
+			desc = from_legitimacy
+			add = {
+				value = this.government_legitimacy
+				divide = 60
+			}
+		}
+		add = {
+			desc = intelligentsia_clout
+			add = {
+				ig:ig_intelligentsia = {
+					value = this.ig_clout
+					multiply = 10
+					if = {
+						limit = {
+							is_in_government = yes
+						}
+						multiply = 1.5
+					}
+				}
+			}
+		}
+ 	}
+}
+mgb_occupation_progress_bar = {
+ 	name = "mgb_occupation_progress_bar"
+ 	desc = "mgb_occupation_progress_bar_desc"
+ 	second_desc = "mgb_occupation_progress_bar_second_desc"
+
+ 	start_value = 0
+ 	min_value = 0
+ 	max_value = 100
+
+ 	double_sided_bad = yes
+
+ 	monthly_progress = {
+		if = {
+			limit = {
+				owner = {
+					has_variable = occupation_change
+				}
+			}
+			add = {
+				desc = from_occupation_change
+				add = var:occupation_change
+			}
+		}
+ 	}
+}
+
+DWCJE_conflict_progress = {
+ 	name = "DWCJE_conflict_progress"
+ 	desc = "DWCJE_conflict_progress_desc"
+ 	start_value = 0
+ 	min_value = -50
+ 	max_value = 50
+ 	default_bad = yes
+}
+
+jeshz_colony_construction_progress_bar = {
+	name = "jeshz_colony_construction_progress_bar"
+	desc = "jeshz_colony_construction_progress_bar_desc"
+	start_value = 0
+	min_value = 0
+	max_value = 100
+	default_green = yes
+	monthly_progress = {
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = tkk_construction_delay
+				}
+			}
+			add = {
+				desc = from_construction
+				add = 1
+			}
+		}
+	}
+}
+
+tkk_public_discontent_progress_bar = {
+	name = "tkk_public_discontent_progress_bar"
+	desc = "tkk_public_discontent_progress_bar_desc"
+	start_value = 0
+	min_value = 0
+	max_value = 100
+	default_bad = yes
+	monthly_progress = {
+		add = {
+			desc = natural_decay
+			add = -0.1
+		}
+		if = {
+			limit = {
+				je:je_tkk_siberian_habitation_zone = {
+					"scripted_bar_progress(tkk_public_discontent_progress_bar)" >= 60
+				}
+			}
+			add = {
+				desc = high_discontent_decay
+				add = -0.5
+			}
+		}
+	}
+}
+
+jekipf_police_infrastructure_construction_bar = {
+	name = "jekipf_police_infrastructure_construction_bar"
+	desc = "jekipf_police_infrastructure_construction_bar_desc"
+	start_value = 0
+	min_value = 0
+	max_value = 100
+	default_green = yes
+	monthly_progress = {
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = tkk_construction_delay
+				}
+			}
+			add = {
+				desc = from_construction
+				add = 1
+			}
+		}
+	}
+}
+
+jespc_port_complex_construction_bar = {
+	name = "jespc_port_complex_construction_bar"
+	desc = "jespc_port_complex_construction_bar_desc"
+	start_value = 0
+	min_value = 0
+	max_value = 100
+	default_green = yes
+	monthly_progress = {
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = tkk_construction_delay
+				}
+			}
+			add = {
+				desc = from_construction
+				add = 1
+			}
+		}
+	}
+}

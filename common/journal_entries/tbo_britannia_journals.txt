@@ -1,0 +1,397 @@
+﻿je_britannian_prosperity = {
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	group = je_group_historical_content
+	scripted_progress_bar = jebp_war_destabilization_progress_bar
+
+    fail = {
+	    custom_tooltip = {
+           text = war_progress_destabilization
+            scope:journal_entry = {
+                "scripted_bar_progress(jebp_war_destabilization_progress_bar)" >= 150
+            }
+        }
+    }
+
+	on_fail = {
+		trigger_event = { id = britannian_prosperity.2 }
+		remove_variable = britannian_prosperity_var
+	}
+
+	weight = 10000
+	should_be_pinned_by_default = yes
+}
+
+je_economic_recovery = {
+	icon = "gfx/interface/icons/ig_icons/industrialists.dds"
+
+	group = je_group_historical_content
+	
+	scripted_button = rec_sell_brittany
+	scripted_button = rec_sell_amazons
+	
+	scripted_progress_bar = economic_recovery_progress_bar
+	
+	modifiers_while_active = {
+		britannia_fall
+	}
+	
+	complete = {
+		custom_tooltip = {
+			text = recover_economy
+			scope:journal_entry = {
+				"scripted_bar_progress(economic_recovery_progress_bar)" >= 200
+			}
+		}
+ 	}
+	
+	fail = {
+		custom_tooltip = {
+			text = recover_economy_fail
+			scope:journal_entry = {
+				"scripted_bar_progress(economic_recovery_progress_bar)" <= 0
+			}
+    	}
+	}
+	
+	on_complete = {
+		remove_modifier = britannia_fall
+	}
+	
+	on_fail = {
+		c:GBR = {
+			set_country_type = decentralized	
+		}
+	}
+	
+	weight = 1000
+	can_revolution_inherit = yes
+	should_be_pinned_by_default = yes
+}
+
+je_german_british_split = {
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	group = je_group_historical_content
+	scripted_progress_bar = jegbs_britannian_relations_progress_bar
+	immediate = {
+		random_political_lobby = {
+			limit = {
+				c:GBR ?= target
+				is_political_lobby_type = lobby_anti_country
+			}
+			save_scope_as = anti_gbr_lobby
+		}
+		random_political_lobby = {
+			limit = {
+				c:GBR ?= target
+				is_political_lobby_type = lobby_pro_country
+			}
+			save_scope_as = pro_gbr_lobby
+		}
+		set_variable = {
+			name = anti_gbr_lobby
+			value = scope:anti_gbr_lobby
+		}
+		set_variable = {
+			name = pro_gbr_lobby
+			value = scope:pro_gbr_lobby
+		}
+	}
+	complete = {
+		custom_tooltip = {
+			text = ger_sentiments_explode_tt
+			scope:journal_entry = {
+				"scripted_bar_progress(jegbs_britannian_relations_progress_bar)" >= 100
+			}
+		}
+	}
+	on_complete = {
+		add_journal_entry = {
+			type = je_anatolian_plot
+		}
+		end_truce = c:GBR
+		trigger_event = {
+			id = german_events.1
+			days = 2
+		}
+	}
+}
+
+je_construction_of_germania = {
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	group = je_group_historical_content
+	scripted_progress_bar = jecg_construction_of_germania
+
+	immediate = {
+		save_scope_value_as = {
+			name = income_scope
+			value = weekly_net_fixed_income
+		}
+		add_modifier = {
+			name = germania_construction_costs
+			multiplier = scope:income_scope
+			divide = -10
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			remove_modifier = germania_construction_costs
+			save_scope_value_as = {
+				name = income_scope
+				value = this.investment_pool_gross_income
+			}
+			add_modifier = {
+				name = germania_construction_costs
+				multiplier = scope:income_scope
+				divide = -10
+			}
+		}
+	}
+
+	complete = {
+		scope:journal_entry = {
+			"scripted_bar_progress(jecg_construction_of_germania)" >= 5000000
+		}
+	}
+
+	on_complete = {
+		remove_modifier = germania_construction_costs
+		s:STATE_BRANDENBURG = {
+			add_modifier = {
+				name = world_capital_germania
+			}
+		}
+	}
+}
+
+je_bormanns_realm = { #bormann hates you
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	group = je_group_historical_content
+
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					AND = {
+						has_technology_researched = nitroglycerin
+						NOT = {
+							has_variable = germania_construction
+						}
+					}
+				}
+				trigger_event = {
+					id = bormann_events.3
+					days = 3
+					popup = yes
+				}
+				set_variable = germania_construction
+			}
+			if = { 
+				limit = {
+					NOT = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_autocracy
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_variable = had_law_revert_event
+						}
+					}
+					if = {
+						limit = {
+							NOT = {
+								exists = c:BRG
+							}
+						}
+						trigger_event = {
+							id = bormann_events.5
+							days = 1
+							popup = yes
+						}
+					}
+					else = {
+						trigger_event = {
+							id = bormann_events.9
+							days = 1
+							popup = yes
+						}
+					}
+				}
+				else = {
+					post_notification = ger_law_reverted
+					activate_law = law_type:law_autocracy
+					activate_law = law_type:law_monarchy
+				}
+			}
+			
+		}
+	}
+}
+
+je_anatolian_plot = {
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	group = je_group_historical_content
+	scripted_button = jeap_stir_up_antagonism
+	scripted_button = jeap_deepen_britannian_baghdad_interests
+	scripted_button = jeap_boost_anti_baghdad_sentiments
+	scripted_button = jeap_promote_baghdad_pro_britannian_sentiments
+	scripted_button = jeap_prompt_secret_pact
+	scripted_button = jeap_pledge_turkey_backing
+	scripted_button = jeap_support_turkey
+
+	immediate = {
+		c:TUR ?= {
+			set_secret_goal = {
+				country = c:BAG
+				secret_goal = conquer
+			}
+		}
+		c:BAG ?= {
+			set_secret_goal = {
+				country = c:TUR
+				secret_goal = antagonize
+			}
+		}
+	}
+	fail = {
+		custom_tooltip = {
+			text = failed_secret_pact_tt
+			has_variable = failed_secret_pact
+		}
+	}
+	possible = {
+		always = yes
+	}
+	on_fail = {
+		jeap_remove_vars = yes
+		trigger_event = {
+			id = german_events.2
+			days = 730
+		}
+	}
+	complete = {
+		has_variable = jeap_joined_war
+	}
+	on_complete = {
+		jeap_remove_vars = yes
+		trigger_event = {
+			id = german_events.2
+			days = 730
+		}
+	}
+	timeout = 3650
+	on_timeout = {
+		jeap_remove_vars = yes
+		trigger_event = {
+			id = german_events.2
+			days = 730
+		}
+	}
+}
+
+je_south_german_war = {# a way to conquer all the loose territories in southern germany owned by britannia, also acts as a failsafe if anatolia fails somehow
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	group = je_group_historical_content
+	scripted_button = jesg_invade_area_westland
+	scripted_button = jesg_invade_near_southland
+	scripted_button = jesg_wipe_britannian_remnants
+	possible = {
+		always = yes
+	}
+	complete = {
+		NOT = {
+			exists = c:BAV
+			exists = c:AST
+			exists = c:YUG
+			exists = c:HNG
+		}
+	}
+}
+
+je_splitting_the_atom = { #nuclear weapons development for burgundy
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+	group = je_group_technology
+	scripted_progress_bar = jespa_atomic_research_progress
+	possible = {
+		always = yes
+	}
+	complete = {
+		custom_tooltip = {
+			text = completed_atomic_research_tt
+			scope:journal_entry = {
+				"scripted_bar_progress(jespa_atomic_research_progress)" >= 100
+			}
+		}
+	}
+	on_complete = {
+		add_journal_entry = {
+			type = je_atomics_production
+		}
+	}
+	should_be_pinned_by_default = yes
+}
+
+je_atomics_production = { #begin producing atomics
+	icon = "gfx/interface/icons/event_icons/event_gear.dds"
+	group = je_group_technology
+	scripted_button = jeatp_begin_atomics_construction
+	scripted_button = jeatp_pause_atomics_construction
+	scripted_button = jeas_review_atomics_policy
+	scripted_button = jeas_the_atomic_option
+	scripted_button = jeatp_open_atomics_sale
+	scripted_button = jeatp_close_atomics_sale
+	scripted_button = jeas_build_centrifuge
+	immediate = {
+		set_variable = {
+			name = atomics_stock
+			value = 0
+		}
+		set_variable = {
+			name = centrifuge_amount
+			value = 1
+		}
+	}
+	possible = {
+		always = yes
+	}
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					has_modifier = jeatp_atomics_production
+				}
+				remove_modifier = jeatp_atomics_production
+				add_modifier = {
+					name = jeatp_atomics_production
+					multiplier = var:centrifuge_amount
+				}
+				produce_nuclear_weapons = yes
+			}
+		}
+	}
+	should_be_pinned_by_default = yes
+}
+
+je_atomics_stock  = {
+	icon = "gfx/interface/icons/event_icons/event_gear"
+	group = je_group_technology
+	scripted_button = jeas_review_atomics_policy
+	scripted_button = jeas_the_atomic_option
+	should_be_pinned_by_default = yes
+	immediate = {
+		set_variable = {
+			name = atomics_policy
+			value = 2
+		}
+		set_variable = { #target by gdp
+			name = atomics_priority_policy
+			value = 1
+		}
+		set_variable = {
+			name = atomics_stock
+			value = 1
+		}
+	}
+}

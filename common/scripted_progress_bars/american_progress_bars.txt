@@ -1,0 +1,93 @@
+bob_skibidi_strength =  {
+	name = "bob_skibidi_strength"
+	desc = "bob_skibidi_strength_desc"
+	start_value = 0
+	min_value = 0
+	max_value = 100
+	default = yes
+}
+
+bob_tralaleroist_strength =  {
+	name = "bob_tralaleroist_strength"
+	desc = "bob_tralaleroist_strength_desc"
+	start_value = 0
+	min_value = 0
+	max_value = 100
+	default_bad = yes
+}
+
+bob_labubu_strength =  {
+	name = "bob_labubu_strength"
+	desc = "bob_labubu_strength_desc"
+	start_value = 0
+	min_value = 0
+	max_value = 100
+	default_green = yes
+}
+
+sw_balkan_rage =  {
+	name = "sw_balkan_rage"
+	desc = "sw_balkan_rage_desc"
+	start_value = 0
+	min_value = 0
+	max_value = 100
+	default_bad = yes
+}
+
+bob_brainrot_solidified = {
+	name = "bob_brainrot_solidified"
+	desc = "bob_brainrot_solidified_desc"
+	start_value = 0
+	min_value = 0
+	max_value = 36
+	default_green = yes
+	monthly_progress = {
+		if = {
+			limit = {
+				AND = {
+					has_variable = brainrot_max_tt
+					var:brainrot_max_tt = 2
+				}
+			}
+			add = {
+				desc = from_solidifying
+				add = 1
+			}
+		}
+		else = {
+			add = {
+				desc = from_decaying
+				add = -10
+			}
+		}
+	}
+}
+
+bob_brainrot_civil_war_progress = {
+	name = "bob_brainrot_civil_war_progress"
+	desc = "bob_brainrot_civil_war_progress_desc"
+	start_value = 0
+	min_value = 0
+	max_value = 24
+	default_bad = yes
+	monthly_progress = {
+		if = {
+			limit = {
+				AND = {
+					has_variable = brainrot_max_tt
+					var:brainrot_max_tt = 3
+				}
+			}
+			add = {
+				desc = from_brainrot_hostility
+				add = 1
+			}
+		}
+		else = {
+			add = {
+				desc = from_decaying
+				add = -5
+			}
+		}
+	}
+}

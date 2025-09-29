@@ -1,0 +1,1241 @@
+qng_increase_military_participation = {
+	name = "qng_increase_military_participation"
+	desc = "qng_increase_military_participation_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -30
+		}
+		add = {
+			value = var:rebel_fighting_strength
+			divide = var:suppression_factor
+			subtract = 1
+			multiply = 15
+		}
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = army_involvement_greater_than_0
+			AND = {
+				has_variable = army_involvement_fraction
+				var:army_involvement_fraction < 1
+			}
+		}
+	}
+
+	effect = {
+		custom_tooltip = {
+			text = qng_increase_military_participation
+			if = {
+				limit = {
+					has_variable = army_involvement_fraction
+				}
+				change_variable = {
+					name = army_involvement_fraction
+					add = 0.05
+				}
+			}
+		}
+	}
+}
+
+qng_decrease_military_participation = {
+	name = "qng_decrease_military_participation"
+	desc = "qng_decrease_military_participation_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = 12
+		}
+		add = {
+			value = var:suppression_factor
+			divide = var:rebel_fighting_strength
+			subtract = 1
+			multiply = 10
+		}
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = army_involvement_less_than_1
+			AND = {
+				has_variable = army_involvement_fraction
+				var:army_involvement_fraction > 0
+			}
+		}
+	}
+
+	effect = {
+		custom_tooltip = {
+			text = qng_decrease_military_participation
+			if = {
+				limit = {
+					has_variable = army_involvement_fraction
+				}
+				change_variable = {
+					name = army_involvement_fraction
+					add = -0.05
+				}
+			}
+		}
+	}
+}
+
+CFDMODJE_tech_boost_button = {
+	name = "CFDMODJE_tech_boost_button"
+	desc = "CFDMODJE_tech_boost_button_desc"
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 20
+	}
+	
+	possible = {
+		custom_tooltip = {
+			text = CFDMODJE_more_than_20_progress
+			scope:journal_entry = {
+				"scripted_bar_progress(cfd_modernization_progress_bar)" > 20
+			}
+		}
+		custom_tooltip = {
+			text = CFDMODJE_did_tech_boost
+			NOT = {
+				has_variable = did_tech_boost
+			}
+		}
+	}
+	
+	effect = {
+		custom_tooltip = {
+			text = CFDMODJE_remove_20_progress
+			scope:journal_entry = {
+				add_progress = { value = -20 name = cfd_modernization_progress_bar }
+			}
+		}
+		add_modifier = {
+			name = CFDMODJE_tech_boost_modifier
+			days = short_modifier_time
+		}
+		set_variable = did_tech_boost
+	}
+}
+
+CFDMODJE_expand_voting_rights = {
+	name = "CFDMODJE_expand_voting_rights"
+	desc = "CFDMODJE_expand_voting_rights_desc"
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 0
+		add = {
+			value = 20
+			subtract = {
+				value = var:british_intervention_chance
+				divide = 3
+			}
+		}
+	}
+	
+	possible = {
+		custom_tooltip = {
+			text = CFDMODJE_more_than_50_progress
+			scope:journal_entry = {
+				"scripted_bar_progress(cfd_modernization_progress_bar)" > 50
+			}
+		}
+		has_law = law_type:law_landed_voting
+		NOT = {
+			has_law = law_type:law_wealth_voting
+		}
+	}
+	
+	effect = {
+		c:GBR = {
+			save_scope_as = britannia_scope
+		}
+		add_radicals = {
+			value = 0.04
+			pop_type = aristocrats
+		}
+		if = {
+			limit = {
+				c:GBR = {
+					has_journal_entry = je_britannian_prosperity
+				}
+			}
+			change_variable = {
+				name = british_intervention_chance
+				add = 15
+			}
+			random_list = {
+				0 = {
+					modifier = {
+						add = var:british_intervention_chance
+					}
+					trigger_event = {
+						id = china_events.151
+						days = 3
+						popup = yes
+					}
+				}
+				100 = {
+					modifier = {
+						subtract = var:british_intervention_chance
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			text = CFDMODJE_remove_50_progress
+			scope:journal_entry = {
+				add_progress = { value = -50 name = cfd_modernization_progress_bar }
+			}
+		}
+		activate_law = law_type:law_wealth_voting
+	}
+}
+
+CFDMODJE_restructure_economy = {
+	name = "CFDMODJE_restructure_economy"
+	desc = "CFDMODJE_restructure_economy_desc"
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 0
+		add = {
+			value = 14
+			subtract = {
+				value = var:british_intervention_chance
+				divide = 3
+			}
+		}
+	}
+	
+	possible = {
+		custom_tooltip = {
+			text = CFDMODJE_more_than_80_progress
+			scope:journal_entry = {
+				"scripted_bar_progress(cfd_modernization_progress_bar)" > 80
+			}
+		}
+		NOT = {
+			has_law = law_type:law_interventionism
+		}
+	}
+	
+	effect = {
+		c:GBR = {
+			save_scope_as = britannia_scope
+		}
+		add_radicals = {
+			value = 0.03
+			pop_type = aristocrats
+		}
+		add_loyalists = {
+			value = 0.03
+			pop_type = capitalists
+		}
+		if = {
+			limit = {
+				c:GBR = {
+					has_journal_entry = je_britannian_prosperity
+				}
+			}
+			change_variable = {
+				name = british_intervention_chance
+				add = 20
+			}
+			random_list = {
+				0 = {
+					modifier = {
+						add = var:british_intervention_chance
+					}
+					trigger_event = {
+						id = china_events.151
+						days = 3
+						popup = yes
+					}
+				}
+				100 = {
+					modifier = {
+						subtract = var:british_intervention_chance
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			text = CFDMODJE_remove_80_progress
+			scope:journal_entry = {
+				add_progress = { value = -80 name = cfd_modernization_progress_bar }
+			}
+		}
+		activate_law = law_type:law_interventionism
+	}
+}
+
+CFDMODJE_empower_academia = {
+	name = "CFDMODJE_empower_academia"
+	desc = "CFDMODJE_empower_academia_desc"
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 0
+		add = {
+			value = 20
+			subtract = {
+				value = var:british_intervention_chance
+				divide = 3
+			}
+		}
+	}
+	
+	possible = {
+		custom_tooltip = {
+			text = CFDMODJE_more_than_30_progress
+			scope:journal_entry = {
+				"scripted_bar_progress(cfd_modernization_progress_bar)" > 30
+			}
+		}
+		NOT = {
+			custom_tooltip = {
+				text = CFDMODJE_empowered_academia
+				has_variable = CFDMODJE_empowered_academia_var
+			}
+		}
+	}
+	
+	effect = {
+		c:GBR = {
+			save_scope_as = britannia_scope
+		}
+		set_variable = CFDMODJE_empowered_academia_var
+		add_loyalists = {
+			value = 0.02
+			pop_type = academia
+		}
+		add_modifier = {
+			name = CFDMODJE_empowering_academia_modifier
+			days = normal_modifier_time
+		}
+		if = {
+			limit = {
+				c:GBR = {
+					has_journal_entry = je_britannian_prosperity
+				}
+			}
+			change_variable = {
+				name = british_intervention_chance
+				add = 10
+			}
+			random_list = {
+				0 = {
+					modifier = {
+						add = var:british_intervention_chance
+					}
+					trigger_event = {
+						id = china_events.151
+						days = 3
+						popup = yes
+					}
+				}
+				100 = {
+					modifier = {
+						subtract = var:british_intervention_chance
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			text = CFDMODJE_remove_30_progress
+			scope:journal_entry = {
+				add_progress = { value = -30 name = cfd_modernization_progress_bar }
+			}
+		}
+	}
+}
+
+CFDMODJE_modernize_bureaucracy = {
+	name = "CFDMODJE_modernize_bureaucracy"
+	desc = "CFDMODJE_modernize_bureaucracy_desc"
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 0
+		add = {
+			value = 15
+			subtract = {
+				value = var:british_intervention_chance
+				divide = 3
+			}
+		}
+	}
+	
+	possible = {
+		custom_tooltip = {
+			text = CFDMODJE_more_than_70_progress
+			scope:journal_entry = {
+				"scripted_bar_progress(cfd_modernization_progress_bar)" > 70
+			}
+		}
+		NOT = {
+			has_law = law_type:law_appointed_bureaucrats
+		}
+	}
+	
+	effect = {
+		c:GBR = {
+			save_scope_as = britannia_scope
+		}
+		if = {
+			limit = {
+				c:GBR = {
+					has_journal_entry = je_britannian_prosperity
+				}
+			}
+			change_variable = {
+				name = british_intervention_chance
+				add = 15
+			}
+			random_list = {
+				0 = {
+					modifier = {
+						add = var:british_intervention_chance
+					}
+					trigger_event = {
+						id = china_events.151
+						days = 3
+						popup = yes
+					}
+				}
+				100 = {
+					modifier = {
+						subtract = var:british_intervention_chance
+					}
+				}
+			}
+		}
+		add_radicals = {
+			value = 0.03
+			pop_type = aristocrats
+		}
+		activate_law = law_type:law_appointed_bureaucrats
+		custom_tooltip = {
+			text = CFDMODJE_remove_70_progress
+			scope:journal_entry = {
+				add_progress = { value = -70 name = cfd_modernization_progress_bar }
+			}
+		}
+	}
+}
+
+CFDMODJE_reject_reforms = {
+	name = "CFDMODJE_reject_reforms"
+	desc = "CFDMODJE_reject_reforms_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		always = yes
+	}
+	ai_chance = {
+		value = 0
+	}
+	effect = {
+		custom_tooltip = {
+			text = CFDMODJE_reject_reforms_var
+			set_variable = CFDMODJE_rejected_reforms_var
+		}
+	}
+}
+
+CFDMODJE_modernize_army = {
+	name = "CFDMODJE_modernize_army"
+	desc = "CFDMODJE_modernize_army_desc"
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 0
+		add = {
+			value = 22
+			subtract = {
+				value = var:british_intervention_chance
+				divide = 3
+			}
+		}
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = CFDMODJE_more_than_70_progress
+			scope:journal_entry = {
+				"scripted_bar_progress(cfd_modernization_progress_bar)" > 70
+			}
+		}
+		NOT = {
+			has_law = law_type:law_professional_army
+		}
+	}
+
+	effect = {
+		c:GBR = {
+			save_scope_as = britannia_scope
+		}
+		add_radicals = {
+			value = 0.02
+			pop_type = aristocrats
+		}
+		activate_law = law_type:law_professional_army
+		custom_tooltip = {
+			text = CFDMODJE_remove_70_progress
+			scope:journal_entry = {
+				add_progress = { value = -70 name = cfd_modernization_progress_bar }
+			}
+		}
+		if = {
+			limit = {
+				c:GBR = {
+					has_journal_entry = je_britannian_prosperity
+				}
+			}
+			change_variable = {
+				name = british_intervention_chance
+				add = 15
+			}
+			random_list = {
+				0 = {
+					modifier = {
+						add = var:british_intervention_chance
+					}
+					trigger_event = {
+						id = china_events.151
+						days = 3
+						popup = yes
+					}
+				}
+				100 = {
+					modifier = {
+						subtract = var:british_intervention_chance
+					}
+				}
+			}
+		}
+	}
+}
+
+DOCPW_integrate_xia_button = {
+	name = "DOCPW_integrate_xia_button"
+	desc = "DOCPW_integrate_xia_button_desc"
+	visible = {
+		exists = c:XIA
+		NOT = {
+				has_variable = demanded_xia
+		}
+	}
+	possible = {
+		exists = c:XIA
+		custom_tooltip = {
+			text = cooldown_passed
+			NOT = {
+				has_variable = conquest_cooldown
+			}
+		}
+	}
+	ai_chance = {
+		value = 100
+	}
+	effect = {
+		set_variable = demanded_xia
+		set_variable = {
+			name = conquest_cooldown
+			years = 1
+		}
+		if = {
+			limit = {
+				c:XIA ?= {
+					OR = {
+						is_subject_of = c:DOC
+						is_subject_of = c:GBR
+					}
+				}
+			}
+			annex = c:XIA
+		}
+		else = {
+			c:XIA ?= {
+				trigger_event = {
+					id = china_events.152
+					days = 7
+					popup = yes
+				}
+			}
+		}
+	}
+}
+
+DOCPW_integrate_sichuan_button = {
+	name = "DOCPW_integrate_sichuan_button"
+	desc = "DOCPW_integrate_sichuan_button_desc"
+	visible = {
+		exists = c:SCU
+		NOT = {
+			has_variable = demanded_scu
+		}
+	}
+	possible = {
+		exists = c:SCU
+		custom_tooltip = {
+			text = cooldown_passed
+			NOT = {
+				has_variable = conquest_cooldown
+			}
+		}
+	}
+	ai_chance = {
+		value = 100
+	}
+	effect = {
+		set_variable = demanded_scu
+		set_variable = {
+			name = conquest_cooldown
+			years = 1
+		}
+		if = {
+			limit = {
+				c:SCU ?= {
+					OR = {
+						is_subject_of = c:DOC
+						is_subject_of = c:GBR
+					}
+				}
+			}
+			annex = c:SCU
+		}
+		else = {
+			c:SCU ?= {
+				trigger_event = {
+					id = china_events.152
+					days = 7
+					popup = yes
+				}
+			}
+		}
+	}
+}
+
+DOCPW_integrate_yunnan_button = {
+	name = "DOCPW_integrate_yunnan_button"
+	desc = "DOCPW_integrate_yunnan_button_desc"
+	visible = {
+		exists = c:YUN
+		NOT = {
+			has_variable = demanded_yun
+		}
+	}
+	possible = {
+		exists = c:YUN
+		custom_tooltip = {
+			text = cooldown_passed
+			NOT = {
+				has_variable = conquest_cooldown
+			}
+		}
+	}
+	ai_chance = {
+		value = 100
+	}
+	effect = {
+		set_variable = demanded_yun
+		set_variable = {
+			name = conquest_cooldown
+			years = 1
+		}
+		if = {
+			limit = {
+				c:YUN ?= {
+					OR = {
+						is_subject_of = c:DOC
+						is_subject_of = c:GBR
+					}
+				}
+			}
+			annex = c:YUN
+		}
+		else = {
+			c:YUN ?= {
+				trigger_event = {
+					id = china_events.152
+					days = 7
+					popup = yes
+				}
+			}
+		}
+	}
+}
+
+DWCJE_minor_warlord_conflict = {
+	name = "DWCJE_minor_warlord_conflict"
+	desc = "DWCJE_minor_warlord_conflict_desc"
+	visible = {
+		is_diplomatic_play_committed_participant = no
+	}
+	possible = {
+		NOT = {
+			any_country = {
+				is_chinese_warlord = yes
+				is_diplomatic_play_committed_participant = yes
+			}
+		}
+		custom_tooltip = {
+			text = not_major_warlord_involved_tt
+			NOR = {
+				var:warlord_1_scope ?= ROOT
+				var:warlord_2_scope ?= ROOT
+			}
+			OR = {
+				any_country = {
+					is_subject_of = ROOT
+					neighbouring_state_is_minor_warlord = yes
+				}
+				neighbouring_state_is_minor_warlord = yes
+			}
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				neighbouring_state_is_minor_warlord = yes
+			}
+			random_neighbouring_state = {
+				limit = {
+					owner = {
+						OR = {
+							valid_minor_warlord_target = yes
+							any_overlord_or_above = {
+								valid_minor_warlord_target = yes
+							}
+						}
+					}
+				}
+				owner = {
+					save_scope_as = target_country_scope
+				}
+			}
+		}
+		else = {
+			random_country = {
+				limit = {
+					is_subject_of = ROOT
+					neighbouring_state_is_minor_warlord = yes
+				}
+				random_neighbouring_state = {
+					limit = {
+						owner = {
+							NOT = {
+								this = ROOT
+								is_subject_of = root
+							}
+							OR = {
+								valid_minor_warlord_target = yes
+								any_overlord_or_above = {
+									valid_minor_warlord_target = yes
+								}
+							}
+						}
+					}
+					owner = {
+						save_scope_as = target_country_scope
+					}
+				}
+			}
+		}
+
+		create_diplomatic_play = {
+			name = chinese_warlord_grab
+			type = dp_china_subjugate_warlord
+			escalation = 50
+			target_state = "scope:target_country_scope.capital".region_state:"scope:target_country_scope"
+			add_war_goal = {
+				holder = "scope:target_country_scope"
+				target_country = ROOT
+				type = regime_change
+			}
+		}
+	}
+	ai_chance = {
+		value = 40
+	}
+}
+
+CFDCL_launch_coup_button = {
+	name = "CFDCL_launch_coup_button"
+	desc = "CFDCL_launch_coup_button_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		AND = {
+			NOT = {
+				is_diplomatic_play_committed_participant = yes
+				is_at_war = yes
+			}
+			ig:ig_intelligentsia = {
+				is_marginalized = yes
+			}
+		}
+	}
+	ai_chance = {
+		value = 100
+	}
+	effect = {
+		cfd_doc_coup = yes
+	}
+}
+
+TKKCC_stage_false_flag_attack = {
+	name = "TKKCC_stage_false_flag_attack"
+	desc = "TKKCC_stage_false_flag_attack_desc"
+	visible = {
+		always = yes
+	}
+	immediate = {
+	}
+	possible = {
+		custom_tooltip = {
+			text = staged_false_flag_tt
+			NOT = {
+				has_variable = staged_false_flag_attack
+			}
+		}
+		infamy < 20
+	}
+	ai_chance = {
+		value = 50
+		subtract = infamy
+	}
+	effect = {
+		c:RAMG = {
+			random_neighbouring_state = {
+				limit = {
+					owner = {
+						country_has_primary_culture = cu:han
+					}
+				}
+				state_region = {
+					save_scope_as = false_flag_scope
+				}
+				owner = {
+					save_scope_as = false_flag_owner_scope
+				}
+			}
+		}
+		set_variable = {
+			name = false_flag_var
+			value = scope:false_flag_owner_scope
+		}
+		change_relations  = {
+			country = scope:false_flag_owner_scope
+			value = -20
+		}
+		set_variable = staged_false_flag_attack
+		change_infamy = 10
+		scope:false_flag_owner_scope = {
+			trigger_event = {
+				id = japan_events.202
+				days = 1
+				popup = yes
+			}
+		}
+		scope:false_flag_scope = {
+			add_devastation = 10
+		}
+	}
+}
+
+TKKCC_full_scale_invasion = {
+	name = "TKKCC_full_scale_invasion"
+	desc = "TKKCC_full_scale_invasion_desc"
+	visible = {
+		has_variable = staged_false_flag_attack
+	}
+	possible = {
+		infamy < 15
+		custom_tooltip = {
+			text = false_flag_done_tt
+			AND = {
+				has_variable = staged_false_flag_attack
+				NOT = {
+					has_variable = launched_full_scale_invasion
+				}
+			}
+		}
+	}
+	ai_chance = {
+		value = 100
+	}
+	effect = {
+		post_notification = greater_asian_war
+		every_country = {
+			limit = {
+				is_player = yes
+			}
+			trigger_event = {
+				id = superevents.2
+				days = 0
+				popup = yes
+			}
+		}
+		remove_variable = staged_false_flag_attack
+		set_variable = launched_full_scale_invasion
+		create_diplomatic_play = {
+			name = chinese_national_defense_war
+			target_country = var:false_flag_var
+			type = dp_chinese_national_defense_war
+			war = yes
+			add_war_goal = {
+				holder = var:false_flag_var
+				type = annex_country
+				target_country = c:RAMG
+			}
+		}
+		every_country = {
+			limit = {
+				has_variable = chinese_national_congress_participant
+			}
+			random_diplomatic_play = { #japan will attempt to annex all chinese national congress participants
+				limit = {
+					any_scope_play_involved = { c:TKK ?= this }
+					any_scope_play_involved = { is_chinese_warlord = yes }
+				}
+				add_target_backers = { PREV }
+				add_war_goal = { holder = c:TKK target_country = PREV type = annex_country }
+			}
+		}
+		random_country = {
+			limit = {
+				has_variable = accepted_chinese_offer
+			}
+			random_diplomatic_play = { #might as well take siberia too
+				limit = {
+					any_scope_play_involved = { c:TKK ?= this }
+					any_scope_play_involved = { is_chinese_warlord = yes }
+				}
+				add_target_backers = { PREV }
+				add_war_goal = { holder = c:TKK target_country = PREV type = annex_country }
+			}
+		}
+	}
+}
+
+jin_decrease_military_participation = {
+	name = "jin_decrease_military_participation"
+	desc = "jin_decrease_military_participation_jin"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = 40
+		}
+		add = {
+			value = var:suppression_factor
+			divide = var:rebel_fighting_strength
+			subtract = 1
+			multiply = 20
+		}
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = army_involvement_less_than_1
+			AND = {
+				has_variable = army_involvement_fraction
+				var:army_involvement_fraction > 0
+			}
+		}
+	}
+
+	effect = {
+		custom_tooltip = {
+			text = qng_decrease_military_participation
+			if = {
+				limit = {
+					has_variable = army_involvement_fraction
+				}
+				change_variable = {
+					name = army_involvement_fraction
+					add = -0.05
+				}
+			}
+		}
+	}
+}
+
+jetfc_business_bailout = {
+	name = "jetfc_business_bailout"
+	desc = "jetfc_business_bailout_desc"
+
+	visible = {
+		always = yes
+	}
+	possible = {
+		taking_loans = no
+	}
+	ai_chance = {
+		value = 100
+	}
+	effect = {
+		add_treasury = -100000
+		add_modifier = {
+			name = jetfc_bailing_out_businesses
+			days = normal_modifier_time
+		}
+	}
+}
+
+tkk_delay_work_progress_button = {
+	name = "tkk_delay_work_progress_button"
+	desc = "tkk_delay_work_progress_button_desc"
+	visible = {
+		always = yes
+	}
+	cooldown = {
+		months = 10
+	}
+	ai_chance = {
+		value = 10
+		add = {
+			value = var:discontent_variable
+			multiply = -0.2
+		}
+	}
+	effect = {
+		add_modifier = {
+			name = tkk_construction_delay
+			months = 6
+		}
+		scope:journal_entry = {
+			add_progress = {
+				value = {
+					value = 20
+					add = {
+						value = "scripted_bar_progress(tkk_public_discontent_progress_bar)"
+						divide = 20
+					}
+				}
+				name = tkk_public_discontent_progress_bar
+			}
+		}
+	}
+}
+
+jeshz_approve_additional_funds = {
+	name = "jeshz_approve_additional_funds"
+	desc = "jeshz_approve_additional_funds_desc"
+	visible = {
+		always = yes
+	}
+	cooldown = {
+		months = 8
+	}
+	ai_chance = {
+		value = 15
+		add = {
+			value = var:discontent_variable
+			multiply = -0.4
+		}
+	}
+	effect = {
+		add_modifier = {
+			name = tkk_approved_additional_funding
+			months = 4
+		}
+		je:je_tkk_kansai_integrated_police_force = {
+			add_progress = {
+				value = 20 name = tkk_public_discontent_progress_bar
+			}
+		}
+	}
+}
+
+jekipf_approve_additional_funding_button = {
+	name = "jekipf_approve_additional_funding_button"
+	desc = "jekipf_approve_additional_funding_button_desc"
+	visible = {
+		always = yes
+	}
+	cooldown = {
+		months = 9
+	}
+	ai_chance = {
+		value = 15
+		add = {
+			value = var:discontent_variable
+			multiply = -0.4
+		}
+	}
+	effect = {
+		add_modifier = {
+			name = tkk_approved_additional_funding
+			months = 6
+		}
+		je:je_tkk_siberian_habitation_zone = {
+			add_progress = {
+				value = 15 name = tkk_public_discontent_progress_bar
+			}
+		}
+	}
+}
+
+jezp_construct_siberian_habitation_zone = {
+	name = "jezp_construct_siberian_habitation_zone"
+	desc = "jezp_construct_siberian_habitation_zone_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		NOT = {
+			tkk_is_working_on_megaproject = yes
+			any_scope_state = {
+				has_modifier = jeshz_siberian_colony_modifier
+			}
+		}
+	}
+	ai_chance = {
+		value = 10
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = -100
+		}
+	}
+	effect = {
+		add_journal_entry = {
+			type = je_tkk_siberian_habitation_zone
+		}
+	}
+}
+
+jezp_construct_kansai_integrated_police_force = {
+	name = "jezp_construct_kansai_integrated_police_force"
+	desc = "jezp_construct_kansai_integrated_police_force_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		NOT = {
+			tkk_is_working_on_megaproject = yes
+			any_scope_state = {
+				has_modifier = jekipf_kansai_integrated_police_modifier
+			}
+		}
+	}
+	ai_chance = {
+		value = 10
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = -100
+		}
+	}
+	effect = {
+		add_journal_entry = {
+			type = je_tkk_kansai_integrated_police_force
+		}
+	}
+}
+
+jezp_construct_southern_port_complex = {
+	name = "jezp_construct_southern_port_complex"
+	desc = "jezp_construct_southern_port_complex_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		NOT = {
+			tkk_is_working_on_megaproject = yes
+			any_scope_state = {
+				has_modifier = jespc_southwest_port_complex
+			}
+		}
+	}
+	ai_chance = {
+		value = 10
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = -100
+		}
+	}
+	effect = {
+		add_journal_entry = {
+			type = je_tkk_southwest_port_complex
+		}
+	}
+}
+
+jespc_approve_additional_funding_button = {
+	name = "jespc_approve_additional_funding_button"
+	desc = "jespc_approve_additional_funding_button_desc"
+	visible = {
+		always = yes
+	}
+	cooldown = {
+		months = 9
+	}
+	ai_chance = {
+		value = 15
+		add = {
+			value = var:discontent_variable
+			multiply = -0.4
+		}
+	}
+	effect = {
+		add_modifier = {
+			name = tkk_approved_additional_funding
+			months = 6
+		}
+		je:je_tkk_siberian_habitation_zone = {
+			add_progress = {
+				value = 15 name = tkk_public_discontent_progress_bar
+			}
+		}
+	}
+}

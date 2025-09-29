@@ -1,0 +1,63 @@
+﻿ideology_fengtian_civicalist = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_radical.dds"
+	
+	character_ideology = yes
+	
+	lawgroup_governance_principles = {
+		law_theocracy = strongly_disapprove
+		law_monarchy = strongly_disapprove
+		law_presidential_republic = approve
+		law_parliamentary_republic = approve
+		law_council_republic = neutral
+		law_corporate_state = strongly_disapprove
+	}
+
+	lawgroup_church_and_state = {
+		law_state_religion = strongly_disapprove
+		law_freedom_of_conscience = neutral
+		law_total_separation = approve
+		law_state_atheism = neutral
+	}
+	
+	lawgroup_bureaucracy = {
+		law_elected_bureaucrats = neutral
+		law_appointed_bureaucrats = approve
+		law_hereditary_bureaucrats = disapprove
+	}
+	
+	country_trigger = {
+		c:FGT ?= this
+	}
+	
+	interest_group_leader_trigger = {
+		OR = {
+			is_interest_group_type = ig_rural_folk
+			is_interest_group_type = ig_trade_unions
+			is_interest_group_type = ig_intelligentsia
+		}
+	}
+	
+	non_interest_group_leader_trigger = {
+		# Agitator ideologies should disapprove of a current law
+		NAND = {
+			has_role = agitator
+			owner = {
+				has_law = law_type:law_presidential_republic
+				has_law = law_type:law_protected_speech
+			}
+		}
+		interest_group = { 
+			is_interest_group_type = ig_rural_folk
+			is_interest_group_type = ig_trade_unions
+			is_interest_group_type = ig_intelligentsia
+		}
+	}
+	
+	interest_group_leader_weight = {
+		value = 10000
+	}
+	
+	non_interest_group_leader_weight = {
+		value = 1000
+	}	
+}

@@ -1,0 +1,2831 @@
+german_helen_moment = {
+	set_variable = { name = german_next value = 2 }
+	if = {
+		limit = {
+			ig:ig_armed_forces = {
+				is_powerful = yes
+			}
+		}
+		change_variable = {
+			name = german_next
+			add = 1
+		}
+	}
+	if = {
+		limit = {
+			ig:ig_armed_forces = {
+				is_in_government = yes
+			}
+		}
+		change_variable = {
+			name = german_next
+			add = 1
+		}
+	}
+	if = {
+		limit = {
+			any_scope_character = {
+				has_ideology = ideology:ideology_jingoist_leader
+			}
+		}
+		change_variable = {
+			name = german_next
+			add = 1
+		}
+	}
+	if = {
+		limit = {
+			ig:ig_intelligentsia = {
+				is_in_government = yes
+			}
+		}
+		change_variable = {
+			name = german_next
+			add = -1
+		}
+	}
+}
+
+fengtian_ally_early_setup = {
+	activate_law = law_type:law_universal_suffrage
+	activate_law = law_type:law_presidential_republic
+	activate_law = law_type:law_professional_army
+	activate_law = law_type:law_homesteading
+}
+
+fengtian_ally_late_setup = {
+	activate_law = law_type:law_single_party_state
+	activate_law = law_type:law_council_republic
+	activate_law = law_type:law_professional_army
+	activate_law = law_type:law_collectivized_agriculture
+	activate_law = law_type:law_command_economy
+}
+
+peasant_revolt_setup = {
+	activate_law = law_type:law_presidential_republic
+	activate_law = law_type:law_homesteading
+	activate_law = law_type:law_national_militia
+	activate_law = law_type:law_agrarianism
+}
+
+slave_revolt_states = {
+	random_state = {
+		limit = {
+			AND = {
+				any_neighbouring_state = {
+					owner = c:SLAVE_REVOLT
+				}
+				owner = {
+					OR = {
+						is_subject_of = c:GER
+						this = c:GER
+					}
+				}
+			}
+		}
+		set_state_owner = c:SLAVE_REVOLT
+	}
+	random_list = {
+		92 = {
+			slave_revolt_states = yes
+		}
+		8 = {
+		}
+	}
+}
+
+calculate_belief = {
+	ig:ig_devout = {
+		save_scope_value_as = {
+			name = clout_scope
+			value = ig_clout
+		}
+	}
+	set_variable = {
+		name = belief_var
+		value = clout_scope
+	}
+	change_variable = {
+		name = belief_var
+		multiply = 6
+		multiply = government_legitimacy
+		divide = 100
+		multiply = radical_fraction
+	}
+	if = {
+		limit = {
+			has_modifier = belief_bonus
+		}
+		remove_modifier = belief_bonus
+	}
+	add_modifier = {
+		name = belief_bonus
+		multiplier = belief_var
+	}
+}
+
+mass_hysteria_check = { # increases hysteria chance by a bit each week and triggers it at random.should increase slowly.
+	change_variable = {
+		name = mass_hysteria_chance
+		add = radical_fraction
+		multiply = 0.15
+	}
+	if = {
+		limit = {
+			has_healthy_economy = no
+		}
+		change_variable = {
+			name = mass_hysteria_chance
+			add = 0.3
+		}
+	}
+	if = {
+		limit = {
+			government_legitimacy <= 40
+		}
+		change_variable = {
+			name = mass_hysteria_chance
+			add = 0.07
+		}
+	}
+	else_if = {
+		limit = {
+			government_legitimacy <= 60
+		}
+		change_variable = {
+			name = mass_hysteria_chance
+			add = 0.03
+		}
+	}
+	random_list = {
+		0 = {
+			modifier = {
+				add = owner.var:mass_hysteria_chance
+			}
+			add_modifier = {
+				name = dvm_mass_hysteria_modifier
+				months = 10
+				is_decaying = yes
+			}
+			set_variable = {
+				name = mass_hysteria_chance
+				value = 0
+			}
+		}
+		100 = {
+			modifier = {
+				subtract = owner.var:mass_hysteria_chance
+			}
+		}
+	}
+}
+
+arab_secularist_setup = {
+		activate_law = law_type:law_presidential_republic
+		activate_law = law_type:law_wealth_voting
+		activate_law = law_type:law_tenant_farmers
+		activate_law = law_type:law_per_capita_based_taxation
+		activate_law = law_type:law_slavery_banned
+		activate_law = law_type:law_total_separation
+		activate_law = law_type:law_professional_army
+		activate_law = law_type:law_no_home_affairs
+		activate_law = law_type:law_appointed_bureaucrats
+		activate_law = law_type:law_cultural_exclusion
+		activate_law = law_type:law_traditionalism
+		activate_law = law_type:law_mercantilism
+		activate_law = law_type:law_women_own_property
+		activate_law = law_type:law_censorship	
+		activate_law = law_type:law_migration_controls
+}
+
+neutral_arab_setup = {
+		activate_law = law_type:law_presidential_republic
+		activate_law = law_type:law_landed_voting
+		activate_law = law_type:law_tenant_farmers
+		activate_law = law_type:law_land_based_taxation
+		activate_law = law_type:law_slave_trade
+		activate_law = law_type:law_freedom_of_conscience
+		activate_law = law_type:law_professional_army
+		activate_law = law_type:law_no_home_affairs
+		activate_law = law_type:law_appointed_bureaucrats
+		activate_law = law_type:law_racial_segregation
+		activate_law = law_type:law_traditionalism
+		activate_law = law_type:law_mercantilism
+		activate_law = law_type:law_censorship	
+		activate_law = law_type:law_migration_controls
+}
+
+orthodox_arab_setup = {
+		activate_law = law_type:law_presidential_republic
+		activate_law = law_type:law_landed_voting
+		activate_law = law_type:law_serfdom
+		activate_law = law_type:law_land_based_taxation
+		activate_law = law_type:law_slave_trade
+		activate_law = law_type:law_state_religion
+		activate_law = law_type:law_professional_army
+		activate_law = law_type:law_no_home_affairs
+		activate_law = law_type:law_appointed_bureaucrats
+		activate_law = law_type:law_national_supremacy
+		activate_law = law_type:law_traditionalism
+		activate_law = law_type:law_mercantilism
+		activate_law = law_type:law_censorship	
+		activate_law = law_type:law_migration_controls
+}
+
+calculate_ural_skirmish_value = {
+	c:SLR ?= {
+		save_scope_as = slr_scope
+	}
+	set_variable = {
+		name = ural_skirmish
+		value = root.army_power_projection
+	}
+	change_variable = {
+		name = ural_skirmish
+		multiply = 25
+	}
+	change_variable = {
+		name = ural_skirmish
+		divide = "scope:slr_scope.army_power_projection"
+	}
+	if = {
+		limit = {
+			has_modifier = ural_shattered_military_organization
+		}
+		change_variable = {
+			name = ural_skirmish
+			multiply = 0.7
+		}
+	}
+	else_if = {
+		limit = {
+			has_modifier = ural_broken_military_organization
+		}
+		change_variable = {
+			name = ural_skirmish
+			multiply = 0.8
+		}
+	}
+	else_if = {
+		limit = {
+			has_modifier = ural_recovering_military_organization
+		}
+		change_variable = {
+			name = ural_skirmish
+			multiply = 0.9
+		}
+	}
+	if = {
+		limit = {
+			has_modifier = ural_shattered_fighting_spirit
+		}
+		change_variable = {
+			name = ural_skirmish
+			multiply = 0.7
+		}
+	}
+	else_if = {
+		limit = {
+			has_modifier = ural_broken_fighting_spirit
+		}
+		change_variable = {
+			name = ural_skirmish
+			multiply = 0.8
+		}
+	}
+	else_if = {
+		limit = {
+			has_modifier = ural_recovering_fighting_spirit
+		}
+		change_variable = {
+			name = ural_skirmish
+			multiply = 0.9
+		}
+	}
+}
+
+reevaluate_university_bonus = {
+	every_scope_state = {
+		limit = {
+			has_building = building_university
+		}
+		if = {
+			limit = {
+				has_modifier = education_access_state_bonus_sru
+			}
+			remove_modifier = education_access_state_bonus_sru
+		}
+		add_modifier = {
+			name = education_access_state_bonus_sru
+			multiplier = b:building_university.level
+		}
+	}
+}
+
+rail_progress_checks = {
+	if = {
+		limit = {
+			"scripted_bar_progress(rail_system_progress)" > 15
+		}
+		if = {
+			NOT = {
+				has_variable = coal_and_iron_extraction_completed
+			}
+			post_notification = sru_iron_and_coal_mines_built
+			set_variable = coal_and_iron_extraction_completed
+			random_scope_state = {
+				limit = {
+					has_potential_resource = bg_iron_mining
+				}
+				create_building={
+					building="building_iron_mine"
+					add_ownership={
+						country={
+							country="c:SRU"
+							levels=2
+						}
+					}
+				}
+			}
+			random_scope_state = {
+			limit = {
+					has_potential_resource = bg_coal_mining
+				}
+				create_building={
+					building="building_coal_mine"
+					add_ownership={
+						country={
+							country="c:SRU"
+							levels=2
+						}
+					}
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			"scripted_bar_progress(rail_system_progress)" > 45
+		}
+		if = {
+			NOT = {
+				has_variable = steel_mill_constructed
+			}
+			post_notification = sru_steel_mill_built
+			set_variable = steel_mill_constructed
+			random_scope_state = {
+				create_building={
+					building="building_steel_mills"
+					add_ownership={
+						country={
+							country="c:SRU"
+							levels=1
+						}
+					}
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			"scripted_bar_progress(rail_system_progress)" > 80
+		}
+		if = {
+			NOT = {
+				has_variable = motor_industries_constructed
+			}
+			post_notification = sru_motor_industries_built
+			set_variable = motor_industries_constructed
+			random_scope_state = {
+				create_building={
+					building="building_motor_industry"
+					add_ownership={
+						country={
+							country="c:SRU"
+							levels=1	
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+rail_expense_and_rate_calc = {
+	if = {
+		limit = {
+			has_modifier = rail_construction_expenses
+		}
+		remove_modifier = rail_construction_expenses
+	}
+	add_modifier = {
+		name = rail_construction_expenses
+		multiplier = scope:rail_investment_level
+	}
+	set_variable = {
+		name = calculating_rail
+		value = 20
+	}
+	if = {
+		limit = {
+			has_modifier = national_emergency_declared_sru
+		}
+		change_variable = {
+			name = calculating_rail
+			multiply = 0.2
+		}
+	}
+	if = {
+		limit = {
+			has_modifier = mobilized_national_guard_sru
+		}
+		change_variable = {
+			name = calculating_rail
+			multiply = 0.45
+		}
+	}
+	if = {
+		limit = {
+			has_modifier = national_vigilance_declared_sru
+		}
+		change_variable = {
+			name = calculating_rail
+			multiply = 0.75
+		}
+	}
+	if = {
+		limit = {
+			has_modifier = national_prosperity_declared_sru
+		}
+		change_variable = {
+			name = calculating_rail
+			multiply = 1.05
+		}
+	}
+	change_variable = {
+		name = calculating_rail
+		multiply = scope:rail_investment_level
+	}
+	je:je_sru_directory_rail_system = {
+		set_bar_progress = {
+			value = owner.var:calculating_rail
+			name = sru_rail_system_construction_efficiency
+		}
+	}
+}		
+
+remove_sru_directory_modifiers = {
+	if = {
+		limit = {
+			has_modifier = national_emergency_declared_sru
+		}
+		remove_modifier = national_emergency_declared_sru
+	}
+	if = {
+		limit = {
+			has_modifier = mobilized_guard_declared_sru
+		}
+		remove_modifier = mobilized_guard_declared_sru
+	}
+	if = {
+		limit = {
+			has_modifier = national_vigilance_declared_sru
+		}
+		remove_modifier = national_vigilance_declared_sru
+	}
+	if = {
+		limit = {
+			has_modifier = national_prosperity_declared_sru
+		}
+		remove_modifier = national_prosperity_declared_sru
+	}
+}
+
+sru_rebellion_check = {
+	every_scope_state = {
+		c:SRU  = {
+			change_variable = {
+				name = rebellion_chance
+				add = prev.turmoil
+			}
+		}
+	}
+	random_list = {
+		0 = {
+			modifer = {
+				add = owner.var:rebellion_chance
+			}
+			create_sru_rebellion = yes
+		}
+		100 = {
+			modifier = {
+				subtract = owner.var:rebellion_chance
+			}
+		}
+	}
+}
+
+create_sru_rebellion = {
+	set_variable = {
+		name = rebellion_chance
+		value = 0
+	}
+	random_scope_state = {
+		order_by = turmoil
+		save_scope_as = rebel_state
+	}
+	create_country = {  
+		tag = SRU
+		origin = root
+		state = "scope:rebel_state".region_state:SRU
+		on_created = {
+			save_scope_as = rebel_country
+			activate_law = law_type:law_monarchy
+			activate_law = law_type:law_oligarchy	
+			activate_law = law_peasant_levies
+			create_diplomatic_play = {
+				name = siberian_unification_war
+				target_country = scope:rebel_country
+				type = dp_annex_war
+				escalation = 20
+				target_state = "root.capital".region_state:root
+				add_war_goal = {
+					holder = root
+					target_country = this
+					type = annex_country
+				}
+			}
+		}
+	}
+	c:SRU = {
+		post_notification = local_rebellion_sru
+	}
+}
+
+select_random_siberian_opponent = {
+	random_neighbouring_state = {
+		limit = {
+			owner = {
+				AND = {
+					country_has_primary_culture = cu:russian
+					any_scope_state = {
+						OR = {
+							region = sr:region_west_siberia
+							region = sr:region_east_siberia
+						}
+					}
+					NOT = {
+						has_truce_with = root
+						is_diplomatic_play_committed_participant = yes
+					}
+				}
+			}
+		}
+		owner = {
+			save_scope_as = owner_country
+		}
+	}
+	root = {
+		set_variable = {
+			name = target_country
+			value = scope:owner_country
+		}
+	}
+}
+
+calculate_war_chance = {
+	set_variable = {
+		name = chance_var
+		value = this.army_power_projection
+	}
+	change_variable = {
+		name = chance_var
+		divide = "var:target_country.army_power_projection"
+	}
+	change_variable = {
+		name = chance_var
+		subtract = 1
+	}
+	change_variable = {
+		name = chance_var
+		multiply = 100
+	}
+	if = {
+		limit = {
+			var:target_country = {
+				taking_loans = yes
+			}
+		}
+		change_variable = {
+			name = chance_var
+			add = 25
+		}
+	}
+	if = {
+		limit = {
+			var:target_country = {
+				has_healthy_economy = no
+			}
+		}
+		change_variable = {
+			name = chance_var
+			add = 25
+		}
+	}
+	if = {
+		limit = {
+			taking_loans = yes
+		}
+		change_variable = {
+			name = chance_var
+			add = -25
+		}	
+	}
+	if = {
+		limit = {
+			has_healthy_economy = no
+		}
+		change_variable = {
+			name = chance_var
+			add = -25
+		}
+	}
+}
+
+select_random_west_russian_opponent = {
+	random_neighbouring_state = {
+		limit = {
+			owner = {
+				has_modifier = successors_of_area_westland
+			}
+		}
+		owner = {
+			save_scope_as = owner_country
+		}
+	}
+	root = {
+		set_variable = {
+			name = target_country
+			value = scope:owner_country
+		}
+	}
+}
+
+remove_negative_modifiers_url = {
+	if = {
+		limit = {
+			has_modifier = ural_shattered_fighting_spirit
+		}
+		remove_modifier = ural_shattered_fighting_spirit
+	}
+	if = {
+		limit = {
+			has_modifier = ural_shattered_military_organization
+		}
+		remove_modifier = ural_shattered_military_organization
+	}
+	if = {
+		limit = {
+			has_modifier = ural_shattered_logistics
+		}
+		remove_modifier = ural_shattered_logistics
+	}
+	if = {
+		limit = {
+			has_modifier = ural_reorganizing_offense
+		}
+		remove_modifier = ural_reorganizing_offense
+	}
+	if = {
+		limit = {
+			has_modifier = ural_reorganizing_defense
+		}
+		remove_modifier = ural_reorganizing_defense
+	}
+	if = {
+		limit = {
+			has_modifier = ural_reorganizing_logistics
+		}
+		remove_modifier = ural_reorganizing_logistics
+	}
+	if = {
+		limit = {
+			has_modifier = ural_broken_fighting_spirit
+		}
+		remove_modifier = ural_broken_fighting_spirit
+	}
+	if = {
+		limit = {
+			has_modifier = ural_broken_military_organization
+		}
+		remove_modifier = ural_broken_military_organization
+	}
+	if = {
+		limit = {
+			has_modifier = ural_broken_logistics
+		}
+		remove_modifier = ural_broken_logistics
+	}
+	if = {
+		limit = {
+			has_modifier = ural_recovering_fighting_spirit
+		}
+		remove_modifier = ural_recovering_fighting_spirit
+	}
+	if = {
+		limit = {
+			has_modifier = ural_recovering_military_organization
+		}
+		remove_modifier = ural_recovering_military_organization
+	}
+	if = {
+		limit = {
+			has_modifier = ural_recovering_logistics
+		}
+		remove_modifier = ural_recovering_logistics
+	}
+}
+
+calculate_suppression = {
+    remove_modifier = fighting_peasants_modifier
+    set_variable = {
+        name = rebel_support_factor
+        value = {
+            value = 0
+            subtract = var:participating_fraction
+            multiply = var:support_modifier
+            multiply = 0.5
+            add = 1
+        }
+    }
+    set_variable = {
+        name = suppression_factor
+        value = {
+            value = this.army_power_projection
+            multiply = this.army_size
+            multiply = var:army_involvement_fraction
+            multiply = var:rebel_support_factor
+        }
+    }
+    add_modifier = {
+        name = rebel_suppression_cost
+        multiplier = {
+            value = root.army_power_projection
+            multiply = this.army_size
+            multiply = var:army_involvement_fraction
+            multiply = 10
+        }
+    }
+    add_modifier = {
+        name = fighting_peasants_modifier
+        multiplier = {
+            value = 100
+            multiply = var:army_involvement_fraction
+            multiply = var:participating_fraction
+        }
+    }
+}
+
+calculate_rebel_strength = {
+    set_variable = {
+        name = rebel_fighting_strength
+        value = {
+            value = root.total_population
+            multiply = root.radical_fraction
+            multiply = var:participating_fraction
+            divide = 5
+        }
+    }
+}
+
+#67db7bb028336f67f0d4f292
+#67db7f0f673e09fa321cb439
+CFDMODJE_remove_vars = {
+	if = {
+		limit = {
+			has_variable = CFDMODJE_rejected_reforms_var
+		}
+		remove_variable = CFDMODJE_rejected_reforms_var
+	}
+	if = {
+		limit = {
+			has_variable = did_tech_boost
+		}
+		remove_variable = did_tech_boost
+	}
+	if = {
+		limit = {
+			has_variable = british_intervention_chance
+		}
+		remove_variable = british_intervention_chance
+	}
+	if = {
+		limit = {
+			has_variable = CFDMODJE_empowered_academia_var
+		}
+		remove_variable = CFDMODJE_empowered_academia_var
+	}
+}
+
+create_southern_warlords = {
+	if = {
+		limit = {
+			exists = s:STATE_SHAOZHOU.region_state:DOC
+		}
+		create_country = {
+			tag = FUJ
+			origin = this
+			state = s:STATE_SHAOZHOU.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+				if = {
+					limit = {
+						exists = s:STATE_FUJIAN
+					}
+					random_state = {
+						limit = {
+							state_region = s:STATE_FUJIAN
+						}
+						set_state_owner = c:FUJ
+					}
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			exists = s:STATE_ZHEJIANG.region_state:DOC
+		}
+		create_country = {
+			tag = ZHJ
+			origin = this
+			state = s:STATE_ZHEJIANG.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+				if = {
+					limit = {
+						exists = s:STATE_SUZHOU
+					}
+					random_state = {
+						limit = {
+							state_region = s:STATE_SUZHOU
+						}
+						set_state_owner = c:ZHJ
+					}
+				}
+				c:FUJ ?= {
+					create_diplomatic_pact = {
+						country = c:ZHJ
+						type = tight_warlord
+					}
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			exists = s:STATE_JIANGXI.region_state:DOC
+		}
+		create_country = {
+			tag = JXI
+			origin = this
+			state = s:STATE_JIANGXI.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+				c:FUJ ?= {
+					create_diplomatic_pact = {
+						country = c:JXI
+						type = tight_warlord
+					}
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			exists = s:STATE_HUNAN.region_state:DOC
+		}
+		create_country = {
+			tag = HNA
+			origin = this
+			state = s:STATE_HUNAN.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+				c:FUJ ?= {
+					create_diplomatic_pact = {
+						country = c:HNA
+						type = tight_warlord
+					}
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			exists = s:STATE_SOUTHERN_ANHUI.region_state:DOC
+		}
+		create_country = {
+			tag = ANH
+			origin = this
+			state = s:STATE_SOUTHERN_ANHUI.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+				c:FUJ ?= {
+					create_diplomatic_pact = {
+						country = c:ANH
+						type = tight_warlord
+					}
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			exists = s:STATE_WESTERN_HUBEI.region_state:DOC
+		}
+		create_country = {
+			tag = HUB
+			origin = this
+			state = s:STATE_WESTERN_HUBEI.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+				if = {
+					limit = {
+						exists = s:STATE_EASTERN_HUBEI
+					}
+					random_state = {
+						limit = {
+							state_region = s:STATE_EASTERN_HUBEI
+						}
+						set_state_owner = c:HUB
+					}
+				}
+				c:FUJ ?= {
+					create_diplomatic_pact = {
+						country = c:HUB
+						type = tight_warlord
+					}
+				}
+			}
+		}
+	}
+}
+
+create_northern_warlords = {
+	if = {
+		limit = {
+			exists = s:STATE_ZHILI.region_state:DOC
+		}
+		create_country = {
+			tag = ZHL
+			origin = this
+			state = s:STATE_ZHILI.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+			}
+		}
+	}
+	if = {
+		limit = {
+			exists = s:STATE_HENAN.region_state:DOC
+		}
+		create_country = {
+			tag = HEN
+			origin = this
+			state = s:STATE_HENAN.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+				if = {
+					limit = {
+						exists = s:STATE_NORTHERN_ANHUI
+					}
+					random_state = {
+						limit = {
+							state_region = s:STATE_NORTHERN_ANHUI
+						}
+						set_state_owner = c:HEN
+					}
+				}
+				c:ZHL ?= {
+					create_diplomatic_pact = {
+						country = c:HEN
+						type = tight_warlord
+					}
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			exists = s:STATE_SHANDONG.region_state:DOC
+		}
+		create_country = {
+			tag = WQI
+			origin = this
+			state = s:STATE_SHANDONG.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+				c:ZHL ?= {
+					create_diplomatic_pact = {
+						country = c:WQI
+						type = tight_warlord
+					}
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			exists = s:STATE_SHANXI.region_state:DOC
+		}
+		create_country = {
+			tag = SHX
+			origin = this
+			state = s:STATE_SHANXI.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+				c:ZHL ?= {
+					create_diplomatic_pact = {
+						country = c:SHX
+						type = tight_warlord
+					}
+				}
+			}
+		}
+	}
+}
+
+also_create_nanjing_warlord = {
+	if = {
+		limit = {
+			exists = s:STATE_JIANGSU.region_state:DOC
+		}
+		create_country = {
+			tag = JSU
+			origin = this
+			state = s:STATE_JIANGSU.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+				if = {
+					limit = {
+						exists = s:STATE_NANJING.region_state:DOC
+					}
+					random_state = {
+						limit = {
+							state_region = s:STATE_NANJING
+						}
+						set_state_owner = c:JSU
+					}
+				}
+				c:ZHL ?= {
+					create_diplomatic_pact = {
+						country = c:JSU
+						type = tight_warlord
+					}
+				}
+			}
+		}
+	}	
+}
+
+create_western_warlords = {
+	if = {
+		limit = {
+			exists = s:STATE_XIAN.region_state:DOC
+		}
+		create_country = {
+			tag = SXI
+			origin = this
+			state = s:STATE_XIAN.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+				if = {
+					limit = {
+						exists = s:STATE_NINGXIA.region_state:DOC
+					}
+					random_state = {
+						limit = {
+							state_region = s:STATE_NINGXIA
+						}
+						set_state_owner = c:SXI
+					}
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			exists = s:STATE_GANSU.region_state:DOC
+		}
+		create_country = {
+			tag = XIB
+			origin = this
+			state = s:STATE_GANSU.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+				if = {
+					limit = {
+						exists = s:STATE_QINGHAI.region_state:DOC
+					}
+					random_state = {
+						limit = {
+							state_region = s:STATE_QINGHAI
+						}
+						set_state_owner = c:XIB
+					}
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			exists = s:STATE_CHONGQING.region_state:DOC
+		}
+		create_country = {
+			tag = CHJ
+			origin = this
+			state = s:STATE_CHONGQING.region_state:DOC
+			on_created = {
+				warlord_setup_effect = yes
+				if = {
+					limit = {
+						exists = s:STATE_SICHUAN.region_state:DOC
+					}
+					random_state = {
+						limit = {
+							state_region = s:STATE_SICHUAN
+						}
+						set_state_owner = c:CHJ
+					}
+				}
+				if = {
+					limit = {
+						exists = s:STATE_YUNNAN.region_state:DOC
+					}
+					random_state = {
+						limit = {
+							state_region = s:STATE_YUNNAN
+						}
+						set_state_owner = c:CHJ
+					}
+				}
+				if = {
+					limit = {
+						exists = s:STATE_GUIZHOU.region_state:DOC
+					}
+					random_state = {
+						limit = {
+							state_region = s:STATE_GUIZHOU
+						}
+						set_state_owner = c:CHJ
+					}
+				}
+			}
+		}
+	}
+}
+
+create_doc = {
+	ordered_state = {
+		limit = {
+			owner = root
+		}
+		order_by = radical_fraction
+		save_scope_as = coup_state
+	}
+	create_country = {
+		tag = DOC
+		origin = this
+		state = "scope:coup_state".region_state:CFD
+		on_created = {
+			activate_law = law_type:law_parliamentary_republic
+			activate_law = law_type:law_landed_voting
+			activate_law = law_type:law_tenant_farmers
+			activate_law = law_type:law_land_based_taxation
+			activate_law = law_type:law_hereditary_bureaucrats
+			activate_law = law_type:law_racial_segregation
+			activate_law = law_type:law_extraction_economy
+			activate_law = law_type:law_censorship	
+			activate_law = law_type:law_closed_borders
+		}
+	}
+	c:GBR ?= {
+		create_diplomatic_pact = {
+			country = c:DOC
+			type = puppet
+		}
+	}
+	every_scope_state = {
+		limit = {
+			state_has_building_type_levels = {
+				target = bt:building_barracks
+				value > 0
+			}
+		}
+		random_list = {
+			50 = {
+				modifier = {
+					subtract = {
+						value = this.radical_fraction
+						multiply = 100
+					}
+				}
+				set_state_owner = c:DOC
+			}
+			50 = {
+				modifier = {
+					add = {
+						value = this.radical_fraction
+						multiply = 100
+					}
+				}
+			}
+		}
+	}
+	c:CFD = {
+		make_independent = yes
+	}
+}
+
+check_strongest_warlords = {
+	ordered_country = {
+		limit = { is_chinese_warlord = yes }
+		order_by = prestige
+		position = 0
+		save_scope_as = strongest_warlord_scope
+	}
+	set_variable = {
+		name = warlord_1_scope
+		value = scope:strongest_warlord_scope
+	}
+	ordered_country = {
+		limit = { is_chinese_warlord = yes }
+		order_by = prestige
+		position = 1
+		save_scope_as = second_strongest_warlord_scope
+	}
+	set_variable = {
+		name = warlord_2_scope
+		value = scope:second_strongest_warlord_scope
+	}
+	var:warlord_2_scope = {
+		save_scope_value_as = {
+			name = relations_scope
+			value = "relations(var:warlord_1_scope)"
+		}
+	}
+	if = {
+		limit = {
+			scope:relations_scope >= -50
+		}
+		var:warlord_2_scope = {
+			change_relations = {
+				country = var:warlord_1_scope
+				value = -1.5
+			}
+		}
+	}
+	else = {
+		if = {
+			limit = {
+				NOT = {
+					has_global_variable = warlord_clash_began
+				}
+			}
+			var:warlord_2_scope = {
+				create_diplomatic_play = {
+					name = warlord_clash
+					target_country = var:warlord_1_scope
+					type = dp_china_warlord_clash
+					escalation = 20
+					target_state = "var:warlord_1_scope.capital".region_state:var
+				}
+			}
+			set_global_variable = {
+				name = warlord_clash_began
+			}
+		}
+	}
+	if = {
+		limit = {
+			scope:relations_scope >= -50
+		}
+		je:je_doc_warlord_clash = {
+			set_bar_progress = {
+				value = scope:relations_scope
+				name = DWCJE_conflict_progress
+			}
+		}
+	}
+}
+
+china_warlord_bloc_breakdown = {
+	add_modifier = {
+		name = chinese_warlord_loss_of_authority
+		days = short_modifier_time
+		is_decaying = yes
+	}
+	every_country = {
+		limit = {
+			is_subject_of = ROOT
+		}
+		make_independent = yes
+		set_variable = {
+			name = recently_broken_warlord
+			days = short_modifier_time
+		}
+	}
+}
+
+cfd_doc_coup = {
+	change_tag = DOC
+	c:GBR ?= {
+		create_diplomatic_pact = {
+			country = c:DOC
+			type = puppet
+		}
+	}
+	ordered_state = {
+		limit = {
+			owner = root
+		}
+		order_by = radical_fraction
+		save_scope_as = coup_state
+	}
+	create_country = {
+		tag = CFD
+		origin = this
+		state = "scope:coup_state".region_state:DOC
+		on_created = {
+			activate_law = law_type:law_presidential_republic
+			activate_law = law_type:law_wealth_voting
+			activate_law = law_type:law_appointed_bureaucrats
+			activate_law = law_type:law_homesteading
+			activate_law = law_type:law_interventionism
+			activate_law = law_type:law_per_capita_based_taxation
+		}
+	}
+	every_scope_state = {
+		limit = {
+			state_has_building_type_levels = {
+				target = bt:building_barracks
+				value > 0
+			}
+		}
+		random_list = {
+			35 = {
+				modifier = {
+					add = {
+						value = this.radical_fraction
+						multiply = 100
+					}
+				}
+				set_state_owner = c:CFD
+			}
+			65 = {
+				modifier = {
+					subtract = {
+						value = this.radical_fraction
+						multiply = 100
+					}
+				}
+			}
+		}
+	}
+	c:CFD = {
+		make_independent = yes
+	}
+	c:CFD = {
+		create_diplomatic_play = {
+			name = chinese_revolt
+			target_country = c:DOC
+			type = dp_annex_war
+			escalation = 20
+			target_state = ROOT.capital.region_state:CFD
+			add_war_goal = {
+				holder = c:DOC
+				target_country = c:CFD
+				type = annex_country
+			}
+		}
+		change_infamy = -150
+	}
+	change_infamy = -150
+}
+
+GDGHC_launder_money = {
+	remove_modifier = GDGHC_laundering_modifier
+	add_modifier = {
+		name = GDGHC_laundering_modifier
+		multiplier = {
+			value = investment_pool_gross_income
+			divide = 10
+		}
+	}
+	change_variable = {
+		name = GDGHC_total_laundered_amount
+		add = {
+			value = investment_pool_gross_income
+			divide = 10
+		}
+	}
+}
+
+instate_japanese_military_rule = {
+	activate_law = law_type:law_closed_borders
+	activate_law = law_type:law_dedicated_police
+	activate_law = law_type:law_professional_army
+	activate_law = law_type:law_national_guard
+	add_liberty_desire = -40
+}
+
+dismantle_shina = {
+	every_country = {
+		limit = {
+			has_variable = chinese_national_congress_participant
+		}
+		add_journal_entry = {
+			type = je_the_chinese_national_congress
+		}
+	}
+	if = {
+		limit = {
+			any_country = {
+				has_variable = accepted_chinese_offer
+			}
+		}
+		random_country = {
+			limit = {
+				has_variable = accepted_chinese_offer
+			}
+			remove_variable = accepted_chinese_offer
+			save_scope_as = russian_side_scope
+		}
+		every_state = {
+			limit = {
+				AND = {
+					state_region = {
+						is_homeland = cu:russian
+					}
+					owner = c:TKK
+				}
+			}
+			set_state_owner = scope:russian_side_scope
+		}
+	}
+	var:false_flag_var = {
+		s:STATE_GUANGDONG = {
+			random_scope_state = {
+				save_scope_as = guangdong_scope
+			}
+		}
+		create_country = {
+			tag = CJOZ
+			origin = this
+			state = scope:guangdong_scope
+		}
+	}
+	every_scope_state = {
+		limit = {
+			state_region = {
+				NOT = {
+					is_homeland = cu:japanese
+				}
+			}
+		}
+		set_state_owner = c:CJOZ
+	}
+}
+
+JE_CNC_check_phases = {
+	if = {
+		limit = {
+			NOT = {
+				has_global_variable = reparations_deliberation_period
+				has_variable = finished_reparation_deliberations
+			}
+			set_variable = finished_reparation_deliberations
+		}
+	}
+	if = {
+		limit = {
+			AND = {
+				has_global_variable = reparations_deliberation_period
+				NOT = {
+					any_country = {
+						has_journal_entry = je_the_chinese_national_congress
+						NOT = {
+							has_variable = finished_reparation_deliberations
+						}
+					}
+				}
+			}
+		}
+		set_global_variable = {
+			name = land_deliberations_period
+		}
+	}
+}
+
+calculate_treasury_deplete_amount = {
+	set_variable = {
+		name = treasury_depletion_var
+		value = 0
+	}
+	every_scope_building = {
+		ROOT = {
+			change_variable = {
+				name = treasury_depletion_var
+				subtract = prev.cash_reserves_available
+			}
+		}
+	}
+	add_treasury = var:treasury_depletion_var
+	remove_variable = treasury_depletion_var
+}
+
+tkk_angry_corporations = {
+	ig:ig_industrialists = {
+		add_modifier = {
+			name = tkk_industrialists_angry
+			days = normal_modifier_time
+		}
+	}
+	add_modifier = {
+		name = tkk_financial_breakdown
+		days = normal_modifier_time
+	}
+}
+
+hh_notif_spam = {
+	post_notification = ger_hh_demand
+	random_list = {
+		97 = {
+			hh_notif_spam = yes
+		}
+		3 = {
+		}
+	}
+}
+
+create_secret_pact = {
+	create_treaty = {
+		name = treaty_secret_pact
+		first_country = c:GBR
+		second_country = c:BAG
+
+		is_draft = no
+		binding_period = { years = 10 } 
+
+		articles_to_create = {
+			{ #foreshadowing?
+				article = guarantee_independence
+				source_country = c:GBR
+				target_country = c:BAG
+			}
+			{ # nothing in life is free
+				article = foreign_investment_rights
+				source_country = c:BAG
+				target_country = c:GBR
+			}
+			{ # this would actually be sort of a positive for the baghdad assembly?
+				article = trade_privilege
+				source_country = c:BAG
+				target_country = c:GBR
+			}
+		}
+	}
+}
+
+jeap_remove_vars = {
+	if = {
+		limit = {
+			has_variable = jeap_joined_war
+		}
+		remove_variable = jeap_joined_war
+	}
+	if = {			
+		limit = {
+		has_variable = prompted_secret_pact
+		}
+		remove_variable = prompted_secret_pact
+	}	
+	if = {
+		limit = {
+			has_variable = pledged_tur_backing
+		}
+		remove_variable = pledged_tur_backing
+	}
+	if = {
+		limit = {
+			has_variable = failed_secret_pact
+		}
+		remove_variable = failed_secret_pact
+	}
+}
+
+burgundy_setup = {
+	add_technology_researched = mass_surveillance
+	add_technology_researched = central_archives
+	activate_law = law_type:law_professional_army
+	activate_law = law_type:law_presidential_republic
+	activate_law = law_type:law_autocracy
+	activate_law = law_type:law_state_atheism
+	activate_law = law_type:law_militarized_police
+	activate_law = law_type:law_secret_police
+	add_journal_entry = {
+		type = je_splitting_the_atom
+	}
+	c:GER = {
+		create_diplomatic_pact = {
+			country = c:BRG
+			type = protectorate
+		}
+	}
+}
+
+atomic_strike_effect = {
+	if = {
+		limit = {
+			var:atomics_priority_policy = 1
+		}
+		ordered_enemy_in_war = {
+			limit = {
+				any_scope_state = {
+					NOT = {
+						has_modifier = ravaged_by_atomics
+					}
+				}
+			}
+			order_by = prestige
+			ordered_state = {
+				limit = {
+					AND = {
+						owner = PREV
+						NOT = {
+							has_modifier = ravaged_by_atomics
+						}
+					}
+				}
+				order_by = gdp
+				atomic_devastation_effect = yes
+				ROOT = {
+					change_variable = {
+						name = atomics_stock
+						subtract = 1
+					}
+				}
+			}
+		}
+		limit = {
+			var:atomics_priority_policy = 2
+		}
+		ordered_enemy_in_war = {
+			limit = {
+				any_scope_state = {
+					NOT = {
+						has_modifier = ravaged_by_atomics
+					}
+				}
+			}
+			order_by = prestige
+			ordered_state = {
+				limit = {
+					AND = {
+						owner = PREV
+						NOT = {
+							has_modifier = ravaged_by_atomics
+						}
+					}
+				}
+				order_by = state_population
+				atomic_devastation_effect = yes
+				ROOT = {
+					change_variable = {
+						name = atomics_stock
+						subtract = 1
+					}
+				}
+			}
+		}
+	}
+}
+
+atomic_devastation_effect = {
+	add_devastation = 100
+	add_modifier = {
+		name = ravaged_by_atomics
+		days = long_modifier_time
+	}
+	kill_population_percent_in_state = {
+		percent = 0.1
+	}
+}
+
+produce_nuclear_weapons = {
+	change_variable = {
+		name = atomics_stock
+		add = {
+			value = 0.05
+			multiply = var:centrifuge_amount
+		}
+	}
+}
+
+create_lorraine = {
+	create_country = {
+		tag = LRA
+		origin = this
+		state = s:STATE_LORRAINE.region_state:WST
+		on_created = {
+			create_character = {
+				template = wst_walthre_freight_smaller
+				on_created = {
+					set_character_as_ruler = yes
+				}
+			}
+			activate_law = law_type:law_monarchy
+			activate_law = law_type:law_autocracy
+			activate_law = law_type:law_national_guard
+			activate_law = law_type:law_appointed_bureaucrats
+			activate_law = law_type:law_professional_army
+			activate_law = law_type:law_mercantilism
+			activate_law = law_type:law_migration_controls
+			activate_law = law_type:law_tenant_farmers
+			activate_law = law_type:law_per_capita_based_taxation
+			activate_law = law_type:law_state_religion
+			s:STATE_ALSACE_LORRAINE.region_state:WST ?= {
+				set_state_owner = c:LRA
+			}
+			s:STATE_CHAMPAGNE.region_state:WST ?= {
+				set_state_owner = c:LRA
+			}
+			s:STATE_PICARDY.region_state:WST ?= {
+				set_state_owner = c:LRA
+			}
+			s:STATE_ILE_DE_FRANCE.region_state:WST ?= {
+				set_state_owner = c:LRA
+			}
+			s:STATE_BURGUNDY.region_state:WST ?= {
+				set_state_owner = c:LRA
+			}
+			s:STATE_FRANCHE_COMTE.region_state:WST ?= {
+				set_state_owner = c:LRA
+			}
+			s:STATE_FRENCH_LOW_COUNTRIES.region_state:WST ?= {
+				set_state_owner = c:LRA
+			}
+		}
+	}
+}
+
+create_toledo_republic = {
+	create_country = {
+		tag = TLR
+		origin = this
+		state = s:STATE_TOLEDO.region_state:WST
+		on_created = {
+			create_character = {
+				template = wst_waldora_freight
+				on_created = {
+					set_character_as_ruler = yes
+				}
+			}
+			add_journal_entry = {
+				type = je_springtime_of_iberia
+			}
+			activate_law = law_type:law_parliamentary_republic
+			activate_law = law_type:law_census_voting
+			activate_law = law_type:law_cultural_exclusion
+			activate_law = law_type:law_appointed_bureaucrats
+			activate_law = law_type:law_professional_army
+			activate_law = law_type:law_protectionism
+			activate_law = law_type:law_no_migration_controls
+			activate_law = law_type:law_homesteading
+			activate_law = law_type:law_per_capita_based_taxation
+			activate_law = law_type:law_women_in_the_workplace
+			activate_law = law_type:law_freedom_of_conscience
+			s:STATE_BADAJOZ.region_state:WST ?= {
+				set_state_owner = c:TLR
+			}
+			s:STATE_CASTILE.region_state:WST ?= {
+				set_state_owner = c:TLR
+			}
+		}
+	}
+}
+
+create_smalland = {
+	create_country = {
+		tag = SML
+		origin = this
+		state = s:STATE_AUVERGNE_LIMOUSIN.region_state:WST
+		on_created = {
+			create_character = {
+				template = wst_waldro_freight_small
+				on_created = {
+					set_character_as_ruler = yes
+				}
+			}
+			activate_law = law_type:law_monarchy
+			activate_law = law_type:law_autocracy
+			activate_law = law_type:law_racial_segregation
+			activate_law = law_type:law_appointed_bureaucrats
+			activate_law = law_type:law_professional_army
+			activate_law = law_type:law_mercantilism
+			activate_law = law_type:law_migration_controls
+			activate_law = law_type:law_tenant_farmers
+			activate_law = law_type:law_per_capita_based_taxation
+			activate_law = law_type:law_state_religion
+			s:STATE_SAVOY.region_state:WST ?= {
+				set_state_owner = c:SML
+			}
+			s:STATE_RHONE.region_state:WST ?= {
+				set_state_owner = c:SML
+			}
+			s:STATE_GUYENNE.region_state:WST ?= {
+				set_state_owner = c:SML
+			}
+		}
+	}
+}
+
+create_languedoc = {
+	create_country = {
+		tag = LNG
+		origin = this
+		state = s:STATE_LANGUEDOC.region_state:WST
+		on_created = {
+			create_character = {
+				template = wst_michel_freight
+				on_created = {
+					set_character_as_ruler = yes
+				}
+			}
+			activate_law = law_type:law_monarchy
+			activate_law = law_type:law_autocracy
+			activate_law = law_type:law_racial_segregation
+			activate_law = law_type:law_appointed_bureaucrats
+			activate_law = law_type:law_professional_army
+			activate_law = law_type:law_mercantilism
+			activate_law = law_type:law_migration_controls
+			activate_law = law_type:law_tenant_farmers
+			activate_law = law_type:law_per_capita_based_taxation
+			activate_law = law_type:law_state_religion
+			s:STATE_PROVENCE.region_state:WST ?= {
+				set_state_owner = c:LNG
+			}
+			s:STATE_AQUITAINE.region_state:WST ?= {
+				set_state_owner = c:LNG
+			}
+		}
+	}
+}
+
+create_portugese_directorate = {
+	create_country = {
+		tag = POR
+		origin = this
+		state = s:STATE_ESTREMADURA.region_state:WST
+		on_created = {
+			create_character = {
+				template = wst_joel_freight_2
+				on_created = {
+					set_character_as_ruler = yes
+				}
+			}
+			add_journal_entry = {
+				type = je_restoration_of_portugal
+			}
+			activate_law = law_type:law_presidential_republic
+			activate_law = law_type:law_oligarchy
+			activate_law = law_type:law_racial_segregation
+			activate_law = law_type:law_appointed_bureaucrats
+			activate_law = law_type:law_professional_army
+			activate_law = law_type:law_mercantilism
+			activate_law = law_type:law_migration_controls
+			activate_law = law_type:law_tenant_farmers
+			activate_law = law_type:law_per_capita_based_taxation
+			activate_law = law_type:law_state_religion
+			s:STATE_BEIRA.region_state:WST ?= {
+				set_state_owner = c:POR
+			}
+		}
+	}
+}
+
+create_aragon = {
+	create_country = {
+		tag = ARG
+		origin = this
+		state = s:STATE_ARAGON.region_state:WST
+		on_created = {
+			create_character = {
+				template = wst_joel_freight_3
+				on_created = {
+					set_character_as_ruler = yes
+				}
+			}
+			add_journal_entry = {
+				type = je_bastion_of_iberia
+			}
+			activate_law = law_type:law_monarchy
+			activate_law = law_type:law_autocracy
+			activate_law = law_type:law_national_supremacy
+			activate_law = law_type:law_hereditary_bureaucrats
+			activate_law = law_type:law_professional_army
+			activate_law = law_type:law_mercantilism
+			activate_law = law_type:law_migration_controls
+			activate_law = law_type:law_serfdom
+			activate_law = law_type:law_per_capita_based_taxation
+			activate_law = law_type:law_state_religion
+			s:STATE_CATALONIA.region_state:WST ?= {
+				set_state_owner = c:ARG
+			}
+			s:STATE_VALENCIA.region_state:WST ?= {
+				set_state_owner = c:ARG
+			}
+			s:STATE_NAVARRA.region_state:WST ?= {
+				set_state_owner = c:ARG
+			}
+			s:STATE_ASTURIAS.region_state:WST ?= {
+				set_state_owner = c:ARG
+			}
+			s:STATE_GALICIA.region_state:WST ?= {
+				set_state_owner = c:ARG
+			}
+		}
+	}
+}
+
+create_corsica = {
+	create_country = {
+		tag = COR
+		origin = this
+		state = s:STATE_CORSICA.region_state:WST
+		on_created = {
+			create_character = {
+				template = wst_joel_freight_1
+				on_created = {
+					set_character_as_ruler = yes
+				}
+			}
+			activate_law = law_type:law_presidential_republic
+			activate_law = law_type:law_autocracy
+			activate_law = law_type:law_racial_segregation
+			activate_law = law_type:law_appointed_bureaucrats
+			activate_law = law_type:law_professional_army
+			activate_law = law_type:law_mercantilism
+			activate_law = law_type:law_migration_controls
+			activate_law = law_type:law_tenant_farmers
+			activate_law = law_type:law_per_capita_based_taxation
+			activate_law = law_type:law_state_religion
+		}
+	}
+}
+
+create_andalusia = {
+	add_journal_entry = {
+		type = je_andalusia_unification
+	}
+	add_journal_entry = {
+		type = je_the_madman_of_andalusia
+	}
+	create_country = {
+		tag = ADL
+		origin = this
+		state = s:STATE_ANDALUSIA.region_state:WST
+		on_created = {
+			create_character = {
+				template = wst_waldro_freight_small
+				on_created = {
+					set_character_as_ruler = yes
+				}
+			}
+			s:STATE_GRANADA.region_state:WST ?= {
+				set_state_owner = c:ADL
+			}
+			s:STATE_ALENTEJO.region_state:WST ?= {
+				set_state_owner = c:ADL
+			}
+			add_journal_entry = {
+				type = je_the_madman_of_andalusia
+			}
+			add_journal_entry = {
+				type = je_andalusia_unification
+			}
+			activate_law = law_type:law_monarchy
+			activate_law = law_type:law_autocracy
+			activate_law = law_type:law_racial_segregation
+			activate_law = law_type:law_appointed_bureaucrats
+			activate_law = law_type:law_professional_army
+			activate_law = law_type:law_mercantilism
+			activate_law = law_type:law_migration_controls
+			activate_law = law_type:law_tenant_farmers
+			activate_law = law_type:law_per_capita_based_taxation
+			activate_law = law_type:law_state_religion
+		}
+	}
+}
+
+toledo_republic_ally_setup = {
+	activate_law = law_type:law_parliamentary_republic
+	activate_law = law_type:law_census_voting
+	activate_law = law_type:law_cultural_exclusion
+	activate_law = law_type:law_freedom_of_conscience
+}
+
+reorganize_spain = {
+	s:STATE_ALENTEJO.region_state:TLR = {
+		set_state_owner = c:POR
+	}
+	c:TLR = {
+		create_country = {
+			tag = GAL
+			origin = this
+			state = s:STATE_GALICIA.region_state:TLR
+			on_created = {
+				c:TLR = {
+					create_diplomatic_pact = {
+						country = c:GAL
+						type = co_governance
+				   	}
+				}
+			}
+		}
+		create_country = {
+			tag = BSQ
+			origin = this
+			state = s:STATE_NAVARRA.region_state:TLR
+			on_created = {
+				s:STATE_ASTURIAS.region_state:TLR = {
+					set_state_owner = c:BSQ
+				}
+				c:TLR = {
+					create_diplomatic_pact = {
+						country = c:BSQ
+						type = co_governance
+					}
+				}
+			}
+		}
+		create_country = {
+			tag = CAT
+			origin = this
+			state = s:STATE_CATALONIA.region_state:TLR
+			on_created = {
+				s:STATE_VALENCIA.region_state:TLR = {
+					set_state_owner = c:CAT
+				}
+				c:TLR = {
+					create_diplomatic_pact = {
+						country = c:CAT
+						type = co_governance
+					}
+				}
+			}
+		}
+	}
+}
+
+calculate_brittany_progress_bars = {
+	set_bar_progress = {
+		value = {
+			value = global_var:smalland_bid_amount
+			divide = {
+				value = global_var:languedoc_bid_amount
+				add = global_var:smalland_bid_amount
+				add = global_var:lorraine_bid_amount
+			}
+			multiply = 30
+		}
+		name = bfb_smalland_bid_progress
+	}
+	set_bar_progress = {
+		value = {
+			value = global_var:languedoc_bid_amount
+			divide = {
+				value = global_var:languedoc_bid_amount
+				add = global_var:smalland_bid_amount
+				add = global_var:lorraine_bid_amount
+			}
+			multiply = 30
+		}
+		name = bfb_languedoc_bid_progress
+	}
+	set_bar_progress = {
+		value = {
+			value = global_var:lorraine_bid_amount
+			divide = {
+				value = global_var:languedoc_bid_amount
+				add = global_var:smalland_bid_amount
+				add = global_var:lorraine_bid_amount
+			}
+			multiply = 30
+		}
+		name = bfb_lorraine_bid_progress
+	}
+}
+
+skibidi_revolt_start = {
+	create_country = {
+		tag = HSD
+		origin = root
+		state = "ROOT.capital"
+		on_created = {
+			add_modifier = {
+				name = skibidi_fighting_temp
+			}
+		}
+	}
+	c:HSD ?= {
+		save_scope_as = hsd_scope
+		set_state_religion = rel:skibidi
+	}
+	every_scope_state = {
+		random_list = {
+			100 = {
+				modifier = {
+					add = {
+						value = "religion_percent_state(rel:skibidi)"
+						multiply = -400
+					}
+				}
+			}
+			0 = {
+				modifier = {
+					add = {
+						value = "religion_percent_state(rel:skibidi)"
+						multiply = 400
+					}
+				}
+				set_state_owner = scope:hsd_scope
+			}
+		}
+	}
+	create_diplomatic_play = {
+		name = skibidi_rebellion
+		target_country = "scope:hsd_scope"
+		type = dp_skibidi_revolt
+		escalation = 60
+		add_war_goal = {
+			holder = "scope:hsd_scope"
+			target_country = ROOT
+			type = annex_country
+		}
+	}
+}
+check_brainrot_balance = {
+	if = {
+		limit = {
+			AND = {
+				var:brainrot_radicalism >= 100
+				var:brainrot_level < 1
+			}
+		}
+		brainrot_lvl1 = yes
+	}
+	if = {
+		limit = {
+			AND = {
+				var:brainrot_radicalism >= 200
+				var:brainrot_level < 2
+			}
+		}
+		brainrot_lvl2 = yes
+	}
+	if = {
+		limit = {
+			AND = {
+				var:brainrot_radicalism >= 300
+				var:brainrot_level < 3
+			}
+		}
+		brainrot_lvl3 = yes
+	}
+}
+
+brainrot_lvl1 = {
+	change_variable = {
+		name = brainrot_level
+		add = 1
+	}
+	every_scope_state = {
+		convert_population = {
+			target = rel:skibidi
+			value = 0.15
+		}
+	}
+	every_scope_state = {
+		convert_population = {
+			target = rel:labubite
+			value = 0.15
+		}
+		convert_population = {
+			target = rel:tralaleroist
+			value = 0.15
+		}
+	}
+}
+
+brainrot_lvl2 = {
+	add_primary_culture = cu:brainrot
+	remove_primary_culture = cu:british
+	change_variable = {
+		name = brainrot_level
+		add = 1
+	}
+	every_scope_state = {
+		convert_population = {
+			target = rel:skibidi
+			value = 0.15
+		}
+	}
+	every_scope_pop = {
+		limit = {
+			religion = rel:skibidi
+		}
+		change_pop_culture = {
+			target = cu:brainrot
+			value = 0.6
+		}
+	}
+}
+
+brainrot_lvl3 = {
+	change_variable = {
+		name = brainrot_level
+		add = 1
+	}
+	every_scope_state = {
+		convert_population = {
+			target = rel:skibidi
+			value = 0.1
+		}
+	}
+	every_scope_pop = {
+		limit = {
+			religion = rel:skibidi
+		}
+		change_pop_culture = {
+			target = cu:brainrot
+			value = 0.1
+		}
+	}
+	every_scope_pop = {
+		limit = {
+			religion = rel:labubite
+		}
+		change_pop_culture = {
+			target = cu:labubu
+			value = 0.7
+		}
+	}
+	every_scope_pop = {
+		limit = {
+			religion = rel:tralaleroist
+		}
+		change_pop_culture = {
+			target = cu:tralalero
+			value = 0.7
+		}
+	}
+}
+
+bob_set_progress_bars = {
+	scope:journal_entry = {
+		set_bar_progress = {
+			value = {
+				value = "ROOT.religion_percent_country(rel:skibidi)"
+				multiply = 100
+				divide = {
+					value = "ROOT.religion_percent_country(rel:skibidi)"
+					add = "ROOT.religion_percent_country(rel:tralaleroist)"
+					add = "ROOT.religion_percent_country(rel:labubite)"
+				}
+			}
+			name = bob_skibidi_strength
+		}
+		set_bar_progress = {
+			value = {
+				value = "ROOT.religion_percent_country(rel:tralaleroist)"
+				multiply = 100
+				divide = {
+					value = "ROOT.religion_percent_country(rel:skibidi)"
+					add = "ROOT.religion_percent_country(rel:tralaleroist)"
+					add = "ROOT.religion_percent_country(rel:labubite)"
+				}
+			}
+			name = bob_tralaleroist_strength
+		}
+		set_bar_progress = {
+			value = {
+				value = "ROOT.religion_percent_country(rel:labubite)"
+				multiply = 100
+				divide = {
+					value = "ROOT.religion_percent_country(rel:skibidi)"
+					add = "ROOT.religion_percent_country(rel:tralaleroist)"
+					add = "ROOT.religion_percent_country(rel:labubite)"
+				}
+			}
+			name = bob_labubu_strength
+		}
+	}
+}
+
+calculate_brainrot_power_disparity = {
+	scope:journal_entry = {
+		save_scope_value_as = {
+			name = skibidi_value
+			value = "scripted_bar_progress(bob_skibidi_strength)"
+		}
+	}
+	scope:journal_entry = {
+		save_scope_value_as = {
+			name = labubu_value
+			value = "scripted_bar_progress(bob_labubu_strength)"
+		}
+	}
+	scope:journal_entry = {
+		save_scope_value_as = {
+			name = tralalero_value
+			value = "scripted_bar_progress(bob_tralaleroist_strength)"
+		}
+	}
+	set_variable = {
+		name = skibidi_var
+		value = scope:skibidi_value
+	}
+	set_variable = {
+		name = labubu_var
+		value = scope:labubu_value
+	}
+	set_variable = {
+		name = tralalero_var
+		value = scope:tralalero_value
+	}
+	set_variable = {
+		name = sld
+		value = {
+			value = scope:skibidi_value
+			subtract = scope:labubu_value
+			divide = {
+				value = scope:skibidi_value
+				add = scope:labubu_value
+			}
+			multiply = 2
+		}
+	}
+	if = {
+		limit = {
+			var:sld < 0
+		}
+		change_variable = {
+			name = sld
+			multiply = -1
+		}
+	}
+	set_variable = {
+		name = stv
+		value = {
+			value = scope:skibidi_value
+			subtract = scope:tralalero_value
+			divide = {
+				value = scope:skibidi_value
+				add = scope:tralalero_value
+			}
+			multiply = 2
+		}
+	}
+	if = {
+		limit = {
+			var:stv < 0
+		}
+		change_variable = {
+			name = stv
+			multiply = -1
+		}
+	}
+	set_variable = {
+		name = ltv
+		value = {
+			value = scope:labubu_value
+			subtract = scope:tralalero_value
+			divide = {
+				value = scope:labubu_value
+				add = scope:tralalero_value
+			}
+			multiply = 2
+		}
+	}
+	if = {
+		limit = {
+			var:stv < 0
+		}
+		change_variable = {
+			name = stv
+			multiply = -1
+		}
+	}
+	if = {
+		limit = {
+			var:sld > var:stv
+		}
+		if = {
+			limit = {
+				var:sld > var:ltv
+			}
+			set_variable = {
+				name = brainrot_max
+				value = var:sld
+			}
+		}
+		else = {
+			set_variable = {
+				name = brainrot_max
+				value = var:ltv
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			var:stv > var:ltv
+		}
+		set_variable = {
+			name = brainrot_max
+			value = var:stv
+		}
+	}
+	else = {
+		set_variable = {
+			name = brainrot_max
+			value = var:ltv
+		}
+	}
+	if = {
+		limit = {
+			var:brainrot_max < 0.3
+		}
+		set_variable = {
+			name = brainrot_max_tt
+			value = 1
+		}
+	}
+	else_if = {
+		limit = {
+			var:brainrot_max < 0.6
+		}
+		set_variable = {
+			name = brainrot_max_tt
+			value = 2
+		}
+	}
+	else = {
+		set_variable = {
+			name = brainrot_max_tt
+			value = 3
+		}
+	}
+}
+
+sigma_nation_rise_up = {
+	random_scope_state = {
+		save_scope_as = sigma_state
+	}
+	create_country = {
+		tag = SNA
+		origin = root
+		state = "scope:sigma_state"
+	}
+	c:SNA ?= {
+		save_scope_as = redpill_scope
+	}
+	every_scope_state = {
+		random_list = {
+			100 = {
+				modifier = {
+					add = {
+						value = "religion_percent_state(rel:redpill)"
+						multiply = -200	
+					}
+				}
+			}			
+			0 = {
+				modifier = {
+					add = {
+						value = "religion_percent_state(rel:redpill)"
+						multiply = 200
+					}
+				}
+				set_state_owner = scope:redpill_scope
+			}
+		}
+	}
+	c:SNA ?= {
+		create_diplomatic_play = {
+			name = sigma_uprising
+			target_country = ROOT
+			type = dp_annex_war
+			escalation = 80
+			add_war_goal = {
+				holder = ROOT
+				target_country = this
+				type = annex_country
+			}
+		}
+	}
+}
+
+brainrot_conversion = {
+	every_scope_state = {
+		convert_population = {
+			target = rel:skibidi
+			value = 0.005
+		}
+	}
+	every_scope_state = {
+		convert_population = {
+			target = rel:labubite
+			value = 0.01
+		}
+	}
+	every_scope_state = {
+		convert_population = {
+			target = rel:tralaleroist
+			value = 0.007
+		}
+	}
+	every_scope_pop = {
+		limit = {
+			religion = rel:skibidi
+		}
+		change_pop_culture = {
+			target = cu:brainrot
+			value = 0.03
+		}
+	}
+	every_scope_pop = {
+		limit = {
+			religion = rel:labubite
+		}
+		change_pop_culture = {
+			target = cu:labubu
+			value = 0.01
+		}
+	}
+	every_scope_pop = {
+		limit = {
+			religion = rel:tralaleroist
+		}
+		change_pop_culture = {
+			target = cu:tralalero
+			value = 0.01
+		}
+	}
+}
+
+bob_remove_variables = {
+	remove_variable = skibidi_var
+	remove_variable = labubu_var
+	remove_variable = tralalero_var
+	remove_variable = brainrot_radicalism
+	remove_variable = brainrot_max_tt
+	remove_variable = brainrot_level
+	remove_variable = sld
+	remove_variable = stv
+	remove_variable = ltv
+}
+
+
+brainrot_civil_war = {
+	if = {
+		limit = {
+			AND = {
+				has_variable = labubu_var
+				has_variable = skibidi_var
+				has_variable = tralalero_var
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = skibidi_cemented
+				}
+			}
+			add_modifier = skibidi_cemented
+		}
+		if = {
+			limit = {
+				country_has_primary_culture = cu:labubu
+			}
+			remove_primary_culture = cu:labubu
+		}
+		if = {
+			limit = {
+				country_has_primary_culture = cu:tralalero
+			}
+			remove_primary_culture = cu:tralalero
+		}
+		random_scope_state = {
+			save_scope_as = tralalero_state
+		}
+		create_country = {
+			tag = TLL
+			origin = root
+			state = "scope:tralalero_state"
+			on_created = {
+				add_modifier = {
+					name = tralalero_cemented
+				}
+			}
+		}
+		c:TLL ?= {
+			save_scope_as = tralalero_scope
+		}
+		every_scope_state = {
+			random_list = {
+				1 = {
+					modifier = {
+						add = {
+							value = {
+								value = var:labubu_var
+								add = var:skibidi_var
+							}
+						}
+					}
+				}			
+				0 = {
+					modifier = {
+						add = {
+							value = var:tralalero_var
+						}
+					}
+					set_state_owner = scope:tralalero_scope
+				}
+			}
+		}
+		random_scope_state = {
+			save_scope_as = labubu_state
+		}
+		create_country = {
+			tag = LBB
+			origin = root
+			state = "scope:labubu_state"
+			on_created = {
+				add_modifier = {
+					name = labubu_cemented
+				}
+			}
+		}
+		c:LBB ?= {
+			save_scope_as = labubu_scope
+		}
+		every_scope_state = {
+			random_list = {
+				1 = {
+					modifier = {
+						add = {
+							value = var:tralalero_var
+						}
+					}
+				}			
+				0 = {
+					modifier = {
+						add = {
+							value = var:labubu_var
+						}
+					}
+					set_state_owner = scope:labubu_scope
+				}
+			}
+		}
+		c:TLL = {
+			create_diplomatic_play = {
+				name = brainrot_civil_war
+				target_country = ROOT
+				type = dp_annex_war
+				escalation = 80
+				add_war_goal = {
+					holder = ROOT
+					target_country = this
+					type = annex_country
+				}
+			}
+		}
+		c:LBB = {
+			create_diplomatic_play = {
+				name = brainrot_civil_war
+				target_country = ROOT
+				type = dp_annex_war
+				escalation = 80
+				add_war_goal = {
+					holder = ROOT
+					target_country = this
+					type = annex_country
+				}
+			}
+			create_diplomatic_play = {
+				name = brainrot_civil_war
+				target_country = "scope:tralalero_scope"
+				type = dp_annex_war
+				escalation = 80
+				add_war_goal = {
+					holder = "scope:tralalero_scope"
+					target_country = this
+					type = annex_country
+				}
+			}
+		}
+	}
+}
+
+check_skibidi_culture_dev_progress = {
+	if = {
+		limit = {
+			cu:brainrot = {
+				culture_national_awakening_occurred = yes
+			}
+			set_variable = {
+				name = cultural_development_base
+				value = 0.3
+			}
+		}
+	}
+	if = {
+		limit = {
+			global_country_ranking > 50
+		}
+		change_variable = {
+			name = cultural_development_base
+			value = 0.5
+		}
+	}
+	change_variable = {
+		name = cultural_development_base
+		value = {
+			value = "ROOT.culture_percent_country(cu:brainrot)"
+			multiply = 1.5
+		}
+	}
+}
+
+
+check_labubu_culture_dev_progress = {
+	if = {
+		limit = {
+			cu:labubu = {
+				culture_national_awakening_occurred = yes
+			}
+			set_variable = {
+				name = cultural_development_base
+				value = 0.3
+			}
+		}
+	}
+	if = {
+		limit = {
+			gdp_per_capita_ranking > 30
+		}
+		change_variable = {
+			name = cultural_development_base
+			value = 0.5
+		}
+	}
+	change_variable = {
+		name = cultural_development_base
+		value = {
+			value = "ROOT.culture_percent_country(cu:labubu)"
+			multiply = 1.5
+		}
+	}
+}
+
+check_tralalero_culture_dev_progress = {
+	if = {
+		limit = {
+			cu:tralalero = {
+				culture_national_awakening_occurred = yes
+			}
+			set_variable = {
+				name = cultural_development_base
+				value = 0.3
+			}
+		}
+	}
+	if = {
+		limit = {
+			global_country_ranking > 50
+		}
+		change_variable = {
+			name = cultural_development_base
+			value = 0.5
+		}
+	}
+	change_variable = {
+		name = cultural_development_base
+		value = {
+			value = "ROOT.culture_percent_country(cu:tralalero)"
+			multiply = 1.5
+		}
+	}
+}

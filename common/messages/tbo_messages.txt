@@ -1,0 +1,69 @@
+local_rebellion_sru = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/revolution.dds"
+	notification_type = feed
+}
+
+sru_iron_and_coal_mines_built = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/building_expanded.dds"
+	notification_type = feed
+}
+
+sru_steel_mill_built = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/building_expanded.dds"
+	notification_type = feed
+}
+
+sru_motor_industries_built = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/building_expanded.dds"
+	notification_type = feed
+}
+
+sru_railway_built = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/building_expanded.dds"
+	notification_type = feed
+}
+
+irk_tsar_secret_discovered = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/bureaucracy.dds"
+	notification_type = feed
+}
+
+irk_investment_accepted = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/trade_route.dds"
+	notification_type = feed
+}
+
+mgb_peasant_war = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/diplomatic_play.dds"
+
+	notification_type = feed
+}
+
+ger_law_reverted = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/order.dds"
+
+	notification_type = feed
+}
+
+ger_hh_demand = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/influence_bad.dds"
+
+	notification_type = feed
+}
+
+greater_asian_war = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/mobilize.dds"
+
+	notification_type = feed
+}

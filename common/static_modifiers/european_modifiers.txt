@@ -1,0 +1,165 @@
+ger_political_chaos_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_bureaucracy_mult = -0.1
+	country_legitimacy_base_add = -15
+	state_radicals_from_political_movements_mult = 0.25
+}
+
+bormann_suspected_of_killing_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	character_popularity_add = -30
+}
+
+world_capital_germania = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_prestige_add = 100
+	state_trade_capacity_mult = 0.15
+	state_infrastructure_mult = 0.1
+}
+
+germania_construction_costs = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_tax_income_add = 1
+}
+
+tur_occupation_resistance = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	state_radicals_from_political_movements_mult = 0.15
+	state_trade_capacity_mult = -0.15
+	state_infrastructure_mult = -0.4
+}
+
+anatolian_plot_influence_use = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_influence_mult = -0.1
+}
+
+jeatp_atomics_production = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_tax_income_add = -5000
+	country_weekly_innovation_add = -10
+}
+
+selling_atomics_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	country_tax_income_add = 20000
+}
+
+buying_atomics_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_tax_income_add = -20000
+}
+
+bormann_killed_union_rep_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	character_popularity_add = -20
+}
+
+bormann_killed_bureaucrat_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	character_popularity_add = -20
+}
+
+moa_waterboarding_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	state_radicals_from_political_movements_mult = 0.15
+	country_authority_mult = -0.05
+	country_legitimacy_base_add = -20
+}
+
+moa_elephant_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	state_radicals_from_political_movements_mult = 0.25
+	country_authority_mult = -0.08
+	country_legitimacy_base_add = -25
+}
+
+moa_flaying_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	state_radicals_from_political_movements_mult = 0.20
+	country_authority_mult = -0.12
+	country_legitimacy_base_add = -30
+}
+
+moa_hungry_rat_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	state_radicals_from_political_movements_mult = 0.25
+	country_authority_mult = -0.16
+	country_legitimacy_base_add = -35
+}
+
+moa_tickle_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	state_radicals_from_political_movements_mult = 0.30
+	country_authority_mult = -0.20
+	country_legitimacy_base_add = -40
+}
+
+waldro_figureheaded_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	character_popularity_add = -20
+}
+
+waldro_figureheaded_country = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_authority_add = -100
+	country_legitimacy_base_add = 10
+}
+
+moa_destroyed_village_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	state_radicals_from_political_movements_mult = 0.25
+	country_legitimacy_base_add = -25
+}
+
+moa_demolished_village_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	state_radicals_from_political_movements_mult = 0.3
+	country_legitimacy_base_add = -30
+}
+
+moa_obliterated_village_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	state_radicals_from_political_movements_mult = 0.35
+	country_legitimacy_base_add = -35
+}
+
+andalusia_political_instability_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	state_radicals_from_political_movements_mult = 0.5
+	country_legitimacy_base_add = -25
+	country_authority_mult = -0.3
+}
+
+andalusia_unified_iberia_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_legitimacy_base_add = 15
+	country_prestige_add = 35
+	country_authority_add = 50
+}
+
+portugal_reunified_iberia = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_legitimacy_base_add = 15
+	country_prestige_add = 50
+}
+
+aragon_unified_iberia_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_legitimacy_base_add = 15
+	country_prestige_add = 35
+	country_authority_add = 50
+}
+
+oif_death_squad_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_tax_income_add  = -5000
+}
+
+oif_death_squads_active = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
+	state_infrastructure_mult = -0.3
+	state_trade_capacity_mult = -0.5
+	state_tax_waste_add = 0.5
+	state_mortality_mult = 0.3
+}

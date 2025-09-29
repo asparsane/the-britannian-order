@@ -1,0 +1,123 @@
+hne_quaker_oats_disbanded_fallout = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	state_standard_of_living_add = -0.5
+	state_birth_rate_mult = -0.2
+	building_group_bg_agriculture_throughput_add = -0.4
+}
+
+hne_tung_tung_tung_corps = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	state_standard_of_living_add = 0.1
+	state_birth_rate_mult = 0.1
+	building_group_bg_agriculture_throughput_add = 0.1
+}
+
+hne_tung_tung_tung_corps_upkeep = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_tax_income_add = -5000
+}
+
+por_barracks_sabotaged = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
+	building_training_rate_mult = -0.5
+	building_throughput_add = -0.20
+	unit_morale_loss_mult = 0.15
+	unit_offense_mult = -0.1
+	unit_defense_mult = -0.1
+}
+
+por_building_sabotaged = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_neagtive.dds
+	building_throughput_add = -0.30
+}
+
+skibidi_sabotage_costs = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_tax_income_add = -1500
+}
+
+skibidi_fighting_temp = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	unit_offense_mult = 10
+	unit_defense_mult = 10
+	unit_advancement_speed_mult = 10
+}
+
+skibidi_cemented = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_prestige_mult = 0.02
+}
+
+skibidi_development_lvl2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_prestige_mult = 0.02
+	building_arts_academy_throughput_add = 0.05
+}
+
+skibidi_development_lvl3 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_prestige_mult = 0.05
+	building_arts_academy_throughput_add = 0.05
+}
+
+skibidi_development_lvl4 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_prestige_mult = 0.05
+	building_arts_academy_throughput_add = 0.05
+	state_loyalists_from_political_movements_mult = 0.05
+	state_radicals_from_political_movements_mult = -0.05
+}
+
+labubu_cemented = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	building_throughput_add = 0.02
+}
+
+labubu_development_lvl2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	building_throughput_add = 0.02
+	country_tax_income_add = 0.02
+}
+
+labubu_development_lvl3 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	building_throughput_add = 0.05
+	country_tax_income_add = 0.02
+}
+
+labubu_development_lvl4 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	building_throughput_add = 0.05
+	country_tax_income_add = 0.05
+}
+
+tralalero_cemented = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	unit_army_offense_mult = 0.02
+	unit_army_defense_mult = 0.02
+}
+
+tralalero_development_lvl2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	unit_army_offense_mult = 0.02
+	unit_army_defense_mult = 0.02
+	country_military_tech_research_speed_mult = 0.05
+}
+
+tralalero_development_lvl3 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	unit_army_offense_mult = 0.02
+	unit_army_defense_mult = 0.02
+	country_military_tech_research_speed_mult = 0.05
+	building_arms_industry_throughput_add = 0.05
+	unit_morale_loss_mult = -0.05
+}
+
+tralalero_development_lvl4 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	unit_army_offense_mult = 0.05
+	unit_army_defense_mult = 0.05
+	country_military_tech_research_speed_mult = 0.05
+	building_arms_industry_throughput_add = 0.05
+	unit_morale_loss_mult = -0.05
+}

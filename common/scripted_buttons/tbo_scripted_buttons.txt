@@ -1,0 +1,2028 @@
+﻿rec_sell_brittany = {
+	name = "rec_sell_brittany"
+	desc = "rec_sell_brittany_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = not_sold_brittany_tt
+			c:GBR = {
+				any_scope_state = {
+					state_region = {
+						is_homeland = cu:french
+					}
+				}
+			}
+			OR = {
+				exists = c:LRA
+				exists = c:SML
+				exists = c:LNG
+			}
+		}
+		NOT = {
+			has_modifier = recently_sold_land
+		}
+	}
+
+	effect = {
+		c:LRA ?= {
+			add_journal_entry = {
+				type = je_bid_for_brittany
+			}
+		}
+		c:SML ?= {
+			add_journal_entry = {
+				type = je_bid_for_brittany
+			}
+		}
+		c:LNG ?= {
+			add_journal_entry = {
+				type = je_bid_for_brittany
+			}
+		}
+	}
+}
+
+rec_sell_amazons = {
+	name = "rec_sell_amazons"
+	desc = "rec_sell_amazons_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = not_sold_amazons_tt
+			exists = s:STATE_GUAYANA.region_state:GBR
+		}
+		NOT = {
+			has_modifier = recently_sold_land
+		}
+	}
+
+	effect = {
+		if = {
+			limit = {
+				exists = s:STATE_GUAYANA.region_state:GBR
+			}
+			random_state = {
+				limit = {
+					state_region = s:STATE_GUAYANA
+				}
+				set_state_owner = c:BRZ
+			}
+			add_modifier = {
+				name = recently_sold_land
+				days = short_modifier_time
+			}
+		}
+		if = {
+			limit = {
+				exists = s:STATE_AMAZONAS.region_state:GBR
+			}
+			random_state = {
+				limit = {
+					state_region = s:STATE_AMAZONAS
+				}
+				set_state_owner = c:BRZ
+			}
+			add_modifier = {
+				name = recently_sold_land
+				days = short_modifier_time
+			}
+		}
+	}
+}
+
+mongol_support_peasant_sentiments = {
+	name = "mongol_support_peasant_sentiments"
+	desc = "mongol_support_peasant_sentiments_desc"
+
+	visible = {
+		exists = c:MGB
+		c:MGB = {
+			NOT = {
+				is_subject_of = c:FGT
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		custom_tooltip = {
+			NOT = {
+				has_variable = promoted_peasant_sentiments
+			}
+		}
+	}
+
+	effect = {
+		add_modifier = {
+			name = mgb_peasant_campaign
+			days = 15
+		}
+		add_modifier = {
+			name = promoting_peasant_sentiments
+			days = very_short_modifier_time
+		}
+		set_variable = promoted_peasant_sentiments
+		random_scope_state = {
+			limit = {
+				state_region = s:STATE_ALXA
+			}
+			add_radicals_in_state = {
+				pop_type = laborers
+				value = large_radicals
+			}
+			add_radicals_in_state = {
+				pop_type = peasants
+				value = large_radicals
+			}
+		}
+	}
+}
+
+mongol_fund_train_guerillas = {
+	name = "mongol_fund_train_guerillas"
+	desc = "mongol_fund_train_guerillas_desc"
+
+	visible = {
+		exists = c:MGB
+		c:MGB = {
+			NOT = {
+				is_subject_of = c:FGT
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = promoted_peasant_sentiments_tt
+			has_variable = promoted_peasant_sentiments
+		}
+		custom_tooltip = {
+			text = not_trained_guerillas_tt
+			NOT = {
+				has_variable = trained_guerillas
+			}
+		}
+	}
+
+	effect = {
+		set_variable = trained_guerillas
+		add_modifier = {
+			name = training_guerillas
+			days = very_short_modifier_time
+		}
+	}
+}
+
+mongol_instigate_peasant_uprisings = {
+	name = "mongol_instigate_peasant_uprisings"
+	desc = "mongol_fund_train_guerillas_desc"
+
+	visible = {
+		exists = c:MGB
+		c:MGB = {
+			NOT = {
+				is_subject_of = c:FGT
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = instigated_peasants_tt
+			has_variable = trained_guerillas
+		}
+		custom_tooltip = {
+			text = not_instigated_preasants_tt
+			NOT = {
+				has_variable = instigated_peasants
+			}
+		}
+	}
+
+	effect = {
+		set_variable = instigated_peasants
+		c:MGB = {
+			random_scope_state = {
+				limit = {
+					state_region = s:STATE_ALXA
+				}
+				add_modifier = {
+					name = peasant_uprisings
+					days = very_short_modifier_time
+				}
+			}
+		}
+	}
+}
+
+mongol_provide_training = {
+	name = "mongol_provide_training"
+	desc = "mongol_provide_training_desc"
+
+	visible = {
+		exists = c:FGT
+		this = c:FGT
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = mgb_training_peasants
+		}
+	}
+
+	effect = {
+		add_modifier = {
+			name = mgb_training_peasants
+			months = 1
+		}
+		if = {
+			limit = {
+				var:peasant_strength_equilibrium < 80
+			}
+			change_variable = { name = peasant_strength_equilibrium add = 10 }
+		}
+	}
+}
+
+mongol_ideological_training = {
+	name = "mongol_ideological_training"
+	desc = "mongol_ideological_training_desc"
+
+	visible = {
+		exists = c:FGT
+		this = c:FGT
+	}
+
+	ai_chance = {
+		value = 30
+		modifier = {
+			trigger = {
+				var:peasant_morale_equilibrium < 35
+			}
+			add = 15
+		}
+		modifier = {
+			trigger = {
+				var:peasant_morale_equilibrium < 20
+			}
+			add = 20
+		}
+		modifier = {
+			trigger = {
+				global_var:peasant_morale_current < 40
+			}
+			add = 20
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = mgb_ideological_training
+		}
+	}
+
+	effect = {
+		add_modifier = {
+			name = mgb_ideological_training
+			months = 1
+		}
+		if = {
+			limit = {
+				var:peasant_morale_equilibrium < 59
+			}
+			change_variable = { name = peasant_morale_equilibrium add = 10 }
+		}
+	}
+}
+
+mongol_covert_military_operation = {
+	name = "mongol_covert_military_operation"
+	desc = "mongol_covert_military_operation_desc"
+
+	visible = {
+		exists = c:FGT
+		this = c:FGT
+	}
+
+	ai_chance = {
+		value = 15
+		modifier = {
+			trigger = {
+				global_var:peasant_strength_current < 30
+			}
+			add = 20
+		}
+		modifier = {
+			trigger = {
+				global_var:peasant_strength_current < 20
+			}
+			add = 25
+		}
+	}
+
+	possible = {
+		NOT = {
+			c:MGB = {
+				any_scope_state = {
+					has_modifier = mgb_covert_operation
+				}
+			}
+		}
+	}
+
+	effect = {
+		c:MGB = {
+			random_scope_state = {
+				limit = {
+					NOT = {
+						OR = {
+							has_modifier = mgb_peasant_campaign
+							has_modifier = mgb_covert_operation
+						}
+					}
+				}
+				add_modifier = {
+					name = mgb_covert_operation
+					months = 1
+				}
+			}
+		}
+	}
+}
+
+mongol_enforce_popular_line = {
+	name = "mongol_enforce_popular_line"
+	desc = "mongol_enforce_popular_line_desc"
+
+	visible = {
+		exists = c:FGT
+		this = c:FGT
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		NOT = {
+			var:peasant_popular_support_equilibrium > 65
+			has_modifier = mgb_enforcing_popular_line
+		}
+	}
+
+	effect = {
+		change_variable = {
+			name = peasant_popular_support_equilibrium
+			add = 15
+		}
+		add_modifier = {
+			name = mgb_enforcing_popular_line
+			months = 2
+		}
+	}
+}
+
+mongol_fan_dissent = {
+	name = "mongol_fan_dissent"
+	desc = "mongol_fan_dissent_desc"
+
+	visible = {
+		exists = c:MGB
+		this = c:MGB
+	}
+
+	ai_chance = {
+		value = 30
+		modifier = {
+			trigger = {
+				je:je_fengtian_mongol_banner_skirmishes ?= {
+					"scripted_bar_progress(peasants_popular_support)" >= 60
+				}
+			}
+			add = 15
+		}
+		modifier = {
+			trigger = {
+				je:je_fengtian_mongol_banner_skirmishes ?= {
+					"scripted_bar_progress(peasants_morale_progress_bar)" >= 70
+				}
+			}
+			add = 20
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = mgb_fan_dissent
+		}
+	}
+
+	effect = {
+		add_modifier = {
+			name = mgb_fanning_dissent
+			months = 1.5
+		}
+	}
+}
+
+mongol_burn_suspected_villages = {
+	name = "mongol_burn_suspected_villages"
+	desc = "mongol_burn_suspected_villages_desc"
+
+	visible = {
+		exists = c:MGB
+		this = c:MGB
+	}
+
+	ai_chance = {
+		value = 25
+		modifier = {
+			trigger = {
+				any_scope_character = {
+					is_ruler = yes
+					has_trait = cruel
+				}
+			}
+			add = 15
+		}
+		modifier = {
+			trigger = {
+				je:je_fengtian_mongol_banner_skirmishes ?= {
+					"scripted_bar_progress(peasants_occupation_progress_bar)" >= 60
+				}
+			}
+			add = 15
+		}
+		modifier = {
+			trigger = {
+				je:je_fengtian_mongol_banner_skirmishes ?= {
+					"scripted_bar_progress(peasants_occupation_progress_bar)" >= 90
+				}
+			}
+			add = 25
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = mgb_burning_villages
+		}
+	}
+
+	effect = {
+		add_modifier = {
+			name = mgb_burning_villages
+			months = 2
+		}
+		random_scope_state = {
+			limit = {
+				owner = c:MGB
+			}
+			add_devastation = 50
+		}
+	}
+}
+
+mongol_military_campaign = {
+	name = "mongol_military_campaign"
+	desc = "mongol_military_campaign_desc"
+
+	visible = {
+		exists = c:MGB
+		this = c:MGB
+	}
+
+	ai_chance = {
+		value = 30
+		modifier = {
+			trigger = {
+				je:je_fengtian_mongol_banner_skirmishes ?= {
+					"scripted_bar_progress(peasants_occupation_progress_bar)" >= 60
+				}
+			}
+			add = 15
+		}
+	}
+
+	possible = {
+		NOT = {
+			c:MGB ?= {
+				any_scope_state = {
+					has_modifier = mgb_counter_campaign
+				}
+			}
+		}
+	}
+
+	effect = {
+		random_scope_state = {
+			limit = {
+				owner = c:MGB 
+				NOT = {
+					has_modifier = mgb_counter_campaign
+				}
+			}
+			add_modifier = {
+				name = mgb_counter_campaign
+				months = 1
+			}
+		}
+	}
+}
+
+mongol_request_qing_support = {
+	name = "mongol_request_qing_support"
+	desc = "mongol_request_qing_support_desc"
+
+	visible = {
+		exists = c:MGB
+		this = c:MGB
+	}
+
+	ai_chance = {
+		value = 20
+		modifier = {
+			trigger = {
+				je:je_fengtian_mongol_banner_skirmishes ?= {
+					"scripted_bar_progress(peasants_occupation_progress_bar)" >= 60
+				}
+			}
+			add = 20
+		}
+		modifier = {
+			trigger = {
+				has_journal_entry = je_fengtian_mongol_banner_skirmishes
+				je:je_fengtian_mongol_banner_skirmishes = {
+					"scripted_bar_progress(peasants_occupation_progress_bar)" >= 80
+				}
+			}
+			add = 40
+		}
+	}
+
+	possible = {
+		NOT = {
+			has_modifier = mgb_qing_support
+			custom_tooltip = {
+				desc = recently_requested_or_refused
+				has_variable = requested_support_recently
+			}
+		}
+	}
+
+	effect = {
+		c:QNG = {
+			trigger_event = {
+				id = fengtian_events.102
+				days = 3
+			}
+		}
+	}
+}
+
+demand_irc = {
+	name = "demand_irc"
+	desc = "demand_irc_desc"
+
+	visible = {
+		NOT = {
+			has_variable = attacked_irc
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = attacked_irc_already_tt
+			NOT = {
+				has_variable = attacked_irc
+			}
+		}
+		custom_tooltip = {
+			text = conquest_cooldown_tt
+			NOT = {
+				has_variable = bna_war_cooldown
+			}
+		}
+	}
+
+	effect = {
+		hidden_effect = {
+			set_variable = {
+				name = attacked_irc
+				value = yes
+			}
+			set_variable = {
+				name = bna_war_cooldown
+				value = yes
+				days = 365
+			}				
+		}
+		c:IRC = {
+			trigger_event = {
+				id = north_american_path.2
+				days = 0
+			}
+		}
+	}
+}
+
+demand_irc_buffer = {
+	name = "demand_irc_buffer"
+	desc = "demand_irc_buffer_desc"
+
+	visible = {
+		has_variable = attacked_irc
+		NOT = {
+			has_variable = not_requested_buffer
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = not_requested_buffer
+			NOT = {
+				has_variable = not_requested_buffer
+			}
+		}
+		custom_tooltip = {
+			text = conquest_cooldown_tt
+			NOT = {
+				has_variable = bna_war_cooldown
+			}
+		}
+	}
+
+	effect = {
+		hidden_effect = {
+			set_variable = {
+				name = not_requested_buffer
+				value = yes
+			}
+			set_variable = {
+				name = bna_war_cooldown
+				value = yes
+				days = 365
+			}				
+		}
+		c:IRC = {
+			trigger_event = {
+				id = north_american_path.4
+				days = 0
+			}
+		}
+	}
+}
+
+demand_usa = {
+	name = "demand_usa"
+	desc = "demand_usa_desc"
+
+	visible = {
+		NOT = {
+			has_variable = attacked_usa
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		OR = {
+			has_variable = attacked_irc
+			NOT = {
+				exists = c:IRC
+			}
+		}
+		custom_tooltip = {
+			text = attacked_usa_already_tt
+			NOT = {
+				has_variable = attacked_usa
+			}
+		}
+		custom_tooltip = {
+			text = conquest_cooldown_tt
+			NOT = {
+				has_variable = bna_war_cooldown
+			}
+		}
+	}
+
+	effect = {
+		hidden_effect = {
+			set_variable = {
+				name = attacked_usa
+				value = yes
+			}
+			set_variable = {
+				name = bna_war_cooldown
+				value = yes
+				days = 365
+			}	
+		}
+		c:BNA = {
+			trigger_event = {
+				id = north_american_path.6
+				days = 0
+			}
+		}
+	}
+}
+
+demand_gna = {
+	name = "demand_gna"
+	desc = "demand_gna_desc"
+
+	visible = {
+		NOT = {
+			has_variable = attacked_gna
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		OR = {
+			has_variable = attacked_usa
+			NOT = {
+				exists = c:USA
+			}
+		}
+		custom_tooltip = {
+			text = attacked_gna_already_tt
+			NOT = {
+				has_variable = attacked_gna
+			}
+		}
+		custom_tooltip = {
+			text = conquest_cooldown_tt
+			NOT = {
+				has_variable = bna_war_cooldown
+			}
+		}
+	}
+
+	effect = {
+		hidden_effect = {
+			set_variable = {
+				name = bna_war_cooldown
+				value = yes
+				days = 365
+			}		
+			set_variable = {
+				name = attacked_gna
+				value = yes
+			}		
+		}
+		c:GNA = {
+			trigger_event = {
+				id = north_american_path.9
+				days = 0
+			}
+		}
+	}
+}
+
+independence_war = {
+	name = "independece_war"
+	desc = "independece_war_desc"
+
+	visible = {
+		NOT = {
+			has_variable = challenged_sun
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		NOT = {
+			has_variable = challenged_sun
+		}
+		OR = {
+			has_variable = attacked_gna
+			NOT = {
+				exists = c:GNA
+			}
+		}
+		custom_tooltip = {
+			text = conquest_cooldown_tt
+			NOT = {
+				has_variable = bna_war_cooldown
+			}
+		}
+	}
+
+	effect = {
+		set_variable = challenged_sun
+		c:BNA = {
+			trigger_event = {
+				id = north_american_path.15
+				days = 0
+			}
+		}
+	}
+}
+
+mid_bureaucratic_oversight = {
+	name = "mid_bureaucratic_oversight"
+	desc = "mid_bureaucratic_oversight_desc"
+
+	visible = {
+		NOT = {
+			exists = c:MID
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = not_oversought_bureaucracy_tt
+			NOT = {
+				has_variable = mid_bureaucracy_var
+			}
+		}
+		custom_tooltip = {
+			text = not_other_oversight_tt
+			NOT = {
+				has_modifier = oversought_military
+			}
+		}
+		NOT = {	exists = c:MID }
+	}
+
+	effect = {
+		random_state = {
+			limit = {
+				state_region = s:STATE_MINNESOTA
+			}
+			create_building = {
+				building = building_government_administration
+				level = 3
+			}
+		}
+		add_modifier = {
+			name = oversought_bureaucracy 
+			days = short_modifier_time
+		}
+		set_variable = mid_bureaucracy_var
+	}
+}
+
+mid_military_oversight = {
+	name = "mid_military_oversight"
+	desc = "mid_military_oversight_desc"
+
+	visible = {
+		NOT = {
+			exists = c:MID
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = not_oversought_military_tt
+			NOT = {
+				has_variable = mil_oversight_var
+			}
+		}
+		custom_tooltip = {
+			text = not_other_oversight_tt
+			NOT = {
+				has_modifier = oversought_bureaucracy
+			}
+		}
+		NOT = {	exists = c:MID }
+	}
+
+	effect = {
+		random_state = {
+			limit = {
+				state_region = s:STATE_MINNESOTA
+			}
+			create_building = {
+				building = building_barracks
+				level = 8
+			}
+		}
+		add_modifier = {
+			name = oversought_military 
+			days = short_modifier_time
+		}
+		set_variable = mil_oversight_var
+	}
+}
+
+mid_establish_administration = {
+	name = "mid_establish_administration"
+	desc = "mid_establish_administration_desc"
+
+	visible = {
+		NOT = {
+			exists = c:MID
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		NOT = {
+			exists = c:MID
+		}
+		custom_tooltip = {
+			text = mid_bureaucracy_var_tt
+			has_variable = mid_bureaucracy_var
+		}
+		custom_tooltip = {
+			text = mil_oversight_var_tt
+			has_variable = mil_oversight_var
+		}
+	}
+
+	effect = {
+		remove_variable = mil_oversight_var
+		remove_variable = mid_bureaucracy_var
+		create_country = {
+			tag = MID
+			origin = this
+			state = s:STATE_MINNESOTA.region_state:BNA
+		}
+		random_state = {
+			limit = {
+				state_region = s:STATE_NORTH_DAKOTA
+			}
+			set_state_owner = c:MID
+		}
+		random_state = {
+			limit = {
+				state_region = s:STATE_SOUTH_DAKOTA
+			}
+			set_state_owner = c:MID
+		}
+		c:BNA = {
+			create_diplomatic_pact = {
+				country = c:MID
+				type = puppet
+			}
+		}
+	}
+}
+
+mid_instill_loyalty = {
+	name = "mid_instill_loyalty"
+	desc = "mid_instill_loyalty_tt"
+
+	visible = {
+		exists = c:MID
+		c:MID = {
+			is_subject_of = c:BNA
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = not_instill_loyalty_tt
+			NOT = {
+				has_variable = mid_instilled_loyalty_var
+				
+			}
+		}
+		custom_tooltip = {
+			text = not_other_establishment_tt
+			NOT = {
+				has_modifier = foreign_constructions
+			}
+		}
+	}
+
+	effect = {
+		add_modifier = instilled_loyalty
+		set_variable = mid_instilled_loyalty_var
+		c:MID = {
+			add_liberty_desire = -20
+		}
+	}
+}
+
+mid_foreign_agriculture = {
+	name = "mid_foreign_agriculture"
+	desc = "mid_foreign_agriculture_tt"
+
+	visible = {
+		exists = c:MID
+		c:MID = {
+			is_subject_of = c:BNA
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = not_foreign_agriculture_tt
+			NOT = {
+				has_variable = has_foreign_agriculture
+			}
+		}
+		custom_tooltip = {
+			text = not_other_establishment_tt
+			NOT = {
+				has_modifier = foreign_constructions
+			}
+		}
+	}
+
+	effect = {
+		add_modifier = {
+			name = foreign_constructions
+			days = short_modifier_time
+		}
+		set_variable = has_foreign_agriculture
+		random_state = {
+			limit = {
+				state_region = s:STATE_NORTH_DAKOTA
+			}
+			create_building = {
+				building = building_wheat_farm
+				add_ownership={
+					country={
+						country="c:BNA"
+						levels=10
+					}
+				}
+			}
+		}
+	}
+}
+
+mid_foreign_mining = {
+	name = "mid_foreign_mining"
+	desc = "mid_foreign_mining_tt"
+
+	visible = {
+		exists = c:MID
+		c:MID = {
+			is_subject_of = c:BNA
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = not_foreign_mining_tt
+			NOT = {
+				has_variable = has_foreign_mining
+			}
+		}
+		custom_tooltip = {
+			text = not_other_establishment_tt
+			NOT = {
+				has_modifier = foreign_constructions
+			}
+		}
+	}
+
+	effect = {
+		add_modifier = {
+			name = foreign_constructions
+			days = short_modifier_time
+		}
+		set_variable = has_foreign_mining
+		random_state = {
+			limit = {
+				state_region = s:STATE_MINNESOTA
+			}
+			create_building = {
+				building = building_iron_mine
+				add_ownership={
+					country={
+						country="c:BNA"
+						levels=10
+					}
+				}
+			}
+		}
+		random_state = {
+			limit = {
+				state_region = s:STATE_SOUTH_DAKOTA
+			}
+			create_building = {
+				building = building_coal_mine
+				add_ownership={
+					country={
+						country="c:BNA"
+						levels=5
+					}
+				}
+			}
+		}
+	}
+}
+
+mid_foreign_war_industry = {
+	name = "mid_foreign_war_industry"
+	desc = "mid_foreign_war_industry_tt"
+
+	visible = {
+		exists = c:MID
+		c:MID = {
+			is_subject_of = c:BNA
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = not_foreign_war_industry_tt
+			NOT = {
+				has_variable = has_foreign_war_industry
+			}
+		}
+		custom_tooltip = {
+			text = not_other_establishment_tt
+			NOT = {
+				has_modifier = foreign_constructions
+			}
+		}
+	}
+
+	effect = {
+		add_modifier = {
+			name = foreign_constructions
+			days = short_modifier_time
+		}
+		set_variable = has_foreign_war_industry
+		random_state = {
+			limit = {
+				state_region = s:STATE_NORTH_DAKOTA
+			}
+			create_building = {
+				building = building_fertilizer_plant
+				add_ownership={
+					country={
+						country="c:BNA"
+						levels=3
+					}
+				}
+			}
+			create_building = {
+				building = building_explosives_factory
+				add_ownership={
+					country={
+						country="c:BNA"
+						levels=2
+					}
+				}
+			}
+		}
+	}
+}
+
+jeap_stir_up_antagonism = {
+	name = "jeap_stir_up_antagonism"
+	desc = "jeap_stir_up_antagonism_desc"
+
+	cooldown = {
+		days = 200
+	}
+	possible = {
+		custom_tooltip = {
+			text = influence_greater_than_0_tt
+			this.influence > 0
+		}
+	}
+	ai_chance = {
+		value = 0
+		add = {
+			value = this.influence
+			divide = 100
+		}
+	}
+	effect = {
+		add_modifier = {
+			name = anatolian_plot_influence_use
+			months = 3
+		}
+		c:TUR = {
+			change_relations = { country = c:BAG value = -3 }
+		}
+	}
+}
+
+jeap_boost_anti_baghdad_sentiments = {
+	name = "jeap_boost_anti_baghdad_sentiments"
+	desc = "jeap_boost_anti_baghdad_sentiments_desc"
+
+	cooldown = {
+		days = 40
+	}
+	ai_chance = {
+		value = 0
+		add = {
+			value = this.influence
+			divide = 30
+		}
+	}
+	visible = {
+		c:TUR = {
+			NOT = {
+				any_political_lobby = {
+					c:BAG ?= target
+					is_political_lobby_type = lobby_anti_country
+				}
+			}
+		}
+	}
+	possible = {
+		custom_tooltip = {
+			text = influence_greater_than_0_tt
+			this.influence > 0
+		}
+	}
+	effect = {
+		add_modifier = {
+			name = anatolian_plot_influence_use
+			months = 3
+		}
+		random_list = {
+			0 = {
+				modifier = {
+					add = this.influence
+					divide = 10
+				}
+				c:TUR = {
+					change_relations = { country ?= c:BAG value = -5 }
+					create_political_lobby = {  
+						type = lobby_anti_country  
+						target = c:BAG
+						add_interest_group = ig:ig_landowners
+						add_interest_group = ig:ig_armed_forces
+					}
+				}
+			}
+			100 = {
+				modifier = {
+					subtract = this.influence
+					divide = 10
+				}
+				c:TUR = {
+					change_relations = { country = c:BAG value = -2 }
+				}
+			}
+		}
+	}
+}
+
+jeap_deepen_britannian_baghdad_interests = { #has a chance to create a pro-bagdad lobby in britannia
+	name = "jeap_deepen_britannian_baghdad_interests"
+	desc = "jeap_deepen_britannian_baghdad_interests_desc"
+	cooldown = {
+		days = 60
+	}
+	ai_chance = {
+		value = 0
+		add = {
+			value = this.influence
+			divide = 25
+		}
+	}
+	visible = {
+		c:GBR = {
+			NOT = {
+				any_political_lobby = {
+					c:BAG = target
+					is_political_lobby_type = lobby_pro_country
+				}
+			}
+		}
+	}
+	possible = {
+		custom_tooltip = {
+			text = influence_greater_than_0_tt
+			this.influence > 0
+		}
+	}
+	effect = {
+		add_modifier = {
+			name = anatolian_plot_influence_use
+			months = 3
+			multiplier = 1.2
+		}
+		random_list = {
+			0 = {
+				modifier = {
+					add = this.influence
+					divide = 10
+				}
+				c:GBR ?= {
+					change_relations = { country = c:BAG value = 3 }
+					create_political_lobby = {  
+						type = lobby_pro_country  
+						target = c:BAG
+						add_interest_group = ig:ig_industrialists
+						add_interest_group = ig:ig_intelligentsia
+					}
+				}
+			}
+			100 = {
+				modifier = {
+					subtract = this.influence
+					divide = 10
+				}
+				c:GBR ?= {
+					change_relations = { country = c:BAG value = 1 }
+				}
+			}
+		}
+	}
+}
+
+jeap_promote_baghdad_pro_britannian_sentiments = { #has a chance to create a pro-britannia lobby in baghdad
+	name = "jeap_promote_baghdad_pro_britannian_sentiments"
+	desc = "jeap_promote_baghdad_pro_britannian_sentiments_desc"
+	cooldown = {
+		days = 40
+	}
+	ai_chance = {
+		value = 0
+		add = {
+			value = this.influence
+			divide = 30
+		}
+	}
+	visible = {
+		c:BAG = {
+			NOT = {
+				any_political_lobby = {
+					c:GBR ?= target
+					is_political_lobby_type = lobby_pro_country
+				}
+			}
+		}
+	}
+	possible = {
+		custom_tooltip = {
+			text = influence_greater_than_0_tt
+			this.influence > 0
+		}
+	}
+	effect = {
+		add_modifier = {
+			name = anatolian_plot_influence_use
+			months = 3
+		}
+		random_list = {
+			0 = {
+				modifier = {
+					add = this.influence
+					divide = 5
+				}
+				c:BAG ?= {
+					change_relations = { country = c:GBR value = 3 }
+					create_political_lobby = {  
+						type = lobby_pro_country  
+						target = c:GBR
+						add_interest_group = ig:ig_armed_forces
+					}
+				}
+			}
+			100 = {
+				modifier = {
+					subtract = this.influence
+					divide = 5
+				}
+				c:BAG ?= {
+					change_relations = { country = c:GBR value = 1 }
+				}
+			}
+		}
+	}
+}
+
+jeap_prompt_secret_pact = { #covertly gives baghdad the decision to ask Britannia for a defensive pact
+	name = "jeap_prompt_secret_pact"
+	desc = "jeap_prompt_secret_pact_desc"
+	cooldown = {
+		days = 60
+	}
+	ai_chance = {
+		value = 0
+		add = {
+			value = this.influence
+			divide = 30
+		}
+	}
+	visible = {
+		AND = {
+			c:GBR = {
+				any_political_lobby = {
+					limit = {
+						c:BAG ?= target
+						is_political_lobby_type = lobby_pro_country
+					}
+				}
+			}
+			c:BAG = {
+				any_political_lobby = {
+					limit = {
+						c:GBR ?= target
+						is_political_lobby_type = lobby_pro_country
+					}
+				}
+			}
+		}
+		NOT = {
+			has_variable = prompted_secret_pact
+		}
+	}
+	possible = {
+		custom_tooltip = {
+			text = influence_greater_than_0_tt
+			this.influence > 0
+		}
+	}
+	effect = {
+		add_modifier = {
+			name = anatolian_plot_influence_use
+			months = 3
+			multiplier = 1.5
+		}
+		random_list = {
+			100 = {
+				modifier = {
+					subtract = this.influence
+					divide = 10
+				}
+				c:BAG = {
+					change_relations = { country = c:GBR value = 1 }
+				}
+			}
+			0 = {
+				modifier = {
+					add = this.influence
+					divide = 10
+				}
+				custom_tooltip = {
+					text = secret_pact_prompted_tt
+					set_variable = prompted_secret_pact
+					c:BAG = {
+						set_variable = secret_pact_decision_available
+					}
+				}
+			}
+		}
+	}
+}
+
+jeap_pledge_turkey_backing = { #promise to back the ottomans in a war against baghdad/britannia
+	name = "jeap_pledge_turkey_backing"
+	desc = "jeap_pledge_turkey_backing_desc"
+
+	ai_chance = {
+		value = 100
+	}
+	visible = {
+		any_treaty = {
+			binds = c:GBR
+			any_scope_article = {
+				has_type = guarantee_independence
+			}
+		}
+		c:TUR = {
+			any_political_lobby = {
+				c:BAG ?= target
+				is_political_lobby_type = lobby_anti_country
+			}
+		}
+	}
+	possible = {
+		custom_tooltip = {
+			text = pledged_tur_backing_tt
+			NOT = {
+				has_variable = pledged_tur_backing
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = {
+			text = promised_turkey_backing_tt
+			set_variable = pledged_tur_backing
+			c:TUR = {
+				set_variable = germany_promised_backing
+			}
+		}
+	}
+}
+
+jeap_support_turkey = { #support turkey and drag britannia down
+	name = "jeap_support_turkey"
+	desc = "jeap_support_turkey_desc"
+	visible = {
+		any_diplomatic_play = {
+			target = {
+				c:BAG ?= this
+			}
+		}
+	}
+	possible = {
+		always = yes
+	}
+	ai_chance = {
+		value = 100
+	}
+	effect = {
+		set_variable = jeap_joined_war
+		random_diplomatic_play = {
+			limit = {
+				initiator = {
+					c:TUR ?= this
+				}
+			}
+			add_target_backers = { c:GER }
+		}
+	}
+}
+
+jesg_invade_near_southland = { # go forward with bavarian cutoff warplan
+	name = "jesg_invade_near_southland"
+	desc = "jesg_invade_near_southland_desc"
+	visible = {
+		c:GBR ?= {
+			has_journal_entry = je_britannian_prosperity
+		}
+		c:BAV ?= {
+			is_subject_of = c:GBR
+		}
+	}
+	possible = {
+		custom_tooltip = {
+			text = fired_german_war_tt
+			NOT = {
+				has_variable = fired_german_war
+			}
+		}
+	}
+	ai_chance = {
+		value = 20
+	}
+	effect = {
+		set_variable = fired_german_war
+		create_diplomatic_play = {
+			name = bavarian_wars
+			target_country = c:BAV
+			type = dp_bavarian_warplan
+			war = yes
+		}
+	}
+}
+
+jesg_invade_area_westland = { #invade westland first
+	name = "jesg_invade_area_westland"
+	desc = "jesg_invade_area_westland_desc"
+	visible = {
+		c:GBR ?= {
+			has_journal_entry = je_britannian_prosperity
+		}
+		c:WST ?= {
+			is_subject_of = c:GBR
+		}
+	}
+	possible = {
+		custom_tooltip = {
+			text = fired_german_war_tt
+			NOT = {
+				has_variable = fired_german_war
+			}
+		}
+	}
+	ai_chance = {
+		value = 20
+	}
+	effect = {
+		set_variable = fired_german_war
+		random_neighbouring_state = {
+			limit = {
+				owner = c:WST
+			}
+			save_scope_as = wargoal_state
+		}
+		create_diplomatic_play = {
+			name = westland_invasion
+			target_country = c:WST
+			target_state = scope:wargoal_state
+			type = dp_conquer_state
+			add_escalation = 75
+			add_war_goal = {
+				holder = c:WST
+				target = c:GER
+				type = humiliation
+			}
+		}
+		random_diplomatic_play = { #gives wargoals on every neighboring state owned by westland
+			limit = {
+				initiator = {
+					c:GER ?= this
+				}
+			}
+			every_state = {
+				limit = {
+					owner ?= c:WST
+					any_neighbouring_state = {
+						owner = {
+							OR = {
+								c:GER ?= this
+								is_subject_of = c:GER
+							}
+						}
+					}
+				}
+				PREV = {
+					add_war_goal = {
+						holder = c:GER
+						target_country = c:WST
+						target_state = PREV
+						type = conquer_state
+					}
+				}
+			}
+		}
+	}
+}
+
+jesg_wipe_britannian_remnants = {
+	name = "jesg_wipe_britannian_remnants"
+	desc = "jesg_wipe_britannian_remnants_desc"
+	visible = {
+		c:GBR ?= {
+			NOT = {
+				has_journal_entry = je_britannian_prosperity
+			}
+		}
+	}
+	possible = {
+		custom_tooltip = {
+			text = fired_german_war_tt
+			NOT = {
+				has_variable = fired_german_war
+			}
+		}
+		OR = {
+			exists = c:AST
+			exists = c:HNG
+			exists = c:YUG
+			exists = c:BAV
+		}
+	}
+	effect = {
+		set_variable = fired_german_war
+		create_diplomatic_play = {
+			name = southern_wipe
+			target_country = c:AST
+			type = dp_annex_war
+			add_escalation = 80
+			add_target_backers = {
+				c:HNG
+				c:YUG
+				c:BAV
+			}
+			add_war_goal = {
+				holder = c:GER
+				target_country = c:HNG
+				type = annex_country
+			}
+			add_war_goal = {
+				holder = c:GER
+				target_country = c:YUG
+				type = annex_country
+			}
+			add_war_goal = {
+				holder = c:GER
+				target_country = c:BAV
+				type = annex_country
+			}
+		}
+	}
+	ai_chance = {
+		value = 50
+	}
+}
+
+jeatp_begin_atomics_construction = {
+	name = "jeatp_begin_atomics_construction"
+	desc = "jeatp_begin_atomics_construction_desc"
+	possible = {
+		NOT = {
+			has_modifier = jeatp_atomics_production
+		}
+	}
+	ai_chance = {
+		value = 20
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = {
+				value = -10
+			}
+		}
+		if = {
+			limit = {
+				in_default = yes
+			}
+			add = {
+				value = -10
+			}
+		}
+	}
+	effect = {
+		add_modifier = {
+			name = jeatp_atomics_production
+			multiplier = var:centrifuge_amount
+		}
+	}
+}
+
+jeatp_pause_atomics_construction = {
+	name = "jeatp_pause_atomics_construction"
+	desc = "jeatp_pause_atomics_construction_desc"
+	possible = {
+		has_modifier = jeatp_atomics_production
+	}
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = {
+				value = 15
+			}
+		}
+		if = {
+			limit = {
+				in_default = yes
+			}
+			add = {
+				value = 75
+			}
+		}
+	}
+	effect = {
+		remove_modifier = jeatp_atomics_production
+	}
+}
+
+jeatp_open_atomics_sale = {
+	name = "jeatp_open_atomics_sale"
+	desc = "jeatp_open_atomics_sale_desc"
+	possible = {
+		custom_tooltip = {
+			text = not_selling_atomics_tt
+			NOT = {
+				has_variable = selling_atomics
+			}
+		}
+	}
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = {
+				value = 20
+			}
+		}
+		add = {
+			value = -10
+			add = var:atomics_stock
+			multiply = 10
+		}
+	}
+	effect = {
+		set_variable = selling_atomics
+	}
+}
+
+jeatp_close_atomics_sale = {
+	name = "jeatp_close_atomics_sale"
+	desc = "jeatp_close_atomics_sale_desc"
+	possible = {
+		has_modifier = jeatp_atomics_production
+		custom_tooltip = {
+			text = selling_atomics_tt
+			has_variable = selling_atomics
+		}
+	}
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = {
+				value = -20
+			}
+		}
+		add = {
+			value = 10
+			subtract = var:atomics_stock
+			multiply = 10
+		}
+	}
+	effect = {
+		remove_variable = selling_atomics
+	}
+}
+
+jeas_review_atomics_policy = {
+	name = "jeas_review_atomics_policy"
+	desc = "jeas_review_atomics_policy_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		always = yes
+	}
+	cooldown = {
+		days = 1825
+	}
+	effect = {
+		trigger_event = {
+			id = atomics_events.1
+			days = 3
+			popup = yes
+		}
+	}
+	ai_chance = {
+		base = 5
+	}
+}
+
+jeas_the_atomic_option = {
+	name = "jeas_the_atomic_option"
+	desc = "jeas_the_atomic_option_desc"
+	visible = {
+		AND = {
+			is_at_war = yes
+			any_enemy_in_war = {
+				any_scope_state = {
+					NOT = {
+						has_modifier = ravaged_by_atomics
+					}
+				}
+			}
+		}
+	}
+	possible = {
+		can_launch_atomics = yes
+	}
+	ai_chance = {
+		value = 20
+		if = {
+			limit = {
+				any_enemy_in_war = {
+					any_scope_state = {
+						has_modifier = ravaged_by_atomics
+					}
+				}
+			}
+			add = {
+				value = 100
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					has_modifier = ravaged_by_atomics
+				}
+			}
+			add = {
+				value = 100
+			}
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				any_diplomatic_play = {
+					limit = {
+						is_war = yes
+						any_scope_play_involved = {
+							THIS = ROOT
+						}
+					}
+					NOT = {
+						has_variable = atomics_used
+					}
+				}
+			}
+			random_diplomatic_play = {
+				limit = {
+					is_war = yes
+					any_scope_play_involved = {
+						THIS = ROOT
+					}
+				}
+				set_variable = atomics_used
+			}
+		}
+		atomic_strike_effect = yes
+	}
+}
+
+jeas_build_centrifuge = {
+	name = "jeas_build_centrifuge"
+	desc = "jeas_build_centrifuge_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		always = yes
+	}
+	cooldown = {
+		days = 180
+	}
+	ai_chance = {
+		value = 10
+	}
+	effect = {
+		if = {
+			limit = {
+				has_variable = centrifuge_amount
+			}
+			change_variable = {
+				name = centrifuge_amount
+				add = 1
+			}
+			add_modifier = {
+				name = centrifuge_construction_cost
+				months = 5
+			}
+		}
+	}
+}

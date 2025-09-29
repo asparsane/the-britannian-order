@@ -1,0 +1,698 @@
+#HNE and Skibidi
+	je_quaker_expulsion = {
+		icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+		group = je_group_historical_content
+		is_shown_when_inactive = {
+			AND = {
+				c:HNE ?= this
+				ig:ig_devout = {
+					is_powerful = yes
+				}
+			}
+		}
+		possible = {
+			ig:ig_rural_folk = {
+				is_powerful = no
+			}
+		}
+		immediate = {
+			add_modifier = hne_quaker_oats_disbanded_fallout
+		}
+		timeout = 365
+		on_timeout = { #relocates some quakers to new france
+			c:BNA = {
+				random_scope_state = {
+					save_scope_as = quaker_relocated_state
+				}
+			}
+			random_scope_pop = {
+				limit = {
+					religion = rel:protestant
+					strata = lower
+				}
+				move_pop = scope:quaker_relocated_state
+			}
+			random_scope_pop = {
+				limit = {
+					religion = rel:protestant
+					strata = middle
+				}
+				move_pop = scope:quaker_relocated_state
+			}
+			random_scope_pop = {
+				limit = {
+					religion = rel:protestant
+					strata = upper
+				}
+				move_pop = scope:quaker_relocated_state
+			}
+			trigger_event = { #disbands quaker oats, k.kerr.otes exiled
+				id = north_america_events.10
+				days = 0
+				popup = yes
+			}
+		}
+	}
+
+	je_tung_tung_tung_corps = { #basically a group to keep some level of control during the famine times. probably will have some kind of roll-based system where unrest continually increases.
+		icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+		group = je_group_historical_content
+		is_shown_when_inactive = {
+			c:HNE ?= this
+			NOT = {
+				has_company = company_type:company_quaker_oats
+			}
+		}
+		possible = {
+			any_scope_pop = {
+				is_in_starvation = yes
+			}
+		}
+		modifiers_while_active = {
+			hne_tung_tung_tung_corps
+			hne_tung_tung_tung_corps_upkeep
+		}
+	}
+
+	je_the_prophet_of_rizz = { #prophet who sees visions of brainrot and starts a religion. people will begin converting to this new religion on a monthly basis.
+		icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+		group = je_group_historical_content
+		is_shown_when_inactive = {
+			c:HNE ?= this
+			has_journal_entry = je_tung_tung_tung_corps
+		}
+		possible = {
+			pop_radical_fraction > 0.1
+		}
+		immediate = {
+			set_variable = {
+				name = skibidi_postwar_debt_amount
+				value = 0
+			}
+			set_variable = {
+				name = barracks_sabotage
+				value = 0
+			}
+			set_variable = {
+				name = industry_sabotage
+				value = 0
+			}
+			set_variable = {
+				name = war_industry_sabotage
+				value = 0
+			}
+		}
+
+		on_monthly_pulse = {
+			effect = {
+				random_scope_state = {
+					convert_population = {
+						target = rel:skibidi value = 0.03
+					}
+				}
+			}
+		}
+
+		complete = {
+			ROOT = {
+				religion_percent_country = {
+					target = rel:skibidi
+					value >= 0.10
+				}
+			}
+		}
+		on_complete = {
+			skibidi_revolt_start = yes
+		}
+	}
+
+	je_sigma_wolves = {# a dark current in mewnited gyatts sociskibidi, the sigmas are a radical undercurrent that seek to upend the fragile order with their own aura... the sigma wolf will be silent no more.
+		icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+		group = je_group_historical_content
+		scripted_progress_bar = sw_sigma_aura #sigma influence
+		scripted_progress_bar = sw_balkan_rage #sigma radicalism
+		timeout = 1825
+		immediate = {
+			every_scope_state = {
+				convert_population = {
+					target = rel:redpill
+					value = 0.15
+				}
+			}
+			every_scope_pop = {
+				limit = {
+					religion = rel:redpill
+				}
+				change_pop_culture = {
+					target = cu:sigma
+					value = 0.10
+				}
+			}
+		}
+		on_monthly_pulse = {
+			effect = {
+				scope:journal_entry = {
+					set_bar_progress = {
+						value = {
+							value = "ROOT.radical_fraction(rel:redpill)"
+							multiply = 10
+						}
+						name = sw_balkan_rage
+					}
+				}
+				every_scope_pop = {
+					limit = {
+						religion = rel:redpill
+						NOT = {
+							culture = cu:sigma
+						}
+					}
+					change_pop_culture = {
+						target = cu:sigma
+						value = 0.05
+					}
+				}
+				random_scope_state = {
+					convert_population = {
+						target = rel:redpill
+						value = {
+							value = 0.01
+							multiply = {
+								value = 1
+								add = {
+									value = "root.radical_fraction(rel:redpill)"
+									multiply = 10
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		complete = {
+			OR = {
+				religion_percent_country = {
+					target = rel:redpill
+					value >= 0.20
+				}
+				culture_percent_country = {
+					target = cu:sigma
+					value >= 0.15
+				}
+			}
+		}
+		on_complete = { #sigma revolt
+			sigma_nation_rise_up = yes
+		}
+		on_timeout = { #sigma movement dies out, less radicalism and converts some to brainrot
+			add_loyalists = {
+				value = 0.01
+			}
+			every_scope_pop = {
+				limit = {
+					religion = {
+						this = rel:redpill
+					}
+				}
+				change_pop_culture = {
+					target = cu:brainrot
+					value = 0.1
+				}
+				change_pop_religion = {
+					target = rel:skibidi
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	je_the_balance_of_brainrot = {
+		icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+		group = je_group_historical_content
+		scripted_progress_bar = bob_skibidi_strength
+		scripted_progress_bar = bob_tralaleroist_strength
+		scripted_progress_bar = bob_brainrot_solidified
+		scripted_progress_bar = bob_brainrot_civil_war_progress
+		scripted_progress_bar = bob_labubu_strength
+		scripted_button = bob_acknowledge_tralaleroism
+		scripted_button = bob_acknowledge_labubuism
+		immediate = {
+			set_variable = {
+				name = brainrot_radicalism
+				value = 0
+			}
+			set_variable = {
+				name = brainrot_max_tt
+				value = 0
+			}
+			set_variable = {
+				name = brainrot_level
+				value = 0
+			}
+		}
+		status_desc = {
+			first_valid = {
+				triggered_desc = {
+					desc = je_bob_brainrot_balance
+					trigger = {
+						var:brainrot_max_tt = 1
+					}
+				}
+				triggered_desc = {
+					desc = je_bob_brainrot_one_dominant
+					trigger = {
+						var:brainrot_max_tt = 2
+					}
+				}
+				triggered_desc = {
+					desc = je_bob_brainrot_hostility
+					trigger = {
+						var:brainrot_max_tt = 3
+					}
+				}
+			}
+		}
+		on_monthly_pulse = {
+			effect = {
+				if = {
+					limit = {
+						var:brainrot_radicalism >= 100
+					}
+					bob_set_progress_bars = yes
+				}
+				if = {
+					limit = {
+						var:brainrot_radicalism < 300
+					}
+					change_variable = {
+						name = brainrot_radicalism
+						add = 10
+					}
+				}
+				check_brainrot_balance = yes
+				calculate_brainrot_power_disparity = yes
+				brainrot_conversion = yes
+			}
+		}
+		timeout = 3650
+		complete = {
+			scope:journal_entry = { #one side solidified now you get bonuses
+				custom_tooltip = {
+					text = bob_dominance_solidified
+					"scripted_bar_progress(bob_brainrot_solidified)" >= 36
+				}
+			}
+		}
+		on_complete = {
+			bob_remove_variables = yes
+			if = {
+				limit = {
+					AND = {
+						var:skibidi_var > var:labubu_var
+						var:skibidi_var > var:tralalero_var
+					}
+				}
+				add_modifier = {
+					name = skibidi_cemented
+				}
+			}
+			else_if = {
+				limit = {
+					AND = {
+						var:labubu_var > var:skibidi_var
+						var:labubu_var > var:tralalero_var
+					}
+				}
+				add_modifier = {
+					name = labubu_cemented
+				}
+			}
+			else = {
+				limit = {
+					AND = {
+						var:tralalero_var > var:skibidi_var
+						var:tralalero_var > var:labubu_var
+					}
+				}
+				add_modifier = {
+					name = tralalero_cemented
+				}
+			}
+		}
+		fail = {
+			scope:journal_entry = { #civil war
+				custom_tooltip = {
+					text = bob_dominance_discontent
+					"scripted_bar_progress(bob_brainrot_civil_war_progress)" >= 36
+				}
+			}
+		}
+		on_fail = {
+			brainrot_civil_war = yes
+			bob_remove_variables = yes
+		}
+		on_timeout = { #also civil war
+			brainrot_civil_war = yes
+			bob_remove_variables = yes
+		}
+	}
+
+	je_skibidi_solidification = {
+		icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+		group = je_group_historical_content
+		immediate = {
+			set_variable = {
+				name = cultural_development_progress
+				value = 0
+			}
+			set_variable = {
+				name = cultural_development_base
+				value = 0
+			}
+		}
+		is_shown_when_inactive = {
+			has_primary_culture = cu:brainrot
+		}
+		possible = {
+			has_modifier = skibidi_cemented
+		}
+		on_monthly_pulse = {
+			effect = {
+				check_skibidi_culture_dev_progress = yes
+				if = {
+					limit = {
+						AND = {
+							has_variable = cultural_development_progress
+							var:cultural_development_progress < 100
+						}
+					}
+					change_variable = {
+						name = cultural_development_progress
+						add = {
+							value = var:cultural_development_base
+							multiply = 2
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						AND = {
+							has_variable = cultural_development_progress
+							var:cultural_development_progress < 200
+						}
+					}
+					change_variable = {
+						name = cultural_development_progress
+						add = {
+							value = var:cultural_development_base
+							multiply = 1.5
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						AND = {
+							has_variable = cultural_development_progress
+							var:cultural_development_progress < 300
+						}
+					}
+					change_variable = {
+						name = cultural_development_progress
+						add = {
+							value = var:cultural_development_base
+							multiply = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						AND = {
+							var:cultural_development_progress >= 100
+							has_modifier = skibidi_cemented
+						}
+					}
+					remove_modifier = skibidi_cemented
+					add_modifier = {
+						name = skibidi_development_lvl2
+					}
+				}
+				if = {
+					limit = {
+						AND = {
+							var:cultural_development_progress >= 200
+							has_modifier = skibidi_development_lvl2
+						}
+					}
+					remove_modifier = skibidi_development_lvl2
+					add_modifier = {
+						name = skibidi_development_lvl3
+					}
+				}
+				if = {
+					limit = {
+						AND = {
+							var:cultural_development_progress >= 300
+							has_modifier = skibidi_development_lvl3
+						}
+					}
+					remove_modifier = skibidi_development_lvl3
+					add_modifier = {
+						name = skibidi_development_lvl4
+					}
+				}
+			}
+		}
+		complete = {
+			has_modifier = skibidi_development_lvl4
+		}
+	}
+
+	je_labubu_solidification = {
+		icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+		group = je_group_historical_content
+		immediate = {
+			set_variable = {
+				name = cultural_development_progress
+				value = 0
+			}
+			set_variable = {
+				name = cultural_development_base
+				value = 0
+			}
+		}
+		is_shown_when_inactive = {
+			has_primary_culture = cu:labubu
+		}
+		possible = {
+			has_modifier = labubu_cemented
+		}
+		on_monthly_pulse = {
+			effect = {
+				check_labubu_culture_dev_progress = yes
+				if = {
+					limit = {
+						AND = {
+							has_variable = cultural_development_progress
+							var:cultural_development_progress < 100
+						}
+					}
+					change_variable = {
+						name = cultural_development_progress
+						add = {
+							value = var:cultural_development_base
+							multiply = 2
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						AND = {
+							has_variable = cultural_development_progress
+							var:cultural_development_progress < 200
+						}
+					}
+					change_variable = {
+						name = cultural_development_progress
+						add = {
+							value = var:cultural_development_base
+							multiply = 1.5
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						AND = {
+							has_variable = cultural_development_progress
+							var:cultural_development_progress < 300
+						}
+					}
+					change_variable = {
+						name = cultural_development_progress
+						add = {
+							value = var:cultural_development_base
+							multiply = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						AND = {
+							var:cultural_development_progress >= 100
+							has_modifier = labubu_cemented
+						}
+					}
+					remove_modifier = labubu_cemented
+					add_modifier = {
+						name = labubu_development_lvl2
+					}
+				}
+				if = {
+					limit = {
+						AND = {
+							var:cultural_development_progress >= 200
+							has_modifier = labubu_development_lvl2
+						}
+					}
+					remove_modifier = labubu_development_lvl2
+					add_modifier = {
+						name = labubu_developmentlvl3
+					}
+				}
+				if = {
+					limit = {
+						AND = {
+							var:cultural_development_progress >= 300
+							has_modifier = labubu_developmentlvl3
+						}
+					}
+					remove_modifier = labubu_developmentlvl3
+					add_modifier = {
+						name = labubu_development_lvl4
+					}
+				}
+			}
+		}
+		complete = {
+			has_modifier = labubu_development_lvl4
+		}
+	}
+
+	je_tralalero_solidification = {
+		icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+		group = je_group_historical_content
+		immediate = {
+			set_variable = {
+				name = cultural_development_progress
+				value = 0
+			}
+			set_variable = {
+				name = cultural_development_base
+				value = 0
+			}
+		}
+		is_shown_when_inactive = {
+			has_primary_culture = cu:tralalero
+		}
+		possible = {
+			has_modifier = tralalero_cemented
+		}
+		on_monthly_pulse = {
+			effect = {
+				check_tralalero_culture_dev_progress = yes
+				if = {
+					limit = {
+						AND = {
+							has_variable = cultural_development_progress
+							var:cultural_development_progress < 100
+						}
+					}
+					change_variable = {
+						name = cultural_development_progress
+						add = {
+							value = var:cultural_development_base
+							multiply = 2
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						AND = {
+							has_variable = cultural_development_progress
+							var:cultural_development_progress < 200
+						}
+					}
+					change_variable = {
+						name = cultural_development_progress
+						add = {
+							value = var:cultural_development_base
+							multiply = 1.5
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						AND = {
+							has_variable = cultural_development_progress
+							var:cultural_development_progress < 300
+						}
+					}
+					change_variable = {
+						name = cultural_development_progress
+						add = {
+							value = var:cultural_development_base
+							multiply = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						AND = {
+							var:cultural_development_progress >= 100
+							has_modifier = tralalero_cemented
+						}
+					}
+					remove_modifier = tralalero_cemented
+					add_modifier = {
+						name = tralalero_development_lvl2
+					}
+				}
+				if = {
+					limit = {
+						AND = {
+							var:cultural_development_progress >= 200
+							has_modifier = tralalero_development_lvl2
+						}
+					}
+					remove_modifier = labubu_development_lvl2
+					add_modifier = {
+						name = tralalero_development_lvl3
+					}
+				}
+				if = {
+					limit = {
+						AND = {
+							var:cultural_development_progress >= 300
+							has_modifier = tralalero_development_lvl3
+						}
+					}
+					remove_modifier = tralalero_development_lvl3
+					add_modifier = {
+						name = tralalero_development_lvl4
+					}
+				}
+			}
+		}
+		complete = {
+			has_modifier = tralalero_development_lvl4
+		}
+	}
+#New France
+	je_the_matter_of_land  = {
+		icon = "gfx/interface/icons/event_icons/event_map"
+		group = je_group_historical_content
+		scripted_button = tml_support_landtaking
+		scripted_button = tml_force_land_return
+		should_be_pinned_by_default = yes
+		immediate = {
+		}
+	}

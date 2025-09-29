@@ -1,0 +1,5 @@
+baghdad_assembly = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_prestige_add = 200
+	country_authority_mult = 0.2
+}

@@ -1,0 +1,704 @@
+soi_propose_unification_button = {
+	name = "soi_propose_unification_button"
+	desc = "soi_propose_unification_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 15
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = -5
+		}
+		if = {
+			limit = {
+				in_default = yes
+			}
+			add = -10
+		}
+	}
+
+	possible = {
+		any_country = {
+			NOT = {
+				this = ROOT
+			}
+			or = {
+				country_has_primary_culture = cu:spanish
+				country_has_primary_culture = cu:portuguese
+			}
+		}
+		NOR = {
+			is_diplomatic_play_committed_participant = yes
+			is_at_war = yes
+		}
+		custom_tooltip = {
+			text = not_proposed_with_portugal_tt
+			NOT = {
+				has_variable = proposed_unification_with_portugal
+			}
+		}
+		custom_tooltip = {
+			text = not_cooldown_tt
+			NOT = {
+				has_variable = iberian_spring_cooldown
+			}
+		}
+	}
+
+	effect = {
+		set_variable = {
+			name = iberian_spring_cooldown
+			days = 60
+		}
+		set_variable = proposed_unification_with_portugal
+		random_country = {
+			limit = {
+				NOT = {
+					this = ROOT
+				}
+				or = {
+					country_has_primary_culture = cu:spanish
+					country_has_primary_culture = cu:portuguese
+				}
+			}
+			trigger_event = {
+				id = westland_events.10
+				days = 3
+				popup = yes
+			}
+		}
+	}
+}
+
+moa_torture_people = { #gives torture menu
+	name = "moa_torture_people"
+	desc = "moa_torture_people_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		always = yes
+	}
+	ai_chance = {
+		value = 0
+	}
+	cooldown = {
+		days = 100
+	}
+	effect = {
+		trigger_event = {
+			id = westland_events.20
+			days = 0
+			popup = yes
+		}
+	}
+}
+
+moa_destroy_village = {
+	name = "moa_destroy_village"
+	desc = "moa_destroy_village_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		NOT = {
+			has_variable = village_destruction_cooldown_var
+		}
+	}
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				scope:journal_entry = {
+					"scripted_bar_progress(moa_waldro_insanity_progress_bar)" >= 15
+				}
+			}
+			add = 30
+		}
+	}
+	effect = {
+		random_scope_state = {
+			limit = {
+				owner = ROOT
+			}
+			kill_population_in_state = {
+				value = 500
+			}
+			state_region = {
+				add_devastation = 5
+			}
+		}
+		add_modifier = {
+			name = moa_destroyed_village_modifier
+			days = 125
+		}
+		custom_tooltip = {
+			text = moa_remove_4_insanity
+			scope:journal_entry = {
+				add_progress = { value = -4 name = moa_waldro_insanity_progress_bar }
+			}
+		}
+		set_variable = {
+			name = village_destruction_cooldown_var
+			days = 200
+		}
+	}
+}
+
+moa_demolish_village = {
+	name = "moa_demolish_village"
+	desc = "moa_demolish_village_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		NOT = {
+			has_variable = village_destruction_cooldown_var
+		}
+	}
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				scope:journal_entry = {
+					"scripted_bar_progress(moa_waldro_insanity_progress_bar)" >= 15
+				}
+			}
+			add = 20
+		}
+		if = {
+			limit = {
+				scope:journal_entry = {
+					"scripted_bar_progress(moa_waldro_insanity_progress_bar)" >= 17
+				}
+			}
+			add = 50
+		}
+	}
+	effect = {
+		random_scope_state = {
+			limit = {
+				owner = ROOT
+			}
+			kill_population_in_state = {
+				value = 700
+			}
+			state_region = {
+				add_devastation = 10
+			}
+		}
+		add_modifier = {
+			name = moa_demolished_village_modifier
+			days = 150
+		}
+		custom_tooltip = {
+			text = moa_remove_5_insanity
+			scope:journal_entry = {
+				add_progress = { value = -5 name = moa_waldro_insanity_progress_bar }
+			}
+		}
+		set_variable = {
+			name = village_destruction_cooldown_var
+			days = 250
+		}
+	}
+}
+
+moa_obliterate_village = {
+	name = "moa_obliterate_village"
+	desc = "moa_obliterate_village_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		NOT = {
+			has_variable = village_destruction_cooldown_var
+		}
+	}
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				scope:journal_entry = {
+					"scripted_bar_progress(moa_waldro_insanity_progress_bar)" >= 15
+				}
+			}
+			add = 20
+		}
+		if = {
+			limit = {
+				scope:journal_entry = {
+					"scripted_bar_progress(moa_waldro_insanity_progress_bar)" >= 19
+				}
+			}
+			add = 70
+		}
+	}
+	effect = {
+		random_scope_state = {
+			limit = {
+				owner = ROOT
+			}
+			kill_population_in_state = {
+				value = 900
+			}
+			state_region = {
+				add_devastation = 15
+			}
+		}
+		add_modifier = {
+			name = moa_obliterated_village_modifier
+			days = 175
+		}
+		custom_tooltip = {
+			text = moa_remove_6_insanity
+			scope:journal_entry = {
+				add_progress = { value = -6 name = moa_waldro_insanity_progress_bar }
+			}
+		}
+		set_variable = {
+			name = village_destruction_cooldown_var
+			days = 300
+		}
+	}
+}
+
+moa_conquer_unifier = { #attacks a random unifier
+	name = "moa_conquer_unifier"
+	desc = "moa_conquer_unifier_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		NOT = {
+			is_diplomatic_play_committed_participant = yes
+			is_at_war = yes
+		}
+		any_country = {
+			NOT = {
+				this = ROOT
+			}
+			OR = {
+				country_has_primary_culture = cu:spanish
+				country_has_primary_culture = cu:portugese
+			}
+			NOR = {
+				is_diplomatic_play_committed_participant = yes
+				is_at_war = yes
+			}
+		}
+	}
+	ai_chance = {
+		value = 10
+	}
+	cooldown = {
+		days = 300
+	}
+	effect = {
+		random_country = {
+			limit = {
+				NOT = {
+					this = ROOT
+				}
+				OR = {
+					country_has_primary_culture = cu:spanish
+					country_has_primary_culture = cu:portugese
+				}
+				NOR = {
+					is_diplomatic_play_committed_participant = yes
+					is_at_war = yes
+				}
+			}
+			save_scope_as = target_iberian_scope
+		}
+		create_diplomatic_play = {
+			name = iberian_unification_war
+			type = dp_annex_war
+			escalation = 50
+			target_country = scope:target_iberian_scope
+			add_war_goal = {
+				holder = "scope:target_iberian_scope"
+				target_country = ROOT
+				type = annex_country
+			}
+		}
+		change_infamy = -20
+		scope:target_iberian_scope = {
+			change_infamy = -20
+		}
+	}
+}
+
+rop_take_back_alentejo = {
+	name = "rop_take_back_alentejo"
+	desc = "rop_take_back_alentejo_desc"
+	visible = {
+		NOT = {
+			exists = s:STATE_ALENTEJO.region_state:POR
+		}
+	}
+	possible = {
+		NOR = {
+			is_at_war = yes
+			is_diplomatic_play_committed_participant = yes
+		}
+		any_state = {
+			limit = {
+				state_region = s:STATE_ALENTEJO
+			}
+			owner = {
+				NOR = {
+					is_at_war = yes
+					is_diplomatic_play_committed_participant = yes
+				}
+			}
+		}
+	}
+	effect = {
+		random_state = {
+			limit = {
+				state_region = s:STATE_ALENTEJO
+			}
+			owner = {
+				save_scope_as = target_iberian_scope
+			}
+		}
+		create_diplomatic_play = {
+			name = reclamation_of_portugal
+			type = dp_reclaim_portugal
+			escalation = 50
+			target_country = scope:target_iberian_scope
+			target_state = s:STATE_ALENTEJO.region_state:"scope:target_iberian_scope"
+			add_war_goal = {
+				holder = "scope:target_iberian_scope"
+				target_country = ROOT
+				type = annex_country
+			}
+		}
+	}
+}
+
+rop_iberia_sweep = {
+	name = "rop_take_back_alentejo"
+	desc = "rop_take_back_alentejo_desc"
+	visible = {
+		exists = s:STATE_ALENTEJO.region_state:POR
+	}
+	ai_chance = {
+		base = 5
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = -2
+		}
+		if = {
+			limit = {
+				in_default = yes
+			}
+			add = -3
+		}
+	}
+	possible = {
+		NOR = {
+			is_at_war = yes
+			is_diplomatic_play_committed_participant = yes
+		}
+		any_country = {
+			NOT = {
+				this = ROOT
+			}
+			OR = {
+				country_has_primary_culture = cu:spanish
+				country_has_primary_culture = cu:portuguese
+			}
+		}
+	}
+	effect = {
+		random_country = {
+			limit = {
+				NOT = {
+					this = ROOT
+				}
+				OR = {
+					country_has_primary_culture = cu:spanish
+					country_has_primary_culture = cu:portuguese
+				}
+			}
+			save_scope_as = target_iberian_scope
+		}
+		create_diplomatic_play = {
+			name = iberian_sweep
+			type = dp_spain_sweep
+			escalation = 50
+			target_country = scope:target_iberian_scope
+			add_war_goal = {
+				holder = "scope:target_iberian_scope"
+				target_country = ROOT
+				type = annex_country
+			}
+		}
+	}
+}
+
+boi_conquer_iberia = {
+	name = "boi_conquer_iberia"
+	desc = "boi_conquer_iberia_desc"
+	visible = {
+		always = yes
+	}
+	ai_chance = {
+		base = 5
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = -2
+		}
+		if = {
+			limit = {
+				in_default = yes
+			}
+			add = -3
+		}
+	}
+	possible = {
+		NOR = {
+			is_at_war = yes
+			is_diplomatic_play_committed_participant = yes
+		}
+		any_country = {
+			NOT = {
+				this = ROOT
+			}
+			OR = {
+				country_has_primary_culture = cu:spanish
+				country_has_primary_culture = cu:portuguese
+			}
+		}
+	}
+	effect = {
+		random_country = {
+			limit = {
+				NOT = {
+					this = ROOT
+				}
+				OR = {
+					country_has_primary_culture = cu:spanish
+					country_has_primary_culture = cu:portuguese
+				}
+			}
+			save_scope_as = target_iberian_scope
+		}
+		create_diplomatic_play = {
+			name = iberian_war
+			type = dp_annex_war
+			escalation = 50
+			target_country = scope:target_iberian_scope
+			add_war_goal = {
+				holder = "scope:target_iberian_scope"
+				target_country = ROOT
+				type = annex_country
+			}
+		}
+	}
+}
+
+bfb_place_additional_bid = {
+	name = "bfb_place_additional_bid"
+	desc = "bfb_place_additional_bid_desc"
+	possible = {
+		NOT = {
+			has_modifier = bfb_placed_bid
+		}
+	}
+	visible = {
+		always = yes
+	}
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				AND = {
+					c:LNG ?= this
+					OR = {
+						global_var:smalland_big_amount > global_var:languedoc_bid_amount
+						global_var:lorraine_bid_amount > global_var:languedoc_bid_amount
+					}
+				}
+			}
+			add = 10
+		}
+		if = {
+			limit = {
+				AND = {
+					c:SML ?= this
+					OR = {
+						global_var:languedoc_bid_amount > global_var:smalland_big_amount
+						global_var:lorraine_bid_amount > global_var:smalland_big_amount
+					}
+				}
+			}
+			add = 10
+		}
+		if = {
+			limit = {
+				AND = {
+					c:LRA ?= this
+					OR = {
+						global_var:languedoc_bid_amount > global_var:lorraine_bid_amount
+						global_var:smalland_big_amount > global_var:lorraine_bid_amount
+					}
+				}
+			}
+			add = 10
+		}
+	}
+	effect = {
+		add_treasury = -1000000
+		c:GBR = {
+			add_treasury = 1000000
+		}
+		if = {
+			limit = {
+				c:LNG ?= this
+			}
+			change_global_variable = {
+				name = languedoc_bid_amount
+				add = {
+					value = 100000
+					multiply = {
+						value = {
+							value = root.influence
+							divide = 1000
+							add = 1
+						}
+						add = {
+							value = root.prestige
+							divide = 10000
+							add = 1
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				c:SML ?= this
+			}
+			change_global_variable = {
+				name = smalland_bid_amount
+				add = {
+					value = 100000
+					multiply = {
+						value = {
+							value = root.influence
+							divide = 1000
+							add = 1
+						}
+						add = {
+							value = root.prestige
+							divide = 10000
+							add = 1
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				c:LRA ?= this
+			}
+			change_global_variable = {
+				name = lorraine_bid_amount
+				add = {
+					value = 100000
+					multiply = {
+						value = {
+							value = root.influence
+							divide = 1000
+							add = 1
+						}
+						add = {
+							value = root.prestige
+							divide = 10000
+							add = 1
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+oif_fund_death_squads = {
+	name = "oif_fund_death_squads"
+	desc = "oif_fund_death_squads_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		NOR = {
+			is_at_war = yes
+			is_diplomatic_play_committed_participant = yes
+		}
+	}
+	cooldown = {
+		days = 100
+	}
+	effect = {
+		add_modifier = {
+			name = oif_death_squad_modifier
+			months = 4
+		}
+		random_country = {
+			limit = {
+				country_has_primary_culture = cu:french
+			}
+			random_scope_state = {
+				add_modifier = {
+					name = oif_death_squads_active
+					months = 6
+				}
+			}
+		}
+	}
+}
+
+oif_conquer_france = {
+	name = "oif_conquer_france"
+	desc = "oif_conquer_france_desc"
+	visible = {
+		always = yes
+	}
+	possible = {
+		NOR = {
+			is_at_war = yes
+			is_diplomatic_play_committed_participant = yes
+		}
+	}
+	cooldown = {
+		days = 100
+	}
+	effect = {
+		c:FRA = {
+			save_scope_as = france_scope
+		}
+		create_diplomatic_play = {
+			name = conquest_of_france
+			type = dp_annex_war
+			escalation = 50
+			target_country = scope:france_scope
+			add_war_goal = {
+				holder = "scope:france_scope"
+				target_country = ROOT
+				type = annex_country
+			}	
+		}
+	}
+}

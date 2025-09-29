@@ -1,0 +1,300 @@
+por_sabotage_barracks = {
+	name = "por_sabotage_barracks"
+	desc = "por_sabotage_barracks_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 15
+		add = {
+			value = var:skibidi_postwar_debt_amount
+			multiply = -1
+		}
+	}
+
+	possible = {
+		var:skibidi_postwar_debt_amount <= 15
+	}
+
+	effect = {
+		change_variable = {
+			name = barracks_sabotage
+			add = 1
+		}
+		change_variable = {
+			name = skibidi_postwar_debt_amount
+			add = 1
+		}
+	}
+}
+
+por_sabotage_industrial_buildings = {
+	name = "por_sabotage_industrial_buildings"
+	desc = "por_sabotage_industrial_buildings_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 15
+		add = {
+			value = var:skibidi_postwar_debt_amount
+			multiply = -1
+		}
+	}
+
+	possible = {
+		var:skibidi_postwar_debt_amount <= 15
+	}
+
+	effect = {
+		change_variable = {
+			name = industry_sabotage
+			add = 1
+		}
+		change_variable = {
+			name = skibidi_postwar_debt_amount
+			add = 1
+		}
+	}
+}
+
+por_sabotage_war_industries = {
+	name = "por_sabotage_war_industries"
+	desc = "por_sabotage_war_industries_desc"
+
+	visible = {
+		always = yes
+	}
+
+	ai_chance = {
+		value = 15
+		add = {
+			value = var:skibidi_postwar_debt_amount
+			multiply = -1
+		}
+	}
+
+	possible = {
+		var:skibidi_postwar_debt_amount <= 15
+	}
+
+	effect = {
+		change_variable = {
+			name = war_industry_sabotage
+			add = 1
+		}
+		change_variable = {
+			name = skibidi_postwar_debt_amount
+			add = 1
+		}
+	}
+}
+
+bob_acknowledge_tralaleroism = {
+	name = "bob_acknowledge_tralaleroism"
+	desc = "bob_acknowledge_tralaleroism_desc"
+	visible = {
+		AND = {
+			has_variable = brainrot_level
+			var:brainrot_level >= 3
+		}
+		NOT = {
+			country_has_primary_culture = cu:tralalero
+		}
+	}
+	possible = {
+		NOT = {
+			country_has_primary_culture = cu:tralalero
+		}
+	}
+	ai_chance = {
+		value = 5
+		if = {
+			limit = {
+				AND = {
+					has_variable = brainrot_max_tt
+					var:brainrot_max_tt >= 2
+					has_variable = tralalero_var
+				}
+			}
+			add = {
+				value = 100
+				subtract = var:tralalero_var
+				multiply = 0.05
+			}
+		}
+	}
+	effect = {
+		add_primary_culture = cu:tralalero
+		every_scope_state = {
+			convert_population = {
+				target = rel:tralaleroist
+				value = 0.1
+			}
+		}
+		every_scope_pop = {
+			limit = {
+				religion = rel:tralaleroist
+			}
+			change_pop_culture = {
+				target = cu:tralalero
+				value = 0.2
+			}
+		}
+	}
+}
+
+bob_acknowledge_labubuism = {
+	name = "bob_acknowledge_labubuism"
+	desc = "bob_acknowledge_labubuism_desc"
+	visible = {
+		AND = {
+			has_variable = brainrot_level
+			var:brainrot_level >= 3
+		}
+		NOT = {
+			country_has_primary_culture = cu:labubu
+		}
+	}
+	possible = {
+		NOT = {
+			country_has_primary_culture = cu:labubu
+		}
+	}
+	ai_chance = {
+		value = 5
+		if = {
+			limit = {
+				AND = {
+					has_variable = brainrot_max_tt
+					var:brainrot_max_tt >= 2
+					has_variable = labubu_var
+				}
+			}
+			add = {
+				value = 100
+				subtract = var:labubu_var
+				multiply = 0.05
+			}
+		}
+	}
+	effect = {
+		add_primary_culture = cu:labubu
+		every_scope_state = {
+			convert_population = {
+				target = rel:labubite
+				value = 0.1
+			}
+		}
+		every_scope_pop = {
+			limit = {
+				religion = rel:labubite
+			}
+			change_pop_culture = {
+				target = cu:labubu
+				value = 0.2
+			}
+		}
+	}
+}
+
+bob_promote_tralaleroism = {
+	name = "bob_promote_tralaleroism"
+	desc = "bob_promote_tralaleroism_desc"
+	visible = {
+		has_primary_culture = cu:tralalero
+	}
+	possible = {
+		always = yes
+	}
+	cooldown = {
+		days = 180
+	}
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				AND = {
+					has_variable = brainrot_max_tt
+					var:brainrot_max_tt >= 2
+					has_variable = tralalero_var
+				}
+			}
+			add = {
+				value = 100
+				subtract = var:tralalero_var
+				multiply = 0.05
+			}
+		}
+	}
+	effect = {
+		every_scope_state = {
+			convert_population = {
+				target = rel:tralaleroist
+				value = 0.05
+			}
+		}
+		every_scope_pop = {
+			limit = {
+				religion = rel:tralaleroist
+			}
+			change_pop_culture = {
+				target = cu:tralalero
+				value = 0.15
+			}
+		}
+	}
+}
+
+bob_promote_labubuism = {
+	name = "bob_promote_labubuism"
+	desc = "bob_promote_labubuism_desc"
+	visible = {
+		has_primary_culture = cu:labubu
+	}
+	possible = {
+		always = yes
+	}
+	cooldown = {
+		days = 180
+	}
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				AND = {
+					has_variable = var:brainrot_max_tt
+					var:brainrot_max_tt >= 2
+					has_variable = labubu_var
+				}
+			}
+			add = {
+				value = 100
+				subtract = var:labubu_var
+				multiply = 0.05
+			}
+		}
+	}
+	effect = {
+		add_primary_culture = cu:labubu
+		every_scope_state = {
+			convert_population = {
+				target = rel:labubite
+				value = 0.05
+			}
+		}
+		every_scope_pop = {
+			limit = {
+				religion = rel:labubite
+			}
+			change_pop_culture = {
+				target = cu:labubu
+				value = 0.15
+			}
+		}
+	}
+}

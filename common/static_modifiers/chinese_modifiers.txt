@@ -1,0 +1,208 @@
+rebel_suppression_cost = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_tax_income_add = -1
+}
+
+fighting_peasants_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	unit_morale_recovery_mult  = -0.06
+	military_formation_mobilization_speed_mult = -0.06
+}
+
+supporting_mgb_rebel_cost = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_tax_income_add = -1500
+	country_military_goods_cost_mult = 0.1
+}
+
+mgb_unrest_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	state_radicals_from_political_movements_mult = 0.1
+	state_standard_of_living_add = -0.5
+	country_legitimacy_base_add = -5
+}
+
+fengtian_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_trade_unions_pop_attraction_mult = 1.0
+	interest_group_ig_trade_unions_pol_str_mult = 0.8
+	interest_group_ig_intelligentsia_pop_attraction_mult = 0.6
+	interest_group_ig_intelligentsia_pol_str_mult = 0.3
+}
+
+the_national_era  = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	country_tax_income_add = 1000
+	country_government_dividends_efficiency_add = 0.07
+	country_bureaucracy_mult = -0.05
+}
+
+CFDMODJE_tech_boost_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_weekly_innovation_mult = 0.05
+	country_tech_spread_mult = 0.05
+}
+
+CFDMODJE_empowering_academia_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	building_group_bg_technology_throughput_add = 0.05
+	country_academics_pol_str_mult = 0.05
+}
+
+CFDMODJE_intelligentsia_decreased_influence = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_negative.dds
+	interest_group_ig_intelligentsia_pol_str_mult = -0.2
+	interest_group_ig_intelligentsia_pop_attraction_mult = -0.3
+	country_weekly_innovation_mult = -0.03
+	country_tech_spread_mult = -0.04
+}
+
+doc_government_collapse_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_legitimacy_base_add = -100
+}
+
+CFDPIAJE_striving_for_autonomy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_liberty_desire_add = 0.05
+}
+
+chinese_warlord_loss_of_authority = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_authority_mult = -0.4
+	country_legitimacy_base_add = -10
+	country_influence_mult = -0.3
+	country_prestige_mult= -0.5
+}
+
+GNJE_heart_of_sphere_trade = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	country_trade_route_competitiveness_mult = 0.25
+	country_trade_route_cost_mult = -0.25
+	country_trade_route_quantity_mult = 0.1
+	interest_group_ig_landowners_pol_str_mult = -0.3
+	interest_group_ig_industrialists_pol_str_mult = 0.2
+}
+
+landowner_rescue = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_landowners_pol_str_mult = 0.15
+}
+
+CFDCL_suppressing_reform = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_ig_landowners_pol_str_mult = 0.1
+	interest_group_ig_intelligentsia_pol_str_mult = -0.15
+	interest_group_ig_intelligentsia_pop_attraction_mult = -0.3
+}
+
+GDGHC_laundering_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	country_tax_income_add = 1
+}
+
+GDGHC_bureaucratic_leniency = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_bureaucracy_mult = 0.1
+	state_bureaucracy_population_base_cost_factor_mult = -0.1
+}
+
+GDGHC_investment_laundering = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_capitalists_investment_pool_contribution_add = 0.2
+}
+
+TKKCOC_overseas_logistics = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	unit_supply_consumption_mult = 0.15
+	unit_occupation_mult = -0.2
+	unit_morale_loss_mult = 0.1
+}
+
+JEIE_super_slavers = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	state_slave_import_mult = 0.1
+	building_slaves_mortality_mult = 0.3
+	state_radicals_from_discrimination_mult = 0.2
+	building_group_bg_agriculture_throughput_add = 0.15
+}
+
+jetfc_financial_crisis_buildings = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	building_throughput_add = -0.4
+	country_company_throughput_bonus_add = -0.6
+}
+
+jetfc_bailing_out_businesses = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_tax_income_add = -4000
+	country_tax_income_mult = -0.3
+}
+
+tkk_industrialists_angry = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -9
+	country_company_throughput_bonus_add = -0.1
+}
+
+tkk_financial_breakdown = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_bureaucracy_mult = -0.1
+	country_authority_mult = -0.3
+	state_investment_pool_efficiency_mult = -0.5
+	state_dependent_wage_add = -2000
+}
+
+jetzp_zaibatsu_program_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	country_bureaucracy_mult = 0.05
+	country_company_throughput_bonus_add = 0.05
+	country_max_companies_add = 2
+}
+
+tkk_approved_additional_funding = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_tax_income_add = -3000
+	interest_group_ig_industrialists_approval_add = 4
+}
+
+tkk_construction_delay = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gears_negative.dds
+	interest_group_ig_industrialists_approval_add = 2.5
+}
+
+jeshz_siberian_colony_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_infrastructure_add = 10
+    state_infrastructure_from_population_mult = 0.1
+    state_construction_mult = 0.05
+	state_migration_pull_mult = 0.15
+	state_migration_pull_add = 10
+}
+
+jeshz_constructing_megaprojects_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_tax_income_add = -10000
+	country_bureaucracy_add = -300
+}
+
+jekipf_kansai_integrated_police_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	state_radicals_from_discrimination_mult = -0.15
+	state_pop_pol_str_mult = -0.05
+	state_accepted_birth_rate_mult = 0.05
+}
+
+jespc_southwest_port_complex = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_infrastructure_from_population_mult = 0.05
+	state_market_access_price_impact = 5
+	state_infrastructure_add = 10
+	state_tax_capacity_add = 75
+}
+
+jeafc_financial_disaster_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative
+	building_throughput_add = -0.5
+	country_legitimacy_base_add = -30
+}
