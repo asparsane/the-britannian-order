@@ -1,0 +1,162 @@
+support_mgb_rebels = {
+	is_shown = {
+		AND = {
+			NOR = {
+				has_modifier = supporting_mgb_rebel_cost
+				has_journal_entry = je_qing_peasant_revolt_je
+			}
+			any_neighbouring_state = {
+				owner = {
+					has_journal_entry = je_qing_peasant_revolt_je
+					has_variable = rebel_strength_multiplier
+				}
+			}
+		}
+	}
+
+	possible = {
+		always = yes
+	}
+
+	when_taken = {
+		add_modifier = {
+			name = supporting_mgb_rebel_cost
+		}
+		c:MGB = {
+			change_variable = {
+				name = rebel_strength_multiplier
+				add = 0.2
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				this = c:FGT
+			}
+			add = 3
+		}
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = -100
+		}
+	}
+}
+
+stop_supporting_rebels = {
+	is_shown = {
+		AND = {
+			has_modifier = supporting_mgb_rebel_cost
+			any_neighbouring_state = {
+				owner = {
+					has_journal_entry = je_qing_peasant_revolt_je
+					has_variable = rebel_strength_multiplier
+				}
+			}
+		}
+	}
+
+	possible = {
+		always = yes
+	}
+
+	when_taken = {
+		remove_modifier = supporting_mgb_rebel_cost
+		c:MGB = {
+			change_variable = {
+				name = rebel_strength_multiplier
+				add = -0.2
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				has_healthy_economy = no
+			}
+			add = 100
+		}
+	}
+}
+
+grab_minor_warlord = {
+	is_shown = {
+		is_chinese_warlord = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = exists_neighboring_broken_warlord_tt
+			OR = {
+				any_neighbouring_state = {
+					owner = {
+						has_variable = recently_broken_warlord
+					}
+				}
+				any_country = {
+					limit = {
+						is_subject_of = this
+					}
+					any_neighbouring_state = {
+						owner = {
+							has_variable = recently_broken_warlord
+						}
+					}
+				}
+			}
+		}
+	}
+
+	when_taken = {
+		random_country = {
+			limit = {
+				has_variable = recently_broken_warlord
+			}
+			save_scope_as = target_warlord_scope
+			scope:target_warlord_scope = {
+				create_diplomatic_play = {
+					name = chinese_warlord_grab
+					type = dp_china_subjugate_warlord
+					escalation = 50
+					target_state = "root.capital".region_state:root
+					add_war_goal = {
+						holder = root
+						target_country = this
+						type = war_reparations
+					}
+				}
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 50
+	}
+}
+
+setup_chinese_puppet = {
+	is_shown = {
+		c:TKK ?= this
+		has_variable = can_setup_puppet
+	}
+	possible = {
+		infamy = 0
+	}
+	ai_chance = {
+		value = 100
+	}
+	when_taken = {
+		remove_variable = can_setup_puppet
+		trigger_event = {
+			id = japan_events.200
+			days = 1
+			popup = yes
+		}
+	}
+}

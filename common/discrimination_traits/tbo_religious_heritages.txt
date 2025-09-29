@@ -1,0 +1,9 @@
+﻿heritage_brainrot_rel = {
+	type = heritage
+	trait_group = heritage_group_brainrot_spiritualism
+}
+
+heritage_misogynist = {
+	type = heritage
+	trait_group = heritage_group_brainrot_spiritualism
+}

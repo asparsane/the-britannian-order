@@ -1,0 +1,510 @@
+dp_unify_shenzhou = {
+	war_goal = annex_country
+	
+	texture = "gfx/interface/icons/war_goals/annex_country.dds"
+	
+	selectable_in_lens = {
+		country_has_primary_culture = cu:han
+	}
+	
+	possible = {
+		NOT = { exists = c:CHI }
+		NOT = { is_country_type = decentralized }
+		is_subject = no
+		scope:target_country = {
+			NOT = { is_country_type = decentralized }
+			aggressive_diplomatic_plays_permitted = yes
+			custom_tooltip = {
+				text = form_shenzhou_tt
+				country_has_primary_culture = cu:han
+			}
+		}
+	}
+	
+	on_weekly_pulse = {}
+	
+	on_war_begins = {}
+
+	on_war_end = {}
+}
+
+dp_unify_russia = {
+	war_goal = annex_country
+	
+	texture = "gfx/interface/icons/war_goals/annex_country.dds"
+	
+	selectable_in_lens = {
+		NOT = {
+			has_journal_entry = irk_the_tsar_of_siberia
+		}
+		country_has_primary_culture = cu:russian
+	}
+	
+	possible = {
+		NOT = { exists = c:RUS }
+		NOT = { is_country_type = decentralized }
+		is_subject = no
+		
+		scope:target_country = {
+			NOT = { is_country_type = decentralized }
+			aggressive_diplomatic_plays_permitted = yes
+			custom_tooltip = {
+				text = form_russia_tt
+				country_has_primary_culture = cu:russian
+			}
+		}
+	}
+	
+	on_weekly_pulse = {}
+	
+	on_war_begins = {
+		scope:initiator = {
+			change_infamy = -30
+		}
+	}
+
+	on_war_end = {}
+}
+
+dp_china_subjugate_warlord = {
+	war_goal = regime_change
+	
+	texture = "gfx/interface/icons/war_goals/regime_change.dds"
+
+	possible = {
+		scope:initiator = {
+			is_chinese_warlord = yes
+		}
+	}
+
+	ai_acceptance_max = 40
+	
+	on_weekly_pulse = {}
+
+	on_war_begins = {
+		scope:initiator = {
+			change_infamy = -50
+			if = {
+				limit = {
+					has_variable = recently_won_war
+				}
+				remove_variable = recently_won_war
+			}
+		}
+		scope:target_country = {
+			if = {
+				limit = {
+					has_variable = recently_won_war
+				}
+				remove_variable = recently_won_war
+			}
+		}
+	}
+
+	on_war_end = {
+		scope:initiator = {
+			trigger_event = {
+				id = diplo_play_hidden_events.6
+				days = 1
+			}
+		}
+		scope:target_country = {
+			trigger_event = {
+				id = diplo_play_hidden_events.12
+				days = 1
+			}
+		}
+	}
+}
+
+dp_china_warlord_clash = {
+	war_goal = regime_change
+	
+	texture = "gfx/interface/icons/war_goals/regime_change.dds"
+
+	possible = {
+		AND = {
+			scope:initiator = {
+				is_chinese_warlord = yes
+			}
+			scope:target_country = {
+				is_chinese_warlord = yes
+			}
+		}
+	}
+
+	ai_acceptance_max = 0
+	
+	on_weekly_pulse = {}
+
+	on_war_begins = {
+		scope:initiator = {
+			change_infamy = -40
+			if = {
+				limit = {
+					has_variable = recently_lost_war
+				}
+				remove_variable = recently_lost_war
+			}
+		}
+		scope:target_country = {
+			if = {
+				limit = {
+					has_variable = recently_lost_war
+				}
+				remove_variable = recently_lost_war
+			}
+		}
+	}
+
+	on_war_end = {
+		scope:initiator = {
+			trigger_event = {
+				id = diplo_play_hidden_events.5
+				days = 1
+			}
+		}
+		scope:target_country = {
+			trigger_event = {
+				id = diplo_play_hidden_events.5
+				days = 1
+			}
+		}
+		remove_global_variable = warlord_clash_began
+	}
+}
+
+dp_japan_establish_ramg = {
+	war_goal = conquer_state
+	
+	texture = "gfx/interface/icons/war_goals/conquer_state.dds"
+
+	selectable_in_lens = {
+		always = no
+	}
+
+	possible = {
+		always = no
+	}
+
+	ai_acceptance_max = 90
+	
+	on_weekly_pulse = {}
+
+	on_war_begins = {
+		c:GDG ?= {
+			change_tag = RAMG
+		}
+		scope:initiator = {
+			if = {
+				limit = {
+					has_variable = recently_won_war
+				}
+				remove_variable = recently_won_war
+			}
+			add_journal_entry = {
+				type = je_tkk_the_conquest_of_china
+			}
+			c:RAMG = {
+				set_country_type = recognized	
+			}
+			create_diplomatic_pact = {
+				country = c:RAMG
+				type = puppet
+			}
+		}
+	}
+
+	on_war_end = {
+		scope:initiator = {
+			trigger_event = {
+				id = diplo_play_hidden_events.4
+				days = 1
+			}
+		}
+	}
+}
+
+dp_chinese_national_defense_war = {
+	war_goal = annex_country
+	
+	texture = "gfx/interface/icons/war_goals/annex_country.dds"
+
+	selectable_in_lens = {
+		always = no
+	}
+
+	possible = {
+		always = no
+	}
+
+	ai_acceptance_max = 0
+	allow_negotiated_peace = no
+	
+	on_weekly_pulse = {}
+	on_war_begins = {
+		scope:initiator = {
+			if = {
+				limit = {
+					has_variable = recently_lost_war
+				}
+				remove_variable = recently_lost_war
+			}
+		}
+		scope:target_country = {
+			if = {
+				limit = {
+					has_variable = recently_won_war
+				}
+				remove_variable = recently_won_war
+			}
+		}
+	}
+	on_war_end = {
+		scope:target_country = {
+			trigger_event = {
+				id = diplo_play_hidden_events.1
+				days = 1
+			}
+		}
+		scope:initiator = {
+			trigger_event = {
+				id = diplo_play_hidden_events.2
+				days = 1
+			}
+		}
+	}
+}
+
+dp_bavarian_warplan = {
+	war_goal = annex_country
+	texture = "gfx/interface/icons/war_goals/annex_country.dds"
+	selectable_in_lens = {
+		always = no
+	}
+	possible = {
+		always = no
+	}
+	ai_acceptance_max = 70
+	on_weekly_pulse = {}
+	on_war_end = {
+		scope:initiator = { #starts a war against the other three, while defending against britannia to the west
+			create_diplomatic_play = {
+				name = central_europe_conquest
+				target_country = c:HNG
+				type = dp_annex_war
+				add_escalation = 50
+				add_war_goal = {
+					holder = c:GER
+					target_country = c:AST
+					type = annex_country
+				}
+				add_war_goal = {
+					holder = c:GER
+					target_country = c:YUG
+					type = annex_country
+				}
+			}
+		}
+	}
+}
+
+dp_westland_incursion = {
+	war_goal = conquer_state
+	texture = "gfx/interface/icons/war_goals/annex_country.dds"
+	selectable_in_lens = {
+		always = no
+	}
+	possible = {
+		always = no
+	}
+	ai_acceptance_max = 70
+	on_weekly_pulse = {}
+	on_war_begins = {
+		scope:initiator = {
+			if = {
+				limit = {
+					has_variable = recently_won_war
+				}
+				remove_variable = recently_won_war
+			}
+		}
+	}
+	on_war_end = {
+		scope:initiator = {
+			trigger_event = {
+				id = diplo_play_hidden_events.3
+				days = 1
+			}
+		}
+	}
+}
+
+dp_iberian_spring = {
+	war_goal = regime_change
+	texture = "gfx/interface/icons/war_goals/regime_change.dds"
+	selectable_in_lens = {
+		always = no
+	}
+	possible = {
+		always = no
+	}
+	ai_acceptance_max = 70
+	on_weekly_pulse = {}
+	on_war_begins = {
+		scope:target_country = {
+			if = {
+				limit = {
+					has_variable = recently_lost_war
+				}
+				remove_variable = recently_lost_war
+			}
+		}
+	}
+	on_war_end = {
+		scope:target_country = {
+			trigger_event = {
+				id = diplo_play_hidden_events.7
+				days = 1
+			}
+		}
+	}
+}
+
+dp_reclaim_portugal = {
+	war_goal = conquer_state
+	texture = "gfx/interface/icons/war_goals/make_dominion.dds"
+	selectable_in_lens = {
+		always = no
+	}
+	possible = {
+		always = no
+	}
+	ai_acceptance_max = 70
+	on_weekly_pulse = {}
+	on_war_begins = {
+		scope:target_country = {
+			if = {
+				limit = {
+					has_variable = recently_lost_war
+				}
+				remove_variable = recently_lost_war
+			}
+		}
+	}
+	on_war_end = {
+		scope:target_country = {
+			trigger_event = {
+				id = diplo_play_hidden_events.8
+				days = 1
+			}
+		}
+	}
+}
+
+dp_spain_sweep = {
+	war_goal = regime_change
+	texture = "gfx/interface/icons/war_goals/make_dominion.dds"
+	selectable_in_lens = {
+		always = no
+	}
+	possible = {
+		always = no
+	}
+	ai_acceptance_max = 70
+	on_weekly_pulse = {}
+	on_war_begins = {
+		scope:target_country = {
+			if = {
+				limit = {
+					has_variable = recently_lost_war
+				}
+				remove_variable = recently_lost_war
+			}
+		}
+	}
+	on_war_end = {
+		scope:target_country = {
+			trigger_event = {
+				id = diplo_play_hidden_events.9
+				days = 1
+			}
+		}
+	}
+}
+
+dp_unify_france = {
+	war_goal = annex_country
+	texture = "gfx/interface/icons/war_goals/annex_country.dds"
+	selectable_in_lens = {
+		always = no
+	}
+	possible = {
+		always = no
+	}
+	ai_acceptance_max = 70
+	on_weekly_pulse = {}
+	on_war_begins = {
+		scope:initiator = {
+			if = {
+				limit = {
+					has_variable = recently_won_war
+				}
+				remove_variable = recently_won_war
+			}
+		}
+		scope:target_country = {
+			if = {
+				limit = {
+					has_variable = recently_won_war
+				}
+				remove_variable = recently_won_war
+			}
+		}
+	}
+	on_war_end = {
+		scope:target_country ?= {
+			trigger_event = {
+				id = diplo_play_hidden_events.10
+				days = 1
+			}
+		}
+		scope:initiator ?= {
+			trigger_event = {
+				id = diplo_play_hidden_events.10
+				days = 1
+			}
+		}
+	}
+}
+
+dp_skibidi_revolt = {
+	war_goal = annex_country
+	texture = "gfx/interface/icons/war_goals/annex_country.dds"
+	selectable_in_lens = {
+		always = no
+	}
+	possible = {
+		always = no
+	}
+	ai_acceptance_max = 70
+	on_weekly_pulse = {}
+	on_war_begins = {
+		scope:target_country = {
+			if = {
+				limit = {
+					has_variable = recently_won_war
+				}
+				remove_variable = recently_won_war
+			}
+		}
+	}
+	on_war_end = {
+		scope:target_country ?= {
+			trigger_event = {
+				id = diplo_play_hidden_events.11
+				days = 1
+			}
+		}
+	}
+}

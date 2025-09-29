@@ -1,0 +1,213 @@
+#americas
+USA = {
+	color = { 0 26 206 }
+	
+	country_type = recognized
+	
+	tier = empire
+	
+	cultures = { yankee dixie }
+	capital = STATE_KANSAS
+}
+IRC = {
+	color = { 34 36 66 }
+	
+	country_type = unrecognized
+	
+	tier = kingdom
+	
+	cultures = { cree }
+	capital = STATE_saskatchewan
+}
+MID = {
+	color = { 131 138 138 }
+	
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { anglo_canadian }
+	capital = STATE_MINNESOTA
+}
+FWE = {
+	color = { 79 17 106 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { yankee }
+	capital = STATE_KANSAS
+}
+FNO = {
+	color = { 25 101 67 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { yankee }
+	capital = STATE_MISSOURI
+}
+FSO = {
+	color = { 74 76 112 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { dixie }
+	capital = STATE_LOUISIANA
+}
+MEX = {
+	color = { 15 117 42 }
+	
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { mexican }
+	capital = STATE_MEXICO
+}
+INC = {
+	color = { 62 104 144 }
+	
+	country_type = unrecognized
+	
+	tier = empire
+	
+	cultures = { quechua }
+	capital = STATE_LIMA
+}
+MYA = {
+	color = { 214 213 194 }
+	
+	country_type = unrecognized
+	
+	tier = kingdom
+	
+	cultures = { mayan }
+	capital = STATE_YUCATAN
+}
+BRZ = {
+	color = { 2 120 0 }
+	
+	country_type = colonial
+	
+	tier = empire
+	
+	cultures = { brazilian }
+	capital = STATE_RIO_DE_JANEIRO
+}
+BLV = {
+	color = { 225 239 43 }
+	
+	country_type = recognized
+	
+	tier = empire
+	
+	cultures = { north_andean }
+	capital = STATE_CUNDINAMARCA
+}
+NMX = {
+	color = { 46 136 17 }
+	
+	country_type = recognized
+	
+	tier = empire
+	
+	cultures = { mexican }
+	capital = STATE_CALIFORNIA
+}
+PAT = {
+	color = { 215 38 218 }
+	
+	country_type = unrecognized
+	
+	tier = empire
+	
+	cultures = { patagonian }
+	capital = STATE_PATAGONIA
+}
+CAM = {
+	color = { 81 223 214 }
+	
+	country_type = unrecognized
+	
+	tier = kingdom
+	
+	cultures = { central_american }
+	capital = STATE_NICARAGUA
+}
+
+#britannian bloc
+BNA = {
+	color = { 103 100 255 }
+	
+	country_type = colonial
+	
+	tier = kingdom
+	
+	cultures = { british }
+	capital = STATE_DISTRICT_OF_COLUMBIA
+}
+
+HNE = { #holy new england
+	color = { 145 112 87 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { british }
+	capital = STATE_MASSACHUSETTS
+}
+
+CRM = { #cromwellia
+	color = { 158 56 19 }
+	country_type = colonial
+	tier = kingdom
+	cultures = { british }
+	capital = STATE_MARYLAND
+}
+
+HSD = { #holy skibidi dominion
+	color = { 223 227 182 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { british }
+	capital = STATE_NEW_YORK
+}
+
+SNA = { #sigma nation
+	color = { 255 0 0 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { redpill }
+	capital = STATE_PENNSYLVANIA
+}
+
+LBB = { #labubu
+	color = { 140 135 116 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { labubu }
+	capital = STATE_NEW_YORK
+}
+
+TLL = { #tralalero
+	color = { 124 173 222 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { tralalero }
+	capital = STATE_NEW_YORK
+}
+
+NFR = { #new france
+	color = { 20 39 163 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { french }
+	capital = STATE_MICHIGAN
+}
+
+UNT = { #united tribes
+
+}

@@ -1,0 +1,214 @@
+catalyst_german_machinations = {
+	category = cc_event
+
+	political_lobby_creation = {
+		lobby_pro_country = {
+			value = 100
+
+			if = {
+				limit = {
+					scope:target_country.country_rank > root.country_rank
+				}
+				multiply = 2
+			}
+			else_if = {
+				limit = {
+					"relations(scope:target_country)" >= relations_threshold:friendly
+				}
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_friendly
+		chance = {
+			value = 0.05
+
+			if = {
+				limit = {
+					"relations(scope:target_country)" >= relations_threshold:friendly
+				}
+				add = 100.0 # Guaranteed
+			}
+			else_if = {
+				limit = {
+					"relations(scope:target_country)" >= relations_threshold:amicable
+				}
+				multiply = 5
+			}
+			else_if = {
+				limit = {
+					"relations(scope:target_country)" >= relations_threshold:cordial
+				}
+				multiply = 2
+			}
+		}
+	}
+
+	effect = {
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = 1
+			ANTI_AMOUNT = -1
+			FACTOR = appeasement_special_events_positive
+		}
+		add_overlord_lobby_appeasement_from_diplomacy = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = 1
+			ANTI_AMOUNT = -1
+			FACTOR = appeasement_special_events_positive
+		}
+	}
+}
+
+catalyst_german_machinations_negative = {
+	category = cc_event
+
+	political_lobby_creation = {
+		lobby_anti_country = {
+			value = 100
+
+			if = {
+				limit = {
+					scope:target_country.country_rank > root.country_rank
+				}
+				multiply = 2
+			}
+
+			if = {
+				limit = {
+					NOT = { has_strategic_adjacency = scope:target_country }
+				}
+				multiply = 0.5
+			}
+
+			if = {
+				limit = {
+					"relations(scope:target_country)" > relations_threshold:poor
+				}
+				multiply = 0.5
+			}
+			else_if = {
+				limit = {
+					"relations(scope:target_country)" <= relations_threshold:hostile
+				}
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 0.05
+
+			if = {
+				limit = {
+					"relations(scope:target_country)" <= relations_threshold:hostile
+				}
+				add = 100.0 # Guaranteed
+			}
+			else_if = {
+				limit = {
+					"relations(scope:target_country)" <= relations_threshold:cold
+				}
+				multiply = 5
+			}
+			else_if = {
+				limit = {
+					"relations(scope:target_country)" <= relations_threshold:poor
+				}
+				multiply = 2
+			}
+		}
+	}
+
+	effect = {
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = -1
+			ANTI_AMOUNT = 1
+			FACTOR = appeasement_special_events_negative
+		}
+		add_overlord_lobby_appeasement_from_diplomacy = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = -1
+			ANTI_AMOUNT = 1
+			FACTOR = appeasement_special_events_negative
+		}
+	}
+}
+
+catalyst_levant_occupation = {
+	category = cc_event
+
+	political_lobby_creation = {
+		lobby_anti_country = {
+			value = 0.25
+
+			if = {
+				limit = {
+					scope:target_country.country_rank > root.country_rank
+				}
+				multiply = 2
+			}
+			if = {
+				limit = {
+					"relations(scope:target_country)" > relations_threshold:poor
+				}
+				multiply = 0.5
+			}
+			else_if = {
+				limit = {
+					"relations(scope:target_country)" <= relations_threshold:hostile
+				}
+				multiply = 1.5
+			}
+		}
+	}
+
+	ai_country_goal_recalculation = {
+		type = more_hostile
+		chance = {
+			value = 0.75
+
+			if = {
+				limit = {
+					"relations(scope:target_country)" <= relations_threshold:cold
+				}
+				add = 100.0 # Guaranteed
+			}
+			else_if = {
+				limit = {
+					"relations(scope:target_country)" <= relations_threshold:poor
+				}
+				multiply = 2
+			}
+		}
+	}
+	effect = {
+		change_relations = {
+			country = scope:target_country
+			value = -20
+		}
+		add_lobby_appeasement_from_diplomacy_unidirectional = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = -2
+			ANTI_AMOUNT = 2
+			FACTOR = appeasement_special_events_negative
+		}
+		add_overlord_lobby_appeasement_from_diplomacy = {
+			FIRST = root
+			SECOND = scope:target_country
+			PRO_AMOUNT = 4
+			ANTI_AMOUNT = -2
+			FACTOR = appeasement_special_events_negative
+		}
+	}
+}

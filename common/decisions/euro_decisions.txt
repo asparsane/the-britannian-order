@@ -1,0 +1,287 @@
+request_secret_pact = {
+	is_shown = {
+		has_variable = secret_pact_decision_available
+	}
+
+	possible = {
+		always = yes
+	}
+
+	when_taken = {
+		remove_variable = secret_pact_decision_available
+		c:GBR = {
+			trigger_event = {
+				id = britannian_prosperity.3
+				days = 2
+				popup = yes
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+}
+
+occupy_anatolian_border = {
+	is_shown = {
+		has_variable = germany_promised_backing
+	}
+
+	possible = {
+		always = yes
+	}
+
+	when_taken = {
+		remove_variable = germany_promised_backing
+		every_neighbouring_state = {
+			limit = {
+				owner = {
+					OR = {
+						this ?= c:BAG
+						is_subject_of = c:BAG
+					}
+				}
+			}
+			set_state_owner = c:TUR
+			add_modifier = {
+				name = tur_occupation_resistance
+				days = normal_modifier_time
+			}
+			state_region = {
+				add_claim = c:BAG
+			}
+		}
+		c:BAG = {
+			create_diplomatic_catalyst = {
+				type = catalyst_levant_occupation
+				target = c:TUR
+			}
+			trigger_event = {
+				id = britannian_prosperity.4
+				days = 1
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+}
+
+purchase_burgundian_atomics = {
+	is_shown = {
+		AND = {
+			c:BRG ?= {
+				AND = {
+					has_variable = selling_atomics
+					var:atomics_stock > 0
+				}
+			}
+			NOT = {
+				c:BRG ?= this
+			}
+		}
+	}
+	possible = {
+		custom_tooltip = {
+			text = not_recently_bought_atomics_tt
+			NOT = {
+				has_variable = burgundian_atomics_cooldown
+			}
+		}
+	}
+	when_taken = {
+		set_variable = {
+			name = burgundian_atomics_cooldown
+			days = 60
+		}
+		add_modifier = {
+			name = buying_atomics_modifier
+			months = 6
+		}
+		c:BRG = {
+			add_modifier = {
+				name = selling_atomics_modifier
+				months = 6
+			}
+			change_variable = {
+				name = atomics_stock
+				subtract = 1
+			}
+		}
+		if = {
+			limit = {
+				has_variable = atomics_stock
+			}
+			change_variable = {
+				name = atomics_stock
+				add = 1
+			}
+		}
+		else = {
+			add_journal_entry = {
+				type = je_atomics_stock
+			}
+		}
+	}
+	ai_chance = {
+		value = 20
+		if = {
+			limit = {
+				taking_loans = yes
+			}
+			add = -15
+		}
+		if = {
+			limit = {
+				in_default = yes
+			}
+			add = -100
+		}
+		if = {
+			limit = {
+				country_rank >= rank_value:major_power
+			}
+			add = 50
+		}
+	}
+}
+
+
+support_lorraine = {
+	is_shown = {
+		c:BRG ?= this
+		exists = c:LRA
+		NOT = {
+			has_variable = supported_lorraine
+		}
+	}
+	possible = {
+		c:LRA = {
+			has_journal_entry = je_bid_for_brittany
+		}
+	}
+	when_taken = {
+		set_variable = supported_lorraine
+		c:LRA = {
+			add_journal_entry = {
+				type = je_aid_from_the_east
+			}
+		}
+	}
+	ai_chance = {
+		value = 100
+	}
+}
+
+give_lorraine_atomics = {
+	is_shown = {
+		c:BRG ?= this
+		var:atomics_stock >= 1
+		NOT = {
+			c:LOR ?= {
+				has_journal_entry = je_atomics_stock
+			}
+		}
+		has_variable = supported_lorraine
+	}
+	possible = {
+		always = yes
+	}
+	when_taken = {
+		c:LRA = {
+			add_journal_entry = {
+				type = je_atomics_stock
+			}
+		}
+	}
+}
+
+languedoc_conquer_smalland = {
+	is_shown = {
+		c:LNG ?= this
+		NOR = {
+			has_journal_entry = je_bid_for_brittany
+			c:GBR ?= {
+				any_scope_state = {
+					state_region = {
+						is_homeland = cu:french
+					}
+				}
+			}
+		}
+	}
+	possible = {
+		NOR = {
+			is_at_war = yes
+			is_diplomatic_play_committed_participant = yes
+		}
+		c:SML = {
+			NOR = {
+				is_at_war = yes
+				is_diplomatic_play_committed_participant = yes
+			}
+		}
+	}
+	when_taken = {
+		c:SML ?= {
+			save_scope_as = smalland_scope
+		}
+		create_diplomatic_play = {
+			name = french_uni_war
+			target_country = scope:smalland_scope
+			type = dp_annex_war
+			war = yes
+			add_war_goal = {
+				holder = scope:smalland_scope
+				type = annex_country
+				target_country = ROOT
+			}
+		}
+	}
+}
+
+smalland_conquer_languedoc = {
+	is_shown = {
+		c:SML ?= this
+		NOT = {
+			has_journal_entry = je_bid_for_brittany
+			c:GBR ?= {
+				any_scope_state = {
+					state_region = {
+						is_homeland = cu:french
+					}
+				}
+			}
+		}
+	}
+	possible = {
+		NOR = {
+			is_at_war = yes
+			is_diplomatic_play_committed_participant = yes
+		}
+		c:SML ?= {
+			NOR = {
+				is_at_war = yes
+				is_diplomatic_play_committed_participant = yes
+			}
+		}
+	}
+	when_taken = {
+		c:LNG ?= {
+			save_scope_as = languedoc_scope
+		}
+		create_diplomatic_play = {
+			name = french_uni_war
+			target_country = scope:languedoc_scope
+			type = dp_annex_war
+			war = yes
+			add_war_goal = {
+				holder = scope:languedoc_scope
+				type = annex_country
+				target_country = c:ROOT
+			}
+		}
+	}
+}

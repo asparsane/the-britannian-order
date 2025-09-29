@@ -1,0 +1,9 @@
+﻿heritage_brainrot = {
+	type = heritage
+	trait_group = heritage_group_brainrot
+}
+
+heritage_manosphere = {
+	type = heritage
+	trait_group = heritage_group_brainrot
+}

@@ -1,0 +1,218 @@
+#unifiers
+MSK = {
+	color = { 3 11 75 }
+	
+	country_type = unrecognized
+	
+	tier = principality
+	
+	cultures = { russian }
+	capital = STATE_TOBOLSK
+}
+ARB = {
+	color = { 8 5 8 }
+	
+	country_type = unrecognized
+	
+	tier = kingdom
+	
+	cultures = { russian }
+	capital = STATE_TOBOLSK
+}
+IRK = {
+	color = { 205 216 206 }
+	
+	country_type = unrecognized
+	
+	tier = principality
+	
+	cultures = { russian }
+	capital = STATE_IRKUTSK
+}
+FER = {
+	color = { 175 134 126 }
+	
+	country_type = unrecognized
+	
+	tier = principality
+	
+	cultures = { russian }
+	capital = STATE_BURYATIA
+}
+URL = {
+	color = { 87 91 85 }
+	
+	country_type = unrecognized
+	
+	tier = principality
+	
+	cultures = { russian }
+	capital = STATE_URAL
+}
+TTA = {
+	color = { 87 81 130 }
+	
+	country_type = unrecognized
+	
+	tier = principality
+	
+	cultures = { russian }
+	capital = STATE_TOBOLSK
+}
+DVM = {
+	color = { 255 255 255 }
+	
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { russian }
+	capital = STATE_TOMSK
+}
+SBR = { #technically not a unifier but eh
+	color = { 189 189 189 }
+	
+	country_type = decentralized
+	
+	tier = kingdom
+	
+	cultures = { siberian }
+	capital = STATE_YAKUTSK
+}
+#post-westland
+NOVGOROD = {
+	color = {  85 183 172  }
+	
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { russian ukranian kazakh }
+	capital = STATE_NOVGOROD
+}
+ARKHANGELSK = {
+	color = { 57 150 134 }
+	
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { russian }
+	capital = STATE_ARKHANGELSK
+}
+PERM = {
+	color = { 76 27 72 }
+	
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { russian }
+	capital = STATE_PERM
+}
+VYATKA = {
+	color = { 236 189 221 }
+	
+	country_type = unrecognized
+	
+	tier = principality
+	
+	cultures = { russian }
+	capital = STATE_VYATKA
+}
+NIZHNY_NOVGOROD = {
+	color = { 73 42 70 }
+	
+	country_type = unrecognized
+	
+	tier = principality
+	
+	cultures = { russian }
+	capital = STATE_NIZHNY_NOVGOROD
+}
+#regional unified
+WSR = {
+	color = { 105 51 35  }
+	country_type = recognized
+	tier = kingdom
+	cultures = { russian ukranian byelorussian }
+}
+SBIRK = {
+	color = { 23 87 58 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { russian }
+	capital = STATE_IRKUTSK
+}
+SBTA = {
+	color = { 236 100 62 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { russian }
+	capital = STATE_TOBOLSK
+}
+SBDVM = {
+	color = { 255 255 255 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { russian }
+	capital = STATE_TOMSK
+}
+SBURL = {
+	color = { 101 118 116 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { russian }
+	capital = STATE_URAL
+}
+SUR = {
+	color = { 30 56 112 }
+	
+	country_type = unrecognized
+	
+	tier = kingdom
+	
+	cultures = { russian }
+	capital = STATE_BURYATIA
+}
+SRU = {
+	color = { 71 146 30 }
+	
+	country_type = unrecognized
+	
+	tier = kingdom
+	
+	cultures = { russian ukranian kazak uzbek }
+	capital = STATE_KHIVA
+}
+DAG = {
+	color = {  2 156 2  }
+	
+	country_type = unrecognized
+	
+	tier = principality
+	
+	cultures = { north_caucasian russian british }
+	capital = STATE_DAGESTAN
+}
+SIBERIA = {
+	color = { 126 134 142 }
+	
+	country_type = unrecognized
+	
+	tier = kingdom
+	
+	cultures = { russian }
+	capital = STATE_TOBOLSK
+}
+#russia
+RUS = {
+	color = { 34 103 15 }
+	
+	country_type = recognized
+	
+	tier = empire
+	
+	cultures = { russian ukranian byelorussian }
+	capital = STATE_MOSCOW
+}

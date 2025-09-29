@@ -1,0 +1,371 @@
+
+#britannian bloc
+GBR = {
+	color = { 230 20 94 }
+	
+	country_type = recognized
+	
+	tier = hegemony
+	
+	cultures = { british scottish }
+	capital = STATE_HOME_COUNTIES
+}
+WST = {
+	color = { 9 84 29 }
+	
+	country_type = recognized
+	
+	tier = empire
+	
+	cultures = { british }
+	capital = STATE_ILE_DE_FRANCE
+}
+SLR = {
+	color = { 223 128 58 }
+	
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { british }
+	capital = STATE_NOVGOROD
+}
+BIN = {
+	color = { 172 107 179 }
+	
+	country_type = colonial
+	
+	tier = empire
+	
+	cultures = { british }
+	capital = STATE_BOMBAY
+}
+BUR = {
+	color = { 99 22 95 }
+
+	country_type = colonial
+	
+	tier = kingdom
+	
+	cultures = { burmese }
+	capital = STATE_BURMA
+}
+CUB = {
+	color = { 68 112 80 }
+
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { british }
+	capital = STATE_CUBA
+}
+#german bloc
+UKR = {
+	color = { 215 239 241 }
+	
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { north_german south_german }
+	capital = STATE_KIEV
+}
+POL = {
+	color = { 224 139 205 }
+	
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { north_german south_german }
+	capital = STATE_GREATER_POLAND
+}
+RKB = {
+	color = { 131 138 138 }
+	
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { north_german south_german }
+	capital = STATE_MINSK
+}
+MOSKOWIEN = {
+	color = { 2 44 19 }
+	
+	country_type = unrecognized
+	
+	tier = principality
+	
+	cultures = { north_german south_german }
+	capital = STATE_MOSCOW
+}
+GER = {
+	color = { 63 63 63 }
+	
+	country_type = recognized
+	
+	tier = empire
+	
+	cultures = { north_german south_german }
+	capital = STATE_BRANDENBURG
+}
+RKAUS = {
+	color = { 255 247 226 }
+	
+	country_type = recognized
+	
+	tier = empire
+	
+	cultures = { south_german }
+	capital = STATE_AUSTRIA
+}
+GNA = {
+	color = { 160 160 160 }
+	
+	country_type = colonial
+	
+	tier = kingdom
+	
+	cultures = { north_german south_german }
+	capital = STATE_MARYLAND
+}
+ITA = {
+	color = { 37 96 0 }
+	
+	country_type = recognized
+	
+	tier = empire
+	
+	cultures = { north_german south_german }
+	capital = STATE_LAZIO
+}
+SCN = {
+	color = { 65 126 255 }
+	
+	country_type = recognized
+	
+	tier = empire
+	
+	cultures = { north_german south_german }
+	capital = STATE_SVEALAND
+}
+MOL = {
+	color = { 39 94 37 }
+
+	country_type = recognized
+	
+	tier = empire
+	
+	cultures = { north_german south_german }
+	capital = STATE_MOLDAVIA
+}
+#misc
+SLAVE_REVOLT = {
+	color = { 122 47 28 }
+	
+	country_type = unrecognized
+	
+	tier = empire
+	
+	cultures = { russian ukranian polish byelorussian }
+	capital = STATE_MOSCOW
+}
+OCC = {
+	color = { 8 53 108 }
+	
+	country_type = unrecognized
+	
+	tier = principality
+	
+	cultures = { french occitan }
+	capital = STATE_LANGUEDOC
+}
+BRG = {
+	color = { 10 0 13 }
+	
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { north_german }
+	capital = STATE_HOLLAND
+}
+GRE = {
+	color = { 114 184 188 }
+
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { greek }
+	capital = STATE_ATTICA
+}
+#britannian german holdings
+BAV = {
+	color = { 167 225 227 }
+
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { british south_german }
+	capital = STATE_BAVARIA
+}
+HNG = {
+	color = {  224 225 199  }
+
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { british hungarian }
+	capital = STATE_CENTRAL_HUNGARY
+}
+AST = {
+	color = { 218 228 209 }
+
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { british south_german }
+	capital = STATE_AUSTRIA
+}
+YUG = {
+	color = { 56 68 164 }
+
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { british }
+	capital = STATE_NORTHERN_SERBIA
+}
+
+#post WST collapse states
+COR = { #Corsica
+	color = { 47 73 143 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { british corsican }
+	capital = STATE_CORSICA
+}
+FRA = {
+	color = {87 120 161 }
+	country_type = recognized
+	tier = empire
+	cultures = { british french }
+	capital = STATE_ILE_DE_FRANCE
+}
+SPA = {
+	color = { 211 214 28 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { british spanish }
+	capital = STATE_TOLEDO
+}
+CAT = {
+	color = { 191 187 77 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { british catalan }
+	capital = STATE_CATALONIA
+}
+
+TLR = { #toledo republic
+	color = { 166 114 55 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { british spanish }
+	capital = STATE_TOLEDO
+}
+
+LRA = { #lorraine
+	color = { 75 157 173 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { british french }
+	capital = STATE_LORRAINE
+}
+
+SML = {#small
+	color = { 65 166 165 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { british french }
+	capital = STATE_AUVERGNE_LIMOUSIN
+}
+
+LNG = { #languedoc
+	color = { 166 95 173 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { british french }
+	capital = STATE_LANGUEDOC
+}
+
+POR = { #portugese directorate
+	color = { 79 114 171 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { portuguese }
+	capital = STATE_ESTREMADURA
+}
+
+ARG = { #aragon
+	color = { 194 14 35 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { british spanish }
+	capital = STATE_ARAGON
+}
+
+BSQ = { #basque
+	color = { 78 212 96 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { basque }
+	capital = STATE_NAVARRA
+}
+
+CAT = { #catalonia
+	color = { 129 135 38 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { catalan }
+	capital = STATE_CATALONIA
+}
+
+GAL = { #galicia
+	color = { 51 160 214 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { galician }
+	capital = STATE_GALICIA
+}
+
+ADL = { #andalusia
+	color = { 110 67 191 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { british spanish }
+	capital = STATE_ANDALUSIA
+}
+
+KIB = { #kingdom of iberia
+	color = { 163 152 70 }
+	country_type = recognized
+	tier = empire
+	cultures = { spanish }
+	capital = STATE_ANDALUSIA
+}
+
+RKF = { # reichskommissariat frankreich
+	color = { 64 23 20 }
+	country_type =  recognized
+	tier = empire
+	cultures = { french north_german south_german }
+	capital = STATE_ILE_DE_FRANCE
+}

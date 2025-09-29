@@ -1,0 +1,268 @@
+msk_taboritsky = {
+	first_name = sergei
+	last_name = taboritsky
+	historical = yes
+	culture = cu:russian
+	ruler = yes
+	birth_date = 1763.6.7
+	dna = dna_taboritsky
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	traits = {
+		ambitious
+		pious
+		psychological_affliction
+	}
+	trait_generation = { }
+}
+
+fgt_lu_anjiang = {
+	first_name = anjiang
+	last_name = lu
+	historical = yes
+	culture = cu:han
+	ruler = yes
+	birth_date = 1813.2.15
+	interest_group = ig_trade_unions
+	ig_leader = yes
+	ideology = ideology_fengtian_civicalist
+	dna = dna_luanjiang
+	traits = {
+		persistent
+		ambitious
+		brave
+	}
+	trait_generation = { }
+}
+
+fer_oleg_antonov = {
+	first_name = oleg
+	last_name = antonov
+	historical = yes
+	culture = cu:russian
+	ruler = yes
+	ig_leader = yes
+	birth_date = 1802.12.5
+	interest_group = ig_rural_folk
+	ideology = ideology_radical
+	traits = {
+		basic_political_operator
+		persistent
+	}
+	trait_generation = { }
+}
+
+ger_schnitzel_bormann = {
+	first_name = schnitzel
+	last_name = bormann
+	historical = yes
+	culture = cu:north_german
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_jingoist_leader
+	birth_date = 1805.1.22
+	ruler = yes
+	dna = dna_schnitzel_bormann
+	traits = {
+		meticulous
+		imposing
+		reckless
+	}
+	trait_generation = {
+		arrogant
+		wrathful
+	}
+}
+
+wst_walthre_freight = {
+	first_name = walthre
+	last_name = freight
+	historical = yes
+	culture = cu:british
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	birth_date = 1771.7.04
+	ruler = yes
+	traits = {
+		arrogant
+		wrathful
+		imposing
+	}
+	trait_generation = {
+	}
+}
+
+wst_joel_freight_1 = { #skibidi dop dop dop yes yes
+	first_name = joel
+	last_name = freight
+	historical = yes
+	culture = cu:corsican
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	birth_date = 1802.6.14
+	is_general = yes
+	traits = {
+		reserved
+		direct
+		meticulous
+	}
+	trait_generation = {
+	}
+}
+
+wst_michel_freight = { #tung tung tung tung tung sahur
+	first_name = michel
+	last_name = freight
+	historical = yes
+	culture = cu:corsican
+	interest_group = ig_petty_bourgeoisie
+	ideology = ideology_moderate
+	birth_date = 1808.11.03
+	is_admiral = yes
+	traits = {
+		innovative
+		erudite
+		literary
+		disabled
+	}
+	trait_generation = {
+	}
+}
+
+wst_lisa_freight = {
+	first_name = lisa
+	last_name = freight
+	historical = yes
+	culture = cu:corsican
+	interest_group = ig_armed_forces
+	ideology = ideology_radical
+	birth_date = 1810.9.27
+	is_admiral = yes
+	female = yes
+	traits = {
+		stalwart_defender
+		expert_defensive_strategist
+		wrathful
+	}
+	trait_generation = {
+	}
+}
+
+wst_walthre_freight_smaller = {
+	first_name = walthre
+	last_name = freight
+	historical = yes
+	culture = cu:french
+	interest_group = landowner
+	is_general = yes
+	ideology = ideology_traditionalist
+	birth_date = 1798.5.11
+	traits = {
+		cautious
+		tactful
+		basic_political_operator
+	}
+	trait_generation = {
+	}
+}
+
+wst_walthre_freight_small = {
+	first_name = walthre
+	last_name = freight
+	historical = yes
+	culture = cu:french
+	interest_group = ig_armed_forces
+	is_general = yes
+	ideology = ideology_jingoist_leader
+	birth_date = 1801.5.19
+	traits ={
+		reckless
+		ruthless
+		hedonist
+		experienced_artillery_commander
+	}
+}
+
+wst_waldro_freight_small = {
+	first_name = waldro
+	last_name = freight
+	historical = yes
+	culture = cu:spanish
+	interest_group = ig_armed_forces
+	is_general = yes
+	ideology = ideology_jingoist_leader
+	birth_date = 1804.9.25
+	traits ={
+		cruel
+		imposing
+		ruthless
+		war_criminal
+	}
+}
+
+wst_waldora_freight = {
+	first_name = waldora
+	last_name = freight
+	culture = cu:spanish
+	interest_group = ig_intelligentsia
+	is_general = yes
+	female = yes
+	ideology = ideology_radical
+	birth_date = 1812.7.22
+	trait = {
+		inspirational_orator
+		erudite
+		tactful
+	}
+}
+
+wst_joel_freight_2 = { #grape teeth
+	first_name = joel
+	last_name = freight
+	culture = cu:portugese
+	interest_group = ig_armed_forces
+	is_general = yes
+	ideology = ideology_jingoist_leader
+	birth_date = 1830.11.25
+	trait = {
+		child
+	}
+	trait_generation = {
+		ambitious
+		honorable
+		pious
+	}
+}
+
+wst_joel_freight_3 = { #bastard
+	first = joel
+	last_name = freight
+	culture = cu:catalan
+	interest_group = ig_armed_forces
+    is_admiral = yes
+	ideology = ideology_jingoist_leader
+	birth_date = 1815.6.18
+	trait = {
+		charismatic
+		romantic
+		inexperienced
+	}
+	trait_generation = {
+	}
+}
+
+hne_k_kerr_otes = { #k.kerr otes, a kindly oats manufacturer
+	first = k_kerr
+	last_name = otes
+	culture = cu:british
+	interest_group = ig_rural_folk
+	ig_leader = yes
+	ideology = ideology_pacifist
+	birth_date = 1802.10.18
+	trait = {
+		charismatic
+		pious
+		honorable
+	}
+	trait_generation = {
+	}
+}

@@ -1,0 +1,3 @@
+﻿heritage_group_brainrot_spiritualism = {
+	type = heritage
+}

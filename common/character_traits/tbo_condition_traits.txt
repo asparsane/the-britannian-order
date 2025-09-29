@@ -1,0 +1,32 @@
+﻿### Conditions
+
+disabled = {
+	type = condition
+	texture = "gfx/interface/icons/character_trait_icons/psychological_affliction.dds"
+
+	character_modifier = {
+		character_health_add = -0.10
+	}
+
+	command_modifier = {
+		unit_offense_mult = -0.15
+		unit_kill_rate_add = -0.05
+	}
+
+	country_modifier = {
+	}
+
+	agitator_modifier = {
+	}
+
+	interest_group_modifier = {
+	}
+
+	possible = {
+		always = 0
+	}
+
+	weight = {
+		value = 0
+	}
+}

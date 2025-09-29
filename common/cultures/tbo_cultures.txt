@@ -1,0 +1,170 @@
+﻿brainrot= {
+	color= rgb{ 232 232 211 }
+	religion = skibidi
+	heritage = heritage_brainrot
+	language = language_anglophone
+	male_common_first_names = {
+		Kai
+		Logan
+		Quandale
+		Ishow
+	}
+	female_common_first_names = {
+		Ice
+		Livvy
+		Sssniper
+	}
+	noble_last_names = {
+		Paul
+		Beast
+		Wolf
+	}
+	common_last_names = {
+		Dunne
+		Gronk
+		Speed
+	}
+
+	male_regal_first_names = {
+		Jake Jimmy
+		Logan
+	}
+	female_regal_first_names = {
+		Sssniper
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian
+	}
+}
+
+tralalero= {
+	color= rgb{ 208 209 163 }
+	religion = tralaleroist
+	heritage = heritage_brainrot
+	language = language_anglophone
+	male_common_first_names = {
+		Assassino
+		Brr_Brr Bombombini
+		Tung_tung_tung
+	}
+	female_common_first_names = {
+		Ballerina Bombardiro
+		Trippi Tralalero
+	}
+	noble_last_names = {
+		Larila
+		Bananini
+		Ambalabu
+		Dun
+	}
+	common_last_names = {
+		Cappucino Cappucina Crocodilo
+		Gusini
+		Patapim
+		Sahur
+		Tralala Troppi
+	}
+
+	male_regal_first_names = {
+		Chimpanzini
+		Boneca
+	}
+	female_regal_first_names = {
+		Lirili
+		Udindindindin
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian
+	}
+}
+
+labubu = {
+	color= rgb{ 62 77 100 }
+	religion = labubite
+	heritage = heritage_brainrot
+	language = language_anglophone
+	male_common_first_names = {
+		24karat
+		67
+		Dubai
+		Mason
+	}
+	female_common_first_names = {
+		Crumbl
+		Demure
+		Matcha Moonbeam
+	}
+	noble_last_names = {
+		67
+		Chocolate
+		Icecream
+	}
+	common_last_names = {
+		67
+		Chocolate
+		Icecream
+	}
+
+	male_regal_first_names = {
+		Crumbl
+		Demure
+		Matcha Moonbeam
+	}
+	female_regal_first_names = {
+		24karat
+		67
+		Dubai
+		Mason
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian
+	}
+}
+
+sigma = {
+	color= rgb{ 255 0 0 }
+	religion = redpill
+	heritage = heritage_manosphere
+	language = language_anglophone
+	male_common_first_names = {
+		Gus
+		Heisen
+		Patrick
+	}
+	female_common_first_names = {
+		Skylar
+	}
+	noble_last_names = {
+		Tate
+		Peterson
+		Wexler
+		Salamanca
+	}
+	common_last_names = {
+		Bateman
+		Berg
+		Fring
+		Salamanca
+		White
+	}
+
+	male_regal_first_names = {
+		Andrew
+		Jordan
+		Hector
+	}
+	female_regal_first_names = {
+		Kim
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian
+	}
+}

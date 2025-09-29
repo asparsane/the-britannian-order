@@ -1,0 +1,346 @@
+#chinese tags at game start
+BYG = {
+	color = { 3 102 44 }
+	
+	country_type = unrecognized
+	
+	tier = kingdom
+	
+	cultures = { han } 
+	capital = STATE_BEIJING
+}
+CFD = {
+	color = { 0 56 121 }
+	
+	country_type = recognized
+
+	tier = kingdom
+
+	cultures = { han }
+	capital = STATE_NANJING
+}
+SCU = {
+	color = { 52 146 77 }
+	
+	country_type = recognized
+
+	tier = kingdom
+
+	cultures = { han }
+	capital = STATE_SICHUAN
+}
+YUN = {
+	color = { 61 162 5 }
+	
+	country_type = recognized
+
+	tier = kingdom
+
+	cultures = { han }
+	capital = STATE_YUNNAN
+}
+XIA = {
+	color = { 228 124 37 }
+	
+	country_type = recognized
+
+	tier = kingdom
+
+	cultures = { han }
+	capital = STATE_NINGXIA
+}
+PHI = {
+	color = { 228 227 30 }
+
+	country_type = recognized
+	
+	tier = kingdom
+	
+	cultures = { filipino }
+	capital = STATE_LUZON
+}
+#qing
+QNG = {
+	color = { 223 228 37 }
+	
+	country_type = unrecognized
+
+	tier = kingdom
+
+	cultures = { han }
+	capital = STATE_NINGXIA
+}
+SKB = {
+	color = { 235 313 168 }
+	
+	country_type = unrecognized
+	
+	tier = kingdom
+	
+	cultures = { manchu uighur }
+	capital = STATE_ALTAI
+}
+MGB = {
+	color = { 192 211 203 }
+	
+	country_type = unrecognized
+	
+	tier = kingdom
+	
+	cultures = { manchu mongol }
+	capital = STATE_ALXA
+}
+#fengtian and friends
+FGT = {
+	color = { 233 30 209 }
+	
+	country_type = unrecognized
+
+	tier = kingdom
+
+	cultures = { han manchu }
+	capital = STATE_SOUTHERN_MANCHURIA
+}
+WKR = {
+	color = { 22 3 128 }
+	
+	country_type = unrecognized
+	
+	tier = principality
+	
+	cultures = { korean }
+	capital = STATE_PYONGYANG
+}
+#japan and friends
+TKK = {
+	color = { 248 229 235 }
+	
+	country_type = recognized
+
+	tier = empire
+
+	cultures = { japanese }
+	capital = STATE_KANSAI
+}
+GDG = {
+	color = { 87 17 37 }
+	
+	country_type = colonial
+
+	tier = kingdom
+
+	cultures = { japanese }
+	capital = STATE_GUANGDONG
+}
+EKR = {
+	color = { 231 244 245 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { japanese }
+	capital = STATE_PUSAN
+}
+RAMG = {
+	color = { 82 69 33 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { japanese }
+	capital = STATE_NANJING
+}
+#doc and warlord tags
+DOC = { # dominion of China
+	color = { 16 30 66 }
+	
+	country_type = recognized
+
+	tier = kingdom
+
+	cultures = { british han }
+	capital = STATE_NANJING
+}
+WQI = {
+	color = { 165 162 58 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_SHANDONG
+}
+ANH = {
+	color = { 42 153 41 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_SOUTHERN_ANHUI
+}
+HEN = {
+	color = { 42 153 41 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_NORTHERN_ANHUI
+}
+JXI = {
+	color = { 55 114 28 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_JIANGXI
+}
+JSU = {
+	color = { 53 102 66 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_JIANGSU
+}
+HNA = {
+	color = { 132 73 209 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_HUNAN
+}
+HUB = {
+	color = { 157 175 54 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_EASTERN_HUBEI
+}
+SHX = {
+	color = { 203 211 143 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_SHANXI
+}
+XIB = {
+	color = { 178 158 112 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_GANSU
+}
+CHJ = {
+	color = { 94 28 88 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_CHONGQING
+}
+SXI = {
+	color = { 129 108 44 } # yan dongshan
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_XIAN
+}
+FUJ = {
+	color = { 58 74 10 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_SHAOZHOU
+}
+ZHL = {
+	color = { 70 90 113 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_ZHILI
+}
+ZHJ = {
+	color = { 10 103 142 }
+	
+	country_type = recognized
+	
+	tier = principality
+	
+	cultures = { han }
+	capital = STATE_ZHEJIANG
+}
+#china
+SHZ = {
+	color = { 152 23 59 }
+	
+	country_type = recognized
+	
+	tier = hegemony
+	
+	cultures = { han manchu mongol tibetan uighur yue min } 
+	capital = STATE_BEIJING
+}
+#misc
+DAI = {
+	color = { 208 216 40 }
+	
+	country_type = unrecognized
+	
+	tier = kingdom
+	
+	cultures = { vietnamese }
+	capital = STATE_TONKIN
+}
+BNM = {
+	color = { 182 189 17 }
+	
+	country_type = recognized
+	
+	tier = empire
+	
+	cultures = { burmese }
+	capital = STATE_BANGKOK
+}
+CJOZ = {
+	color = { 67 64 99 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { han }
+}
+IND = {
+	color = { 40 125 103 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { balinese batak dayak}
+}

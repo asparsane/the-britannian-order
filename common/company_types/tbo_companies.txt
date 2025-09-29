@@ -1,0 +1,240 @@
+﻿# arasaka
+company_arasaka = {
+	icon = "gfx/interface/icons/event_icons/arasaka.png"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
+	
+	flavored_company = yes
+
+	preferred_headquarters = { STATE_KANSAI }
+	
+	building_types = {  
+		building_steel_mills
+		building_tooling_workshops
+		building_arms_industry
+		building_artillery_foundries
+	}
+	
+	potential = {
+		c:TKK ?= this
+	}
+
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			c:TKK ?= this
+			has_journal_entry = je_tkk_zaibatsu_program
+		}
+	}
+	
+	possible = { 
+		c:TKK ?= this
+		has_journal_entry = je_tkk_zaibatsu_program
+	}
+	
+	prosperity_modifier = {
+		unit_army_offense_mult = 0.02
+	}	
+	
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
+}
+
+# kame yu
+company_kameyu = {
+	icon = "gfx/interface/icons/company_icons/historical_company_icons/japanese_mitsubishi.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_heavy.dds"
+	
+	flavored_company = yes
+
+	preferred_headquarters = { STATE_KANSAI }
+	
+	building_types = {  
+		building_food_industry
+		building_tobacco_plantation
+		building_tea_plantation
+	}
+	
+	potential = {
+		c:TKK ?= this
+	}
+	
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			c:TKK ?= this
+			has_journal_entry = je_tkk_zaibatsu_program
+		}
+	}
+	
+	possible = { 
+		c:TKK ?= this
+		has_journal_entry = je_tkk_zaibatsu_program
+	}
+	
+	prosperity_modifier = {
+		state_loyalists_from_political_movements_mult = 0.03
+	}	
+	
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
+}
+
+#quaker oats
+company_quaker_oats = {
+	icon = "gfx/interface/icons/event_icons/quaker_oats.png"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_farm_wheat.dds"
+	flavored_company = yes
+	preferred_headquarters = { STATE_NEW_YORK }
+	building_types = {
+		building_food_industry
+		building_wheat_farm
+		building_rye_farm
+	}
+	potential = {
+		c:HNE ?= this
+	}
+	possible = {
+		c:HNE ?= this
+		NOT = {
+			has_modifier = hne_expelled_quakers
+		}
+	}
+	prosperity_modifier = {
+		state_loyalists_from_political_movements_mult = 0.1
+		building_wheat_farm_throughput_add = 0.05
+	}
+	ai_weight = {
+		value = 3 # uh... sure?
+	}
+}
+
+company_skibidi_incorporated = {
+	icon = "gfx/interface/icons/event_icons/skibidilogo.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_lights.dds"
+	flavored_company = yes
+	preferred_headquarters = { STATE_NEW_YORK }
+	building_types = {
+		building_arts_academy
+	}
+	potential = {
+		country_has_primary_culture = cu:brainrot
+	}
+	possible = {
+		has_modifier = skibidi_development_lvl4
+	}
+	prosperity_modifier = {
+		state_loyalists_from_political_movements_mult = 0.1
+		country_prestige_mult = 0.1
+	}
+	ai_weight = {
+		value = 100 #skibidi dop dop dop yes yes
+	}
+}
+
+company_dubai_chocolate = {
+	icon = "gfx/interface/icons/event_icons/dubaichocolate.png"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_lights.dds"
+	flavored_company = yes
+	preferred_headquarters = { STATE_NEW_YORK }
+	building_types = {
+		building_sugar_plantation
+		building_coffee_plantation
+	}
+	potential = {
+		country_has_primary_culture = cu:labubu
+	}
+	possible = {
+		has_modifier = labubu_development_lvl2
+	}
+	possible_prestige_goods = {
+		prestige_good_dubai_chocolate
+	}
+	prestige_goods_trigger = {
+		has_modifier = labubu_development_lvl4
+	}
+	prosperity_modifier = {
+		country_tax_income_mult = 0.05
+	}
+	ai_weight = {
+		value = 100 #24 karat dubai chocolate
+	}
+}
+
+company_crumbl = {
+	icon = "gfx/interface/icons/event_icons/crumbl.png"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_lights.dds"
+	flavored_company = yes
+	preferred_headquarters = { STATE_NEW_YORK }
+	building_types = {
+		building_sugar_plantation
+		building_food_industry
+	}
+	potential = {
+		country_has_primary_culture = cu:labubu
+	}
+	possible = {
+		has_modifier = labubu_development_lvl4
+	}
+	possible_prestige_goods = {
+		prestige_good_moonbeam_icecream_crumbl_cookies
+	}
+	prestige_goods_trigger = {
+		has_modifier = labubu_development_lvl4
+	}
+	prosperity_modifier = {
+		building_throughput_add = 0.05
+	}
+	ai_weight = {
+		value = 100 #24 karat dubai chocolate
+	}
+}
+
+company_labubu = {
+	icon = "gfx/interface/icons/event_icons/crumbl.png"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_lights.dds"
+	flavored_company = yes
+	preferred_headquarters = { STATE_NEW_YORK }
+	building_types = {
+		building_tooling_workshops
+		building_steel_mills
+	}
+	potential = {
+		country_has_primary_culture = cu:labubu
+	}
+	possible = {
+		has_modifier = labubu_development_lvl4
+	}
+	prosperity_modifier = {
+		country_bureaucracy_mult = 0.1
+		country_loan_interest_rate_mult = -0.2
+		state_loyalists_from_political_movements_mult = 0.1
+	}
+	ai_weight = {
+		value = 100 #crumbl cookies moonbeam icecream
+	}
+}
+
+company_tralalero_arms = {
+	icon = "gfx/interface/icons/event_icons/tralalero_arms.png"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_heavy.dds"
+	flavored_company = yes
+	preferred_headquarters = { STATE_NEW_YORK }
+	building_types = {
+		building_artillery_foundries
+		building_arms_industry
+	}
+	potential = {
+		country_has_primary_culture = cu:tralalero
+	}
+	possible = {
+		has_modifier = tralalero_development_lvl4
+	}
+	prosperity_modifier = {
+		unit_morale_loss_mult = -0.1
+		unit_morale_recovery_mult = 0.2
+		unit_morale_damage_mult = 0.1
+	}
+	ai_weight = {
+		value = 100 #tralalero tralala
+	}
+}
