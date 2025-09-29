@@ -1,0 +1,40 @@
+﻿COUNTRIES = {
+	c:IRK ?= {
+		effect_starting_technology_tier_2_tech = yes
+		
+		set_market_capital = STATE_IRKUTSK
+		
+		activate_law = law_type:law_monarchy
+		activate_law = law_type:law_oligarchy
+		activate_law = law_type:law_serfdom
+		activate_law = law_type:law_land_based_taxation
+		activate_law = law_type:law_hereditary_bureaucrats
+		activate_law = law_type:law_national_supremacy
+		activate_law = law_type:law_laissez_faire
+		activate_law = law_type:law_peasant_levies
+		activate_law = law_type:law_censorship
+		activate_law = law_type:law_debt_slavery
+		activate_law = law_type:law_dedicated_police
+		activate_law = law_type:law_no_womens_rights
+		activate_law = law_type:law_closed_borders
+		activate_law = law_type:law_national_guard
+		
+		ig:ig_landowners = {
+			add_ruling_interest_group = yes
+		}
+
+		ig:ig_armed_forces = {
+			add_ruling_interest_group = yes
+		}
+		
+		set_government_wage_level = medium
+		set_tax_level = high
+		add_modifier = {
+			name = irk_outmoded_bureaucracy
+		}
+		add_modifier = {
+			name = irk_archaic_taxation_system
+		}
+		
+	}
+}

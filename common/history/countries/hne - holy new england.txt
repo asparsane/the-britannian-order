@@ -1,0 +1,28 @@
+﻿COUNTRIES = {
+	c:HNE ?= {
+		effect_starting_technology_tier_1_tech = yes
+		
+		set_market_capital = STATE_CONNECTICUT	
+		
+		activate_law = law_type:law_theocracy
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_homesteading
+		activate_law = law_type:law_land_based_taxation
+		activate_law = law_type:law_state_religion
+		activate_law = law_type:law_hereditary_bureaucrats
+		activate_law = law_type:law_professional_army
+		activate_law = law_type:law_national_supremacy
+		activate_law = law_type:law_national_guard
+		activate_law = law_type:law_agrarianism
+		activate_law = law_type:law_censorship
+		activate_law = law_type:law_legacy_slavery
+		
+        add_company = company_type:company_quaker_oats
+        company:company_arasaka = {
+            set_company_establishment_date = 1788.1.15
+            set_company_state_region = s:STATE_NEW_YORK
+        }
+		set_government_wage_level = high
+		set_tax_level = medium
+	}
+}

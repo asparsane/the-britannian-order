@@ -1,0 +1,15 @@
+﻿COUNTRIES = {
+	c:LWE ?= {
+		effect_starting_technology_tier_4_tech = yes
+		add_technology_researched = urban_planning
+		add_technology_researched = academia
+		add_technology_researched = law_enforcement
+		
+		set_market_capital = STATE_LOWER_EGYPT
+		
+		neutral_arab_setup = yes
+		
+		set_government_wage_level = high
+		set_tax_level = medium
+	}
+}

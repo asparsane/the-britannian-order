@@ -1,0 +1,41 @@
+﻿COUNTRIES = {
+	c:TKK ?= {
+		effect_starting_technology_tier_3_tech = yes
+		add_technology_researched = civilizing_mission
+		add_technology_researched = corporate_charters
+		add_technology_researched = stock_exchange
+		
+		set_market_capital = STATE_KANSAI	
+		
+		activate_law = law_type:law_monarchy
+		activate_law = law_type:law_autocracy
+		activate_law = law_type:law_tenant_farmers
+		activate_law = law_type:law_land_based_taxation
+		activate_law = law_type:law_hereditary_bureaucrats
+		activate_law = law_type:law_racial_segregation
+		activate_law = law_type:law_traditionalism
+		activate_law = law_type:law_censorship	
+		activate_law = law_type:law_closed_borders
+		
+		set_government_wage_level = high
+		set_tax_level = medium
+
+        add_modifier = {
+            name = jetzp_zaibatsu_program_modifier
+        }
+		add_journal_entry = {
+			type = je_tkk_zaibatsu_program
+		}
+        add_company = company_type:company_arasaka
+        company:company_arasaka = {
+            set_company_establishment_date = 1833.1.5
+            set_company_state_region = s:STATE_KANSAI
+        }
+        add_company = company_type:company_kameyu
+        company:company_kameyu = {
+            set_company_establishment_date = 1833.1.5
+            set_company_state_region = s:STATE_KANSAI
+			add_owned_country = c:JIN
+        }
+	}
+}
